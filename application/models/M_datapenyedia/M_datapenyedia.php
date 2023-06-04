@@ -36,7 +36,6 @@ class M_datapenyedia extends CI_Model
         return $query->row_array();
     }
 
-    
 
     public function tambah_nib($data)
     {
@@ -44,18 +43,28 @@ class M_datapenyedia extends CI_Model
         return $this->db->affected_rows();
     }
 
+    public function update_nib($data, $where)
+    {
+        $this->db->update('tbl_vendor_nib', $data);
+        $this->db->where($where);
+        return $this->db->affected_rows();
+    }
 
-    public function udpate_enkrip($where, $data)
+
+
+    public function update_enkrip($where, $data)
     {
         $this->db->update('tbl_vendor_nib', $data, $where);
         return $this->db->affected_rows();
     }
 
-    public function udpate_dekrip($where, $data)
+    public function update_dekrip($where, $data)
     {
         $this->db->update('tbl_vendor_nib', $data, $where);
         return $this->db->affected_rows();
     }
+
+
     public function get_row_nib($id_vendor)
     {
         $this->db->select('*');

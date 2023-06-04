@@ -1,8 +1,10 @@
 <!-- Main content -->
 <section class="content">
     <!-- nanti ini di buat file global terpisah -->
-    <input type="hidden" name="id_url_vendor" value="<?= $row_vendor['id_url_vendor']?>">
-    <input type="hidden" name="secret_token" value="<?= $row_vendor['token_scure_vendor']?>">
+    <input type="hidden" name="id_url_vendor" value="<?= $row_vendor['id_url_vendor'] ?>">
+    <input type="hidden" name="secret_token" value="<?= $row_vendor['token_scure_vendor'] ?>">
+    <input type="hidden" name="url_dekrip_nib" value="<?= base_url('datapenyedia/update_dekrip_nib/') ?>">
+    <input type="hidden" name="url_enkrip_nib" value="<?= base_url('datapenyedia/update_enkrip_nib/') ?>">
     <input type="hidden" value="<?= base_url('datapenyedia/get_row_global_vendor/') ?>" name="url_get_row_vendor">
     <input type="hidden" value="<?= base_url('datapenyedia/add_izin_usaha') ?>" name="url_post">
     <!-- <a href="javascript:;" onclick="kirun()">klik</a> -->
@@ -62,12 +64,12 @@
                                     <strong> Form Izin Usaha -
                                         <span class="text-secondary">Nomor Induk Berusaha (NIB)</span>
                                     </strong>
-                                    <div class="card-tools">
+                                    <!-- <div class="card-tools">
                                         <button type="button" class="btn btn-warning btn-sm" readonly>
                                             <i class="fas fa-edit mr-2"></i>
                                             Edit Changes
                                         </button>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <form id="form_izin_usaha" enctype="multipart/form-data">
                                     <div class="card-body">
@@ -182,10 +184,9 @@
                                                 </td>
                                                 <td class="col-sm-2">
                                                     <div class="col-sm-12">
-                                                        <a href="#" class="nav-link">
-                                                            <i class="far fa-file-pdf mr-2"></i>
-                                                            <label for="" class="file"><?= $get_row_nib['file_dokumen'] ?></label>
-                                                        </a>
+                                                        <div id="tampil_dokumen">
+
+                                                        </div>
                                                     </div>
                                                 </td>
                                                 <td class="col-sm-4" colspan="2">
