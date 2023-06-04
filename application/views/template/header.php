@@ -40,6 +40,8 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/template/frontend/plugins/bs-stepper/css/bs-stepper.min.css">
     <!-- dropzonejs -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/template/frontend/plugins/dropzone/min/dropzone.min.css">
+
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <style>
         /* .invalid class prevents CSS from automatically applying */
         .invalid input:required:invalid {

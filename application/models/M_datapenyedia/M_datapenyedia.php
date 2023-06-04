@@ -65,6 +65,15 @@ class M_datapenyedia extends CI_Model
     }
 
 
+    public function get_row_nib_url($id_url)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_nib');
+        $this->db->where('tbl_vendor_nib.id_url', $id_url);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
     public function get_row_nib($id_vendor)
     {
         $this->db->select('*');

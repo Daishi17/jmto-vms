@@ -3,8 +3,8 @@
     <!-- nanti ini di buat file global terpisah -->
     <input type="hidden" name="id_url_vendor" value="<?= $row_vendor['id_url_vendor'] ?>">
     <input type="hidden" name="secret_token" value="<?= $row_vendor['token_scure_vendor'] ?>">
-    <input type="hidden" name="url_dekrip_nib" value="<?= base_url('datapenyedia/update_dekrip_nib/') ?>">
-    <input type="hidden" name="url_enkrip_nib" value="<?= base_url('datapenyedia/update_enkrip_nib/') ?>">
+    <input type="hidden" name="url_encryption_nib" value="<?= base_url('datapenyedia/encryption_nib/') ?>">
+    <input type="hidden" name="url_download" value="<?= base_url('datapenyedia/url_download/') ?>">
     <input type="hidden" value="<?= base_url('datapenyedia/get_row_global_vendor/') ?>" name="url_get_row_vendor">
     <input type="hidden" value="<?= base_url('datapenyedia/add_izin_usaha') ?>" name="url_post">
     <!-- <a href="javascript:;" onclick="kirun()">klik</a> -->
@@ -118,9 +118,10 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                                             </div>
-                                                            <select name="sts_seumur_hidup" class="custom-select rounded-1 text-sm" id="exampleSelectRounded1">
-                                                                <option value="1">Seumur Hidup</option>
-                                                                <option value="2">Tanggal</option>
+                                                            <select name="sts_seumur_hidup" class="custom-select rounded-1 text-sm" id="exampleSelectRounded1" onchange="sts_berlaku_nib()">
+                                                                <option value="1">Tanggal</option>
+                                                                <option value="2">Seumur Hidup</option>
+
                                                             </select>
                                                         </div>
                                                     </div>
@@ -131,7 +132,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                                             </div>
-                                                            <input type="date" name="tgl_berlaku" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask readonly>
+                                                            <input type="date" id="tgl_berlaku_nib" name="tgl_berlaku_nib" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -217,10 +218,10 @@
                                             <i class="fas fa-save mr-2"></i>
                                             Simpan
                                         </button>
-                                        <button type="button" class="btn btn-danger btn-sm">
+                                        <!-- <button type="button" class="btn btn-danger btn-sm">
                                             <i class="fas fa-ban mr-2"></i>
                                             Cancel
-                                        </button>
+                                        </button> -->
                                     </div>
                                 </form>
                             </div>

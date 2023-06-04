@@ -8,6 +8,7 @@ class Datapenyedia extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('M_datapenyedia/M_datapenyedia');
+		$this->load->helper('download');
 	}
 
 	public function index()
@@ -72,6 +73,7 @@ class Datapenyedia extends CI_Controller
 		$nomor_surat = $this->input->post('nomor_surat');
 		$kualifikasi_izin = $this->input->post('kualifikasi_izin');
 		$sts_seumur_hidup = $this->input->post('sts_seumur_hidup');
+		$tgl_berlaku_nib = $this->input->post('tgl_berlaku_nib');
 		$password_dokumen = '1234';
 
 		// SETTING PATH 
@@ -84,7 +86,7 @@ class Datapenyedia extends CI_Controller
 		$config['allowed_types'] = 'pdf';
 		$config['max_size'] = 0;
 		$config['remove_spaces'] = TRUE;
-		$config['encrypt_name'] = TRUE;
+		// $config['encrypt_name'] = TRUE;
 
 
 		$this->load->library('upload', $config);
@@ -104,6 +106,7 @@ class Datapenyedia extends CI_Controller
 				'password_dokumen' => $password_dokumen,
 				'file_dokumen' => $enckrips_string,
 				'token_dokumen' => $secret,
+				'tgl_berlaku_nib' => $tgl_berlaku_nib,
 				'sts_token_dokumen' => 1,
 			];
 			if (!$row_nib) {
@@ -129,7 +132,7 @@ class Datapenyedia extends CI_Controller
 				'kualifikasi_izin' => $kualifikasi_izin,
 				'sts_seumur_hidup' => $sts_seumur_hidup,
 				'password_dokumen' => $password_dokumen,
-				'sts_token_dokumen' => 1,
+				'tgl_berlaku_nib' => $tgl_berlaku_nib,
 			];
 			if (!$row_nib) {
 				$this->M_datapenyedia->tambah_nib($upload);
@@ -148,21 +151,32 @@ class Datapenyedia extends CI_Controller
 		}
 	}
 
-	public function update_dekrip_nib($id_url)
+	public function encryption_nib($id_url)
 	{
-		$get_row_enkrip = $this->M_datapenyedia->get_row_nib($id_url);
+		$type = $this->input->post('type');
+
+		$get_row_enkrip = $this->M_datapenyedia->get_row_nib_url($id_url);
 		$secret_token = $this->input->post('secret_token');
 		$chiper = "AES-128-ECB";
 		$secret = $get_row_enkrip['token_dokumen'];
-		$dekrip_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+		if ($type == 'dekrip') {
+			$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+			$data = [
+				'sts_token_dokumen' => 2,
+				'file_dokumen' => $encryption_string,
+			];
+		} else {
+			$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+			$data = [
+				'sts_token_dokumen' => 1,
+				'file_dokumen' => $encryption_string,
+			];
+		}
+
 		$id_vendor = $get_row_enkrip['id_vendor'];
 		$row_vendor = $this->M_datapenyedia->get_row_vendor($id_vendor);
 		$where = [
 			'id_url' => $id_url
-		];
-		$data = [
-			'status' => 2,
-			'file_dokumen' => $dekrip_string,
 		];
 
 		if ($secret_token == $row_vendor['token_scure_vendor']) {
@@ -178,21 +192,15 @@ class Datapenyedia extends CI_Controller
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
 
-	public function update_enkrip_nib($id_enkrip)
+	public function url_download($id_url)
 	{
-		$get_row_enkrip  = $this->M_datapenyedia->get_row_enkrip($id_enkrip);
-		$chiper = "AES-128-ECB";
-		$secret = $get_row_enkrip['token'];
-		$enkrip_string = openssl_encrypt($get_row_enkrip['file_asli'], $chiper, $secret);
-		$where = [
-			'id_enkrip' => $id_enkrip
-		];
-		$data = [
-			'status' => 1,
-			'file_asli' => $enkrip_string,
-		];
-		$this->M_datapenyedia->update_enkrip($where, $data);
-		redirect('enkripsi/enkrip');
+		$get_row_enkrip = $this->M_datapenyedia->get_row_nib_url($id_url);
+		$id_vendor = $get_row_enkrip['id_vendor'];
+		$row_vendor = $this->M_datapenyedia->get_row_vendor($id_vendor);
+		$date = date('Y');
+		// $nama_file = $get_row_enkrip['nomor_surat'];
+		// $file_dokumen =  $get_row_enkrip['file_dokumen'];
+		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/NIB-' . $date . '/' . $get_row_enkrip['file_dokumen'], NULL);
 	}
 
 	public function akta_pendirian()
