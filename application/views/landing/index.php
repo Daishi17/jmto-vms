@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>University - Education, Event and Course template</title>
+    <title>EPROC - JMTO</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="https://themes.potenzaglobalsolutions.com/html/academic/images/favicon.ico" />
+    <!-- <link rel="shortcut icon" href="https://themes.potenzaglobalsolutions.com/html/academic/images/favicon.ico" /> -->
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200&display=swap" rel="stylesheet">
@@ -43,7 +43,7 @@
                         <div class="d-lg-flex align-items-center">
                             <!-- logo -->
                             <a class="navbar-brand text-lg-center" href="index.html">
-                                <img class="logo" src="<?= base_url()?>assets/img/jmto_logo.png" alt="Logo">
+                                <img class="logo" src="<?= base_url() ?>assets/img/jmto_logo.png" alt="Logo">
                                 <img class="sticky-logo" src="https://media.licdn.com/dms/image/C5616AQEu8BWysPOY4g/profile-displaybackgroundimage-shrink_200_800/0/1629163094732?e=2147483647&v=beta&t=Q8dE2xAcWWwU9GuheMkq6cZB_qfUpQkN7Mgk_ezYBpY" alt="Logo">
                             </a>
                             <nav class="navbar navbar-expand-lg">
@@ -113,7 +113,7 @@
                                     </ul>
                                 </div>
                                 <!-- Navbar END-->
-                                <a class="btn btn-dark text-black d-lg-flex d-none" href="<?= base_url('auth')?>"><i>LOGIN</i> </a>
+                                <a class="btn btn-dark text-black d-lg-flex d-none" href="<?= base_url('auth') ?>"><i>LOGIN</i> </a>
                             </nav>
                         </div>
                     </div>
@@ -158,22 +158,22 @@
                 <br><br>
                 <div class="col-md-3">
                     <center>
-                        <img width="70px" src="<?= base_url()?>assets/img/ruastol.png" alt="Logo"> <br><i class="text-white ml-2" style="font-size: 15px;"> Ruas Tol <i class="fa fa-caret-right" aria-hidden="true"></i> 50</i>
+                        <img width="70px" src="<?= base_url() ?>assets/img/ruastol.png" alt="Logo"> <br><i class="text-white ml-2" style="font-size: 15px;"> Ruas Tol <i class="fa fa-caret-right" aria-hidden="true"></i> 50</i>
                     </center>
                 </div>
                 <div class="col-md-3">
                     <center>
-                        <img width="70px" src="<?= base_url()?>assets/img/gerbang.png" alt="Logo"> <br><i class="text-white ml-2" style="font-size: 15px;"> Gerbang Tol <i class="fa fa-caret-right" aria-hidden="true"></i> 316</i>
+                        <img width="70px" src="<?= base_url() ?>assets/img/gerbang.png" alt="Logo"> <br><i class="text-white ml-2" style="font-size: 15px;"> Gerbang Tol <i class="fa fa-caret-right" aria-hidden="true"></i> 316</i>
                     </center>
                 </div>
                 <div class="col-md-3">
                     <center>
-                        <img width="70px" src="<?= base_url()?>assets/img/gardu.png" alt="Logo"> <br><i class="text-white ml-2" style="font-size: 15px;"> Gardu Tol <i class="fa fa-caret-right" aria-hidden="true"></i> 1839</i>
+                        <img width="70px" src="<?= base_url() ?>assets/img/gardu.png" alt="Logo"> <br><i class="text-white ml-2" style="font-size: 15px;"> Gardu Tol <i class="fa fa-caret-right" aria-hidden="true"></i> 1839</i>
                     </center>
                 </div>
                 <div class="col-md-3">
                     <center>
-                        <img width="70px" src="<?= base_url()?>assets/img/jalan.png" alt="Logo"> <br><i class="text-white ml-2" style="font-size: 15px;"> Panjang Jalan <i class="fa fa-caret-right" aria-hidden="true"></i> 2234 KM</i>
+                        <img width="70px" src="<?= base_url() ?>assets/img/jalan.png" alt="Logo"> <br><i class="text-white ml-2" style="font-size: 15px;"> Panjang Jalan <i class="fa fa-caret-right" aria-hidden="true"></i> 2234 KM</i>
                     </center>
                 </div>
             </div>
@@ -196,7 +196,7 @@
                     <div class="category border-radius py-4">
                         <div class="category-icon">
                             <a href="#" class="category-item text-center">
-                                <img width="200px" height="188px" src="<?= base_url()?>assets/img/logo3.png" alt="Logo">
+                                <img width="200px" height="188px" src="<?= base_url() ?>assets/img/logo3.png" alt="Logo">
                             </a>
                         </div>
                         <center>
@@ -209,7 +209,7 @@
                     <div class="category border-radius py-4">
                         <div class="category-icon">
                             <a href="#" class="category-item text-center">
-                                <img width="200px" height="100%" src="<?= base_url()?>assets/img/monitoring.png" alt="Logo">
+                                <img width="200px" height="100%" src="<?= base_url() ?>assets/img/monitoring.png" alt="Logo">
                             </a>
                         </div>
                         <center>
@@ -222,7 +222,7 @@
                     <div class="category border-radius py-4">
                         <div class="category-icon">
                             <a href="#" class="category-item text-center">
-                                <img width="200px" src="<?= base_url()?>assets/img/proc.png" alt="Logo">
+                                <img width="200px" src="<?= base_url() ?>assets/img/proc.png" alt="Logo">
                             </a>
                         </div>
                         <center>
@@ -234,7 +234,7 @@
                     <div class="category border-radius py-4">
                         <div class="category-icon">
                             <a href="#" class="category-item text-center">
-                                <img width="200px" src="<?= base_url()?>assets/img/support.png" alt="Logo">
+                                <img width="200px" src="<?= base_url() ?>assets/img/support.png" alt="Logo">
                             </a>
                         </div>
                         <center>
