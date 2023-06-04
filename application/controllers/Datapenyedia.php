@@ -70,7 +70,8 @@ class Datapenyedia extends CI_Controller
 
 	public function izin_usaha()
 	{
-		$id_vendor = '1';
+		$id_vendor = $this->session->userdata('id_vendor');
+		$data['row_vendor']  = $this->M_datapenyedia->get_row_vendor($id_vendor);
 		$data['get_row_nib']  = $this->M_datapenyedia->get_row_nib($id_vendor);
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
@@ -80,9 +81,30 @@ class Datapenyedia extends CI_Controller
 	}
 
 
+	
+	public function get_row_global_vendor($id_url_vendor)
+	{
+		$token = $this->input->post('secret_token');
+		$row_vendor = $this->M_datapenyedia->get_row_vendor_by_id_url_vendor($id_url_vendor);
+		$id_vendor = $row_vendor['id_vendor'];
+		$row_nib = $this->M_datapenyedia->get_row_nib($id_vendor);
+		if ($token == $row_vendor['token_scure_vendor']) {
+			$response = [
+				'row_vendor'=> $row_vendor,
+				'row_nib'=> $row_nib,
+			];
+		} else {
+			$response = [
+				'maaf'=> 'Anda Belum Beruntung',
+			];
+		}
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+
 	public function add_izin_usaha()
 	{
-		$id_vendor = '1';
+		$id_vendor = $this->session->userdata('id_vendor');
 		$id = $this->uuid->v4();
 		$id = str_replace('-', '', $id);
 		$token = $this->token->data_token();
@@ -91,7 +113,6 @@ class Datapenyedia extends CI_Controller
 		$kualifikasi_izin = $this->input->post('kualifikasi_izin');
 		$sts_seumur_hidup = $this->input->post('sts_seumur_hidup');
 		$password_dokumen = '1234';
-
 		$config['upload_path'] = './danang_vendor/';
 		$config['allowed_types'] = 'pdf';
 		$config['max_size'] = 0;

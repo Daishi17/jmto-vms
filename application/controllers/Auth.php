@@ -15,11 +15,8 @@ class Auth extends CI_Controller
 	{
 		$this->form_validation->set_rules('userName', 'Username', 'required|trim');
 		$this->form_validation->set_rules('password', 'Password', 'required|trim');
-
 		$email = $this->input->post('userName');
 		$password = $this->input->post('password');
-
-
 		if ($this->form_validation->run() == TRUE) {
 			$this->login_vendor->login($email, $password);
 		} else {

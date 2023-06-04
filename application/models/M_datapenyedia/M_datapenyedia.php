@@ -10,12 +10,6 @@ class M_datapenyedia extends CI_Model
         return $this->db->affected_rows();
     }
 
-    public function insert_trx_jenis_usaha($data)
-    {
-        $this->db->insert_batch('trx_jenis_usaha_vendor', $data);
-        return $this->db->affected_rows();
-    }
-
     public function get_result_vendor()
     {
         $this->db->select('*');
@@ -32,6 +26,17 @@ class M_datapenyedia extends CI_Model
         $query = $this->db->get();
         return $query->row_array();
     }
+
+    public function get_row_vendor_by_id_url_vendor($id_url_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor');
+        $this->db->where('tbl_vendor.id_url_vendor', $id_url_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    
 
     public function tambah_nib($data)
     {

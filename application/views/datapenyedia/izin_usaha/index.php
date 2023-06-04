@@ -1,6 +1,11 @@
 <!-- Main content -->
 <section class="content">
-
+    <!-- nanti ini di buat file global terpisah -->
+    <input type="hidden" name="id_url_vendor" value="<?= $row_vendor['id_url_vendor']?>">
+    <input type="hidden" name="secret_token" value="<?= $row_vendor['token_scure_vendor']?>">
+    <input type="hidden" value="<?= base_url('datapenyedia/get_row_global_vendor/') ?>" name="url_get_row_vendor">
+    <input type="hidden" value="<?= base_url('datapenyedia/add_izin_usaha') ?>" name="url_post">
+    <!-- <a href="javascript:;" onclick="kirun()">klik</a> -->
     <!-- Default box -->
     <div class="card card-outline card-primary">
         <div class="card-header">
@@ -9,7 +14,6 @@
                 <span class="text-secondary">Kreatif Intelegensi Teknologi</span>
             </strong>
         </div>
-
         <div class="card-body">
             <div class="card card-primary card-outline-tabs">
                 <div class="card-header p-0 border-bottom-0">
@@ -59,14 +63,13 @@
                                         <span class="text-secondary">Nomor Induk Berusaha (NIB)</span>
                                     </strong>
                                     <div class="card-tools">
-                                        <button type="button" class="btn btn-warning btn-sm" disabled>
+                                        <button type="button" class="btn btn-warning btn-sm" readonly>
                                             <i class="fas fa-edit mr-2"></i>
                                             Edit Changes
                                         </button>
                                     </div>
                                 </div>
                                 <form id="form_izin_usaha" enctype="multipart/form-data">
-                                    <input type="text" value="<?= base_url('datapenyedia/add_izin_usaha') ?>" name="url_post">
                                     <div class="card-body">
                                         <table class="table table-sm table-bordered">
                                             <tr>
@@ -81,7 +84,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-folder-open"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control form-control-sm" placeholder="Nomor Induk Berusaha" disabled>
+                                                            <input type="text" name="jenis_izin" value="Nomor Induk Berusaha" class="form-control form-control-sm" placeholder="Nomor Induk Berusaha" readonly>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -126,7 +129,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask disabled>
+                                                            <input type="date" name="tgl_berlaku" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask readonly>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -181,7 +184,7 @@
                                                     <div class="col-sm-12">
                                                         <a href="#" class="nav-link">
                                                             <i class="far fa-file-pdf mr-2"></i>
-                                                            <label for="" class="file"><?= $get_row_nib['file_dokumen']?></label>
+                                                            <label for="" class="file"><?= $get_row_nib['file_dokumen'] ?></label>
                                                         </a>
                                                     </div>
                                                 </td>
@@ -230,7 +233,7 @@
                                         <span class="text-secondary">Surat Izin Usaha Perdagangan (SIUP)</span>
                                     </strong>
                                     <div class="card-tools">
-                                        <button type="button" class="btn btn-warning btn-sm" disabled>
+                                        <button type="button" class="btn btn-warning btn-sm" readonly>
                                             <i class="fas fa-edit mr-2"></i>
                                             Edit Changes
                                         </button>
@@ -251,7 +254,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-folder-open"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control form-control-sm" placeholder="Surat Izin Usaha Perdagangan" disabled>
+                                                            <input type="text" class="form-control form-control-sm" placeholder="Surat Izin Usaha Perdagangan" readonly>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -361,7 +364,7 @@
                                                         <i class="fas fa-lock mr-2"></i>
                                                         Enkripsi Doc
                                                     </button>
-                                                    <button type="button" class="btn btn-warning btn-sm" disabled>
+                                                    <button type="button" class="btn btn-warning btn-sm" readonly>
                                                         <i class="fas fa-unlock-alt mr-2"></i>
                                                         Dekripsi Doc
                                                     </button>
@@ -385,7 +388,7 @@
                                         </table>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="button" class="btn btn-primary btn-sm" disabled>
+                                        <button type="button" class="btn btn-primary btn-sm" readonly>
                                             <i class="fas fa-save mr-2"></i>
                                             Save Changes
                                         </button>
@@ -405,7 +408,7 @@
                                         <span class="text-secondary">Sertifikat Badan Usaha (SBU)</span>
                                     </strong>
                                     <div class="card-tools">
-                                        <button type="button" class="btn btn-warning btn-sm" disabled>
+                                        <button type="button" class="btn btn-warning btn-sm" readonly>
                                             <i class="fas fa-edit mr-2"></i>
                                             Edit Changes
                                         </button>
@@ -426,7 +429,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-folder-open"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control form-control-sm" placeholder="Sertifikat Badan Usaha" disabled>
+                                                            <input type="text" class="form-control form-control-sm" placeholder="Sertifikat Badan Usaha" readonly>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -536,7 +539,7 @@
                                                         <i class="fas fa-lock mr-2"></i>
                                                         Enkripsi Doc
                                                     </button>
-                                                    <button type="button" class="btn btn-warning btn-sm" disabled>
+                                                    <button type="button" class="btn btn-warning btn-sm" readonly>
                                                         <i class="fas fa-unlock-alt mr-2"></i>
                                                         Dekripsi Doc
                                                     </button>
@@ -560,7 +563,7 @@
                                         </table>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="button" class="btn btn-primary btn-sm" disabled>
+                                        <button type="button" class="btn btn-primary btn-sm" readonly>
                                             <i class="fas fa-save mr-2"></i>
                                             Save Changes
                                         </button>
@@ -580,7 +583,7 @@
                                         <span class="text-secondary">Surat Izin Usaha Jasa Konstruksi (SIUJK)</span>
                                     </strong>
                                     <div class="card-tools">
-                                        <button type="button" class="btn btn-warning btn-sm" disabled>
+                                        <button type="button" class="btn btn-warning btn-sm" readonly>
                                             <i class="fas fa-edit mr-2"></i>
                                             Edit Changes
                                         </button>
@@ -601,7 +604,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-folder-open"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control form-control-sm" placeholder="Surat Izin Usaha Jasa Konstruksi" disabled>
+                                                            <input type="text" class="form-control form-control-sm" placeholder="Surat Izin Usaha Jasa Konstruksi" readonly>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -711,7 +714,7 @@
                                                         <i class="fas fa-lock mr-2"></i>
                                                         Enkripsi Doc
                                                     </button>
-                                                    <button type="button" class="btn btn-warning btn-sm" disabled>
+                                                    <button type="button" class="btn btn-warning btn-sm" readonly>
                                                         <i class="fas fa-unlock-alt mr-2"></i>
                                                         Dekripsi Doc
                                                     </button>
@@ -720,7 +723,7 @@
                                         </table>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="button" class="btn btn-primary btn-sm" disabled>
+                                        <button type="button" class="btn btn-primary btn-sm" readonly>
                                             <i class="fas fa-save mr-2"></i>
                                             Save Changes
                                         </button>

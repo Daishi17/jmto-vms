@@ -1,3 +1,3 @@
-<script src="<?= base_url('js_folder/izin_usaha/file_public.js')?>"></script>
+<script src="<?= base_url('js_folder/izin_usaha//file_public.js')?>"></script>
 <script src="<?= base_url('js_folder/nib/file_public.js')?>"></script>
 <script src="<?= base_url('js_folder/sbu/file_public.js')?>"></script>
