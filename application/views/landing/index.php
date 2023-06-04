@@ -43,7 +43,7 @@
                         <div class="d-lg-flex align-items-center">
                             <!-- logo -->
                             <a class="navbar-brand text-lg-center" href="index.html">
-                                <img class="logo" src="<?= base_url()?>assets/img/jmto_logo.png" alt="Logo">
+                                <img class="logo" src="<?= base_url() ?>assets/img/jmto_logo.png" alt="Logo">
                                 <img class="sticky-logo" src="https://media.licdn.com/dms/image/C5616AQEu8BWysPOY4g/profile-displaybackgroundimage-shrink_200_800/0/1629163094732?e=2147483647&v=beta&t=Q8dE2xAcWWwU9GuheMkq6cZB_qfUpQkN7Mgk_ezYBpY" alt="Logo">
                             </a>
                             <nav class="navbar navbar-expand-lg">
@@ -113,7 +113,7 @@
                                     </ul>
                                 </div>
                                 <!-- Navbar END-->
-                                <a class="btn btn-dark text-black d-lg-flex d-none" href="<?= base_url('auth')?>"><i>LOGIN</i> </a>
+                                <a class="btn btn-dark text-black d-lg-flex d-none" href="<?= base_url('auth') ?>"><i>LOGIN</i> </a>
                             </nav>
                         </div>
                     </div>
@@ -158,22 +158,22 @@
                 <br><br>
                 <div class="col-md-3">
                     <center>
-                        <img width="70px" src="<?= base_url()?>assets/img/ruastol.png" alt="Logo"> <br><i class="text-white ml-2" style="font-size: 15px;"> Ruas Tol <i class="fa fa-caret-right" aria-hidden="true"></i> 50</i>
+                        <img width="70px" src="<?= base_url() ?>assets/img/ruastol.png" alt="Logo"> <br><i class="text-white ml-2" style="font-size: 15px;"> Ruas Tol <i class="fa fa-caret-right" aria-hidden="true"></i> 50</i>
                     </center>
                 </div>
                 <div class="col-md-3">
                     <center>
-                        <img width="70px" src="<?= base_url()?>assets/img/gerbang.png" alt="Logo"> <br><i class="text-white ml-2" style="font-size: 15px;"> Gerbang Tol <i class="fa fa-caret-right" aria-hidden="true"></i> 316</i>
+                        <img width="70px" src="<?= base_url() ?>assets/img/gerbang.png" alt="Logo"> <br><i class="text-white ml-2" style="font-size: 15px;"> Gerbang Tol <i class="fa fa-caret-right" aria-hidden="true"></i> 316</i>
                     </center>
                 </div>
                 <div class="col-md-3">
                     <center>
-                        <img width="70px" src="<?= base_url()?>assets/img/gardu.png" alt="Logo"> <br><i class="text-white ml-2" style="font-size: 15px;"> Gardu Tol <i class="fa fa-caret-right" aria-hidden="true"></i> 1839</i>
+                        <img width="70px" src="<?= base_url() ?>assets/img/gardu.png" alt="Logo"> <br><i class="text-white ml-2" style="font-size: 15px;"> Gardu Tol <i class="fa fa-caret-right" aria-hidden="true"></i> 1839</i>
                     </center>
                 </div>
                 <div class="col-md-3">
                     <center>
-                        <img width="70px" src="<?= base_url()?>assets/img/jalan.png" alt="Logo"> <br><i class="text-white ml-2" style="font-size: 15px;"> Panjang Jalan <i class="fa fa-caret-right" aria-hidden="true"></i> 2234 KM</i>
+                        <img width="70px" src="<?= base_url() ?>assets/img/jalan.png" alt="Logo"> <br><i class="text-white ml-2" style="font-size: 15px;"> Panjang Jalan <i class="fa fa-caret-right" aria-hidden="true"></i> 2234 KM</i>
                     </center>
                 </div>
             </div>
@@ -196,7 +196,7 @@
                     <div class="category border-radius py-4">
                         <div class="category-icon">
                             <a href="#" class="category-item text-center">
-                                <img width="200px" height="188px" src="<?= base_url()?>assets/img/logo3.png" alt="Logo">
+                                <img width="200px" height="188px" src="<?= base_url() ?>assets/img/logo3.png" alt="Logo">
                             </a>
                         </div>
                         <center>
@@ -209,7 +209,7 @@
                     <div class="category border-radius py-4">
                         <div class="category-icon">
                             <a href="#" class="category-item text-center">
-                                <img width="200px" height="100%" src="<?= base_url()?>assets/img/monitoring.png" alt="Logo">
+                                <img width="200px" height="100%" src="<?= base_url() ?>assets/img/monitoring.png" alt="Logo">
                             </a>
                         </div>
                         <center>
@@ -222,7 +222,7 @@
                     <div class="category border-radius py-4">
                         <div class="category-icon">
                             <a href="#" class="category-item text-center">
-                                <img width="200px" src="<?= base_url()?>assets/img/proc.png" alt="Logo">
+                                <img width="200px" src="<?= base_url() ?>assets/img/proc.png" alt="Logo">
                             </a>
                         </div>
                         <center>
@@ -234,7 +234,7 @@
                     <div class="category border-radius py-4">
                         <div class="category-icon">
                             <a href="#" class="category-item text-center">
-                                <img width="200px" src="<?= base_url()?>assets/img/support.png" alt="Logo">
+                                <img width="200px" src="<?= base_url() ?>assets/img/support.png" alt="Logo">
                             </a>
                         </div>
                         <center>
@@ -243,9 +243,6 @@
                         </center>
                     </div>
                 </div>
-            </div>
-            <div class="row justify-content-center">
-                <a class="btn btn-dark mt-4 mt-md-5" href="#">View All Categories</a>
             </div>
         </div>
     </section>
@@ -269,7 +266,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <table id="table_berita" class="table table-striped table-bordered" style="font-style: italic;">
+                    <table class="table table-striped table-bordered table_berita" style="font-style: italic;color:black">
                         <thead class="thead-inverse bg-dark text-white">
                             <tr>
                                 <th>No <i class="fa fa-list-ol" aria-hidden="true"></i></th>
@@ -300,16 +297,26 @@
 
     <!--=================================
     tabs -->
-    <section class="space-ptb bg-light">
+    <section class="space-ptb">
         <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-10 text-center">
+                    <!-- Section Title START -->
+                    <div class="section-title">
+                        <h2>DAFTAR TENDER <i class="fa fa-newspaper-o" aria-hidden="true"></i></h2>
+                        <p>Daftar Tender E-procurement JMTO</p>
+                    </div>
+                    <!-- Section Title END -->
+                </div>
+            </div>
             <div class="row no-gutters">
                 <div class="col-lg-12">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active bg-dark text-white" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><i>PENGADAAN BARANG</i></a>
-                            <a class="nav-item nav-link bg-dark text-white" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><i>PENGADAAN JASA PEMBORONGAN</i></a>
+                            <a class="nav-item nav-link bg-warning text-white" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><i>PENGADAAN JASA PEMBORONGAN</i></a>
                             <a class="nav-item nav-link bg-dark text-white" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"><i>PENGADAAN JASA KONTRUKSI</i></a>
-                            <a class="nav-item nav-link bg-dark text-white" id="nav-design-tab" data-toggle="tab" href="#nav-design" role="tab" aria-controls="nav-design" aria-selected="false"><i>PENGADAAN JASA LAINYA</i></a>
+                            <a class="nav-item nav-link bg-warning text-white" id="nav-design-tab" data-toggle="tab" href="#nav-design" role="tab" aria-controls="nav-design" aria-selected="false"><i>PENGADAAN JASA LAINYA</i></a>
                         </div>
                     </nav>
                     <div class="tab-content bg-white p-4 p-md-5" id="nav-tabContent">
@@ -319,7 +326,7 @@
                                 <p class="mb-0">Data Tender Pengadaan Barang Yang Ada Pada E-procurement JMTO.</p>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <table id="table_berita" class="table table-striped table-bordered" style="font-style: italic;font-size:10px;">
+                                        <table class="table table-striped table-bordered table_berita" style="font-style: italic;font-size:10px;color:black">
                                             <thead class="thead-inverse bg-dark text-white">
                                                 <tr>
                                                     <th>No <i class="fa fa-list-ol" aria-hidden="true"></i></th>
@@ -345,27 +352,93 @@
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <div class="section-title mb-4">
-                                <h3 class="title">Making the decision</h3>
-                                <p class="mb-0">We all know that nothing moves until someone makes a decision. The first action is always in making the decision to proceed. This is a fundamental step, which most people overlook.</p>
+                                <h3 class="title">DATA PENGADAAN JASA PEMBORONGAN</h3>
+                                <p class="mb-0">Data Tender Pengadaan Barang Yang Ada Pada E-procurement JMTO.</p>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-striped table-bordered table_berita" style="font-style: italic;font-size:10px;color:black">
+                                            <thead class="thead-inverse bg-dark text-white">
+                                                <tr>
+                                                    <th>No <i class="fa fa-list-ol" aria-hidden="true"></i></th>
+                                                    <th style="width:400px">Nama Paket <i class="fa fa-database" aria-hidden="true"></i></th>
+                                                    <th>Hps <i class="fa fa-usd" aria-hidden="true"></i></th>
+                                                    <th>Akhir Pendaftaran <i class="fa fa-calendar" aria-hidden="true"></i></th>
+                                                    <th>Persyaratan <i class="fa fa-files-o" aria-hidden="true"></i></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td scope="row">1</td>
+                                                    <td>Jasa Pemborongan Pekerjaan Pemeliharaan Periodik Scrapping Filling Overlay (SFO) Pada Ruas Jalan Tol Bali - Mandara Tahun 2023</td>
+                                                    <td>Rp 16.610.361.900,00</td>
+                                                    <td>10-May-2023 12:00</td>
+                                                    <td><a class="btn btn-sm btn-dark text-white" href="javascript:;"><i class="fas fa fa-file"></i> View</a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
-                            <p class="mb-4 mb-md-4 pb-2">The sad thing is the majority of people have no clue about what they truly want. They have no clarity. When asked the question, responses will be superficial at best, and at worst, will be what someone else wants for them.</p>
-                            <a href="#" class="btn btn-primary btn-round">Read More</a>
                         </div>
                         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                             <div class="section-title mb-4">
-                                <h3 class="title">Clarity – developing the Vision</h3>
-                                <p class="mb-0">Having clarity of purpose and a clear picture of what you desire, is probably the single most important factor in achievement. Why is Clarity so important?</p>
+                                <h3 class="title">DATA PENGADAAN JASA KONTRUKSI</h3>
+                                <p class="mb-0">Data Tender Pengadaan Barang Yang Ada Pada E-procurement JMTO.</p>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-striped table-bordered table_berita" style="font-style: italic;font-size:10px;color:black">
+                                            <thead class="thead-inverse bg-dark text-white">
+                                                <tr>
+                                                    <th>No <i class="fa fa-list-ol" aria-hidden="true"></i></th>
+                                                    <th style="width:400px">Nama Paket <i class="fa fa-database" aria-hidden="true"></i></th>
+                                                    <th>Hps <i class="fa fa-usd" aria-hidden="true"></i></th>
+                                                    <th>Akhir Pendaftaran <i class="fa fa-calendar" aria-hidden="true"></i></th>
+                                                    <th>Persyaratan <i class="fa fa-files-o" aria-hidden="true"></i></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td scope="row">1</td>
+                                                    <td>Jasa Pemborongan Pekerjaan Pemeliharaan Periodik Scrapping Filling Overlay (SFO) Pada Ruas Jalan Tol Bali - Mandara Tahun 2023</td>
+                                                    <td>Rp 16.610.361.900,00</td>
+                                                    <td>10-May-2023 12:00</td>
+                                                    <td><a class="btn btn-sm btn-dark text-white" href="javascript:;"><i class="fas fa fa-file"></i> View</a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
-                            <p class="mb-4 mb-md-4 pb-2">Without clarity, you send a very garbled message out to the Universe. We know that the Law of Attraction says that we will attract what we focus on, so if we don’t have clarity, we will attract confusion.</p>
-                            <a href="#" class="btn btn-primary btn-round">Read More</a>
                         </div>
                         <div class="tab-pane fade" id="nav-design" role="tabpanel" aria-labelledby="nav-design-tab">
                             <div class="section-title mb-4">
-                                <h3 class="title">Focus – having a plan</h3>
-                                <p class="mb-0">The best way is to develop and follow a plan. Start with your goals in mind and then work backward to develop the plan. What steps are required to get you to the goals? Make the plan as detailed as possible.</p>
+                                <h3 class="title">DATA PENGADAAN JASALAINYA</h3>
+                                <p class="mb-0">Data Tender Pengadaan Barang Yang Ada Pada E-procurement JMTO.</p>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-striped table-bordered table_berita" style="font-style: italic;font-size:10px;color:black">
+                                            <thead class="thead-inverse bg-dark text-white">
+                                                <tr>
+                                                    <th>No <i class="fa fa-list-ol" aria-hidden="true"></i></th>
+                                                    <th style="width:400px">Nama Paket <i class="fa fa-database" aria-hidden="true"></i></th>
+                                                    <th>Hps <i class="fa fa-usd" aria-hidden="true"></i></th>
+                                                    <th>Akhir Pendaftaran <i class="fa fa-calendar" aria-hidden="true"></i></th>
+                                                    <th>Persyaratan <i class="fa fa-files-o" aria-hidden="true"></i></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td scope="row">1</td>
+                                                    <td>Jasa Pemborongan Pekerjaan Pemeliharaan Periodik Scrapping Filling Overlay (SFO) Pada Ruas Jalan Tol Bali - Mandara Tahun 2023</td>
+                                                    <td>Rp 16.610.361.900,00</td>
+                                                    <td>10-May-2023 12:00</td>
+                                                    <td><a class="btn btn-sm btn-dark text-white" href="javascript:;"><i class="fas fa fa-file"></i> View</a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
-                            <p class="mb-4 mb-md-4 pb-2">Try to visualize and then plan for, every possible setback. Commit the plan to paper and then keep it with you at all times. Review it regularly and ensure that every step takes you closer to your Vision and Goals. If the plan doesn’t support the vision then change it!</p>
-                            <a href="#" class="btn btn-primary btn-round">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -378,351 +451,69 @@
 
     <!--=================================
     Action box -->
-    <section class="space-ptb bg-overlay-black-80 bg-holder" style="background-image: url(images/bg/03.jpg);">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10 text-center">
-                    <a class="icon-btn icon-btn-lg position-relative btn-animation popup-youtube mx-auto mb-4 mb-lg-5" href="https://www.youtube.com/watch?v=LgvseYYhqU0"><i class="fas fa-play fa-1x"></i></a>
-                    <h2 class="text-white mb-4 display-7">Education for Individual and Social Responsibility</h2>
-                    <a class="btn btn-primary mr-sm-3 d-sm-inline-block mt-2" href="#">Become A Student</a>
-                    <a class="btn btn-white mt-2" href="#">Discover More</a>
+    <section>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10 text-center">
+                <!-- Section Title START -->
+                <div class="section-title">
+                    <h2>LOKASI <i class="fa fa-map-marker" aria-hidden="true"></i></h2>
+                    <p>Lokasi Kami</p>
                 </div>
+                <!-- Section Title END -->
             </div>
         </div>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1015243.0397777373!2d106.87879!3d-6.290899!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f29c898a114b%3A0xbdc38eee360b6262!2sJasa%20Marga!5e0!3m2!1sen!2sid!4v1685887740907!5m2!1sen!2sid" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </section>
     <!--=================================
     Action box -->
-
-    <!--=================================
-    Form -->
-    <section class="space-ptb">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7">
-                    <div class="border pr-lg-6">
-                        <div class="section-title px-4 pt-4 mb-4">
-                            <h2>Get Started here</h2>
-                            <p>Success isn’t really that difficult.</p>
-                        </div>
-                        <form class="form-row mt-0 align-items-center p-4">
-                            <div class="form-group col-12">
-                                <label class="text-dark font-weight-bold">Full name</label>
-                                <div class="form-icon d-flex">
-                                    <i class="far fa-user"></i>
-                                    <input type="text" class="form-control" placeholder="Full name">
-                                </div>
-                            </div>
-                            <div class="form-group col-12">
-                                <label class="text-dark font-weight-bold">Email Address</label>
-                                <div class="form-icon d-flex">
-                                    <i class="far fa-envelope"></i>
-                                    <input type="text" class="form-control" placeholder="Email Address">
-                                </div>
-                            </div>
-                            <div class="form-group col-12">
-                                <label class="text-dark font-weight-bold">Your phone</label>
-                                <div class="form-icon d-flex">
-                                    <i class="fas fa-phone-alt"></i>
-                                    <input type="text" class="form-control" placeholder="Your phone">
-                                </div>
-                            </div>
-                            <div class="form-group col-sm-12 mb-0 mt-3">
-                                <button type="submit" class="btn btn-primary">Submit Now</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-lg-5 text-center align-items-center">
-                    <div class="registration d-none d-lg-block">
-                        <img class="img-fluid border-radius" src="https://themes.potenzaglobalsolutions.com/html/academic/images/about/08.jpg" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--=================================
-    Form -->
-
-    <!--=================================
-    Testimonial-->
-    <section class="space-ptb bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="owl-carousel testimonial-center" data-nav-arrow="false" data-nav-dots="true" data-items="1" data-md-items="1" data-sm-items="1" data-xs-items="1" data-xx-items="1" data-space="0" data-autoheight="true">
-                        <!-- item-01 START -->
-                        <div class="item">
-                            <div class="testimonial-item">
-                                <div class="testimonial-quote text-center mb-4">
-                                    <i class="fas fa-quote-left fa-2x text-white"></i>
-                                </div>
-                                <div class="text-center">
-                                    <h3 class="mb-4">You won't regret it. I can't say enough about web service. It's the <span class="text-primary">perfect solution for our business.</span></h3>
-                                </div>
-                                <div class="testimonial-content">
-                                    <p>This is where you create powerful, progressive change. Notice the sense of freedom in your thoughts, the sense of accomplishment and Walkout 10 years into your future.</p>
-                                </div>
-                                <div class="testimonial-author">
-                                    <div class="testimonial-avatar avatar avatar-md mr-0">
-                                        <img class="img-fluid " src="https://themes.potenzaglobalsolutions.com/html/academic/images/avatar/02.jpg" alt="">
-                                    </div>
-                                    <div class="testimonial-name">
-                                        <h5 class="name">Scarlett D.</h5>
-                                        <span>- Manager</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- item-01 END -->
-
-                        <!-- item-02 START -->
-                        <div class="item">
-                            <div class="testimonial-item">
-                                <div class="testimonial-quote text-center mb-4">
-                                    <i class="fas fa-quote-left fa-2x text-white"></i>
-                                </div>
-                                <div class="text-center">
-                                    <h3 class="mb-4">University impressed me on multiple levels. I wish I would have <span class="text-primary">thought of it first.</span></h3>
-                                </div>
-                                <div class="testimonial-content">
-                                    <p>They are intentional because these changes are changes that you are choosing and they are the changes that will cause you to live the life you want to live and dream.</p>
-                                </div>
-                                <div class="testimonial-author">
-                                    <div class="testimonial-avatar avatar avatar-md mr-0">
-                                        <img class="img-fluid " src="https://themes.potenzaglobalsolutions.com/html/academic/images/avatar/05.jpg" alt="">
-                                    </div>
-                                    <div class="testimonial-name">
-                                        <h5 class="name">Hali D.</h5>
-                                        <span>- Marketing Expert</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- item-02 END -->
-
-                        <!-- item-03 START -->
-                        <div class="item">
-                            <div class="testimonial-item">
-                                <div class="testimonial-quote text-center mb-4">
-                                    <i class="fas fa-quote-left fa-2x text-white"></i>
-                                </div>
-                                <div class="text-center">
-                                    <h3 class="mb-4">Thanks guys, keep up the good work! I didn't <span class="text-primary">even need training.</span></h3>
-                                </div>
-                                <div class="testimonial-content">
-                                    <p>They often mean leaving the perception of security in order to discover your personal freedom. These are the changes that will bring happiness and satisfaction into your life. Just go there now.</p>
-                                </div>
-                                <div class="testimonial-author">
-                                    <div class="testimonial-avatar avatar avatar-md mr-0">
-                                        <img class="img-fluid " src="https://themes.potenzaglobalsolutions.com/html/academic/images/avatar/03.jpg" alt="">
-                                    </div>
-                                    <div class="testimonial-name">
-                                        <h5 class="name">Sumner N.</h5>
-                                        <span>- Team Leader</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- item-03 END -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--=================================
-    Testimonial-->
-
-    <!--=================================
-    Event -->
-    <section class="space-ptb">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-md-7">
-                            <div class="section-title">
-                                <h2>Latest Events</h2>
-                                <p class="mb-0">Success isn’t really that difficult. There is a significant portion of the population</p>
-                            </div>
-                        </div>
-                        <div class="col-md-5 text-md-right mb-4 mb-md-0">
-                            <a class="btn btn-primary btn-round" href="#">View All</a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-7">
-                            <div class="event-list bg-white mb-3 p-3 border">
-                                <div class="d-sm-flex">
-                                    <div class="event-img">
-                                        <img class="w-100" src="https://themes.potenzaglobalsolutions.com/html/academic/images/events/list/01.jpg" alt="">
-                                    </div>
-                                    <div class="event-content pl-sm-4 pt-4 p-sm-0">
-                                        <a href="event-detail.html" class="text-dark h5">Young Leaders in Tech Policy Fellowship</a>
-                                        <div class="events-meta my-3">
-                                            <ul class="list-unstyled mb-0 d-flex">
-                                                <li class="mr-3"><a href="#" class="text-dark"><i class="fas fa-calendar-alt pr-1 text-primary"></i> 5 Oct, 2020</a></li>
-                                                <li><a href="#" class="text-dark"><i class="fas fa-clock pr-1 text-primary"></i> 9:00 AM - 11:00 AM</a></li>
-                                            </ul>
-                                        </div>
-                                        <p class="text-dark">Franklin’s extraordinary success in life and politics can be attributed to his perseverance.</p>
-                                        <a class="btn btn-sm btn-dark btn-round" href="#">View Details</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="event-list bg-white mb-3 p-3 border">
-                                <div class="d-sm-flex">
-                                    <div class="event-img">
-                                        <img class="w-100" src="https://themes.potenzaglobalsolutions.com/html/academic/images/events/list/02.jpg" alt="">
-                                    </div>
-                                    <div class="event-content pl-sm-4 pt-4 p-sm-0">
-                                        <a href="event-detail.html" class="text-dark h5">Expert Panel- Careers in Tech Policy</a>
-                                        <div class="events-meta my-3">
-                                            <ul class="list-unstyled mb-0 d-flex">
-                                                <li class="mr-3"><a href="#" class="text-dark"><i class="fas fa-calendar-alt pr-1 text-primary"></i> 27 Nov, 2020</a></li>
-                                                <li><a href="#" class="text-dark"><i class="fas fa-clock pr-1 text-primary"></i> 8:00 AM - 5:00 PM</a></li>
-                                            </ul>
-                                        </div>
-                                        <p class="text-dark">Next time you really want to achieve something, take time to focus on your own personal journal.</p>
-                                        <a class="btn btn-sm btn-dark btn-round" href="#">View Details</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-5 mt-xl-0 mt-4">
-                            <div class="blog-post d-flex align-items-center border border-radius">
-                                <div class="blog-date">
-                                    <h3>04</h3>
-                                    <span>Dec</span>
-                                </div>
-                                <div class="blog-contant">
-                                    <h5 class="mt-0 mb-3">Health and Life Expectancy</h5>
-                                    <div class="blog-meta mb-3">
-                                        <ul class="list-unstyled mb-0 d-sm-flex">
-                                            <li class="pr-sm-2"><a href="#"><i class="fas fa-map-marker-alt text-primary pr-1"></i> Anaheim</a></li>
-                                            <li><a href="#"><i class="fas fa-clock text-primary pr-1"></i> 8:00 AM - 5:00 PM</a></li>
-                                        </ul>
-                                    </div>
-                                    <a class="btn p-0" href="blog-detail.html">View Details</a>
-                                </div>
-                            </div>
-                            <div class="blog-post d-flex align-items-center border border-radius mt-4">
-                                <div class="blog-date">
-                                    <h3>22</h3>
-                                    <span>Dec</span>
-                                </div>
-                                <div class="blog-contant">
-                                    <h5 class="mt-0 mb-3">Protecting Our Most Vulnerable Populations</h5>
-                                    <div class="blog-meta mb-3">
-                                        <ul class="list-unstyled mb-0 d-sm-flex">
-                                            <li class="pr-sm-2"><a href="#"><i class="fas fa-map-marker-alt text-primary pr-1"></i> Bedford</a></li>
-                                            <li><a href="#"><i class="fas fa-clock text-primary pr-1"></i> 10:00 AM - 4:00 PM</a></li>
-                                        </ul>
-                                    </div>
-                                    <a class="btn p-0" href="blog-detail.html">View Details</a>
-                                </div>
-                            </div>
-                            <div class="blog-post d-flex align-items-center border border-radius mt-4">
-                                <div class="blog-date">
-                                    <h3>35</h3>
-                                    <span>Dec</span>
-                                </div>
-                                <div class="blog-contant">
-                                    <h5 class="mt-0 mb-3">National Science Day celebrated at LPU Campus</h5>
-                                    <div class="blog-meta mb-3">
-                                        <ul class="list-unstyled mb-0 d-sm-flex">
-                                            <li class="pr-sm-2"><a href="#"><i class="fas fa-map-marker-alt text-primary pr-1"></i> Lincolnton</a></li>
-                                            <li><a href="#"><i class="fas fa-clock text-primary pr-1"></i> 11:00 AM - 3:00 PM</a></li>
-                                        </ul>
-                                    </div>
-                                    <a class="btn p-0" href="blog-detail.html">View Details</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--=================================
-    Event -->
-
-    <!--=================================
-    Call to action-->
-    <section class="h-700 space-pt" style="background-image: url(images/bg/07.jpg); background-size: cover; background-position: center center;">
-        <div class="container pb-4">
-            <div class="row pb-4 justify-content-center">
-                <div class="col-sm-10 mb-4 mb-lg-0 text-center">
-                    <h2 class="mb-2 mb-sm-4">The Education You Want. The Attention You Deserve.</h2>
-                    <p>We also know those epic stories, those modern-day legends surrounding the early failures of such supremely successful folks as Michael Jordan and Bill Gates.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--=================================
-    Call to action-->
-
     <!--=================================
     Footer-->
     <footer class="space-pt bg-overlay-black-90 bg-holder footer" style="background-image: url(images/bg/03.jpg);">
         <div class="container">
             <div class="row pb-5 pb-lg-6 mb-lg-3">
                 <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0 pr-lg-5">
-                    <a href="index.html"><img class="img-fluid mb-3 footer-logo" src="https://themes.potenzaglobalsolutions.com/html/academic/images/logo-light.svg" alt=""></a>
-                    <p class="text-white">The best way is to develop and follow a plan. Start with your goals in mind and then work backward to develop the plan.</p>
-                    <h5 class="text-white mb-2 mb-sm-4">Follow Us</h5>
+                    <a href="index.html"><img class="img-fluid mb-3 footer-logo" src="<?= base_url() ?>assets/img/jmto_logo.png" alt=""></a>
+                    <p class="text-white">JMTO merupakan kelompok usaha PT Jasa Marga (Persero) Tbk dengan komposisi saham 99,9 persen dimiliki oleh PT Jasa Marga (Persero) Tbk dan 0,1 persen dimiliki oleh Induk Koperasi Karyawan Jasa Marga. Kegiatan Usaha JMTO meliputi Layanan Pengoperasian, ETC dan Layanan IT</p>
+                    <h5 class="text-white mb-2 mb-sm-4">(021) 22984722</h5>
                     <div class="social-icon social-icon-style-02">
                         <ul>
-                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fa fa-phone"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-2 mb-4 mb-lg-0">
-                    <h5 class="text-white mb-2 mb-sm-4">Category</h5>
+                    <h5 class="text-white mb-2 mb-sm-4"> Pengadaan</h5>
                     <div class="footer-link">
                         <ul class="list-unstyled mb-0">
-                            <li><a class="text-white" href="#">Economics</a></li>
-                            <li><a class="text-white" href="#">Natural</a></li>
-                            <li><a class="text-white" href="#">Architecture</a></li>
-                            <li><a class="text-white" href="#">Electrical</a></li>
-                            <li><a class="text-white" href="#">Biological</a></li>
-                            <li><a class="text-white" href="#">Psychology</a></li>
+                            <li><a class="text-white" href="#">Pengadaan Barang</a></li>
+                            <li><a class="text-white" href="#">Pengadaan Jasa Lain</a></li>
+                            <li><a class="text-white" href="#">Pengadaan Jasa Pemborongan</a></li>
+                            <li><a class="text-white" href="#">Pengadaan Konsultansi</a></li>
+                            <li><a class="text-white" href="#">Pengadaan Kontruksi</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-2 mb-4 mb-sm-0">
-                    <h5 class="text-white mb-2 mb-sm-4">Useful Link</h5>
-                    <div class="footer-link">
-                        <ul class="list-unstyled mb-0">
-                            <li><a class="text-white" href="index.html">Home</a></li>
-                            <li><a class="text-white" href="about-us.html">About</a></li>
-                            <li><a class="text-white" href="course.html">Course</a></li>
-                            <li><a class="text-white" href="privacy-policy.html">Privacy Policy</a></li>
-                            <li><a class="text-white" href="pricing.html">Pricing</a></li>
-                            <li><a class="text-white" href="faq.html">Faq</a></li>
-                        </ul>
-                    </div>
+                    <h5 class="text-white mb-2 mb-sm-4">Alamat Kami</h5>
+                    <p class="text-white">Gedung Cabang Jagorawi Lt. 4
+                        Plaza Tol Taman Mini Indonesia Indah
+                        Jakarta, 13550 Indonesia
+                        Telp. (021) 22984722</p>
                 </div>
                 <div class="col-sm-6 col-lg-4">
-                    <h5 class="text-white mb-2 mb-sm-4">Contact Us</h5>
+                    <h5 class="text-white mb-2 mb-sm-4">Link Terkait</h5>
                     <p class="text-white">Helped thousands of clients to find the right property for their needs.</p>
-                    <div class="footer-contact-info">
-                        <div class="contact-address mt-4">
-                            <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <p class="ml-3 mb-0 text-white">6580 Allison Turnpike Creminfort, AL 32808-4509</p>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-microphone-alt"></i>
-                                <p class="mb-0 font-weight-bold ml-3"><a class="text-white" href="#">+(123) 456-7890</a></p>
-                            </div>
-                            <div class="contact-item mb-0">
-                                <i class="fas fa-headset"></i>
-                                <a class="text-white ml-3 text-white" href="#">letstalk@university.com</a>
-                            </div>
-                        </div>
+                    <div class="footer-link">
+                        <ul class="list-unstyled mb-0">
+                            <li><a class="text-white" href="index.html">Corporate Internal Media (CIM)</a></li>
+                            <li><a class="text-white" href="about-us.html">Electronic Operational Performance Appraisal (EOPA)</a></li>
+                            <li><a class="text-white" href="course.html">Jasa Marga Livestreaming</a></li>
+                            <li><a class="text-white" href="privacy-policy.html">Privacy Policy</a></li>
+                            <li><a class="text-white" href="pricing.html">JMTO Internal Web Mail</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -731,7 +522,7 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-12 text-center">
-                        <p class="mb-0 text-white">©Copyright 2020 <a href="index.html">university</a> All Rights Reserved</p>
+                        <p class="mb-0 text-white">©PT Jasamarga Tollroad Operator. 2023 <a href="index.html"></a> Privacy & Policy</p>
                     </div>
                 </div>
             </div>
@@ -778,7 +569,7 @@
 
 <script>
     $(document).ready(function() {
-        $('#table_berita').DataTable();
+        $('.table_berita').DataTable();
     });
 </script>
 
