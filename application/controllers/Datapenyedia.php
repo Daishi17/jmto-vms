@@ -19,16 +19,66 @@ class Datapenyedia extends CI_Controller
 		$this->load->view('datapenyedia/ajax');
 	}
 
+
+	public function identitas_perusahaan()
+	{
+		$this->load->view('template/header');
+		$this->load->view('template/sidebar');
+		$this->load->view('datapenyedia/identitas/index');
+		$this->load->view('template/footer');
+	}
+
+	public function akta_pendirian()
+	{
+		$this->load->view('template/header');
+		$this->load->view('template/sidebar');
+		$this->load->view('datapenyedia/akta_pendirian/index');
+		$this->load->view('template/footer');
+	}
+
+	public function manajerial()
+	{
+		$this->load->view('template/header');
+		$this->load->view('template/sidebar');
+		$this->load->view('datapenyedia/manajerial/index');
+		$this->load->view('template/footer');
+	}
+
+	public function sdm()
+	{
+		$this->load->view('template/header');
+		$this->load->view('template/sidebar');
+		$this->load->view('datapenyedia/sdm/index');
+		$this->load->view('template/footer');
+	}
+
+	public function pengalaman()
+	{
+		$this->load->view('template/header');
+		$this->load->view('template/sidebar');
+		$this->load->view('datapenyedia/pengalaman/index');
+		$this->load->view('template/footer');
+	}
+
+	public function pajak()
+	{
+		$this->load->view('template/header');
+		$this->load->view('template/sidebar');
+		$this->load->view('datapenyedia/pajak/index');
+		$this->load->view('template/footer');
+	}
+
 	public function izin_usaha()
 	{
 		$id_vendor = '1';
 		$data['get_row_nib']  = $this->M_datapenyedia->get_row_nib($id_vendor);
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
-		$this->load->view('datapenyedia/izin_usaha/index',$data);
+		$this->load->view('datapenyedia/izin_usaha/index', $data);
 		$this->load->view('template/footer');
 		$this->load->view('js_file_on_session/index');
 	}
+
 
 	public function add_izin_usaha()
 	{

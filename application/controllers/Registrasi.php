@@ -74,7 +74,7 @@ class Registrasi extends CI_Controller
 		$data['get_jenis_usaha']  = $this->M_jenis_usaha->get_result_jenis_usaha();
 		$this->load->view('template/header_registrasi');
 		$this->load->view('template/sidebar_registrasi');
-		$this->load->view('datapenyedia/identitas/index', $data);
+		$this->load->view('datapenyedia/registrasi/identitas', $data);
 		$this->load->view('template/footer');
 		$this->load->view('js_file_out_session/index');
 	}
@@ -120,7 +120,7 @@ class Registrasi extends CI_Controller
 						'sts_kantor_cabang' => $sts_kantor_cabang,
 						'alamat_kantor_cabang' => $alamat_kantor_cabang,
 						'password' =>  password_hash($password, PASSWORD_DEFAULT),
-						'id_jenis_usaha' => implode(",",$jenis_usaha)
+						'id_jenis_usaha' => implode(",", $jenis_usaha)
 
 					];
 					$this->M_datapenyedia->insert_vendor($data_vendor);

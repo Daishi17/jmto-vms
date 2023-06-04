@@ -1,246 +1,472 @@
-    <!-- Main content -->
-    <?php if (!$this->session->userdata('npwp') && !$this->session->userdata('email')) {
-        redirect('registrasi');
-    }
-    ?>
-    <section class="content">
-        <div class="container">
+<!-- Main content -->
+<section class="content">
 
-            <!-- Default box -->
-            <div class="card card-outline card-primary text-sm">
-                <div class="card-header">
-                    <h4 class="card-title">
-                        <i class="fas fa-city mr-2"></i>
-                        <strong>Identitas Perusahaan / Individu</strong>
-                    </h4>
-                </div>
-                <div class="card-body">
-                    <div class="card card-primary text-sm">
-                        <div class="card-header">
-                            <h6 class="card-title">
-                                <i class="fab fa-wpforms mr-2"></i>
-                                Form Input Identitas Perusahaan / Individu
-                            </h6>
+    <!-- Default box -->
+    <div class="card card-outline card-primary">
+        <div class="card-header">
+            <i class="fas fa-building mr-2"></i>
+            <strong>Identitas Perusahan</strong>
+        </div>
+        <form>
+            <div class="card-body">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <i class="fas fa-file-alt mr-2"></i>
+                        Form Identitas Perusahan
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-block btn-warning btn-sm">
+                                <i class="fas fa-edit mr-2"></i>
+                                Edit Changes
+                            </button>
                         </div>
-                        <form action="<?= base_url('registrasi/add_identitas') ?>" method="post">
-                            <div class="card-body">
-                                <div class="callout callout-danger text-sm">
-                                    <i class="fas fa-info"></i>
-                                    <strong>Catatan:</strong>
-                                    <div class="text-sm">
-                                        <span class="text-primary">
-                                            1. Semua inputan form identitas wajib di isi, terkecuali alamat kantor cabang jika tidak terdapat kantor cabang <br>
-                                            2. Untuk inputan NPWP dan Email sudah automatis terisi sesuai dengan isian registrasi awal.
-                                        </span>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-sm table-bordered">
+                            <tr>
+                                <td class="col-sm-2 bg-light">
+                                    <label for="#" class="col-sm-12 col-form-label">
+                                        Jenis Usaha
+                                    </label>
+                                </td>
+                                <td class="col-sm-3">
+                                    <div class="col-sm-12">
+                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-lg-jenis">
+                                            <i class="far fa-file-alt mr-2"></i>
+                                            Form Edit Jenis Usaha
+                                        </button>
+                                        <!-- <select class="form-control select2bs4" style="width: 100%;" disabled>
+                                        <option selected="selected">Jasa Konsultasi</option>
+                                        <option>Jasa Lain</option>
+                                        <option>Jasa Pemborongan</option>
+                                    </select> -->
                                     </div>
-                                </div>
-                                <table class="table table-sm">
-                                    <tr class="col-sm-12">
-                                        <td class="col-sm-4">
-                                            <select class="select2bs4" name="jenis_usaha[]" multiple data-placeholder="Pilih Jenis Usaha" style="width: 100%;">
-                                                <?php foreach ($get_jenis_usaha as $key => $value) { ?>
-                                                    <option value="<?= $value['id_jenis_usaha']?>"><?= $value['nama_jenis_usaha']?></option>
-                                                <?php } ?>
+                                </td>
+                                <td class="col-sm-3 bg-light">
+                                    <label for="#" class="col-sm-10 col-form-label">
+                                        Nama Usaha / Perorangan
+                                    </label>
+                                </td>
+                                <td class="col-sm-4">
+                                    <div class="col-sm-12">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-city"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" placeholder="Kreatif Intelegensi Teknologi" disabled>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-sm-1 bg-light">
+                                    <label for="#" class="col-sm-12 col-form-label">
+                                        <span>Bentuk Usaha</span>
+                                    </label>
+                                </td>
+                                <td class="col-sm-3">
+                                    <div class="col-sm-12">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-th"></i></span>
+                                            </div>
+                                            <select class="custom-select rounded-11 text-sm" id="exampleSelectRounded11" disabled>
+                                                <option>Perseroan Terbatas (PT)</option>
+                                                <option>Commanditaire Vennootschap (CV)</option>
+                                                <option>Firma</option>
+                                                <option>Perorangan</option>
                                             </select>
-                                        </td>
-                                        <td class="col-sm-6">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fas fa-user-tag"></i></span>
-                                                </div>
-                                                <input type="text" class="form-control" name="nama_usaha" placeholder="Nama Perusahaan / Individu">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="col-sm-2 bg-light">
+                                    <label for="#" class="col-sm-10 col-form-label">
+                                        Kualifikasi Usaha
+                                    </label>
+                                </td>
+                                <td class="col-sm-4">
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-th-list"></i></span>
                                             </div>
-                                        </td>
-                                    </tr>
-                                    <tr class="col-sm-12">
-                                        <td class="col-sm-4">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fas fa-th-list"></i></span>
-                                                </div>
-                                                <select name="bentuk_usaha" class="form-control">
-                                                    <option>Pilih Bentuk Usaha...</option>
-                                                    <option value="Perseroan Terbatas (PT)">Perseroan Terbatas (PT)</option>
-                                                    <option value="Commanditaire Vennootschap (CV)">Commanditaire Vennootschap (CV)</option>
-                                                    <option value="Firma">Firma</option>
-                                                    <option value="Individu">Individu</option>
-                                                </select>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-4">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fas fa-th-list"></i></span>
-                                                </div>
-                                                <select name="kualifikasi_usaha" class="form-control">
-                                                    <option>Pilih Kualifikasi Usaha...</option>
-                                                    <option value="Besar">Besar</option>
-                                                    <option value="Menengah">Menengah</option>
-                                                    <option value="Kecil">Kecil</option>
-                                                </select>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr class="col-sm-12">
-                                        <td class="col-sm-4">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fas fa-address-card"></i></span>
-                                                </div>
-                                                <input type="text" class="form-control" name="npwp" value="<?= $this->session->userdata('npwp') ?>" data-inputmask='"mask": "99.999.999.9-999.999"' readonly data-mask>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-4">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fas fa-envelope-open-text"></i></span>
-                                                </div>
-                                                <input type="email" class="form-control" name="email" value="<?= $this->session->userdata('email') ?>" readonly>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr class="col-sm-12">
-                                        <td class="col-sm-12" colspan="2">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fas fa-road"></i></span>
-                                                </div>
-                                                <textarea type="text" name="alamat" class="form-control" placeholder="Alamat Lengkap ..."></textarea>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr class="col-sm-12">
-                                        <td class="col-sm-4">
-                                            <select name="id_provinsi[]" id="provinsitambah" class="form-control select2bs4">
-                                                <option value="">--Provinsi--</option>
-                                                <?php foreach ($provinsi as $key => $value) { ?>
-                                                    <option value="<?= $value['id_provinsi'] ?>"><?= $value['nama_provinsi'] ?></option>
-                                                <?php  } ?>
+                                            <select class="custom-select rounded-1 text-sm" id="exampleSelectRounded1" disabled>
+                                                <option>Usaha Besar</option>
+                                                <option>Usaha Menengah</option>
+                                                <option>Usaha Kecil (Mikro UMKM)</option>
                                             </select>
-                                        </td>
-                                        <td class="col-sm-4">
-                                            <select name="id_kabupaten[]" id="kabupatentambah" class="form-control select2bs4">
-                                                <option value="">--Kabupaten--</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr class="col-sm-12">
-                                        <td class="col-sm-4">
-                                            <select class="form-control select2bs4" style="width: 100%;">
-                                                <option selected="selected">Pilih Kecamatan</option>
-                                                <option>DKI Jakarta</option>
-                                                <option>Banten</option>
-                                                <option>Jawa Barat</option>
-                                            </select>
-                                        </td>
-                                        <td class="col-sm-4">
-                                            <input type="text" name="nama_kelurahan" placeholder="Nama Kelurahan..." class="form-control">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-sm-6">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fas fa-map-pin"></i></span>
-                                                </div>
-                                                <input type="text" name="kode_pos" class="form-control" onkeypress="return hanyaAngka(event)" placeholder="Kode Pos">
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-6">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
-                                                </div>
-                                                <input type="text" name="no_telpon" class="form-control" onkeypress="return hanyaAngka(event)" placeholder="Nomor Kontak">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr class="col-sm-12">
-                                        <td class="col-sm-4">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fas fa-th-list"></i></span>
-                                                </div>
-                                                <select name="sts_kantor_cabang" class="form-control">
-                                                    <option>Kantor Cabang...</option>
-                                                    <option value="1">Ya</option>
-                                                    <option value="2">Tidak</option>
-                                                </select>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-6">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fas fa-road"></i></span>
-                                                </div>
-                                                <input type="text" name="alamat_kantor_cabang" class="form-control" placeholder="Alamat Kantor Cabang">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-sm-6">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
-                                                </div>
-                                                <input type="text" name="password" class="form-control" placeholder="Buat Password">
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-6">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                                                </div>
-                                                <input name="password2" type="text" class="form-control" placeholder="Konfirmasi Password">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-sm-6">
-                                            <div class="custom-control custom-checkbox">
-                                                <div class="row">
-                                                    <div class="col-md-1">
-                                                        <input type="checkbox" id="check_terima_identittas" onclick="Terima_identitas()">
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <label>Saya menyetujui persyaratan layanan.</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-
-                            </div>
-                            <td class="col-sm-6">
-                                <center>
-                                    <?php echo $widget; ?>
-                                    <?php echo $script; ?>
-                                    <br>
-                                </center>
-                            </td>
+                                        </div>
+                                    </div>
                     </div>
                     </tr>
+                    <tr>
+                        <td class="col-sm-1 bg-light">
+                            <label for="#" class="col-sm-12 col-form-label">
+                                NPWP
+                            </label>
+                        </td>
+                        <td class="col-sm-3">
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" placeholder="95.725.637.3-411.000" data-inputmask='"mask": "99.999.999.9-999.999"' data-mask disabled>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-sm-2 bg-light">
+                            <label for="#" class="col-sm-12 col-form-label">
+                                Email
+                            </label>
+                        </td>
+                        <td class="col-sm-4">
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-envelope-open-text"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" placeholder="kreatifintelegnsi@gmail.com" disabled>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1 bg-light">
+                            <label for="#" class="col-sm-12 col-form-label">
+                                Alamat
+                            </label>
+                        </td>
+                        <td class="col-sm-11" colspan="3">
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-road"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Jl. Kodiklat TNI No. 15 Raya Puspitek" disabled>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1 bg-light">
+                            <label for="#" class="col-sm-12 col-form-label">
+                                Provinsi
+                            </label>
+                        </td>
+                        <td class="col-sm-3">
+                            <div class="col-sm-12">
+                                <select class="form-control select2bs4" style="width: 100%;" disabled>
+                                    <option selected="selected">DKI Jakarta</option>
+                                    <option>Banten</option>
+                                    <option>Jawa Barat</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td class="col-sm-2 bg-light">
+                            <label for="#" class="col-sm-12 col-form-label">
+                                Kabupaten / Kota
+                            </label>
+                        </td>
+                        <td class="col-sm-4">
+                            <div class="col-sm-12">
+                                <select class="form-control select2bs4" style="width: 100%;" disabled>
+                                    <option selected="selected">Jakarta Timur</option>
+                                    <option>Tangerang Selatan</option>
+                                    <option>Bandung</option>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1 bg-light">
+                            <label for="#" class="col-sm-12 col-form-label">
+                                Kecamatan
+                            </label>
+                        </td>
+                        <td class="col-sm-3">
+                            <div class="col-sm-12">
+                                <select class="form-control select2bs4" style="width: 100%;" disabled>
+                                    <option selected="selected">Cawang</option>
+                                    <option>Serpong</option>
+                                    <option>Bandung Barat</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td class="col-sm-2 bg-light">
+                            <label for="#" class="col-sm-12 col-form-label">
+                                Kelurahan
+                            </label>
+                        </td>
+                        <td class="col-sm-4">
+                            <div class="col-sm-12">
+                                <select class="form-control select2bs4" style="width: 100%;" disabled>
+                                    <option selected="selected">Kramat Jati</option>
+                                    <option>Buaran</option>
+                                    <option>Dago</option>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1 bg-light">
+                            <label for="#" class="col-sm-12 col-form-label">
+                                Kode Pos
+                            </label>
+                        </td>
+                        <td class="col-sm-3">
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-map-pin"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" placeholder="15310" data-inputmask='"mask": "99999"' data-mask disabled>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-sm-2 bg-light">
+                            <label for="#" class="col-sm-12 col-form-label">
+                                Nomor Kontak
+                            </label>
+                        </td>
+                        <td class="col-sm-4">
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-phone-alt"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" placeholder="08118333433" disabled>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1 bg-light">
+                            <label for="#" class="col-sm-12 col-form-label">
+                                Kantor Cabang
+                            </label>
+                        </td>
+                        <td class="col-sm-2">
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-laptop-house"></i></span>
+                                    </div>
+                                    <select class="custom-select rounded-0 text-sm" id="exampleSelectRounded0" disabled>
+                                        <option>Tidak Ada</option>
+                                        <option>Ada</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-sm-2 bg-light">
+                            <label for="#" class="col-sm-12 col-form-label">
+                                Alamat Kantor Cabang
+                            </label>
+                        </td>
+                        <td class="col-sm-4">
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-laptop-house"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" placeholder="" disabled>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1 bg-light">
+                            <label for="#" class="col-sm-12 col-form-label">
+                                User Id
+                            </label>
+                        </td>
+                        <td class="col-sm-3">
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-user-lock"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Email || NPWP" disabled>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-sm-2 bg-light">
+                            <label for="#" class="col-sm-12 col-form-label">
+                                Password
+                            </label>
+                        </td>
+                        <td class="col-sm-4">
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" placeholder="********" disabled>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
                     </table>
-                    <div class="card-footer">
-                        <button type="submit" id="button_save" class="btn btn-primary disabled">
-                            <i class="fas fa-save mr-2"></i>
-                            Save Changes
-                        </button>
-                        <button type="button" class="btn btn-danger">
-                            <i class="fas fa-ban mr-2"></i>
-                            Cancel
-                        </button>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-success btn-sm" disabled>
+                        <i class="fas fa-save mr-2"></i>
+                        Save Changes
+                    </button>
+                    <button type="button" class="btn btn-danger btn-sm">
+                        <i class="fas fa-ban mr-2"></i>
+                        Cancel
+                    </button>
+                </div>
+            </div>
+    </div>
+    <!-- /.card-body -->
+    </form>
+    </div>
+    <!-- /.card -->
+    <div class="modal fade" id="modal-lg-jenis">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5> <img src="<?php echo base_url(); ?>assets/template/frontend/dist/img/jmto_rev1.png" class="brand-image img-circle elevation-3" style="opacity: .8">
+                        <span class="text-primary">
+                            <strong>Jasamarga Tollroad Operator</strong>
+                        </span>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card card-info card-outline">
+                        <div class="card-header">
+                            <i class="fas fa-building"></i>
+                            <span class="text-secondary">
+                                <strong>Kreatif Intelegensi Teknologi</strong>
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <form class="needs-validation" novalidate>
+                                <table class="table table-bordered table-sm">
+                                    <tr>
+                                        <td class="col-sm-2 bg-light">
+                                            <!--<span class="col-sm-10" for="inputKode">
+                                            <strong>Kode KBLI</strong>
+                                        </span> -->
+                                            <label for="inputKode" class="col-sm-10  col-form-label">Jenis Usaha</label>
+                                        </td>
+                                        <td class="col-mb-2">
+                                            <div class="col-sm-12">
+                                                <select class="form-control select2bs4" style="width: 100%;">
+                                                    <option selected="selected">Jasa Lainnya</option>
+                                                    <option>Jasa Pemborongan</option>
+                                                    <option>Jasa Konsultasi</option>
+                                                    <option>Jasa Konstruksi</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="col-sm-1">
+                                            <span type="button" class="badge badge-info">
+                                                <strong>
+                                                    <a class="nav-link">
+                                                        <span class="text-white"><i class="fas fa-save mr-2"></i>Insert</span>
+                                                    </a>
+                                                </strong>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-tools">
+                                        <div class="input-group input-group-sm" style="width: 200px;">
+                                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body table-responsive p-0">
+                                    <table class="table table-hover text-nowrap table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Jenis Usaha</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Jasa Lain</td>
+                                                <td>
+                                                    <span class="badge badge-success">
+                                                        <strong>Sudah Tervalidasi</strong>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger btn-sm">
+                                                        <i class="fas fa-trash mr-2"></i>
+                                                        Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Jasa Konsultasi</td>
+                                                <td>
+                                                    <span class="badge badge-danger">
+                                                        <strong>Data Tidak Valid</strong>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger btn-sm">
+                                                        <i class="fas fa-trash mr-2"></i>
+                                                        Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Jasa Pemborongan</td>
+                                                <td>
+                                                    <span class="badge badge-warning">
+                                                        <strong>Belum Tervalidasi</strong>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger btn-sm">
+                                                        <i class="fas fa-trash mr-2"></i>
+                                                        Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="card-footer clearfix">
+                                    <ul class="pagination pagination-sm m-0 float-right">
+                                        <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    </form>
+                </div>
+                <div class="modal-footer justify-content-start">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <i class="fas fa-times-circle mr-2"></i>
+                        Close
+                    </button>
                 </div>
             </div>
         </div>
-        <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-
-        </div>
-
-    </section>
-    <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
+
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
