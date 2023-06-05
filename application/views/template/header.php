@@ -67,9 +67,9 @@
                 </strong>
                 <!-- Left navbar links -->
                 <ul class="navbar-nav">
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-                    </li>
+                    </li> -->
                     <li class="nav-item d-none d-sm-inline-block">
                         <a href="<?= base_url('dashboard') ?>" class="nav-link">
                             <i class="fas fa-tachometer-alt mr-2"></i>
@@ -241,7 +241,7 @@
                                 Ganti Password
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">
+                            <a href="<?= base_url('auth/logout') ?>" class="dropdown-item">
                                 <i class="fas fa-sign-out-alt mr-2"></i>
                                 Log Out System
                             </a>

@@ -9,6 +9,10 @@ class Datapenyedia extends CI_Controller
 		parent::__construct();
 		$this->load->model('M_datapenyedia/M_datapenyedia');
 		$this->load->helper('download');
+		$id_vendor = $this->session->userdata('id_vendor');
+		if (!$id_vendor) {
+			redirect('auth');
+		}
 	}
 
 	public function index()

@@ -120,7 +120,7 @@ class Registrasi extends CI_Controller
 						'sts_kantor_cabang' => $sts_kantor_cabang,
 						'alamat_kantor_cabang' => $alamat_kantor_cabang,
 						'password' =>  password_hash($password, PASSWORD_DEFAULT),
-						'id_jenis_usaha' => implode(",", $jenis_usaha)
+						'id_jenis_usaha' => implode("", $jenis_usaha)
 
 					];
 					$this->M_datapenyedia->insert_vendor($data_vendor);

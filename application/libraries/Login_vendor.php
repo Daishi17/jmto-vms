@@ -63,16 +63,7 @@ class Login_vendor
     }
     public function logout()
     {
-        $this->ci->session->unset_userdata('username_vendor');
-        $this->ci->session->unset_userdata('id_vendor');
-        $this->ci->session->unset_userdata('status_daftar_hitam_vendor');
-        $this->ci->session->unset_userdata('masa_berlaku_daftar_hitam');
-        $this->ci->session->unset_userdata('role_vendor');
-        $this->ci->session->unset_userdata('status_vendor_baru');
-        $this->ci->session->unset_userdata('status_validasi_dokumen');
-        $this->ci->session->unset_userdata('kualifikasi_usaha');
-        $this->ci->session->unset_userdata('id_jenis_pengadaan');
-        $this->ci->session->set_flashdata('berhasil', 'Anda Berhasil Logout');
-        redirect('https://eproc.jmtm.co.id');
+        $this->ci->session->sess_destroy();
+        redirect(base_url(''));
     }
 }
