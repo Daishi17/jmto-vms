@@ -33,7 +33,7 @@ class Email_send
         $this->ci->load->library('email', $config);
         $this->ci->email->set_newline("\r\n");
         // Email dan nama pengirim
-        $this->ci->email->from('eproc@jmtm.co.id', 'JMTM');
+        $this->ci->email->from('admin@kintekindo.net', 'JMTO');
 
         // Email penerima
 
