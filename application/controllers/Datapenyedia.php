@@ -47,10 +47,12 @@ class Datapenyedia extends CI_Controller
 		$row_vendor = $this->M_datapenyedia->get_row_vendor_by_id_url_vendor($id_url_vendor);
 		$id_vendor = $row_vendor['id_vendor'];
 		$row_nib = $this->M_datapenyedia->get_row_nib($id_vendor);
+		$row_siup = $this->M_datapenyedia->get_row_siup($id_vendor);
 		if ($token == $row_vendor['token_scure_vendor']) {
 			$response = [
 				'row_vendor' => $row_vendor,
 				'row_nib' => $row_nib,
+				'row_siup' => $row_siup
 			];
 		} else {
 			$response = [
@@ -216,8 +218,8 @@ class Datapenyedia extends CI_Controller
 		$id = str_replace('-', '', $id);
 		$token = $this->token->data_token();
 		// post
-		$nomor_surat = $this->input->post('nomor_surat');
-		$kualifikasi_izin = $this->input->post('kualifikasi_izin');
+		$nomor_surat = $this->input->post('nomor_surat_siup');
+		$kualifikasi_izin = $this->input->post('kualifikasi_izin_siup');
 		$sts_seumur_hidup = $this->input->post('sts_seumur_hidup_siup');
 		$tgl_berlaku_siup = $this->input->post('tgl_berlaku_siup');
 		$password_dokumen = '1234';
@@ -295,6 +297,48 @@ class Datapenyedia extends CI_Controller
 			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 			// redirect(base_url('upload'));
 		}
+	}
+
+
+	public function encryption_siup($id_url)
+	{
+		$type = $this->input->post('type');
+
+		$get_row_enkrip = $this->M_datapenyedia->get_row_siup_url($id_url);
+		$secret_token = $this->input->post('secret_token');
+		$chiper = "AES-128-ECB";
+		$secret = $get_row_enkrip['token_dokumen'];
+		if ($type == 'dekrip') {
+			$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+			$data = [
+				'sts_token_dokumen' => 2,
+				'file_dokumen' => $encryption_string,
+			];
+		} else {
+			$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+			$data = [
+				'sts_token_dokumen' => 1,
+				'file_dokumen' => $encryption_string,
+			];
+		}
+
+		$id_vendor = $get_row_enkrip['id_vendor'];
+		$row_vendor = $this->M_datapenyedia->get_row_vendor($id_vendor);
+		$where = [
+			'id_url' => $id_url
+		];
+
+		if ($secret_token == $row_vendor['token_scure_vendor']) {
+			$response = [
+				'message' => 'success'
+			];
+		} else {
+			$response = [
+				'maaf' => 'Anda Belum Beruntung',
+			];
+		}
+		$this->M_datapenyedia->update_enkrip_siup($where, $data);
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
 	// end siup crud
 

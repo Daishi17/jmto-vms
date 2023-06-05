@@ -10,7 +10,8 @@
     <!-- <a href="javascript:;" onclick="kirun()">klik</a> -->
 
     <!-- link post siup -->
-    <input type="hidden" value="<?= base_url('datapenyedia/add_izin_usaha_siup') ?>" name="url_post">
+    <input type="hidden" value="<?= base_url('datapenyedia/add_izin_usaha_siup') ?>" name="url_post_siup">
+    <input type="hidden" name="url_encryption_siup" value="<?= base_url('datapenyedia/encryption_siup/') ?>">
     <!-- end link post siup  -->
 
     <!-- Default box -->
@@ -276,7 +277,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-qrcode"></i></span>
                                                             </div>
-                                                            <input type="text" name="nomor_surat" class="form-control form-control-sm" placeholder="">
+                                                            <input type="text" name="nomor_surat_siup" class="form-control form-control-sm" placeholder="">
                                                         </div>
                                                     </div>
                                                 </td>
@@ -323,7 +324,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-server"></i></span>
                                                             </div>
-                                                            <select name="kualifikasi_izin" class="custom-select rounded-2 text-sm" id="exampleSelectRounded2">
+                                                            <select name="kualifikasi_izin_siup" class="custom-select rounded-2 text-sm" id="exampleSelectRounded2">
                                                                 <?php foreach ($kualifikasi as $key => $value) { ?>
                                                                     <option value="<?= $value['id_kualifikasi_izin'] ?>"> <?= $value['nama_kualifikasi'] ?></option>
                                                                 <?php  } ?>
@@ -357,23 +358,17 @@
                                                         File Dokumen
                                                     </label>
                                                 </td>
-                                                <td class="col-sm-3">
+                                                <td class="col-sm-2">
                                                     <div class="col-sm-12">
-                                                        <a href="#" class="nav-link">
-                                                            <i class="far fa-file-pdf mr-2"></i>
-                                                            Dokumen SIUP.pdf
-                                                        </a>
+                                                        <div id="tampil_dokumen_siup">
+
+                                                        </div>
                                                     </div>
                                                 </td>
                                                 <td class="col-sm-4" colspan="2">
-                                                    <button type="button" class="btn btn-success btn-sm">
-                                                        <i class="fas fa-lock mr-2"></i>
-                                                        Enkripsi Doc
-                                                    </button>
-                                                    <button type="button" class="btn btn-warning btn-sm" readonly>
-                                                        <i class="fas fa-unlock-alt mr-2"></i>
-                                                        Dekripsi Doc
-                                                    </button>
+                                                    <div class="button_enkrip_siup">
+
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr>

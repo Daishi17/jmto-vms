@@ -101,6 +101,7 @@ class M_datapenyedia extends CI_Model
         return $query->row_array();
     }
 
+
     public function tambah_siup($data)
     {
         $this->db->insert('tbl_vendor_siup', $data);
@@ -111,6 +112,21 @@ class M_datapenyedia extends CI_Model
     {
         $this->db->update('tbl_vendor_siup', $data);
         $this->db->where($where);
+        return $this->db->affected_rows();
+    }
+
+    public function get_row_siup_url($id_url)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_siup');
+        $this->db->where('tbl_vendor_siup.id_url', $id_url);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function update_enkrip_siup($where, $data)
+    {
+        $this->db->update('tbl_vendor_siup', $data, $where);
         return $this->db->affected_rows();
     }
     // end siup

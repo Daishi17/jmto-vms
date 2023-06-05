@@ -32,7 +32,7 @@ function get_row_vendor() {
 
                 } else {
                     $('.button_enkrip').html('<a href="javascript:;" onclick="DekripEnkrip(\'' + id_url +'\''+','+ '\'' + 'enkrip' +'\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i>Enkripsi Dokumen</a>');
-                    var html2 = '<a href="javascript:;" onclick="DownloadFile(\''+ id_url +'\')" class="btn btn-sm btn-info">' + response['row_nib']['file_dokumen'] +'</a>';
+                    var html2 = '<a href="javascript:;" onclick="DownloadFile(\''+ id_url +'\')" class="btn btn-sm btn-warning">' + response['row_nib']['file_dokumen'] +'</a>';
                     $('#tampil_dokumen').html(html2);
                 }
             }
