@@ -162,6 +162,12 @@ function DekripEnkripSiup(id_url, type){
 
 }
 
+
+function DownloadFile(id_url){
+  var url_download = $('[name="url_download_siup"]').val()
+  location.href = url_download + id_url;
+}
+
 function sts_berlaku_siup(){
     var sts_seumur_hidup = $('[name="sts_seumur_hidup_siup"]').val()
     if (sts_seumur_hidup == 1) {

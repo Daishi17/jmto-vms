@@ -12,6 +12,7 @@
     <!-- link post siup -->
     <input type="hidden" value="<?= base_url('datapenyedia/add_izin_usaha_siup') ?>" name="url_post_siup">
     <input type="hidden" name="url_encryption_siup" value="<?= base_url('datapenyedia/encryption_siup/') ?>">
+    <input type="hidden" name="url_download_siup" value="<?= base_url('datapenyedia/url_download_siup/') ?>">
     <!-- end link post siup  -->
 
     <!-- Default box -->

@@ -340,6 +340,17 @@ class Datapenyedia extends CI_Controller
 		$this->M_datapenyedia->update_enkrip_siup($where, $data);
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
+
+	public function url_download_siup($id_url)
+	{
+		$get_row_enkrip = $this->M_datapenyedia->get_row_siup_url($id_url);
+		$id_vendor = $get_row_enkrip['id_vendor'];
+		$row_vendor = $this->M_datapenyedia->get_row_vendor($id_vendor);
+		$date = date('Y');
+		// $nama_file = $get_row_enkrip['nomor_surat'];
+		// $file_dokumen =  $get_row_enkrip['file_dokumen'];
+		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/NIB-' . $date . '/' . $get_row_enkrip['file_dokumen'], NULL);
+	}
 	// end siup crud
 
 	public function akta_pendirian()
