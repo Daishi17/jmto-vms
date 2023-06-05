@@ -416,7 +416,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                <form>
+                                <form id="form_izin_usaha3" enctype="multipart/form-data">
                                     <div class="card-body">
                                         <table class="table table-sm table-bordered">
                                             <tr>
@@ -446,7 +446,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-qrcode"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control form-control-sm" placeholder="">
+                                                            <input name="nomor_surat_sbu" type="text" class="form-control form-control-sm" placeholder="">
                                                         </div>
                                                     </div>
                                                 </td>
@@ -463,9 +463,9 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                                             </div>
-                                                            <select class="custom-select rounded-1 text-sm" id="exampleSelectRounded1">
-                                                                <option>Seumur Hidup</option>
-                                                                <option>Tanggal</option>
+                                                            <select name="sts_seumur_hidup_sbu" class="custom-select rounded-1 text-sm" id="exampleSelectRounded1">
+                                                                <option value="1">Tanggal</option>
+                                                                <option value="2">Seumur Hidup</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -476,7 +476,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                                                            <input name="tgl_berlaku_sbu" type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -494,9 +494,9 @@
                                                                 <span class="input-group-text"><i class="fas fa-server"></i></span>
                                                             </div>
                                                             <select class="custom-select rounded-2 text-sm" id="exampleSelectRounded2">
-                                                                <option>Besar</option>
-                                                                <option>Menengah</option>
-                                                                <option>Kecil (Mikro UMKM)</option>
+                                                                <?php foreach ($kualifikasi as $key => $value) { ?>
+                                                                    <option value="<?= $value['id_kualifikasi_izin'] ?>"> <?= $value['nama_kualifikasi'] ?></option>
+                                                                <?php  } ?>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -510,8 +510,7 @@
                                                     <div class="col-sm-12">
                                                         <div class="input-group">
                                                             <div class="custom-file">
-                                                                <input type="file" class="custom-file-input" id="exampleInputFile">
-                                                                <label class="custom-file-label" for="exampleInputFile">Nama File</label>
+                                                                <input type="file" name="file_dokumen">
                                                             </div>
                                                             <div class="input-group-append">
                                                                 <button type="button" class="btn btn-primary btn-sm">
