@@ -19,18 +19,24 @@
                                 <img class="profile-user-img img-fluid img-circle" src="<?php echo base_url(); ?>assets/template/frontend/dist/img/logo usaha.png" alt="User profile picture">
                             </div>
                             <h5 class="profile-username text-center text-sm">
-                                <strong>Kreatif Intelegensi Teknologi</strong>
+                                <strong><?= $row_vendor['nama_usaha'] ?></strong>
                             </h5>
-                            <p class="text-muted text-center">Jasa Lainnya || Jasa Konsultasi || Jasa Pemborongan</p>
+                            <p class="text-muted text-center">
+                                <!-- Jasa Lainnya || Jasa Konsultasi || Jasa Pemborongan -->
+                                <?php foreach ($kualifikasi as $key => $value) { ?>
+                                    <?php $kualifikasi = $this->M_dashboard->get_kualifikasi_izin($value); ?>
+                                    <?php echo $kualifikasi['nama_jenis_usaha'] ?> <br>
+                                <?php    } ?>
+                            </p>
                             <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
-                                    <b>Kualifikasi Usaha</b> <a class="float-right">Menengah</a>
+                                    <b>Kualifikasi Usaha</b> <a class="float-right"><?= $row_vendor['nama_kualifikasi'] ?></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>NPWP</b> <a class="float-right">95.725.637.3-411.000</a>
+                                    <b>NPWP</b> <a class="float-right"> <?= $row_vendor['npwp'] ?></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Email</b> <a class="float-right">kreatifintelegensi@gmail.com</a>
+                                    <b>Email</b> <a class="float-right"><?= $row_vendor['email'] ?></a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Status Dokumen</b>
@@ -71,7 +77,7 @@
                                         </th>
                                         <td class="col-sm-10">
                                             <i class="fas fa-building mr-2"></i>
-                                            Perseroan Terbatas (PT)
+                                            <?= $row_vendor['bentuk_usaha'] ?>
                                         </td>
                                     </tr>
                                     <tr>
@@ -80,7 +86,7 @@
                                         </th>
                                         <td class="col-sm-10">
                                             <i class="fas fa-road mr-2"></i>
-                                            Jl. Kodiklat TNI No. 15 Raya Puspitek
+                                            <?= $row_vendor['alamat'] ?>
                                         </td>
                                     </tr>
                                     <tr>
@@ -89,7 +95,7 @@
                                         </th>
                                         <td class="col-sm-10">
                                             <i class="fas fa-map mr-2"></i>
-                                            Banten
+                                            <?= $row_vendor['nama_provinsi'] ?>
                                         </td>
                                     </tr>
                                     <tr>
@@ -98,7 +104,7 @@
                                         </th>
                                         <td class="col-sm-10">
                                             <i class="fas fa-map-signs mr-2"></i>
-                                            Tangerang Selatan
+                                            <?= $row_vendor['nama_kabupaten'] ?>
                                         </td>
                                     </tr>
                                     <tr>
@@ -107,7 +113,7 @@
                                         </th>
                                         <td class="col-sm-10">
                                             <i class="fas fa-route mr-2"></i>
-                                            Serpong
+                                            <?= $row_vendor['nama_kecamatan'] ?>
                                         </td>
                                     </tr>
                                     <tr>
@@ -116,7 +122,7 @@
                                         </th>
                                         <td class="col-sm-10">
                                             <i class="fas fa-map-marker-alt mr-3"></i>
-                                            Buaran
+                                            <?= $row_vendor['kelurahan'] ?>
                                         </td>
                                     </tr>
                                     <tr>
@@ -125,7 +131,7 @@
                                         </th>
                                         <td class="col-sm-10">
                                             <i class="fas fa-map-pin mr-3"></i>
-                                            15310
+                                            <?= $row_vendor['kode_pos'] ?>
                                         </td>
                                     </tr>
                                     <tr>
@@ -134,7 +140,7 @@
                                         </th>
                                         <td class="col-sm-10">
                                             <i class="fas fa-phone-alt mr-2"></i>
-                                            0811-8333-433
+                                            <?= $row_vendor['no_telpon'] ?>
                                         </td>
                                     </tr>
                                     <tr>
@@ -143,7 +149,11 @@
                                         </th>
                                         <td class="col-sm-10">
                                             <i class="fas fa-laptop-house mr-2"></i>
-                                            Tidak Ada
+                                            <?php if ($row_vendor['sts_kantor_cabang'] == 1) { ?>
+                                                <?= $row_vendor['alamat_kantor_cabang'] ?>
+                                            <?php  } else { ?>
+                                                Tidak Ada
+                                            <?php   }   ?>
                                         </td>
                                     </tr>
                                     <tr>
@@ -151,7 +161,12 @@
                                             Alamat Kantor Cabang
                                         </th>
                                         <td class="col-sm-10">
-                                            -
+                                            <i class="fas fa-laptop-house mr-2"></i>
+                                            <?php if ($row_vendor['sts_kantor_cabang'] == 1) { ?>
+                                                <?= $row_vendor['alamat_kantor_cabang'] ?>
+                                            <?php  } else { ?>
+                                                -
+                                            <?php   }   ?>
                                         </td>
                                     </tr>
                                     <tr>

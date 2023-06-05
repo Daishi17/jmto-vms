@@ -23,4 +23,9 @@ class Auth extends CI_Controller
 			$this->load->view('auth/index');
 		}
 	}
+
+	public function logout()
+	{
+		$this->login_vendor->logout();
+	}
 }

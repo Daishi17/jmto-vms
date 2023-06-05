@@ -1,6 +1,5 @@
 
 get_row_vendor();
-
 function get_row_vendor() {
     var secret_token = $('[name="secret_token"]').val()
     var id_url_vendor = $('[name="id_url_vendor"]').val()
@@ -32,7 +31,7 @@ function get_row_vendor() {
 
                 } else {
                     $('.button_enkrip').html('<a href="javascript:;" onclick="DekripEnkrip(\'' + id_url +'\''+','+ '\'' + 'enkrip' +'\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i>Enkripsi Dokumen</a>');
-                    var html2 = '<a href="javascript:;" onclick="DownloadFile(\''+ id_url +'\')" class="btn btn-sm btn-info">' + response['row_nib']['file_dokumen'] +'</a>';
+                    var html2 = '<a href="javascript:;" onclick="DownloadFile(\''+ id_url +'\')" class="btn btn-sm btn-warning">' + response['row_nib']['file_dokumen'] +'</a>';
                     $('#tampil_dokumen').html(html2);
                 }
             }
@@ -70,7 +69,7 @@ function DekripEnkrip(id_url, type){
                     Swal.showLoading()
                     const b = Swal.getHtmlContainer().querySelector('b')
                     timerInterval = setInterval(() => {
-                      b.textContent = Swal.getTimerRight()
+                      // b.textContent = Swal.getTimerRight()
                     }, 100)
                   },
                   willClose: () => {
@@ -81,7 +80,7 @@ function DekripEnkrip(id_url, type){
                 }).then((result) => {
                   /* Read more about handling dismissals below */
                   if (result.dismiss === Swal.DismissReason.timer) {
-                    console.log('I was closed by the timer')
+                    
                   }
                 })
                
@@ -100,14 +99,14 @@ function DekripEnkrip(id_url, type){
                 let timerInterval
                 Swal.fire({
                   title: 'Sedang Proses Enkripsi!',
-                  html: 'Proses Deksripsi <b></b>',
+                  html: 'Proses Enkripsi <b></b>',
                   timer: 2000,
                   timerProgressBar: true,
                   didOpen: () => {
                     Swal.showLoading()
                     const b = Swal.getHtmlContainer().querySelector('b')
                     timerInterval = setInterval(() => {
-                      b.textContent = Swal.getTimerRight()
+                      // b.textContent = Swal.getTimerRight()
                     }, 100)
                   },
                   willClose: () => {
@@ -118,7 +117,7 @@ function DekripEnkrip(id_url, type){
                 }).then((result) => {
                   /* Read more about handling dismissals below */
                   if (result.dismiss === Swal.DismissReason.timer) {
-                    console.log('I was closed by the timer')
+                    
                   }
                 })
             }
@@ -131,7 +130,6 @@ function DekripEnkrip(id_url, type){
 var form_izin_usaha = $('#form_izin_usaha')
 form_izin_usaha.on('submit', function(e) {
     var url_post = $('[name="url_post"]').val()
-    console.log(url_post);
     e.preventDefault();
     $.ajax({
         url: url_post,
@@ -144,14 +142,14 @@ form_izin_usaha.on('submit', function(e) {
             let timerInterval
             Swal.fire({
               title: 'Sedang Proses Menyimpan Data!',
-              html: 'Membuat Data<b></b>',
+              html: 'Membuat Data <b></b>',
               timer: 3000,
               timerProgressBar: true,
               didOpen: () => {
                 Swal.showLoading()
                 const b = Swal.getHtmlContainer().querySelector('b')
                 timerInterval = setInterval(() => {
-                  b.textContent = Swal.getTimerRight()
+                  // b.textContent = Swal.getTimerRight()
                 }, 100)
               },
               willClose: () => {
@@ -162,7 +160,7 @@ form_izin_usaha.on('submit', function(e) {
             }).then((result) => {
               /* Read more about handling dismissals below */
               if (result.dismiss === Swal.DismissReason.timer) {
-                console.log('I was closed by the timer')
+                
               }
             })
         }
