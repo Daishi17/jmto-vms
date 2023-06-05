@@ -2,9 +2,12 @@
     <?php if (!$this->session->userdata('npwp') && !$this->session->userdata('email')) {
         redirect('registrasi');
     }
+
     ?>
     <section class="content">
         <div class="container">
+            <input type="hidden" name="url_provinsi" value="<?= base_url('registrasi/dataKabupaten/') ?>">
+            <input type="hidden" name="url_kecamatan" value="<?= base_url('registrasi/dataKecamatan/') ?>">
 
             <!-- Default box -->
             <div class="card card-outline card-primary text-sm">
@@ -111,7 +114,7 @@
                                     </tr>
                                     <tr class="col-sm-12">
                                         <td class="col-sm-4">
-                                            <select name="id_provinsi[]" id="provinsitambah" class="form-control select2bs4">
+                                            <select name="id_provinsi" id="provinsitambah" class="form-control select2bs4">
                                                 <option value="">--Provinsi--</option>
                                                 <?php foreach ($provinsi as $key => $value) { ?>
                                                     <option value="<?= $value['id_provinsi'] ?>"><?= $value['nama_provinsi'] ?></option>
@@ -119,18 +122,15 @@
                                             </select>
                                         </td>
                                         <td class="col-sm-4">
-                                            <select name="id_kabupaten[]" id="kabupatentambah" class="form-control select2bs4">
+                                            <select name="id_kabupaten" id="kabupatentambah" class="form-control select2bs4">
                                                 <option value="">--Kabupaten--</option>
                                             </select>
                                         </td>
                                     </tr>
                                     <tr class="col-sm-12">
                                         <td class="col-sm-4">
-                                            <select class="form-control select2bs4" style="width: 100%;">
-                                                <option selected="selected">Pilih Kecamatan</option>
-                                                <option>DKI Jakarta</option>
-                                                <option>Banten</option>
-                                                <option>Jawa Barat</option>
+                                            <select class="form-control select2bs4" style="width: 100%;" name="id_kecamatan" id="kecamatantambah">
+                                                <option>--Kecamatan--</option>
                                             </select>
                                         </td>
                                         <td class="col-sm-4">
@@ -183,7 +183,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-key"></i></span>
                                                 </div>
-                                                <input type="text" name="password" class="form-control" placeholder="Buat Password">
+                                                <input type="password" name="password" class="form-control" placeholder="Buat Password">
                                             </div>
                                         </td>
                                         <td class="col-sm-6">
@@ -191,7 +191,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-lock"></i></span>
                                                 </div>
-                                                <input name="password2" type="text" class="form-control" placeholder="Konfirmasi Password">
+                                                <input name="password2" type="password" class="form-control" placeholder="Konfirmasi Password">
                                             </div>
                                         </td>
                                     </tr>

@@ -67,11 +67,30 @@ class Registrasi extends CI_Controller
 		$this->load->view('js_file_out_session/index');
 	}
 
+	public function dataKabupaten($id_provinsi) //klpd
+	{
+		$data = $this->M_datapenyedia->getKabupaten($id_provinsi);
+		echo '<option value="">--Kabupaten--</option>';
+		foreach ($data as $key => $value) {
+			echo '<option value="' . $value['id_kabupaten'] . '">' . $value['nama_kabupaten'] . '</option>';
+		}
+	}
+
+	public function dataKecamatan($id_kabupaten)
+	{
+		$data = $this->M_datapenyedia->getKecamatan($id_kabupaten);
+		echo '<option value="">--Kecamatan--</option>';
+		foreach ($data as $key => $value) {
+			echo '<option value="' . $value['id_kecamatan'] . '">' . $value['nama_kecamatan'] . '</option>';
+		}
+	}
+
 	public function identitas()
 	{
 		$data['widget'] = $this->recaptcha->getWidget();
 		$data['script'] = $this->recaptcha->getScriptTag();
 		$data['get_jenis_usaha']  = $this->M_jenis_usaha->get_result_jenis_usaha();
+		$data['provinsi'] = $this->M_datapenyedia->get_provinsi();
 		$this->load->view('template/header_registrasi');
 		$this->load->view('template/sidebar_registrasi');
 		$this->load->view('datapenyedia/registrasi/identitas', $data);
@@ -91,11 +110,17 @@ class Registrasi extends CI_Controller
 					redirect('registrasi/identitas');
 				} else {
 					$nama_usaha = $this->input->post('nama_usaha');
+					if (!is_dir('file_vms/' . $nama_usaha)) {
+						mkdir('./file_vms/' . $nama_usaha, 0777, TRUE);
+					}
 					$bentuk_usaha = $this->input->post('bentuk_usaha');
 					$kualifikasi_usaha = $this->input->post('kualifikasi_usaha');
 					$npwp = $this->input->post('npwp');
 					$email = $this->input->post('email');
 					$alamat = $this->input->post('alamat');
+					$id_provinsi = $this->input->post('id_provinsi');
+					$id_kabupaten = $this->input->post('id_kabupaten');
+					$id_kecamatan = $this->input->post('id_kecamatan');
 					$nama_kelurahan = $this->input->post('nama_kelurahan');
 					$kode_pos = $this->input->post('kode_pos');
 					$no_telpon = $this->input->post('no_telpon');
@@ -114,6 +139,9 @@ class Registrasi extends CI_Controller
 						'npwp' => $npwp,
 						'email' => $email,
 						'alamat' => $alamat,
+						'id_provinsi' => $id_provinsi,
+						'id_kabupaten' => $id_kabupaten,
+						'id_kecamatan' => $id_kecamatan,
 						'kelurahan' => $nama_kelurahan,
 						'kode_pos' => $kode_pos,
 						'no_telpon' => $no_telpon,
@@ -126,7 +154,7 @@ class Registrasi extends CI_Controller
 					$this->M_datapenyedia->insert_vendor($data_vendor);
 					// insert ke trx jenis usaha
 					$this->session->set_flashdata('success', 'Regis Berhasil');
-					redirect('registrasi/identitas');
+					redirect(base_url());
 				}
 			}
 		} else {

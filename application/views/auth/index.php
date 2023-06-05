@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <title>Document</title>
+    <title>E-Proc | JMTO</title>
     <style>
         /* Importing fonts from Google */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
@@ -137,7 +137,8 @@
             <img src="https://survey.jasamarga.co.id/landing/images/logo.png" alt="">
         </div>
         <div class="text-center mt-4 name">
-            E-Procurement JMTO
+            E-Procurement JMTO <br>
+            Penyedia
         </div>
         <form class="p-3 mt-3" action="<?= base_url('auth') ?>" method="post">
             <div class="form-field d-flex align-items-center">
