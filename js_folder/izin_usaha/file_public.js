@@ -70,7 +70,7 @@ function DekripEnkrip(id_url, type){
                     Swal.showLoading()
                     const b = Swal.getHtmlContainer().querySelector('b')
                     timerInterval = setInterval(() => {
-                      b.textContent = Swal.getTimerRight()
+                      // b.textContent = Swal.getTimerRight()
                     }, 100)
                   },
                   willClose: () => {
@@ -81,7 +81,7 @@ function DekripEnkrip(id_url, type){
                 }).then((result) => {
                   /* Read more about handling dismissals below */
                   if (result.dismiss === Swal.DismissReason.timer) {
-                    console.log('I was closed by the timer')
+                    
                   }
                 })
                
@@ -107,7 +107,7 @@ function DekripEnkrip(id_url, type){
                     Swal.showLoading()
                     const b = Swal.getHtmlContainer().querySelector('b')
                     timerInterval = setInterval(() => {
-                      b.textContent = Swal.getTimerRight()
+                      // b.textContent = Swal.getTimerRight()
                     }, 100)
                   },
                   willClose: () => {
@@ -118,7 +118,7 @@ function DekripEnkrip(id_url, type){
                 }).then((result) => {
                   /* Read more about handling dismissals below */
                   if (result.dismiss === Swal.DismissReason.timer) {
-                    console.log('I was closed by the timer')
+                    
                   }
                 })
             }
@@ -131,7 +131,6 @@ function DekripEnkrip(id_url, type){
 var form_izin_usaha = $('#form_izin_usaha')
 form_izin_usaha.on('submit', function(e) {
     var url_post = $('[name="url_post"]').val()
-    console.log(url_post);
     e.preventDefault();
     $.ajax({
         url: url_post,
@@ -144,14 +143,14 @@ form_izin_usaha.on('submit', function(e) {
             let timerInterval
             Swal.fire({
               title: 'Sedang Proses Menyimpan Data!',
-              html: 'Membuat Data<b></b>',
+              html: 'Membuat Data <b></b>',
               timer: 3000,
               timerProgressBar: true,
               didOpen: () => {
                 Swal.showLoading()
                 const b = Swal.getHtmlContainer().querySelector('b')
                 timerInterval = setInterval(() => {
-                  b.textContent = Swal.getTimerRight()
+                  // b.textContent = Swal.getTimerRight()
                 }, 100)
               },
               willClose: () => {
@@ -162,7 +161,7 @@ form_izin_usaha.on('submit', function(e) {
             }).then((result) => {
               /* Read more about handling dismissals below */
               if (result.dismiss === Swal.DismissReason.timer) {
-                console.log('I was closed by the timer')
+                
               }
             })
         }

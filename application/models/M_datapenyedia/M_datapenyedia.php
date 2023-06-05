@@ -10,6 +10,14 @@ class M_datapenyedia extends CI_Model
         return $this->db->affected_rows();
     }
 
+    public function get_kualifikasi_izin()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_kualifikasi_izin');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
     public function get_result_vendor()
     {
         $this->db->select('*');
@@ -82,4 +90,28 @@ class M_datapenyedia extends CI_Model
         $query = $this->db->get();
         return $query->row_array();
     }
+
+    // siup
+    public function get_row_siup($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_siup');
+        $this->db->where('tbl_vendor_siup.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function tambah_siup($data)
+    {
+        $this->db->insert('tbl_vendor_siup', $data);
+        return $this->db->affected_rows();
+    }
+
+    public function update_siup($data, $where)
+    {
+        $this->db->update('tbl_vendor_siup', $data);
+        $this->db->where($where);
+        return $this->db->affected_rows();
+    }
+    // end siup
 }

@@ -33,6 +33,7 @@ class Datapenyedia extends CI_Controller
 		$id_vendor = $this->session->userdata('id_vendor');
 		$data['row_vendor']  = $this->M_datapenyedia->get_row_vendor($id_vendor);
 		$data['get_row_nib']  = $this->M_datapenyedia->get_row_nib($id_vendor);
+		$data['kualifikasi']  = $this->M_datapenyedia->get_kualifikasi_izin();
 		$this->load->view('template/header');
 		// $this->load->view('template/sidebar');
 		$this->load->view('datapenyedia/izin_usaha/index', $data);
@@ -202,6 +203,100 @@ class Datapenyedia extends CI_Controller
 		// $file_dokumen =  $get_row_enkrip['file_dokumen'];
 		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/NIB-' . $date . '/' . $get_row_enkrip['file_dokumen'], NULL);
 	}
+
+
+	// siup crud
+	public function add_izin_usaha_siup()
+	{
+		$id_vendor = $this->session->userdata('id_vendor');
+		$nama_usaha = $this->session->userdata('nama_usaha');
+		$row_siup = $this->M_datapenyedia->get_row_siup($id_vendor);
+
+		$id = $this->uuid->v4();
+		$id = str_replace('-', '', $id);
+		$token = $this->token->data_token();
+		// post
+		$nomor_surat = $this->input->post('nomor_surat');
+		$kualifikasi_izin = $this->input->post('kualifikasi_izin');
+		$sts_seumur_hidup = $this->input->post('sts_seumur_hidup_siup');
+		$tgl_berlaku_siup = $this->input->post('tgl_berlaku_siup');
+		$password_dokumen = '1234';
+
+		// SETTING PATH 
+		$date = date('Y');
+		if (!is_dir('file_vms/' . $nama_usaha . '/SIUP-' . $date)) {
+			mkdir('file_vms/' . $nama_usaha . '/SIUP-' . $date, 0777, TRUE);
+		}
+
+		$config['upload_path'] = './file_vms/' . $nama_usaha . '/SIUP-' . $date;
+		$config['allowed_types'] = 'pdf';
+		$config['max_size'] = 0;
+		$config['remove_spaces'] = TRUE;
+		// $config['encrypt_name'] = TRUE;
+
+
+		$this->load->library('upload', $config);
+		if ($this->upload->do_upload('file_dokumen')) {
+			$fileData = $this->upload->data();
+			$file_dokumen = $fileData['file_name'];
+			$chiper = "AES-128-ECB";
+			$secret = $token;
+			$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret);
+			$upload = [
+				'id_url' => $id,
+				'id_vendor' => $id_vendor,
+				'no_urut_siup' => '322',
+				'nomor_surat' => $nomor_surat,
+				'kualifikasi_izin' => $kualifikasi_izin,
+				'sts_seumur_hidup' => $sts_seumur_hidup,
+				'password_dokumen' => $password_dokumen,
+				'file_dokumen' => $enckrips_string,
+				'token_dokumen' => $secret,
+				'tgl_berlaku_siup' => $tgl_berlaku_siup,
+				'sts_token_dokumen' => 1,
+			];
+			if (!$row_siup) {
+				$this->M_datapenyedia->tambah_siup($upload);
+			} else {
+				$where = [
+					'id_vendor' => $id_vendor
+				];
+				$this->M_datapenyedia->update_siup($upload, $where);
+			}
+
+
+			$response = [
+				'row_siup' => $this->M_datapenyedia->get_row_siup($id_vendor),
+			];
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
+		} else {
+			$upload = [
+				'id_url' => $id,
+				'id_vendor' => $id_vendor,
+				'no_urut_siup' => '322',
+				'nomor_surat' => $nomor_surat,
+				'kualifikasi_izin' => $kualifikasi_izin,
+				'sts_seumur_hidup' => $sts_seumur_hidup,
+				'password_dokumen' => $password_dokumen,
+				'tgl_berlaku_siup' => $tgl_berlaku_siup,
+			];
+			if (!$row_siup) {
+				$this->M_datapenyedia->tambah_siup($upload);
+			} else {
+				$where = [
+					'id_vendor' => $id_vendor
+				];
+				$this->M_datapenyedia->update_siup($upload, $where);
+			}
+
+			$response = [
+				'row_siup' => $this->M_datapenyedia->get_row_siup($id_vendor),
+			];
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
+			// redirect(base_url('upload'));
+		}
+	}
+	// end siup crud
 
 	public function akta_pendirian()
 	{
