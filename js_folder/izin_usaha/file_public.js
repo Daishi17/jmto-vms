@@ -1,6 +1,5 @@
 
 get_row_vendor();
-
 function get_row_vendor() {
     var secret_token = $('[name="secret_token"]').val()
     var id_url_vendor = $('[name="id_url_vendor"]').val()
@@ -100,7 +99,7 @@ function DekripEnkrip(id_url, type){
                 let timerInterval
                 Swal.fire({
                   title: 'Sedang Proses Enkripsi!',
-                  html: 'Proses Deksripsi <b></b>',
+                  html: 'Proses Enkripsi <b></b>',
                   timer: 2000,
                   timerProgressBar: true,
                   didOpen: () => {

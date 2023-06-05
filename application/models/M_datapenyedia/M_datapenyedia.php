@@ -130,4 +130,82 @@ class M_datapenyedia extends CI_Model
         return $this->db->affected_rows();
     }
     // end siup
+
+    // sbu
+    public function get_row_sbu($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_sbu');
+        $this->db->where('tbl_vendor_sbu.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_row_sbu_url($id_url)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_sbu');
+        $this->db->where('tbl_vendor_sbu.id_url', $id_url);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function tambah_sbu($data)
+    {
+        $this->db->insert('tbl_vendor_sbu', $data);
+        return $this->db->affected_rows();
+    }
+
+    public function update_sbu($data, $where)
+    {
+        $this->db->update('tbl_vendor_sbu', $data);
+        $this->db->where($where);
+        return $this->db->affected_rows();
+    }
+
+    public function update_enkrip_sbu($where, $data)
+    {
+        $this->db->update('tbl_vendor_sbu', $data, $where);
+        return $this->db->affected_rows();
+    }
+    // end sbu
+
+    // siujk
+    public function get_row_siujk($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_siujk');
+        $this->db->where('tbl_vendor_siujk.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_row_siujk_url($id_url)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_siujk');
+        $this->db->where('tbl_vendor_siujk.id_url', $id_url);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function tambah_siujk($data)
+    {
+        $this->db->insert('tbl_vendor_siujk', $data);
+        return $this->db->affected_rows();
+    }
+
+    public function update_siujk($data, $where)
+    {
+        $this->db->update('tbl_vendor_siujk', $data);
+        $this->db->where($where);
+        return $this->db->affected_rows();
+    }
+
+    public function update_enkrip_siujk($where, $data)
+    {
+        $this->db->update('tbl_vendor_siujk', $data, $where);
+        return $this->db->affected_rows();
+    }
+    // end siujk
 }

@@ -31,7 +31,7 @@ function get_row_vendor_siup() {
 
               } else {
                   $('.button_enkrip_siup').html('<a href="javascript:;" onclick="DekripEnkripSiup(\'' + id_url +'\''+','+ '\'' + 'enkrip' +'\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i>Enkripsi Dokumen</a>');
-                  var html_siup = '<a href="javascript:;" onclick="DownloadFile(\''+ id_url +'\')" class="btn btn-sm btn-info">' + response['row_siup']['file_dokumen'] +'</a>';
+                  var html_siup = '<a href="javascript:;" onclick="DownloadFile_siup(\''+ id_url +'\')" class="btn btn-sm btn-warning">' + response['row_siup']['file_dokumen'] +'</a>';
                   $('#tampil_dokumen_siup').html(html_siup);
               }
           }
@@ -44,7 +44,6 @@ function get_row_vendor_siup() {
 var form_izin_usaha2 = $('#form_izin_usaha2')
 form_izin_usaha2.on('submit', function(e) {
     var url_post = $('[name="url_post_siup"]').val()
-    console.log(url_post);
     e.preventDefault();
     $.ajax({
         url: url_post,
@@ -135,7 +134,7 @@ function DekripEnkripSiup(id_url, type){
               let timerInterval
               Swal.fire({
                 title: 'Sedang Proses Enkripsi!',
-                html: 'Proses Deksripsi <b></b>',
+                html: 'Proses Enkripsi <b></b>',
                 timer: 2000,
                 timerProgressBar: true,
                 didOpen: () => {
@@ -163,7 +162,7 @@ function DekripEnkripSiup(id_url, type){
 }
 
 
-function DownloadFile(id_url){
+function DownloadFile_siup(id_url){
   var url_download = $('[name="url_download_siup"]').val()
   location.href = url_download + id_url;
 }

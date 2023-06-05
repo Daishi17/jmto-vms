@@ -15,6 +15,19 @@
     <input type="hidden" name="url_download_siup" value="<?= base_url('datapenyedia/url_download_siup/') ?>">
     <!-- end link post siup  -->
 
+
+    <!-- link post sbu -->
+    <input type="hidden" value="<?= base_url('datapenyedia/add_izin_usaha_sbu') ?>" name="url_post_sbu">
+    <input type="hidden" name="url_encryption_sbu" value="<?= base_url('datapenyedia/encryption_sbu/') ?>">
+    <input type="hidden" name="url_download_sbu" value="<?= base_url('datapenyedia/url_download_sbu/') ?>">
+    <!-- end link post sbu  -->
+
+    <!-- link post siujk -->
+    <input type="hidden" value="<?= base_url('datapenyedia/add_izin_usaha_siujk') ?>" name="url_post_siujk">
+    <input type="hidden" name="url_encryption_siujk" value="<?= base_url('datapenyedia/encryption_siujk/') ?>">
+    <input type="hidden" name="url_download_siujk" value="<?= base_url('datapenyedia/url_download_siujk/') ?>">
+    <!-- end link post siujk  -->
+
     <!-- Default box -->
     <div class="card card-outline card-primary">
         <div class="card-header">
@@ -477,7 +490,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                                             </div>
-                                                            <input name="tgl_berlaku_sbu" type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                                                            <input name="tgl_berlaku_sbu" type="date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -494,7 +507,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-server"></i></span>
                                                             </div>
-                                                            <select class="custom-select rounded-2 text-sm" id="exampleSelectRounded2">
+                                                            <select name="kualifikasi_izin_sbu" class="custom-select rounded-2 text-sm" id="exampleSelectRounded2">
                                                                 <?php foreach ($kualifikasi as $key => $value) { ?>
                                                                     <option value="<?= $value['id_kualifikasi_izin'] ?>"> <?= $value['nama_kualifikasi'] ?></option>
                                                                 <?php  } ?>
@@ -530,21 +543,15 @@
                                                 </td>
                                                 <td class="col-sm-2">
                                                     <div class="col-sm-12">
-                                                        <a href="#" class="nav-link">
-                                                            <i class="far fa-file-pdf mr-2"></i>
-                                                            Dokumen SBU.pdf
-                                                        </a>
+                                                        <div id="tampil_dokumen_sbu">
+
+                                                        </div>
                                                     </div>
                                                 </td>
                                                 <td class="col-sm-4" colspan="2">
-                                                    <button type="button" class="btn btn-success btn-sm">
-                                                        <i class="fas fa-lock mr-2"></i>
-                                                        Enkripsi Doc
-                                                    </button>
-                                                    <button type="button" class="btn btn-warning btn-sm" readonly>
-                                                        <i class="fas fa-unlock-alt mr-2"></i>
-                                                        Dekripsi Doc
-                                                    </button>
+                                                    <div class="button_enkrip_sbu">
+
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -565,14 +572,14 @@
                                         </table>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="button" class="btn btn-primary btn-sm" readonly>
+                                        <button type="submit" class="btn btn-primary btn-sm">
                                             <i class="fas fa-save mr-2"></i>
-                                            Save Changes
+                                            Simpan
                                         </button>
-                                        <button type="button" class="btn btn-danger btn-sm">
+                                        <!-- <button type="button" class="btn btn-danger btn-sm">
                                             <i class="fas fa-ban mr-2"></i>
                                             Cancel
-                                        </button>
+                                        </button> -->
                                     </div>
                                 </form>
                             </div>
@@ -592,7 +599,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                <form>
+                                <form id="form_izin_usaha4" enctype="multipart/form-data">
                                     <div class="card-body">
                                         <table class="table table-sm table-bordered">
                                             <tr>
@@ -622,7 +629,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-qrcode"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control form-control-sm" placeholder="">
+                                                            <input name="nomor_surat_siujk" type="text" class="form-control form-control-sm" placeholder="">
                                                         </div>
                                                     </div>
                                                 </td>
@@ -640,8 +647,8 @@
                                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                                             </div>
                                                             <select class="custom-select rounded-1 text-sm" id="exampleSelectRounded1">
-                                                                <option>Seumur Hidup</option>
-                                                                <option>Tanggal</option>
+                                                                <option value="1">Tanggal</option>
+                                                                <option value="2">Seumur Hidup</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -652,7 +659,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                                                            <input name="tgl_berlaku_siujk" type="date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -669,10 +676,10 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-server"></i></span>
                                                             </div>
-                                                            <select class="custom-select rounded-2 text-sm" id="exampleSelectRounded2">
-                                                                <option>Besar</option>
-                                                                <option>Menengah</option>
-                                                                <option>Kecil (Mikro UMKM)</option>
+                                                            <select name="kualifikasi_izin_siujk" class="custom-select rounded-2 text-sm" id="exampleSelectRounded2">
+                                                                <?php foreach ($kualifikasi as $key => $value) { ?>
+                                                                    <option value="<?= $value['id_kualifikasi_izin'] ?>"> <?= $value['nama_kualifikasi'] ?></option>
+                                                                <?php  } ?>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -686,8 +693,7 @@
                                                     <div class="col-sm-12">
                                                         <div class="input-group">
                                                             <div class="custom-file">
-                                                                <input type="file" class="custom-file-input" id="exampleInputFile">
-                                                                <label class="custom-file-label" for="exampleInputFile">Nama File</label>
+                                                                <input type="file" name="file_dokumen">
                                                             </div>
                                                             <div class="input-group-append">
                                                                 <button type="button" class="btn btn-primary btn-sm">
@@ -704,36 +710,30 @@
                                                         File Dokumen
                                                     </label>
                                                 </td>
-                                                <td class="col-sm-3">
+                                                <td class="col-sm-2">
                                                     <div class="col-sm-12">
-                                                        <a href="#" class="nav-link">
-                                                            <i class="far fa-file-pdf mr-2"></i>
-                                                            Dokumen SIUJK.pdf
-                                                        </a>
+                                                        <div id="tampil_dokumen_siujk">
+
+                                                        </div>
                                                     </div>
                                                 </td>
                                                 <td class="col-sm-4" colspan="2">
-                                                    <button type="button" class="btn btn-success btn-sm">
-                                                        <i class="fas fa-lock mr-2"></i>
-                                                        Enkripsi Doc
-                                                    </button>
-                                                    <button type="button" class="btn btn-warning btn-sm" readonly>
-                                                        <i class="fas fa-unlock-alt mr-2"></i>
-                                                        Dekripsi Doc
-                                                    </button>
+                                                    <div class="button_enkrip_siujk">
+
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </table>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="button" class="btn btn-primary btn-sm" readonly>
+                                        <button type="submit" class="btn btn-primary btn-sm">
                                             <i class="fas fa-save mr-2"></i>
-                                            Save Changes
+                                            Simpan
                                         </button>
-                                        <button type="button" class="btn btn-danger btn-sm">
+                                        <!-- <button type="button" class="btn btn-danger btn-sm">
                                             <i class="fas fa-ban mr-2"></i>
                                             Cancel
-                                        </button>
+                                        </button> -->
                                     </div>
                                 </form>
                             </div>

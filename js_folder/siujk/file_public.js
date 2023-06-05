@@ -1,5 +1,5 @@
-get_row_vendor_sbu()
-function get_row_vendor_sbu() {
+get_row_vendor_siujk()
+function get_row_vendor_siujk() {
     var secret_token = $('[name="secret_token"]').val()
     var id_url_vendor = $('[name="id_url_vendor"]').val()
     var url_get_row_vendor = $('[name="url_get_row_vendor"]').val()
@@ -14,24 +14,24 @@ function get_row_vendor_sbu() {
             if (response == 'maaf') {
                 alert('Maaf Anda Kurang Beruntung');
             } else {
-                var id_url = response['row_sbu']['id_url'];
-                $('[name="jenis_izin"]').val(response['row_sbu']['jenis_izin']);
-                $('[name="no_urut_sbu"]').val(response['row_sbu']['no_urut_sbu']);
-                $('[name="nomor_surat_sbu"]').val(response['row_sbu']['nomor_surat']);
-                $('[name="kualifikasi_izin_sbu"]').val(response['row_sbu']['kualifikasi_izin']);
-                $('[name="tgl_berlaku_sbu"]').val(response['row_sbu']['tgl_berlaku_sbu']);
+                var id_url = response['row_siujk']['id_url'];
+                $('[name="jenis_izin"]').val(response['row_siujk']['jenis_izin']);
+                $('[name="no_urut_siujk"]').val(response['row_siujk']['no_urut_siujk']);
+                $('[name="nomor_surat_siujk"]').val(response['row_siujk']['nomor_surat']);
+                $('[name="kualifikasi_izin_siujk"]').val(response['row_siujk']['kualifikasi_izin']);
+                $('[name="tgl_berlaku_siujk"]').val(response['row_siujk']['tgl_berlaku_siujk']);
     
-                // $('.file').text(response['row_sbu']['file_dokumen'])
-                if (response['row_sbu']['sts_token_dokumen'] == 1) {
-                    $('.button_enkrip_sbu').html('<a href="javascript:;" onclick="DekripEnkripSbu(\'' + id_url +'\''+','+ '\'' + 'dekrip' +'\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i>Dekripsi Dokumen</a>');
-                    var html_sbu = '<a href="javascript:;" class="btn btn-sm btn-info">' +
-                    response['row_sbu']['file_dokumen'] +'</a>';
-                    $('#tampil_dokumen_sbu').html(html_sbu);
+                // $('.file').text(response['row_siujk']['file_dokumen'])
+                if (response['row_siujk']['sts_token_dokumen'] == 1) {
+                    $('.button_enkrip_siujk').html('<a href="javascript:;" onclick="DekripEnkripSiujk(\'' + id_url +'\''+','+ '\'' + 'dekrip' +'\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i>Dekripsi Dokumen</a>');
+                    var html_siujk = '<a href="javascript:;" class="btn btn-sm btn-info">' +
+                    response['row_siujk']['file_dokumen'] +'</a>';
+                    $('#tampil_dokumen_siujk').html(html_siujk);
   
                 } else {
-                    $('.button_enkrip_sbu').html('<a href="javascript:;" onclick="DekripEnkripSbu(\'' + id_url +'\''+','+ '\'' + 'enkrip' +'\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i>Enkripsi Dokumen</a>');
-                    var html_sbu = '<a href="javascript:;" onclick="DownloadFile_sbu(\''+ id_url +'\')" class="btn btn-sm btn-warning">' + response['row_sbu']['file_dokumen'] +'</a>';
-                    $('#tampil_dokumen_sbu').html(html_sbu);
+                    $('.button_enkrip_siujk').html('<a href="javascript:;" onclick="DekripEnkripSiujk(\'' + id_url +'\''+','+ '\'' + 'enkrip' +'\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i>Enkripsi Dokumen</a>');
+                    var html_siujk = '<a href="javascript:;" onclick="DownloadFile_siujk(\''+ id_url +'\')" class="btn btn-sm btn-warning">' + response['row_siujk']['file_dokumen'] +'</a>';
+                    $('#tampil_dokumen_siujk').html(html_siujk);
                 }
             }
           
@@ -39,9 +39,9 @@ function get_row_vendor_sbu() {
     })
 }
 
-var form_izin_usaha3 = $('#form_izin_usaha3')
-form_izin_usaha3.on('submit', function(e) {
-    var url_post = $('[name="url_post_sbu"]').val()
+var form_izin_usaha4 = $('#form_izin_usaha4')
+form_izin_usaha4.on('submit', function(e) {
+    var url_post = $('[name="url_post_siujk"]').val()
     e.preventDefault();
     $.ajax({
         url: url_post,
@@ -67,7 +67,7 @@ form_izin_usaha3.on('submit', function(e) {
               willClose: () => {
                 clearInterval(timerInterval)
                 Swal.fire('Data Berhasil Di Simpan!', '', 'success')
-                get_row_vendor_sbu() 
+                get_row_vendor_siujk() 
               }
             }).then((result) => {
               /* Read more about handling dismissals below */
@@ -77,15 +77,17 @@ form_izin_usaha3.on('submit', function(e) {
             })
         }
     })
+
+    
 })
 
-function DekripEnkripSbu(id_url, type){
+function DekripEnkripSiujk(id_url, type){
     var secret_token = $('[name="secret_token"]').val()
-    var url_encryption_sbu = $('[name="url_encryption_sbu"]').val();
+    var url_encryption_siujk = $('[name="url_encryption_siujk"]').val();
     if (type == 'dekrip') {
         $.ajax({
             method: "POST",
-            url: url_encryption_sbu + id_url,
+            url: url_encryption_siujk + id_url,
             dataType: "JSON",
             data:{
                 secret_token: secret_token,
@@ -108,7 +110,7 @@ function DekripEnkripSbu(id_url, type){
                   willClose: () => {
                     clearInterval(timerInterval)
                     Swal.fire('Dokumen Berhasil Di Deskripsi!', '', 'success')
-                    get_row_vendor_sbu() 
+                    get_row_vendor_siujk() 
                   }
                 }).then((result) => {
                   /* Read more about handling dismissals below */
@@ -122,7 +124,7 @@ function DekripEnkripSbu(id_url, type){
     } else {
         $.ajax({
             method: "POST",
-            url: url_encryption_sbu + id_url,
+            url: url_encryption_siujk + id_url,
             dataType: "JSON",
             data:{
                 secret_token: secret_token,
@@ -145,7 +147,7 @@ function DekripEnkripSbu(id_url, type){
                   willClose: () => {
                     clearInterval(timerInterval)
                     Swal.fire('Dokumen Berhasil Di Enkripsi', '', 'success')
-                    get_row_vendor_sbu() 
+                    get_row_vendor_siujk() 
                   }
                 }).then((result) => {
                   /* Read more about handling dismissals below */
@@ -158,7 +160,7 @@ function DekripEnkripSbu(id_url, type){
     }
 }
 
-function DownloadFile_sbu(id_url){
-    var url_download = $('[name="url_download_sbu"]').val()
+function DownloadFile_siujk(id_url){
+    var url_download = $('[name="url_download_siujk"]').val()
     location.href = url_download + id_url;
 }

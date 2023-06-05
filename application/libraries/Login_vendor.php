@@ -46,7 +46,7 @@ class Login_vendor
 
                     // buat session
                     $this->ci->session->set_userdata($userdata);
-                    redirect('datapenyedia/izin_usaha');
+                    redirect('dashboard');
                 } else {
                     $this->ci->session->set_flashdata('salah', 'Email Atau Password Salah');
                     redirect('auth');
