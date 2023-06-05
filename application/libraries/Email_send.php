@@ -25,8 +25,8 @@ class Email_send
             'protocol' => 'smtp',
             'smtp_host' => 'kintekindo.net',
             'smtp_port' => 465,
-            'smtp_user' => 'afikriz@gmail.com',
-            'smtp_pass' => 'Fm13082124#',
+            'smtp_user' => 'admin@kintekindo.net',
+            'smtp_pass' => 'Kintekindo0902#',
             'mailtype'  => 'html',
             'charset'   => 'iso-8859-1'
         );
