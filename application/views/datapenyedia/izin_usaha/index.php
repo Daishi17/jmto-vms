@@ -254,12 +254,12 @@
                                     <strong> Form Izin Usaha -
                                         <span class="text-secondary">Surat Izin Usaha Perdagangan (SIUP)</span>
                                     </strong>
-                                    <div class="card-tools">
+                                    <!-- <div class="card-tools">
                                         <button type="button" class="btn btn-warning btn-sm" readonly>
                                             <i class="fas fa-edit mr-2"></i>
                                             Edit Changes
                                         </button>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <form id="form_izin_usaha2" enctype="multipart/form-data">
                                     <div class="card-body">
@@ -423,12 +423,12 @@
                                     <strong> Form Izin Usaha -
                                         <span class="text-secondary">Sertifikat Badan Usaha (SBU)</span>
                                     </strong>
-                                    <div class="card-tools">
+                                    <!-- <div class="card-tools">
                                         <button type="button" class="btn btn-warning btn-sm" readonly>
                                             <i class="fas fa-edit mr-2"></i>
                                             Edit Changes
                                         </button>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <form id="form_izin_usaha3" enctype="multipart/form-data">
                                     <div class="card-body">
@@ -592,12 +592,12 @@
                                     <strong> Form Izin Usaha -
                                         <span class="text-secondary">Surat Izin Usaha Jasa Konstruksi (SIUJK)</span>
                                     </strong>
-                                    <div class="card-tools">
+                                    <!-- <div class="card-tools">
                                         <button type="button" class="btn btn-warning btn-sm" readonly>
                                             <i class="fas fa-edit mr-2"></i>
                                             Edit Changes
                                         </button>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <form id="form_izin_usaha4" enctype="multipart/form-data">
                                     <div class="card-body">
