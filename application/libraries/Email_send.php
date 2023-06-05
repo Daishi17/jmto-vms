@@ -23,10 +23,10 @@ class Email_send
         }
         $config = array(
             'protocol' => 'smtp',
-            'smtp_host' => 'mail.jmtm.co.id',
+            'smtp_host' => 'smtp.gmail.com',
             'smtp_port' => 465,
-            'smtp_user' => 'eproc@jmtm.co.id',
-            'smtp_pass' => '@dminJMTM!',
+            'smtp_user' => 'afikriz@gmail.com',
+            'smtp_pass' => 'Fm13082124#',
             'mailtype'  => 'html',
             'charset'   => 'iso-8859-1'
         );
