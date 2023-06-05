@@ -16,4 +16,13 @@ class M_Dashboard extends CI_Model
         $query = $this->db->get();
         return $query->row_array();
     }
+
+    public function get_kualifikasi_izin($value)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jenis_usaha');
+        $this->db->where('id_jenis_usaha', $value);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
 }

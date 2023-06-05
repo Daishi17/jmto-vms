@@ -18,7 +18,7 @@ class Dashboard extends CI_Controller
     {
         $id_vendor = $this->session->userdata('id_vendor');
         $data['row_vendor'] = $this->M_dashboard->get_row_vendor($id_vendor);
-        $my_array1 = str_split($data['row_vendor']['id_jenis_usaha']);
+        $data['kualifikasi'] = str_split($data['row_vendor']['id_jenis_usaha']);
 
         $this->load->view('template/header');
         $this->load->view('template/sidebar');

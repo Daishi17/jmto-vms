@@ -21,7 +21,13 @@
                             <h5 class="profile-username text-center text-sm">
                                 <strong><?= $row_vendor['nama_usaha'] ?></strong>
                             </h5>
-                            <p class="text-muted text-center">Jasa Lainnya || Jasa Konsultasi || Jasa Pemborongan</p>
+                            <p class="text-muted text-center">
+                                <!-- Jasa Lainnya || Jasa Konsultasi || Jasa Pemborongan -->
+                                <?php foreach ($kualifikasi as $key => $value) { ?>
+                                    <?php $kualifikasi = $this->M_dashboard->get_kualifikasi_izin($value); ?>
+                                    <?php echo $kualifikasi['nama_jenis_usaha'] ?> <br>
+                                <?php    } ?>
+                            </p>
                             <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
                                     <b>Kualifikasi Usaha</b> <a class="float-right"><?= $row_vendor['nama_kualifikasi'] ?></a>
