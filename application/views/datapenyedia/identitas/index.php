@@ -30,15 +30,11 @@
                                 </td>
                                 <td class="col-sm-3">
                                     <div class="col-sm-12">
-                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-lg-jenis">
-                                            <i class="far fa-file-alt mr-2"></i>
-                                            Form Edit Jenis Usaha
-                                        </button>
-                                        <!-- <select class="form-control select2bs4" style="width: 100%;" disabled>
-                                        <option selected="selected">Jasa Konsultasi</option>
-                                        <option>Jasa Lain</option>
-                                        <option>Jasa Pemborongan</option>
-                                    </select> -->
+                                        <select class="select2bs4" name="jenis_usaha[]" multiple data-placeholder="Pilih Jenis Usaha" style="width: 100%;">
+                                            <?php foreach ($get_jenis_usaha as $key => $value) { ?>
+                                                <option value="<?= $value['id_jenis_usaha'] ?>"><?= $value['nama_jenis_usaha'] ?></option>
+                                            <?php } ?>
+                                        </select>
                                     </div>
                                 </td>
                                 <td class="col-sm-3 bg-light">

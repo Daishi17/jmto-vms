@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
+date_default_timezone_set("Asia/Jakarta");
 class Datapenyedia extends CI_Controller
 {
 
@@ -8,6 +8,7 @@ class Datapenyedia extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('M_datapenyedia/M_datapenyedia');
+		$this->load->model('M_jenis_usaha/M_jenis_usaha');
 		$this->load->helper('download');
 		$id_vendor = $this->session->userdata('id_vendor');
 		if (!$id_vendor) {
@@ -26,9 +27,10 @@ class Datapenyedia extends CI_Controller
 
 	public function identitas_perusahaan()
 	{
+		$data['get_jenis_usaha']  = $this->M_jenis_usaha->get_result_jenis_usaha();
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
-		$this->load->view('datapenyedia/identitas/index');
+		$this->load->view('datapenyedia/identitas/index',$data);
 		$this->load->view('template/footer');
 	}
 
@@ -39,7 +41,7 @@ class Datapenyedia extends CI_Controller
 		$data['get_row_nib']  = $this->M_datapenyedia->get_row_nib($id_vendor);
 		$data['kualifikasi']  = $this->M_datapenyedia->get_kualifikasi_izin();
 		$this->load->view('template/header');
-		// $this->load->view('template/sidebar');
+		$this->load->view('template/sidebar');
 		$this->load->view('datapenyedia/izin_usaha/index', $data);
 		$this->load->view('template/footer');
 		$this->load->view('js_file_on_session/index');

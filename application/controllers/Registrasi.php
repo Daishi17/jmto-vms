@@ -9,6 +9,7 @@ class Registrasi extends CI_Controller
 		parent::__construct();
 		$this->load->model('M_datapenyedia/M_datapenyedia');
 		$this->load->model('M_jenis_usaha/M_jenis_usaha');
+		$this->load->model('Wilayah/Wilayah_model');
 		$this->load->library(array('form_validation', 'recaptcha'));
 	}
 
@@ -72,6 +73,7 @@ class Registrasi extends CI_Controller
 		$data['widget'] = $this->recaptcha->getWidget();
 		$data['script'] = $this->recaptcha->getScriptTag();
 		$data['get_jenis_usaha']  = $this->M_jenis_usaha->get_result_jenis_usaha();
+		$data['provinsi']  = $this->Wilayah_model->getProvinsi();
 		$this->load->view('template/header_registrasi');
 		$this->load->view('template/sidebar_registrasi');
 		$this->load->view('datapenyedia/registrasi/identitas', $data);
@@ -96,7 +98,10 @@ class Registrasi extends CI_Controller
 					$npwp = $this->input->post('npwp');
 					$email = $this->input->post('email');
 					$alamat = $this->input->post('alamat');
-					$nama_kelurahan = $this->input->post('nama_kelurahan');
+					$id_provinsi = $this->input->post('id_provinsi');
+					$id_kabupaten = $this->input->post('id_kabupaten');
+					$id_kecamatan = $this->input->post('id_kecamatan');
+					$kelurahan = $this->input->post('kelurahan');
 					$kode_pos = $this->input->post('kode_pos');
 					$no_telpon = $this->input->post('no_telpon');
 					$sts_kantor_cabang = $this->input->post('sts_kantor_cabang');
@@ -114,7 +119,10 @@ class Registrasi extends CI_Controller
 						'npwp' => $npwp,
 						'email' => $email,
 						'alamat' => $alamat,
-						'kelurahan' => $nama_kelurahan,
+						'id_provinsi' => $id_provinsi,
+						'id_kabupaten' => $id_kabupaten,
+						'id_kecamatan' => $id_kecamatan,
+						'kelurahan' => $kelurahan,
 						'kode_pos' => $kode_pos,
 						'no_telpon' => $no_telpon,
 						'sts_kantor_cabang' => $sts_kantor_cabang,

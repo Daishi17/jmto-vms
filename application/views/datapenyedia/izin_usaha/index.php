@@ -234,7 +234,7 @@
                                         </table>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary btn-sm">
+                                        <button type="submit" id="on_save" class="btn btn-primary btn-sm">
                                             <i class="fas fa-save mr-2"></i>
                                             Simpan
                                         </button>

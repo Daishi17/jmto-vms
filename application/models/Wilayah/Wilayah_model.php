@@ -15,7 +15,7 @@ class Wilayah_model extends CI_Model
    }
    public function getKecamatan($id_kabupaten)
    {
-      return $this->db->get_where('tbl_kecamatan', array('id_kecamatan' => $id_kabupaten))->result_array();
+      return $this->db->get_where('tbl_kecamatan', array('id_kabupaten' => $id_kabupaten))->result_array();
    }
    public function getAllKabupaten()
    {

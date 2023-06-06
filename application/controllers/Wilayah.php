@@ -13,7 +13,7 @@ class Wilayah extends CI_Controller
    public function dataKabupaten($id_provinsi) //klpd
    {
       $data = $this->Wilayah_model->getKabupaten($id_provinsi);
-      echo '<option value="">--Kabupaten--</option>';
+      echo '<option value="">Pilih Kabupaten</option>';
       foreach ($data as $key => $value) {
          echo '<option value="' . $value['id_kabupaten'] . '">' . $value['nama_kabupaten'] . '</option>';
       }
@@ -21,8 +21,8 @@ class Wilayah extends CI_Controller
 
    public function dataKecamatan($id_kabupaten) //satuan kerja
    {
-   	$data= $this->M_wilayah->getKecamatan($id_kabupaten);
-   	echo '<option value="">pilih Kecamatan</option>';
+   	$data= $this->Wilayah_model->getKecamatan($id_kabupaten);
+   	echo '<option value="">Pilih Kecamatan</option>';
    	foreach ($data as $key => $value) {
    		echo '<option value="'.$value['id_kecamatan'].'">'.$value['nama_kecamatan'].'</option>';
    	}

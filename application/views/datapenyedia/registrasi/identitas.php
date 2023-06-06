@@ -3,6 +3,9 @@
         redirect('registrasi');
     }
     ?>
+
+    <input type="hidden" required name="url_kabupaten"  value="<?= base_url('wilayah/dataKabupaten/')?>">
+    <input type="hidden" required name="url_kecamatan" value="<?= base_url('wilayah/dataKecamatan/')?>">
     <section class="content">
         <div class="container">
 
@@ -48,7 +51,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-user-tag"></i></span>
                                                 </div>
-                                                <input type="text" class="form-control" name="nama_usaha" placeholder="Nama Perusahaan / Individu">
+                                                <input type="text" required class="form-control" name="nama_usaha" placeholder="Nama Perusahaan / Individu">
                                             </div>
                                         </td>
                                     </tr>
@@ -87,7 +90,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-address-card"></i></span>
                                                 </div>
-                                                <input type="text" class="form-control" name="npwp" value="<?= $this->session->userdata('npwp') ?>" data-inputmask='"mask": "99.999.999.9-999.999"' readonly data-mask>
+                                                <input type="text" required class="form-control" name="npwp" value="<?= $this->session->userdata('npwp') ?>" data-inputmask='"mask": "99.999.999.9-999.999"' readonly data-mask>
                                             </div>
                                         </td>
                                         <td class="col-sm-4">
@@ -95,7 +98,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-envelope-open-text"></i></span>
                                                 </div>
-                                                <input type="email" class="form-control" name="email" value="<?= $this->session->userdata('email') ?>" readonly>
+                                                <input type="email" required class="form-control" name="email" value="<?= $this->session->userdata('email') ?>" readonly>
                                             </div>
                                         </td>
                                     </tr>
@@ -105,36 +108,33 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-road"></i></span>
                                                 </div>
-                                                <textarea type="text" name="alamat" class="form-control" placeholder="Alamat Lengkap ..."></textarea>
+                                                <textarea type="text" required name="alamat" class="form-control" placeholder="Alamat Lengkap ..."></textarea>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr class="col-sm-12">
                                         <td class="col-sm-4">
-                                            <select name="id_provinsi[]" id="provinsitambah" class="form-control select2bs4">
-                                                <option value="">--Provinsi--</option>
+                                            <select name="id_provinsi" required id="provinsitambah" class="form-control select2bs4">
+                                                <option value="">Plih Provinsi </option>
                                                 <?php foreach ($provinsi as $key => $value) { ?>
                                                     <option value="<?= $value['id_provinsi'] ?>"><?= $value['nama_provinsi'] ?></option>
                                                 <?php  } ?>
                                             </select>
                                         </td>
                                         <td class="col-sm-4">
-                                            <select name="id_kabupaten[]" id="kabupatentambah" class="form-control select2bs4">
-                                                <option value="">--Kabupaten--</option>
+                                            <select name="id_kabupaten" required id="kabupatentambah" class="form-control select2bs4">
+                                                <option value="">Pilih Kabupaten</option>
                                             </select>
                                         </td>
                                     </tr>
                                     <tr class="col-sm-12">
                                         <td class="col-sm-4">
-                                            <select class="form-control select2bs4" style="width: 100%;">
-                                                <option selected="selected">Pilih Kecamatan</option>
-                                                <option>DKI Jakarta</option>
-                                                <option>Banten</option>
-                                                <option>Jawa Barat</option>
+                                            <select name="id_kecamtan" required id="kecamatantambah" class="form-control select2bs4">
+                                                <option value="">Pilih Kecamatan</option>
                                             </select>
                                         </td>
                                         <td class="col-sm-4">
-                                            <input type="text" name="nama_kelurahan" placeholder="Nama Kelurahan..." class="form-control">
+                                            <input type="text" required name="kelurahan" placeholder="Nama Kelurahan..." class="form-control">
                                         </td>
                                     </tr>
                                     <tr>
@@ -143,7 +143,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-map-pin"></i></span>
                                                 </div>
-                                                <input type="text" name="kode_pos" class="form-control" onkeypress="return hanyaAngka(event)" placeholder="Kode Pos">
+                                                <input type="text" required name="kode_pos" class="form-control" onkeypress="return hanyaAngka(event)" placeholder="Kode Pos">
                                             </div>
                                         </td>
                                         <td class="col-sm-6">
@@ -151,7 +151,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
                                                 </div>
-                                                <input type="text" name="no_telpon" class="form-control" onkeypress="return hanyaAngka(event)" placeholder="Nomor Kontak">
+                                                <input type="text" required name="no_telpon" class="form-control" onkeypress="return hanyaAngka(event)" placeholder="Nomor Kontak">
                                             </div>
                                         </td>
                                     </tr>
@@ -161,7 +161,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-th-list"></i></span>
                                                 </div>
-                                                <select name="sts_kantor_cabang" class="form-control">
+                                                <select required name="sts_kantor_cabang" class="form-control">
                                                     <option>Kantor Cabang...</option>
                                                     <option value="1">Ya</option>
                                                     <option value="2">Tidak</option>
@@ -173,7 +173,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-road"></i></span>
                                                 </div>
-                                                <input type="text" name="alamat_kantor_cabang" class="form-control" placeholder="Alamat Kantor Cabang">
+                                                <input type="text" required name="alamat_kantor_cabang" class="form-control" placeholder="Alamat Kantor Cabang">
                                             </div>
                                         </td>
                                     </tr>
@@ -183,7 +183,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-key"></i></span>
                                                 </div>
-                                                <input type="text" name="password" class="form-control" placeholder="Buat Password">
+                                                <input type="text" required name="password" class="form-control" placeholder="Buat Password">
                                             </div>
                                         </td>
                                         <td class="col-sm-6">
@@ -191,7 +191,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-lock"></i></span>
                                                 </div>
-                                                <input name="password2" type="text" class="form-control" placeholder="Konfirmasi Password">
+                                                <input required name="password2" type="text" class="form-control" placeholder="Konfirmasi Password">
                                             </div>
                                         </td>
                                     </tr>

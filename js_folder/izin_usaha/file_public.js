@@ -138,6 +138,9 @@ form_izin_usaha.on('submit', function(e) {
         contentType: false,
         cache : false,
         processData: false,
+        beforeSend: function() {
+          $('#on_save').attr("disabled", true);
+      },
         success: function(response) {
             let timerInterval
             Swal.fire({
@@ -156,6 +159,7 @@ form_izin_usaha.on('submit', function(e) {
                 clearInterval(timerInterval)
                 Swal.fire('Data Berhasil Di Simpan!', '', 'success')
                 get_row_vendor();
+                $('#on_save').attr("disabled", false);
               }
             }).then((result) => {
               /* Read more about handling dismissals below */

@@ -59,75 +59,78 @@
     <!-- Site wrapper -->
     <div class="wrapper">
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand text-sm navbar-light navbar-warning">
-            <div class="container-fluid">
-                <strong class="text-primary">
-                    <i class="fas fa-city mr-2"></i>
-                    SI-DRT JMTO
-                </strong>
-                <!-- Left navbar links -->
+        <nav class="main-header navbar navbar-expand-md navbar-light navbar-warning">
+            <a style="font-size: 15px;" class="navbar-brand">
+                <img src="<?php echo base_url(); ?>assets/template/frontend/dist/img/e-logo.jpeg" class="brand-image img-circle elevation-3">
+                <span class="brand-text font-weight-light text-black">
+                    <strong>DRT-JMTO</strong>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse order-3" id="navbarCollapse">
                 <ul class="navbar-nav">
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link text-navy">
+                            <span class="text-navy"><i class="fas fa-align-justify"></i></span>
+                        </a>
+                    </li>
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a href="<?= base_url('dashboard') ?>" class="nav-link">
+                        <a style="font-size: 13px;" href="<?= base_url('dashboard') ?>" class="nav-link text-navy">
                             <i class="fas fa-tachometer-alt mr-2"></i>
                             <strong>Dashboard</strong>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a id="dropdownSubMenu" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
+                        <a style="font-size: 13px;" id="dropdownSubMenu" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link text-navy dropdown-toggle">
                             <i class="fas fa-city mr-2"></i>
                             <strong>Profile Perusahan</strong>
                         </a>
                         <ul aria-labelledby="dropdownSubMenu" class="dropdown-menu border-0 shadow">
                             <li>
-                                <a href="<?= base_url('datapenyedia/identitas_perusahaan') ?>" class="dropdown-item">
+                                <a style="font-size: 13px;" href="<?= base_url('datapenyedia/identitas_perusahaan') ?>" class="dropdown-item">
                                     <i class="fas fa-hospital-user mr-2"></i>
                                     Identitas Perusahan
                                 </a>
                             </li>
                             <li class="dropdown-divider"></li>
                             <li>
-                                <a href="<?= base_url('datapenyedia/izin_usaha') ?>" class="dropdown-item">
+                                <a style="font-size: 13px;" href="<?= base_url('datapenyedia/izin_usaha') ?>" class="dropdown-item">
                                     <i class="fas fa-clone mr-2"></i>
                                     Izin Perusahan
                                 </a>
                             </li>
                             <li>
-                                <a href="<?= base_url('datapenyedia/akta_pendirian') ?>" class="dropdown-item">
+                                <a style="font-size: 13px;" href="<?= base_url('datapenyedia/akta_pendirian') ?>" class="dropdown-item">
                                     <i class="fas fa-file-alt mr-2"></i>
                                     Akta Pendirian
                                 </a>
                             </li>
                             <li>
-                                <a href="<?= base_url('datapenyedia/manajerial') ?>" class="dropdown-item">
+                                <a style="font-size: 13px;" href="<?= base_url('datapenyedia/manajerial') ?>" class="dropdown-item">
                                     <i class="fas fa-sitemap mr-2"></i>
                                     Manajerial
                                 </a>
                             </li>
                             <li>
-                                <a href="<?= base_url('datapenyedia/sdm') ?>" class="dropdown-item">
+                                <a style="font-size: 13px;" href="<?= base_url('datapenyedia/sdm') ?>" class="dropdown-item">
                                     <i class="fas fa-users mr-2"></i>
                                     Sumber Daya Manusia (SDM)
                                 </a>
                             </li>
                             <li>
-                                <a href="<?= base_url('datapenyedia/pengalaman') ?>" class="dropdown-item">
+                                <a style="font-size: 13px;" href="<?= base_url('datapenyedia/pengalaman') ?>" class="dropdown-item">
                                     <i class="fas fa-briefcase mr-2"></i>
                                     Pengalaman
                                 </a>
                             </li>
                             <li>
-                                <a href="<?= base_url('datapenyedia/pajak') ?>" class="dropdown-item">
+                                <a style="font-size: 13px;" href="<?= base_url('datapenyedia/pajak') ?>" class="dropdown-item">
                                     <i class="fas fa-fax mr-2"></i>
                                     Pajak
                                 </a>
                             </li>
                             <li class="dropdown-divider"></li>
                             <li>
-                                <a href="#" class="dropdown-item">
+                                <a style="font-size: 13px;" href="#" class="dropdown-item">
                                     <i class="fas fa-ban mr-2"></i>
                                     Daftar Hitam
                                 </a>
@@ -135,20 +138,20 @@
                         </ul>
                     </li>
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a href="#" class="nav-link">
+                        <a style="font-size: 13px;" href="#" class="nav-link text-navy">
                             <i class="fas fa-folder-open mr-2"></i>
                             <strong>Dokumen Tervalidasi</strong>
                             <span class="badge badge-danger right">2</span>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
+                        <a style="font-size: 13px;" id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-navy">
                             <i class="fas fa-envelope-open mr-2"></i>
                             <strong>Informasi Tender</strong>
                         </a>
                         <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                             <li>
-                                <a href="#" class="dropdown-item">
+                                <a style="font-size: 13px;" href="#" class="dropdown-item">
                                     <i class="fas fa-envelope mr-2"></i>
                                     Undangan Tender Terpilih
                                     <span class="badge badge-success right">3</span>
@@ -156,14 +159,14 @@
                             </li>
                             <li class="dropdown-divider"></li>
                             <li>
-                                <a href="#" class="dropdown-item">
+                                <a style="font-size: 13px;" href="#" class="dropdown-item">
                                     <i class="fas fa-registered mr-2"></i>
                                     Informasi Tender Umum
                                 </a>
                             </li>
                             <li class="dropdown-divider"></li>
                             <li>
-                                <a href="#" class="dropdown-item">
+                                <a style="font-size: 13px;" href="#" class="dropdown-item">
                                     <i class="fas fa-newspaper mr-2"></i>
                                     Berita Terkini
                                     <span class="badge badge-warning right">4</span>
@@ -172,13 +175,13 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
+                        <a style="font-size: 13px;" id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-navy">
                             <i class="fas fa-book mr-2"></i>
                             <strong>Penilaian & Laporan</strong>
                         </a>
                         <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
                             <li>
-                                <a href="#" class="dropdown-item">
+                                <a href="#" class="dropdown-item ">
                                     <i class="fas fa-balance-scale mr-2"></i>
                                     Penilaian
                                 </a>
@@ -201,19 +204,20 @@
                         </ul>
                     </li>
                 </ul>
-
-                <!-- Right navbar links -->
                 <ul class="navbar-nav ml-auto">
-
-                    <!-- Notifications Dropdown Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link text-navy">
+                            <span class="text-navy"><i class="fas fa-align-justify"></i></span>
+                        </a>
+                    </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#">
-                            <i class="fab fa-windows"></i>
-                            User Guide || FAQ
+                        <a style="font-size: 13px;" class="nav-link text-navy" data-toggle="dropdown" href="#">
+                            <span class="text-navy">
+                                <i class="fas fa-caret-square-down"></i>
+                                Guide || FAQ
+                            </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <span class="dropdown-item dropdown-header">User Guide || FAQ</span>
-                            <div class="dropdown-divider"></div>
                             <a href="#" class="dropdown-item">
                                 <i class="far fa-file-pdf mr-2"></i>Dokumen User Guide
                             </a>
@@ -224,15 +228,19 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#">
-                            <i class="fas fa-user-lock"></i>
-                            User Account
+                        <a  style="font-size:13px;" class="navbar-brand nav-link" data-toggle="dropdown" href="#">
+                            <img src="<?php echo base_url(); ?>assets/template/frontend/dist/img/avatar5.png" class="brand-image img-circle elevation-3">
+                            <span class="text-navy text-sm">
+                                User: <strong>Penyedia</strong>
+                            </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                             <span class="dropdown-item dropdown-header">
-                                <strong>User ID:&nbsp;&nbsp;</strong>
                                 <span class="text-primary">
-                                    <i class="fas fa-city mr-2"></i> Kreatif Intelegensi Teknologi
+                                    <strong>
+                                        <i class="fas fa-user-lock mr-2"></i>
+                                        <?= $this->session->userdata('nama_usaha')?>
+                                    </strong>
                                 </span>
                             </span>
                             <div class="dropdown-divider"></div>
@@ -240,17 +248,11 @@
                                 <i class="fas fa-key mr-2"></i>
                                 Ganti Password
                             </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="<?= base_url('auth/logout') ?>" class="dropdown-item">
+                            <a href="#" class="dropdown-item">
                                 <i class="fas fa-sign-out-alt mr-2"></i>
                                 Log Out System
                             </a>
                         </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                            <i class="fas fa-expand-arrows-alt"></i>
-                        </a>
                     </li>
                 </ul>
             </div>
