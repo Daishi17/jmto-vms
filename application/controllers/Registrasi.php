@@ -68,6 +68,24 @@ class Registrasi extends CI_Controller
 		$this->load->view('js_file_out_session/index');
 	}
 
+	public function dataKabupaten($id_provinsi) //klpd
+	{
+		$data = $this->M_datapenyedia->getKabupaten($id_provinsi);
+		echo '<option value="">--Kabupaten--</option>';
+		foreach ($data as $key => $value) {
+			echo '<option value="' . $value['id_kabupaten'] . '">' . $value['nama_kabupaten'] . '</option>';
+		}
+	}
+
+	public function dataKecamatan($id_kabupaten)
+	{
+		$data = $this->M_datapenyedia->getKecamatan($id_kabupaten);
+		echo '<option value="">--Kecamatan--</option>';
+		foreach ($data as $key => $value) {
+			echo '<option value="' . $value['id_kecamatan'] . '">' . $value['nama_kecamatan'] . '</option>';
+		}
+	}
+
 	public function identitas()
 	{
 		$data['widget'] = $this->recaptcha->getWidget();
@@ -93,6 +111,9 @@ class Registrasi extends CI_Controller
 					redirect('registrasi/identitas');
 				} else {
 					$nama_usaha = $this->input->post('nama_usaha');
+					if (!is_dir('file_vms/' . $nama_usaha)) {
+						mkdir('./file_vms/' . $nama_usaha, 0777, TRUE);
+					}
 					$bentuk_usaha = $this->input->post('bentuk_usaha');
 					$kualifikasi_usaha = $this->input->post('kualifikasi_usaha');
 					$npwp = $this->input->post('npwp');
@@ -134,7 +155,7 @@ class Registrasi extends CI_Controller
 					$this->M_datapenyedia->insert_vendor($data_vendor);
 					// insert ke trx jenis usaha
 					$this->session->set_flashdata('success', 'Regis Berhasil');
-					redirect('registrasi/identitas');
+					redirect(base_url());
 				}
 			}
 		} else {

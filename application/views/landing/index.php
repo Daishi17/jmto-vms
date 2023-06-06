@@ -140,7 +140,7 @@
             </div>
             <div class="row justify-content-center text-center pt-0 pt-md-4">
                 <div class="col-xl-12">
-                    <a href="#" class="btn btn-outline-warning text-white btn-round"><i>PENDAFTARAN PENYEDIA</i></a>
+                    <a href="<?= base_url('registrasi') ?>" class="btn btn-outline-warning text-white btn-round"><i>PENDAFTARAN PENYEDIA</i></a>
                 </div>
             </div>
         </div>

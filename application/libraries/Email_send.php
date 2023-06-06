@@ -23,17 +23,17 @@ class Email_send
         }
         $config = array(
             'protocol' => 'smtp',
-            'smtp_host' => 'mail.jmtm.co.id',
+            'smtp_host' => 'kintekindo.net',
             'smtp_port' => 465,
-            'smtp_user' => 'eproc@jmtm.co.id',
-            'smtp_pass' => '@dminJMTM!',
+            'smtp_user' => 'admin@kintekindo.net',
+            'smtp_pass' => 'Kintekindo0902#',
             'mailtype'  => 'html',
             'charset'   => 'iso-8859-1'
         );
         $this->ci->load->library('email', $config);
         $this->ci->email->set_newline("\r\n");
         // Email dan nama pengirim
-        $this->ci->email->from('eproc@jmtm.co.id', 'JMTM');
+        $this->ci->email->from('admin@kintekindo.net', 'JMTO');
 
         // Email penerima
 

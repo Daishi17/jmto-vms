@@ -4,6 +4,32 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class M_datapenyedia extends CI_Model
 {
 
+    public function get_provinsi()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_provinsi');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function getKabupaten($id_provinsi)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_kabupaten');
+        $this->db->where('id_provinsi', $id_provinsi);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function getKecamatan($id_kabupaten)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_kecamatan');
+        $this->db->where('id_kabupaten', $id_kabupaten);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
     public function insert_vendor($data)
     {
         $this->db->insert('tbl_vendor', $data);
