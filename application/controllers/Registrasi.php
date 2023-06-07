@@ -37,7 +37,6 @@ class Registrasi extends CI_Controller
 					$this->session->set_userdata('email', $email);
 					$this->session->set_userdata('npwp', $npwp);
 					$this->session->set_flashdata('success', 'Email : ' . $email . ' Terdaftar Silakan Check Email Anda Untuk Mengetahui Link Untuk Mengisi Identitas Vendor Dan Pastikan Masih 1 Perangkat (Terkadang Email Masuk Ke Spam!!)');
-					redirect('registrasi');
 					// START EMAIL SEND TYPE
 					$type_send_email = 'registrasi';
 					$data_send_email = [
@@ -45,6 +44,7 @@ class Registrasi extends CI_Controller
 					];
 					var_dump($data_send_email);die;
 					$this->email_send->sen_row_email($type_send_email, $data_send_email);
+					redirect('registrasi');
 					// END EMAIL SEND TYPE
 				}
 			}
