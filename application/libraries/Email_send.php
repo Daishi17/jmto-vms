@@ -21,15 +21,15 @@ class Email_send
             $base_url = base_url('registrasi/identitas');
         } else {
         }
-        $config = array(
-            'protocol' => 'smtp',
-            'smtp_host' => 'kintekindo.net',
-            'smtp_port' => 465,
-            'smtp_user' => 'admin@kintekindo.net',
-            'smtp_pass' => 'Kintekindo0902#',
-            'mailtype'  => 'html',
-            'charset'   => 'iso-8859-1'
-        );
+        // $config = array(
+        //     'protocol' => 'smtp',
+        //     'smtp_host' => 'kintekindo.net',
+        //     'smtp_port' => 465,
+        //     'smtp_user' => 'admin@kintekindo.net',
+        //     'smtp_pass' => 'Kintekindo0902#',
+        //     'mailtype'  => 'html',
+        //     'charset'   => 'iso-8859-1'
+        // );
         $this->ci->load->library('email', $config);
         $this->ci->email->set_newline("\r\n");
         // Email dan nama pengirim
