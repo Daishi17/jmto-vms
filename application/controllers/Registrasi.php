@@ -42,7 +42,6 @@ class Registrasi extends CI_Controller
 					$data_send_email = [
 						'email' => $email
 					];
-					var_dump($data_send_email);die;
 					$this->email_send->sen_row_email($type_send_email, $data_send_email);
 					redirect('registrasi');
 					// END EMAIL SEND TYPE
