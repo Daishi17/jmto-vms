@@ -13,13 +13,25 @@ function get_row_vendor() {
         },
         success: function(response) {
           if (response['row_nib']) {
-            $('input').attr("readonly", true);
-            $('select').attr("disabled", true);
+            $('.nomor_surat_form').attr("readonly", true);
+            $('.sts_seumur_hidup_form').attr("disabled", true);
+            $('.tgl_berlaku_nib_form').attr("readonly", true);
+            $('.kualifikasi_izin_form').attr("disabled", true);
+            $('.file_dokumen').attr("readonly", true);
+            $('.nib_kbli_form').attr("readonly", true);
+            $('.file_dokumen').attr("disabled", true);
             $('#on_save').attr("disabled", true);
+            // $('input').attr("readonly", true);
+            // $('select').attr("disabled", true);
+            // $('#on_save').attr("disabled", true);
           } else {
-            $('input').attr("readonly", false);
-            $('select').attr("disabled", false);
-            $('#on_save').attr("disabled", false);
+            $('.nomor_surat_form').attr("readonly", false);
+            $('.sts_seumur_hidup_form').attr("disabled", false);
+            $('.tgl_berlaku_nib_form').attr("readonly", false);
+            $('.kualifikasi_izin_form').attr("disabled", false);
+            $('.file_dokumen').attr("readonly", false);
+            $('.nib_kbli_form').attr("readonly", false);
+            $('.file_dokumen').attr("disabled", false);
           }
             if (response == 'maaf') {
                 alert('Maaf Anda Kurang Beruntung');
@@ -209,18 +221,29 @@ function sts_berlaku_nib(){
 
 function EditChangeGlobal() {
   $('#apply_edit').modal('hide')
-  $('input').attr("readonly", false);
-  $('select').attr("disabled", false);
+  $('.nomor_surat_form').attr("readonly", false);
+  $('.sts_seumur_hidup_form').attr("disabled", false);
+  $('.tgl_berlaku_nib_form').attr("readonly", false);
+  $('.kualifikasi_izin_form').attr("disabled", false);
+  $('.file_dokumen').attr("readonly", false);
+  $('.nib_kbli_form').attr("readonly", false);
+  $('.file_dokumen').attr("disabled", false);
   $('#on_save').attr("disabled", false);
 }
 
 function BatalChangeGlobal() {
-  $('#on_save').attr("disabled", true);
   $('#apply_edit').modal('hide')
-    $('input').attr("readonly", true);
-    $('select').attr("disabled", true);
+  $('.nomor_surat_form').attr("readonly", true);
+  $('.sts_seumur_hidup_form').attr("disabled", true);
+  $('.tgl_berlaku_nib_form').attr("readonly", true);
+  $('.kualifikasi_izin_form').attr("disabled", true);
+  $('.file_dokumen').attr("readonly", true);
+  $('.nib_kbli_form').attr("readonly", true);
+  $('.file_dokumen').attr("disabled", true);
+  $('#on_save').attr("disabled", true);
 }
 
 $('#modal_dekrip').on('hidden.bs.modal', function () {
   get_row_vendor();
 })
+

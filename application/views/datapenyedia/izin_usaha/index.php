@@ -106,7 +106,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-folder-open"></i></span>
                                                             </div>
-                                                            <input type="text" name="jenis_izin" value="Nomor Induk Berusaha" class="form-control form-control-sm" placeholder="Nomor Induk Berusaha">
+                                                            <input type="text" name="jenis_izin" value="Nomor Induk Berusaha" class="form-control form-control-sm" placeholder="Nomor Induk Berusaha" readonly>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -121,7 +121,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-qrcode"></i></span>
                                                             </div>
-                                                            <input type="text" name="nomor_surat" class="form-control form-control-sm" placeholder="">
+                                                            <input type="text" name="nomor_surat" class="form-control form-control-sm nomor_surat_form" placeholder="">
                                                         </div>
                                                     </div>
                                                 </td>
@@ -138,7 +138,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                                             </div>
-                                                            <select name="sts_seumur_hidup" class="custom-select rounded-1 text-sm" id="exampleSelectRounded1" onchange="sts_berlaku_nib()">
+                                                            <select name="sts_seumur_hidup" class="custom-select rounded-1 text-sm sts_seumur_hidup_form" id="exampleSelectRounded1" onchange="sts_berlaku_nib()">
                                                                 <option value="1">Tanggal</option>
                                                                 <option value="2">Seumur Hidup</option>
 
@@ -152,7 +152,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                                             </div>
-                                                            <input type="date" id="tgl_berlaku_nib" name="tgl_berlaku_nib" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                                                            <input type="date" id="tgl_berlaku_nib" name="tgl_berlaku_nib" class="form-control tgl_berlaku_nib_form" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -169,7 +169,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-server"></i></span>
                                                             </div>
-                                                            <select name="kualifikasi_izin" class="custom-select rounded-2 text-sm" id="exampleSelectRounded2">
+                                                            <select name="kualifikasi_izin" class="custom-select rounded-2 text-sm kualifikasi_izin_form" id="exampleSelectRounded2">
                                                                 <?php foreach ($kualifikasi as $key => $value) { ?>
                                                                     <option value=" <?= $value['id_kualifikasi_izin'] ?>"> <?= $value['nama_kualifikasi'] ?></option>
                                                                 <?php  } ?>
@@ -186,7 +186,7 @@
                                                     <div class="col-sm-12">
                                                         <div class="input-group">
                                                             <div class="custom-file">
-                                                                <input type="file" name="file_dokumen">
+                                                                <input type="file" name="file_dokumen" class="file_dokumen">
                                                             </div>
                                                             <div class="input-group-append">
                                                                 <button type="button" class="btn btn-primary btn-sm">
@@ -224,7 +224,7 @@
                                                 </td>
                                                 <td class="col-sm-3" colspan="3">
                                                     <div class="col-sm-3">
-                                                        <button type="button" class="btn btn-block btn-danger btn-sm" data-toggle="modal" data-target="#modal-lg-kbli">
+                                                        <button type="button" class="btn btn-block btn-danger btn-sm" data-toggle="modal" data-target="#modal-lg-kbli nib_kbli_form">
                                                             <i class="far fa-file-alt mr-2"></i>
                                                             Form Input KBLI
                                                         </button>
@@ -236,7 +236,7 @@
                                     <div class="card-footer">
                                         <button type="submit" id="on_save" class="btn btn-success btn-sm">
                                             <i class="fas fa-save mr-2"></i>
-                                            Save Change
+                                            Simpan
                                         </button>
                                         <a href="javascript:;" id="on_cancel" onclick="BatalChangeGlobal()" class="btn btn-danger btn-sm"> <i class="fas fa fa-ban"> </i> Cancel</a>
                                     </div>
@@ -251,12 +251,12 @@
                                     <strong> Form Izin Usaha -
                                         <span class="text-secondary">Surat Izin Usaha Perdagangan (SIUP)</span>
                                     </strong>
-                                    <!-- <div class="card-tools">
-                                        <button type="button" class="btn btn-warning btn-sm">
+                                    <div class="card-tools">
+                                        <button type="button" data-toggle="modal" data-target="#apply_edit_siup" class="btn btn-warning btn-sm">
                                             <i class="fas fa-edit mr-2"></i>
                                             Edit Changes
                                         </button>
-                                    </div> -->
+                                    </div>
                                 </div>
                                 <form id="form_izin_usaha2" enctype="multipart/form-data">
                                     <div class="card-body">
@@ -273,7 +273,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-folder-open"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control form-control-sm" placeholder="Surat Izin Usaha Perdagangan">
+                                                            <input type="text" class="form-control form-control-sm" placeholder="Surat Izin Usaha Perdagangan" readonly>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -288,7 +288,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-qrcode"></i></span>
                                                             </div>
-                                                            <input type="text" name="nomor_surat_siup" class="form-control form-control-sm" placeholder="">
+                                                            <input type="text" name="nomor_surat_siup" class="form-control form-control-sm nomor_surat_siup" placeholder="">
                                                         </div>
                                                     </div>
                                                 </td>
@@ -305,7 +305,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                                             </div>
-                                                            <select name="sts_seumur_hidup_siup" class="custom-select rounded-1 text-sm" id="exampleSelectRounded1" onchange="sts_berlaku_siup()">
+                                                            <select name="sts_seumur_hidup_siup" class="custom-select rounded-1 text-sm sts_seumur_hidup_siup" id="exampleSelectRounded1" onchange="sts_berlaku_siup()">
                                                                 <option value="1">Tanggal</option>
                                                                 <option value="2">Seumur Hidup</option>
                                                             </select>
@@ -318,7 +318,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                                             </div>
-                                                            <input id="tgl_berlaku_siup" name="tgl_berlaku_siup" type="date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy">
+                                                            <input id="tgl_berlaku_siup" name="tgl_berlaku_siup" type="date" class="form-control tgl_berlaku_siup" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy">
                                                         </div>
                                                     </div>
                                                 </td>
@@ -335,7 +335,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-server"></i></span>
                                                             </div>
-                                                            <select name="kualifikasi_izin_siup" class="custom-select rounded-2 text-sm" id="exampleSelectRounded2">
+                                                            <select name="kualifikasi_izin_siup" class="custom-select rounded-2 text-sm kualifikasi_izin_siup" id="exampleSelectRounded2">
                                                                 <?php foreach ($kualifikasi as $key => $value) { ?>
                                                                     <option value="<?= $value['id_kualifikasi_izin'] ?>"> <?= $value['nama_kualifikasi'] ?></option>
                                                                 <?php  } ?>
@@ -400,14 +400,14 @@
                                         </table>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary btn-sm">
+                                        <button type="submit" class="btn btn-primary btn-sm on_save_siup">
                                             <i class="fas fa-save mr-2"></i>
                                             Simpan
                                         </button>
-                                        <!-- <button type="button" class="btn btn-danger btn-sm">
+                                        <button type="button" class="btn btn-danger btn-sm">
                                             <i class="fas fa-ban mr-2"></i>
-                                            Cancel
-                                        </button> -->
+                                            Batal
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -420,12 +420,12 @@
                                     <strong> Form Izin Usaha -
                                         <span class="text-secondary">Sertifikat Badan Usaha (SBU)</span>
                                     </strong>
-                                    <!-- <div class="card-tools">
+                                    <div class="card-tools">
                                         <button type="button" class="btn btn-warning btn-sm">
                                             <i class="fas fa-edit mr-2"></i>
                                             Edit Changes
                                         </button>
-                                    </div> -->
+                                    </div>
                                 </div>
                                 <form id="form_izin_usaha3" enctype="multipart/form-data">
                                     <div class="card-body">
@@ -589,12 +589,12 @@
                                     <strong> Form Izin Usaha -
                                         <span class="text-secondary">Surat Izin Usaha Jasa Konstruksi (SIUJK)</span>
                                     </strong>
-                                    <!-- <div class="card-tools">
+                                    <div class="card-tools">
                                         <button type="button" class="btn btn-warning btn-sm">
                                             <i class="fas fa-edit mr-2"></i>
                                             Edit Changes
                                         </button>
-                                    </div> -->
+                                    </div>
                                 </div>
                                 <form id="form_izin_usaha4" enctype="multipart/form-data">
                                     <div class="card-body">
@@ -898,6 +898,7 @@
             </div>
         </div>
     </div>
+
     <div class="modal fade" id="modal-lg-siup">
         <div class="modal-dialog modal-dialog-scrollable modal-lg">
             <div class="modal-content">
@@ -1043,6 +1044,7 @@
             </div>
         </div>
     </div>
+
     <div class="modal fade" id="modal-lg-sbu">
         <div class="modal-dialog modal-dialog-scrollable modal-lg">
             <div class="modal-content">
@@ -1196,6 +1198,28 @@
 <!-- MODAL IZIN USAHA -->
 <!-- Modal -->
 <div class="modal fade" id="apply_edit" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title">Anda Yakin Ingin Mengedit Data Anda ??</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <center>
+                    <img src="<?= base_url('assets/img/tanya.jpg') ?>" width="200px" alt="">
+                </center>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" onclick="EditChangeGlobal()" class="btn btn-success"> <i class="fas fa fa-check"> </i> Yakin !!</a>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa fa-ban"> </i> Tidak !!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="apply_edit_siup" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-warning">

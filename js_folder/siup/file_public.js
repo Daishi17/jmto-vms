@@ -12,6 +12,27 @@ function get_row_vendor_siup() {
           secret_token:secret_token,
       },
       success: function(response) {
+        if (response['row_siup']) {
+          $('.nomor_surat_siup').attr("readonly", true);
+          $('.sts_seumur_hidup_siup').attr("disabled", true);
+          $('.tgl_berlaku_siup').attr("readonly", true);
+          $('.kualifikasi_izin_form').attr("disabled", true);
+          $('.file_dokumen').attr("readonly", true);
+          $('.nib_kbli_form').attr("readonly", true);
+          $('.file_dokumen').attr("disabled", true);
+          $('#on_save').attr("disabled", true);
+          // $('input').attr("readonly", true);
+          // $('select').attr("disabled", true);
+          // $('#on_save').attr("disabled", true);
+        } else {
+          $('.nomor_surat_form').attr("readonly", false);
+          $('.sts_seumur_hidup_form').attr("disabled", false);
+          $('.tgl_berlaku_nib_form').attr("readonly", false);
+          $('.kualifikasi_izin_form').attr("disabled", false);
+          $('.file_dokumen').attr("readonly", false);
+          $('.nib_kbli_form').attr("readonly", false);
+          $('.file_dokumen').attr("disabled", false);
+        }
           if (response == 'maaf') {
               alert('Maaf Anda Kurang Beruntung');
           } else {
