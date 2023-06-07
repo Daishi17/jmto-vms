@@ -125,15 +125,19 @@ class Datapenyedia extends CI_Controller
 				'tgl_berlaku_nib' => $tgl_berlaku_nib,
 				'sts_token_dokumen' => 1,
 			];
+			$sts_upload = [
+				'sts_upload_dokumen' => 1
+			];
+			$where = [
+				'id_vendor' => $id_vendor
+			];
 			if (!$row_nib) {
 				$this->M_datapenyedia->tambah_nib($upload);
+				$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			} else {
-				$where = [
-					'id_vendor' => $id_vendor
-				];
 				$this->M_datapenyedia->update_nib($upload, $where);
+				$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			}
-
 
 			$response = [
 				'row_nib' => $this->M_datapenyedia->get_row_nib($id_vendor),
@@ -307,13 +311,21 @@ class Datapenyedia extends CI_Controller
 				'tgl_berlaku_siup' => $tgl_berlaku_siup,
 				'sts_token_dokumen' => 1,
 			];
+			$sts_upload = [
+				'sts_upload_dokumen' => 1
+			];
+			$where = [
+				'id_vendor' => $id_vendor
+			];
 			if (!$row_siup) {
 				$this->M_datapenyedia->tambah_siup($upload);
+				$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			} else {
 				$where = [
 					'id_vendor' => $id_vendor
 				];
 				$this->M_datapenyedia->update_siup($upload, $where);
+				$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			}
 
 
@@ -457,13 +469,21 @@ class Datapenyedia extends CI_Controller
 				'tgl_berlaku_sbu' => $tgl_berlaku_sbu,
 				'sts_token_dokumen' => 1,
 			];
+			$sts_upload = [
+				'sts_upload_dokumen' => 1
+			];
+			$where = [
+				'id_vendor' => $id_vendor
+			];
 			if (!$row_sbu) {
 				$this->M_datapenyedia->tambah_sbu($upload);
+				$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			} else {
 				$where = [
 					'id_vendor' => $id_vendor
 				];
 				$this->M_datapenyedia->update_sbu($upload, $where);
+				$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			}
 
 
@@ -608,13 +628,21 @@ class Datapenyedia extends CI_Controller
 				'tgl_berlaku_siujk' => $tgl_berlaku_siujk,
 				'sts_token_dokumen' => 1,
 			];
+			$sts_upload = [
+				'sts_upload_dokumen' => 1
+			];
+			$where = [
+				'id_vendor' => $id_vendor
+			];
 			if (!$row_siujk) {
 				$this->M_datapenyedia->tambah_siujk($upload);
+				$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			} else {
 				$where = [
 					'id_vendor' => $id_vendor
 				];
 				$this->M_datapenyedia->update_siujk($upload, $where);
+				$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			}
 
 

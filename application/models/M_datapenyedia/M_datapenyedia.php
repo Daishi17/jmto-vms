@@ -36,6 +36,12 @@ class M_datapenyedia extends CI_Model
         return $this->db->affected_rows();
     }
 
+    public function update_status_dokumen($data, $where)
+    {
+        $this->db->update('tbl_vendor', $data, $where);
+        return $this->db->affected_rows();
+    }
+
     public function get_kualifikasi_izin()
     {
         $this->db->select('*');
