@@ -111,12 +111,6 @@
                                 </a>
                             </li>
                             <li>
-                                <a style="font-size: 13px;" href="<?= base_url('datapenyedia/sdm') ?>" class="dropdown-item">
-                                    <i class="fas fa-users mr-2"></i>
-                                    Sumber Daya Manusia (SDM)
-                                </a>
-                            </li>
-                            <li>
                                 <a style="font-size: 13px;" href="<?= base_url('datapenyedia/pengalaman') ?>" class="dropdown-item">
                                     <i class="fas fa-briefcase mr-2"></i>
                                     Pengalaman
@@ -248,7 +242,7 @@
                                 <i class="fas fa-key mr-2"></i>
                                 Ganti Password
                             </a>
-                            <a href="#" class="dropdown-item">
+                            <a href="<?= base_url('auth/logout')?>" class="dropdown-item">
                                 <i class="fas fa-sign-out-alt mr-2"></i>
                                 Log Out System
                             </a>

@@ -3,8 +3,8 @@
         redirect('registrasi');
     }
     ?>
-    <input type="hidden" required name="url_kabupaten"  value="<?= base_url('wilayah/dataKabupaten/')?>">
-    <input type="hidden" required name="url_kecamatan" value="<?= base_url('wilayah/dataKecamatan/')?>">
+    <input type="hidden" required name="url_kabupaten" value="<?= base_url('wilayah/dataKabupaten/') ?>">
+    <input type="hidden" required name="url_kecamatan" value="<?= base_url('wilayah/dataKecamatan/') ?>">
     <section class="content">
         <div class="container">
             <input type="hidden" name="url_provinsi" value="<?= base_url('registrasi/dataKabupaten/') ?>">
@@ -18,6 +18,20 @@
                         <strong>Identitas Perusahaan / Individu</strong>
                     </h4>
                 </div>
+                <?php if ($this->session->flashdata('password2')) {
+                    echo '  <div class="alert alert-warning alert-dismissible">
+               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+               <h5><i class="icon fas fa-exclamation-triangle"></i> Maaf!</h5>';
+                    echo  $this->session->flashdata('password2');
+                    echo ' </div>';
+                } ?>
+                <?php if ($this->session->flashdata('success')) {
+                    echo '  <div class="alert alert-success alert-dismissible">
+               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+               <h5><i class="icon fas fa-exclamation-triangle"></i> Maaf!</h5>';
+                    echo  $this->session->flashdata('success');
+                    echo ' </div>';
+                } ?>
                 <div class="card-body">
                     <div class="card card-primary text-sm">
                         <div class="card-header">
@@ -130,7 +144,7 @@
                                     </tr>
                                     <tr class="col-sm-12">
                                         <td class="col-sm-4">
-                                            <select name="id_kecamtan" required id="kecamatantambah" class="form-control select2bs4">
+                                            <select name="id_kecamatan" required id="kecamatantambah" class="form-control select2bs4">
                                                 <option value="">Pilih Kecamatan</option>
                                             </select>
                                         </td>

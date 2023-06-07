@@ -23,7 +23,7 @@ class Email_send
         }
         $config = array(
             'protocol' => 'smtp',
-            'smtp_host' => 'kintekindo.net',
+            'smtp_host' => 'localhost',
             'smtp_port' => 465,
             'smtp_user' => 'admin@kintekindo.net',
             'smtp_pass' => 'Kintekindo0902#',

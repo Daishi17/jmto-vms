@@ -34,13 +34,6 @@
                             echo  $this->session->flashdata('email_salah');
                             echo ' </div>';
                         } ?>
-                        <?php if ($this->session->flashdata('npwp_salah')) {
-                            echo '  <div class="alert alert-warning alert-dismissible">
-               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-               <h5><i class="icon fas fa-exclamation-triangle"></i> Maaf!</h5>';
-                            echo  $this->session->flashdata('npwp_salah');
-                            echo ' </div>';
-                        } ?>
                         <?php if ($this->session->flashdata('success')) {
                             echo '  <div class="alert alert-success alert-dismissible">
                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -104,7 +97,6 @@
                                 Registrasi
                             </button>
                         </div>
-
                         <?= form_close(); ?>
                     </div>
                 </div>

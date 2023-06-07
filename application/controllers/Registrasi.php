@@ -24,18 +24,11 @@ class Registrasi extends CI_Controller
 				if ($this->form_validation->run() == false) {
 					$data = [
 						'email' => form_error('email'),
-						'npwp' => form_error('npwp'),
 					];
 					$data['widget'] = $this->recaptcha->getWidget();
 					$data['script'] = $this->recaptcha->getScriptTag();
-					$this->session->set_flashdata('email_salah', $data['email']);
-					$this->session->set_flashdata('npwp_salah', $data['npwp']);
-					$data['title'] = 'REGISTARSI';
-					$this->load->view('template/header_registrasi');
-					$this->load->view('template/sidebar_registrasi');
-					$this->load->view('datapenyedia/registrasi/index', $data);
-					$this->load->view('template/footer');
-					$this->load->view('js_file_out_session/index');
+					$this->session->set_flashdata('email_salah', 'Email Atau Npwp Salah');
+					redirect('registrasi');
 				} else {
 					$data['widget'] = $this->recaptcha->getWidget();
 					$data['script'] = $this->recaptcha->getScriptTag();
@@ -44,16 +37,13 @@ class Registrasi extends CI_Controller
 					$this->session->set_userdata('email', $email);
 					$this->session->set_userdata('npwp', $npwp);
 					$this->session->set_flashdata('success', 'Email : ' . $email . ' Terdaftar Silakan Check Email Anda Untuk Mengetahui Link Untuk Mengisi Identitas Vendor Dan Pastikan Masih 1 Perangkat (Terkadang Email Masuk Ke Spam!!)');
-					$this->load->view('template/header_registrasi');
-					$this->load->view('template/sidebar_registrasi');
-					$this->load->view('datapenyedia/registrasi/index', $data);
-					$this->load->view('template/footer');
-					$this->load->view('js_file_out_session/index');
+					redirect('registrasi');
 					// START EMAIL SEND TYPE
 					$type_send_email = 'registrasi';
 					$data_send_email = [
 						'email' => $email
 					];
+					var_dump($data_send_email);die;
 					$this->email_send->sen_row_email($type_send_email, $data_send_email);
 					// END EMAIL SEND TYPE
 				}
@@ -108,6 +98,10 @@ class Registrasi extends CI_Controller
 			$response = $this->recaptcha->verifyResponse($recaptcha);
 			if (isset($response['success']) and $response['success'] === true) {
 				if ($this->form_validation->run() == false) {
+					$data = [
+						'password2' => form_error('password2'),
+					];
+					$this->session->set_flashdata('password2', $data['password']);
 					redirect('registrasi/identitas');
 				} else {
 					$nama_usaha = $this->input->post('nama_usaha');
@@ -154,8 +148,8 @@ class Registrasi extends CI_Controller
 					];
 					$this->M_datapenyedia->insert_vendor($data_vendor);
 					// insert ke trx jenis usaha
-					$this->session->set_flashdata('success', 'Regis Berhasil');
-					redirect(base_url());
+					$this->session->set_flashdata('success', 'Registrasi Berhasil');
+					redirect('registrasi');
 				}
 			}
 		} else {
