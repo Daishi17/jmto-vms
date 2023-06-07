@@ -34,13 +34,22 @@ class Registrasi extends CI_Controller
 					$data['script'] = $this->recaptcha->getScriptTag();
 					$email = $this->input->post('email');
 					$npwp = $this->input->post('npwp');
+					$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+					$charactersLength = strlen($characters);
+					$randomString = '';
+					for ($i = 0; $i < 10; $i++) {
+						$randomString .= $characters[random_int(0, $charactersLength - 1)];
+					}
+					$randomString;
+					$this->session->set_userdata('token_regis', $randomString);
 					$this->session->set_userdata('email', $email);
 					$this->session->set_userdata('npwp', $npwp);
 					$this->session->set_flashdata('success', 'Email : ' . $email . ' Terdaftar Silakan Check Email Anda Untuk Mengetahui Link Untuk Mengisi Identitas Vendor Dan Pastikan Masih 1 Perangkat (Terkadang Email Masuk Ke Spam!!)');
 					// START EMAIL SEND TYPE
 					$type_send_email = 'registrasi';
 					$data_send_email = [
-						'email' => $email
+						'email' => $email,
+						'token_regis' => $randomString
 					];
 					$this->email_send->sen_row_email($type_send_email, $data_send_email);
 					redirect('registrasi');
@@ -75,8 +84,9 @@ class Registrasi extends CI_Controller
 		}
 	}
 
-	public function identitas()
+	public function identitas($session_data = null)
 	{
+		$data['token_regis'] = $session_data;
 		$data['widget'] = $this->recaptcha->getWidget();
 		$data['script'] = $this->recaptcha->getScriptTag();
 		$data['get_jenis_usaha']  = $this->M_jenis_usaha->get_result_jenis_usaha();
@@ -148,7 +158,16 @@ class Registrasi extends CI_Controller
 					$this->M_datapenyedia->insert_vendor($data_vendor);
 					// insert ke trx jenis usaha
 					$this->session->set_flashdata('success', 'Registrasi Berhasil');
-					redirect('registrasi');
+					$data['widget'] = $this->recaptcha->getWidget();
+					$data['script'] = $this->recaptcha->getScriptTag();
+					$data['get_jenis_usaha']  = $this->M_jenis_usaha->get_result_jenis_usaha();
+					$data['provinsi']  = $this->Wilayah_model->getProvinsi();
+					$this->load->view('template/header_registrasi');
+					$this->load->view('template/sidebar_registrasi');
+					$this->load->view('datapenyedia/registrasi/identitas', $data);
+					$this->load->view('template/footer');
+					$this->load->view('datapenyedia/registrasi/redirect_identitas');
+					$this->session->sess_destroy();
 				}
 			}
 		} else {

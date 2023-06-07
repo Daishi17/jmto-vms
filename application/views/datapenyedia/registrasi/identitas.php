@@ -3,7 +3,8 @@
         redirect('registrasi');
     }
     ?>
-    <input type="hidden" required name="url_kabupaten" value="<?= base_url('wilayah/dataKabupaten/') ?>">
+    <?php if ($token_regis == $this->session->userdata('token_regis')) { ?>
+        <input type="hidden" required name="url_kabupaten" value="<?= base_url('wilayah/dataKabupaten/') ?>">
     <input type="hidden" required name="url_kecamatan" value="<?= base_url('wilayah/dataKecamatan/') ?>">
     <section class="content">
         <div class="container">
@@ -158,7 +159,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-map-pin"></i></span>
                                                 </div>
-                                                <input type="text" required name="kode_pos" class="form-control" onkeypress="return hanyaAngka(event)" placeholder="Kode Pos">
+                                                <input type="text" required name="kode_pos" maxlength="5" class="form-control" onkeypress="return hanyaAngka(event)" placeholder="Kode Pos">
                                             </div>
                                         </td>
                                         <td class="col-sm-6">
@@ -166,7 +167,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
                                                 </div>
-                                                <input type="text" required name="no_telpon" class="form-control" onkeypress="return hanyaAngka(event)" placeholder="Nomor Kontak">
+                                                <input type="text" required maxlength="13" name="no_telpon" class="form-control" onkeypress="return hanyaAngka(event)" placeholder="Nomor Kontak">
                                             </div>
                                         </td>
                                     </tr>
@@ -176,7 +177,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-th-list"></i></span>
                                                 </div>
-                                                <select required name="sts_kantor_cabang" class="form-control">
+                                                <select required onchange="Kantor_cabang()" name="sts_kantor_cabang" class="form-control">
                                                     <option>Kantor Cabang...</option>
                                                     <option value="1">Ya</option>
                                                     <option value="2">Tidak</option>
@@ -188,7 +189,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-road"></i></span>
                                                 </div>
-                                                <input type="text" required name="alamat_kantor_cabang" class="form-control" placeholder="Alamat Kantor Cabang">
+                                                <input type="text" name="alamat_kantor_cabang" class="form-control" placeholder="Alamat Kantor Cabang">
                                             </div>
                                         </td>
                                     </tr>
@@ -259,3 +260,7 @@
     <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+    <?php } else { ?>
+      <?php  $this->load->view('notfound'); ?>
+    <?php   }
+    ?>

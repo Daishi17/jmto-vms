@@ -33,3 +33,13 @@ $('#kabupatentambah').change(function() {
     }
   });
 })		
+
+function Kantor_cabang(){
+  var sts_kantor_cabang = $('[name="sts_kantor_cabang"]').val()
+  if (sts_kantor_cabang == 1) {
+    $('[name="alamat_kantor_cabang"]').attr("readonly", false); 
+  } else {
+    $('[name="alamat_kantor_cabang"]').attr("readonly", true); 
+    $('[name="alamat_kantor_cabang"]').val(''); 
+  }
+}

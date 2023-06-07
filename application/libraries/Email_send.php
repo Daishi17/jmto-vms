@@ -18,12 +18,13 @@ class Email_send
             $type = $this->ci->M_datapenyedia->get_row_vendor($data['id_vendor']);
         } else if ($type == 'registrasi') {
             $email = $data['email'];
-            $base_url = base_url('registrasi/identitas');
+            $token_regis = $data['token_regis'];
+            $base_url = base_url('registrasi/identitas/' . $token_regis);
         } else {
         }
         $config = array(
             'protocol' => 'smtp',
-            'smtp_host' => 'localhost',
+            'smtp_host' => 'kintekindo.net',
             'smtp_port' => 465,
             'smtp_user' => 'admin@kintekindo.net',
             'smtp_pass' => 'Kintekindo0902#',
