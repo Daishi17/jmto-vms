@@ -74,57 +74,57 @@
                         </a>
                     </li>
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a style="font-size: 13px;" href="<?= base_url('dashboard') ?>" class="nav-link text-navy">
+                        <a style="font-size:12px" href="<?= base_url('dashboard') ?>" class="nav-link text-navy">
                             <i class="fas fa-tachometer-alt mr-2"></i>
                             <strong>Dashboard</strong>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a style="font-size: 13px;" id="dropdownSubMenu" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link text-navy dropdown-toggle">
+                        <a style="font-size:12px" id="dropdownSubMenu" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link text-navy dropdown-toggle">
                             <i class="fas fa-city mr-2"></i>
                             <strong>Profile Perusahan</strong>
                         </a>
                         <ul aria-labelledby="dropdownSubMenu" class="dropdown-menu border-0 shadow">
                             <li>
-                                <a style="font-size: 13px;" href="<?= base_url('datapenyedia/identitas_perusahaan') ?>" class="dropdown-item">
+                                <a style="font-size:12px" href="<?= base_url('datapenyedia/identitas_perusahaan') ?>" class="dropdown-item">
                                     <i class="fas fa-hospital-user mr-2"></i>
                                     Identitas Perusahan
                                 </a>
                             </li>
                             <li class="dropdown-divider"></li>
                             <li>
-                                <a style="font-size: 13px;" href="<?= base_url('datapenyedia/izin_usaha') ?>" class="dropdown-item">
+                                <a style="font-size:12px" href="<?= base_url('datapenyedia/izin_usaha') ?>" class="dropdown-item">
                                     <i class="fas fa-clone mr-2"></i>
                                     Izin Perusahan
                                 </a>
                             </li>
                             <li>
-                                <a style="font-size: 13px;" href="<?= base_url('datapenyedia/akta_pendirian') ?>" class="dropdown-item">
+                                <a style="font-size:12px" href="<?= base_url('datapenyedia/akta_pendirian') ?>" class="dropdown-item">
                                     <i class="fas fa-file-alt mr-2"></i>
                                     Akta Pendirian
                                 </a>
                             </li>
                             <li>
-                                <a style="font-size: 13px;" href="<?= base_url('datapenyedia/manajerial') ?>" class="dropdown-item">
+                                <a style="font-size:12px" href="<?= base_url('datapenyedia/manajerial') ?>" class="dropdown-item">
                                     <i class="fas fa-sitemap mr-2"></i>
                                     Manajerial
                                 </a>
                             </li>
                             <li>
-                                <a style="font-size: 13px;" href="<?= base_url('datapenyedia/pengalaman') ?>" class="dropdown-item">
+                                <a style="font-size:12px" href="<?= base_url('datapenyedia/pengalaman') ?>" class="dropdown-item">
                                     <i class="fas fa-briefcase mr-2"></i>
                                     Pengalaman
                                 </a>
                             </li>
                             <li>
-                                <a style="font-size: 13px;" href="<?= base_url('datapenyedia/pajak') ?>" class="dropdown-item">
+                                <a style="font-size:12px" href="<?= base_url('datapenyedia/pajak') ?>" class="dropdown-item">
                                     <i class="fas fa-fax mr-2"></i>
                                     Pajak
                                 </a>
                             </li>
                             <li class="dropdown-divider"></li>
                             <li>
-                                <a style="font-size: 13px;" href="#" class="dropdown-item">
+                                <a style="font-size:12px" href="#" class="dropdown-item">
                                     <i class="fas fa-ban mr-2"></i>
                                     Daftar Hitam
                                 </a>
@@ -132,20 +132,20 @@
                         </ul>
                     </li>
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a style="font-size: 13px;" href="#" class="nav-link text-navy">
+                        <a style="font-size:12px" href="#" class="nav-link text-navy">
                             <i class="fas fa-folder-open mr-2"></i>
                             <strong>Dokumen Tervalidasi</strong>
                             <span class="badge badge-danger right">2</span>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a style="font-size: 13px;" id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-navy">
+                        <a style="font-size:12px" id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-navy">
                             <i class="fas fa-envelope-open mr-2"></i>
                             <strong>Informasi Tender</strong>
                         </a>
                         <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                             <li>
-                                <a style="font-size: 13px;" href="#" class="dropdown-item">
+                                <a style="font-size:12px" href="#" class="dropdown-item">
                                     <i class="fas fa-envelope mr-2"></i>
                                     Undangan Tender Terpilih
                                     <span class="badge badge-success right">3</span>
@@ -153,14 +153,14 @@
                             </li>
                             <li class="dropdown-divider"></li>
                             <li>
-                                <a style="font-size: 13px;" href="#" class="dropdown-item">
+                                <a style="font-size:12px" href="#" class="dropdown-item">
                                     <i class="fas fa-registered mr-2"></i>
                                     Informasi Tender Umum
                                 </a>
                             </li>
                             <li class="dropdown-divider"></li>
                             <li>
-                                <a style="font-size: 13px;" href="#" class="dropdown-item">
+                                <a style="font-size:12px" href="#" class="dropdown-item">
                                     <i class="fas fa-newspaper mr-2"></i>
                                     Berita Terkini
                                     <span class="badge badge-warning right">4</span>
@@ -169,7 +169,7 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a style="font-size: 13px;" id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-navy">
+                        <a style="font-size:12px" id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-navy">
                             <i class="fas fa-book mr-2"></i>
                             <strong>Penilaian & Laporan</strong>
                         </a>
@@ -205,7 +205,7 @@
                         </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a style="font-size: 13px;" class="nav-link text-navy" data-toggle="dropdown" href="#">
+                        <a style="font-size:12px" class="nav-link text-navy" data-toggle="dropdown" href="#">
                             <span class="text-navy">
                                 <i class="fas fa-caret-square-down"></i>
                                 Guide || FAQ
@@ -222,7 +222,7 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a  style="font-size:13px;" class="navbar-brand nav-link" data-toggle="dropdown" href="#">
+                        <a style="font-size:13px;" class="navbar-brand nav-link" data-toggle="dropdown" href="#">
                             <img src="<?php echo base_url(); ?>assets/template/frontend/dist/img/avatar5.png" class="brand-image img-circle elevation-3">
                             <span class="text-navy text-sm">
                                 User: <strong>Penyedia</strong>
@@ -233,7 +233,7 @@
                                 <span class="text-primary">
                                     <strong>
                                         <i class="fas fa-user-lock mr-2"></i>
-                                        <?= $this->session->userdata('nama_usaha')?>
+                                        <?= $this->session->userdata('nama_usaha') ?>
                                     </strong>
                                 </span>
                             </span>
@@ -242,7 +242,7 @@
                                 <i class="fas fa-key mr-2"></i>
                                 Ganti Password
                             </a>
-                            <a href="<?= base_url('auth/logout')?>" class="dropdown-item">
+                            <a href="<?= base_url('auth/logout') ?>" class="dropdown-item">
                                 <i class="fas fa-sign-out-alt mr-2"></i>
                                 Log Out System
                             </a>

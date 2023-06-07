@@ -21,7 +21,7 @@ class Login_vendor
             redirect('auth');
         } else {
             if ($cek->sts_aktif == 0) {
-                $this->ci->session->set_flashdata('salah', 'Username Sedang Menunggu Di Aktivasi!');
+                $this->ci->session->set_flashdata('salah', 'Akun Anda Sedang Menunggu Di Aktivasi Oleh Validator JMTO!');
                 redirect('auth');
             } else {
                 if ($cek && password_verify($password_vendor, $cek->password)) {
