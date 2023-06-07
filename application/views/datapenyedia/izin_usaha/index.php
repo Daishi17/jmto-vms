@@ -234,14 +234,11 @@
                                         </table>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="submit" id="on_save" class="btn btn-primary btn-sm">
+                                        <button type="submit" id="on_save" class="btn btn-success btn-sm">
                                             <i class="fas fa-save mr-2"></i>
-                                            Simpan
+                                            Save Change
                                         </button>
-                                        <!-- <button type="button" class="btn btn-danger btn-sm">
-                                            <i class="fas fa-ban mr-2"></i>
-                                            Cancel
-                                        </button> -->
+                                        <a href="javascript:;" id="on_cancel" onclick="BatalChangeGlobal()" class="btn btn-danger btn-sm"> <i class="fas fa fa-ban"> </i> Cancel</a>
                                     </div>
                                 </form>
                             </div>
