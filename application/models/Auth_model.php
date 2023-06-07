@@ -9,6 +9,7 @@ class Auth_model extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_vendor');
         $this->db->where('email', $username);
+        $this->db->or_where('npwp', $username);
         return $this->db->get()->row();
     }
 
