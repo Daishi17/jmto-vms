@@ -2,9 +2,7 @@
     <?php if (!$this->session->userdata('npwp') && !$this->session->userdata('email')) {
         redirect('registrasi');
     }
-
     ?>
-
     <input type="hidden" required name="url_kabupaten"  value="<?= base_url('wilayah/dataKabupaten/')?>">
     <input type="hidden" required name="url_kecamatan" value="<?= base_url('wilayah/dataKecamatan/')?>">
     <section class="content">

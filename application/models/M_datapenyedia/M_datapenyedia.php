@@ -65,6 +65,9 @@ class M_datapenyedia extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_vendor');
+        $this->db->join('tbl_provinsi', 'tbl_provinsi.id_provinsi = tbl_vendor.id_provinsi');
+        $this->db->join('tbl_kabupaten', 'tbl_kabupaten.id_kabupaten = tbl_vendor.id_kabupaten');
+        $this->db->join('tbl_kecamatan', 'tbl_kecamatan.id_kecamatan = tbl_vendor.id_kecamatan');
         $this->db->where('tbl_vendor.id_url_vendor', $id_url_vendor);
         $query = $this->db->get();
         return $query->row_array();

@@ -27,7 +27,7 @@
     <input type="hidden" name="url_encryption_siujk" value="<?= base_url('datapenyedia/encryption_siujk/') ?>">
     <input type="hidden" name="url_download_siujk" value="<?= base_url('datapenyedia/url_download_siujk/') ?>">
     <!-- end link post siujk  -->
-
+    <input type="hidden" name="url_dekrip_nib" value="<?= base_url('datapenyedia/dekrip_nib') ?>">
     <!-- Default box -->
     <div class="card card-outline card-primary">
         <div class="card-header">
@@ -84,12 +84,12 @@
                                     <strong> Form Izin Usaha -
                                         <span class="text-secondary">Nomor Induk Berusaha (NIB)</span>
                                     </strong>
-                                    <!-- <div class="card-tools">
-                                        <button type="button" class="btn btn-warning btn-sm" readonly>
+                                    <div class="card-tools" style="margin-right:auto;">
+                                        <button type="button" data-toggle="modal" data-target="#apply_edit" class="btn btn-block btn-warning btn-sm">
                                             <i class="fas fa-edit mr-2"></i>
                                             Edit Changes
                                         </button>
-                                    </div> -->
+                                    </div>
                                 </div>
                                 <form id="form_izin_usaha" enctype="multipart/form-data">
                                     <div class="card-body">
@@ -106,7 +106,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-folder-open"></i></span>
                                                             </div>
-                                                            <input type="text" name="jenis_izin" value="Nomor Induk Berusaha" class="form-control form-control-sm" placeholder="Nomor Induk Berusaha" readonly>
+                                                            <input type="text" name="jenis_izin" value="Nomor Induk Berusaha" class="form-control form-control-sm" placeholder="Nomor Induk Berusaha">
                                                         </div>
                                                     </div>
                                                 </td>
@@ -255,7 +255,7 @@
                                         <span class="text-secondary">Surat Izin Usaha Perdagangan (SIUP)</span>
                                     </strong>
                                     <!-- <div class="card-tools">
-                                        <button type="button" class="btn btn-warning btn-sm" readonly>
+                                        <button type="button" class="btn btn-warning btn-sm">
                                             <i class="fas fa-edit mr-2"></i>
                                             Edit Changes
                                         </button>
@@ -276,7 +276,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-folder-open"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control form-control-sm" placeholder="Surat Izin Usaha Perdagangan" readonly>
+                                                            <input type="text" class="form-control form-control-sm" placeholder="Surat Izin Usaha Perdagangan">
                                                         </div>
                                                     </div>
                                                 </td>
@@ -424,7 +424,7 @@
                                         <span class="text-secondary">Sertifikat Badan Usaha (SBU)</span>
                                     </strong>
                                     <!-- <div class="card-tools">
-                                        <button type="button" class="btn btn-warning btn-sm" readonly>
+                                        <button type="button" class="btn btn-warning btn-sm">
                                             <i class="fas fa-edit mr-2"></i>
                                             Edit Changes
                                         </button>
@@ -445,7 +445,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-folder-open"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control form-control-sm" placeholder="Sertifikat Badan Usaha" readonly>
+                                                            <input type="text" class="form-control form-control-sm" placeholder="Sertifikat Badan Usaha">
                                                         </div>
                                                     </div>
                                                 </td>
@@ -593,7 +593,7 @@
                                         <span class="text-secondary">Surat Izin Usaha Jasa Konstruksi (SIUJK)</span>
                                     </strong>
                                     <!-- <div class="card-tools">
-                                        <button type="button" class="btn btn-warning btn-sm" readonly>
+                                        <button type="button" class="btn btn-warning btn-sm">
                                             <i class="fas fa-edit mr-2"></i>
                                             Edit Changes
                                         </button>
@@ -614,7 +614,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-folder-open"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control form-control-sm" placeholder="Surat Izin Usaha Jasa Konstruksi" readonly>
+                                                            <input type="text" class="form-control form-control-sm" placeholder="Surat Izin Usaha Jasa Konstruksi">
                                                         </div>
                                                     </div>
                                                 </td>
@@ -1196,3 +1196,64 @@
 <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+<!-- MODAL IZIN USAHA -->
+<!-- Modal -->
+<div class="modal fade" id="apply_edit" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title">Anda Yakin Ingin Mengedit Data Anda ??</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <center>
+                    <img src="<?= base_url('assets/img/tanya.jpg') ?>" width="200px" alt="">
+                </center>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" onclick="EditChangeGlobal()" class="btn btn-success"> <i class="fas fa fa-check"> </i> Yakin !!</a>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa fa-ban"> </i> Tidak !!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal_dekrip" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form_dekrip" method="post">
+                    <input type="hidden" name="id_url">
+                    <input type="hidden" name="secret_token" value="<?= $row_vendor['token_scure_vendor'] ?>">
+                    <center>
+                        <img src="<?= base_url('assets/img/private.jpg') ?>" width="100%" alt="">
+                        <p>Silakan Masukan Token Untuk Mendkrip File Anda </p>
+                        <div class="token_generate">
+
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input id="token_nib" type="text" name="token_dokumen" value="" class="form-control">
+                        </div>
+                    </center>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" id="button_dekrip_generate" onclick="GenerateDekrip()" class="btn btn-success"> <i class="fas fa fa-check"> </i> Generate !!</a>
+                <button disabled style="display:none" id="button_dekrip_generate_manipulasi" class="btn btn-success"> <i class="fas fa fa-check"> </i> Generate !!</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa fa-ban"> </i> Batal !!</button>
+            </div>
+        </div>
+    </div>
+</div>

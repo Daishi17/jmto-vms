@@ -12,6 +12,15 @@ function get_row_vendor() {
             secret_token:secret_token,
         },
         success: function(response) {
+          if (response['row_nib']) {
+            $('input').attr("readonly", true);
+            $('select').attr("disabled", true);
+            $('#on_save').attr("disabled", true);
+          } else {
+            $('input').attr("readonly", false);
+            $('select').attr("disabled", false);
+            $('#on_save').attr("disabled", false);
+          }
             if (response == 'maaf') {
                 alert('Maaf Anda Kurang Beruntung');
             } else {
@@ -24,14 +33,14 @@ function get_row_vendor() {
     
                 $('.file').text(response['row_nib']['file_dokumen'])
                 if (response['row_nib']['sts_token_dokumen'] == 1) {
-                    $('.button_enkrip').html('<a href="javascript:;" onclick="DekripEnkrip(\'' + id_url +'\''+','+ '\'' + 'dekrip' +'\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i>Dekripsi Dokumen</a>');
-                    var html2 = '<a href="javascript:;" class="btn btn-sm btn-info">' +
+                    $('.button_enkrip').html('<a href="javascript:;"  onclick="DekripEnkrip(\'' + id_url +'\''+','+ '\'' + 'dekrip' +'\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i>Dekripsi Dokumen</a>');
+                    var html2 = '<a href="javascript:;" class="btn btn-sm btn-info btn-block">' +
                     response['row_nib']['file_dokumen'] +'</a>';
                     $('#tampil_dokumen').html(html2);
-
+                    $('.token_generate').html('<div class="input-group"><div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-qrcode">Token </i></span></div><input type="text" value="'+response['row_nib']['token_dokumen']+'" class="form-control form-control-sm" readonly></div>');
                 } else {
                     $('.button_enkrip').html('<a href="javascript:;" onclick="DekripEnkrip(\'' + id_url +'\''+','+ '\'' + 'enkrip' +'\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i>Enkripsi Dokumen</a>');
-                    var html2 = '<a href="javascript:;" onclick="DownloadFile(\''+ id_url +'\')" class="btn btn-sm btn-warning">' + response['row_nib']['file_dokumen'] +'</a>';
+                    var html2 = '<a href="javascript:;" onclick="DownloadFile(\''+ id_url +'\')" class="btn btn-sm btn-warning btn-block">' + response['row_nib']['file_dokumen'] +'</a>';
                     $('#tampil_dokumen').html(html2);
                 }
             }
@@ -49,43 +58,11 @@ function DownloadFile(id_url){
 function DekripEnkrip(id_url, type){
     var secret_token = $('[name="secret_token"]').val()
     var url_encryption_nib = $('[name="url_encryption_nib"]').val();
+    var modal_dekrip = $('#modal_dekrip');
     if (type == 'dekrip') {
-        $.ajax({
-            method: "POST",
-            url: url_encryption_nib + id_url,
-            dataType: "JSON",
-            data:{
-                secret_token: secret_token,
-                type:type
-            },
-            success: function(response) {
-                let timerInterval
-                Swal.fire({
-                  title: 'Sedang Proses Deskripsi!',
-                  html: 'Proses Deksripsi <b></b>',
-                  timer: 2000,
-                  timerProgressBar: true,
-                  didOpen: () => {
-                    Swal.showLoading()
-                    const b = Swal.getHtmlContainer().querySelector('b')
-                    timerInterval = setInterval(() => {
-                      // b.textContent = Swal.getTimerRight()
-                    }, 100)
-                  },
-                  willClose: () => {
-                    clearInterval(timerInterval)
-                    Swal.fire('Dokumen Berhasil Di Deskripsi!', '', 'success')
-                    get_row_vendor();
-                  }
-                }).then((result) => {
-                  /* Read more about handling dismissals below */
-                  if (result.dismiss === Swal.DismissReason.timer) {
-                    
-                  }
-                })
-               
-            }
-        })
+      modal_dekrip.modal('show');
+      $('input').attr("readonly", false);
+      $('[name="id_url"]').val(id_url);
     } else {
         $.ajax({
             method: "POST",
@@ -124,6 +101,55 @@ function DekripEnkrip(id_url, type){
         })
     }
  
+}
+
+
+function GenerateDekrip(){
+      var url_dekrip_nib = $('[name="url_dekrip_nib"]').val();
+      var modal_dekrip = $('#modal_dekrip');
+      $.ajax({
+            method: "POST",
+            url: url_dekrip_nib,
+            dataType: "JSON",
+            data: $('#form_dekrip').serialize(),
+            beforeSend: function() {
+                $('#button_dekrip_generate').css('display', 'none');
+                $('#button_dekrip_generate_manipulasi').css('display', 'block');
+            },
+            success: function(response) {
+              if (response['maaf']) {
+                Swal.fire(response['maaf'], '', 'warning')   
+              } else {
+                    let timerInterval
+                    Swal.fire({
+                      title: 'Sedang Proses Deskripsi!',
+                      html: 'Proses Deksripsi <b></b>',
+                      timer: 2000,
+                      timerProgressBar: true,
+                      didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                          // b.textContent = Swal.getTimerRight()
+                        }, 100)
+                      },
+                      willClose: () => {
+                        clearInterval(timerInterval)
+                        Swal.fire('Dokumen Berhasil Di Deskripsi!', '', 'success')
+                        get_row_vendor();
+                        $('#button_dekrip_generate').css('display', 'block');
+                        $('#button_dekrip_generate_manipulasi').css('display', 'none');
+                        modal_dekrip.modal('hide');
+                      }
+                    }).then((result) => {
+                      /* Read more about handling dismissals below */
+                      if (result.dismiss === Swal.DismissReason.timer) {
+                        
+                      }
+                    })
+              }
+            }
+        })
 }
 
 
@@ -180,3 +206,21 @@ function sts_berlaku_nib(){
         $('#tgl_berlaku_nib').attr("readonly", true); 
     }
 }
+
+function EditChangeGlobal() {
+  $('#apply_edit').modal('hide')
+  $('input').attr("readonly", false);
+  $('select').attr("disabled", false);
+  $('#on_save').attr("disabled", false);
+}
+
+function BatalChangeGlobal() {
+  $('#on_save').attr("disabled", true);
+  $('#apply_edit').modal('hide')
+    $('input').attr("readonly", true);
+    $('select').attr("disabled", true);
+}
+
+$('#modal_dekrip').on('hidden.bs.modal', function () {
+  get_row_vendor();
+})

@@ -3,12 +3,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 date_default_timezone_set("Asia/Jakarta");
 class Datapenyedia extends CI_Controller
 {
-
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('M_datapenyedia/M_datapenyedia');
 		$this->load->model('M_jenis_usaha/M_jenis_usaha');
+		$this->load->model('Wilayah/Wilayah_model');
 		$this->load->helper('download');
 		$id_vendor = $this->session->userdata('id_vendor');
 		if (!$id_vendor) {
@@ -27,11 +27,14 @@ class Datapenyedia extends CI_Controller
 
 	public function identitas_perusahaan()
 	{
+		$data['row_vendor'] = $this->vendor->get_vendor_url();
 		$data['get_jenis_usaha']  = $this->M_jenis_usaha->get_result_jenis_usaha();
+		$data['provinsi']  = $this->Wilayah_model->getProvinsi();
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
-		$this->load->view('datapenyedia/identitas/index',$data);
+		$this->load->view('datapenyedia/identitas/index', $data);
 		$this->load->view('template/footer');
+		$this->load->view('js_file_on_session/index');
 	}
 
 	public function izin_usaha()
@@ -204,6 +207,40 @@ class Datapenyedia extends CI_Controller
 		$this->M_datapenyedia->update_enkrip($where, $data);
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
+
+	public function dekrip_nib()
+	{
+		$id_url = $this->input->post('id_url');
+		$token_dokumen = $this->input->post('token_dokumen');
+		$secret_token = $this->input->post('secret_token');
+		$get_row_enkrip = $this->M_datapenyedia->get_row_nib_url($id_url);
+		$id_vendor = $get_row_enkrip['id_vendor'];
+		$row_vendor = $this->M_datapenyedia->get_row_vendor($id_vendor);
+		$chiper = "AES-128-ECB";
+		$secret_token_dokumen = $get_row_enkrip['token_dokumen'];
+		$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret_token_dokumen);
+		$where = [
+			'id_url' => $id_url
+		];
+		$data = [
+			'sts_token_dokumen' => 2,
+			'file_dokumen' => $encryption_string,
+		];
+		if ($token_dokumen == $secret_token_dokumen) {
+			$response = [
+				'message' => 'success'
+			];
+			$this->M_datapenyedia->update_enkrip($where, $data);
+		} else {
+			$response = [
+				'maaf' => 'Maaf Anda Memerlukan Token Yang Valid',
+			];
+		}
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+
+
 
 	public function url_download($id_url)
 	{

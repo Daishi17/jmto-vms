@@ -1,6 +1,7 @@
 <!-- Main content -->
 <section class="content">
-
+    <input type="hidden" name="url_provinsi" value="<?= base_url('registrasi/dataKabupaten/') ?>">
+    <input type="hidden" name="url_kabupaten" value="<?= base_url('registrasi/dataKecamatan/') ?>">
     <!-- Default box -->
     <div class="card card-outline card-primary">
         <div class="card-header">
@@ -30,11 +31,12 @@
                                 </td>
                                 <td class="col-sm-3">
                                     <div class="col-sm-12">
-                                        <select class="select2bs4" name="jenis_usaha[]" multiple data-placeholder="Pilih Jenis Usaha" style="width: 100%;">
+                                        <a href="javascript:;" onclick="m_jenis_usaha()" class="btn btn-sm btn-info btn-block"> <i class="fas fa-city"></i> &nbsp; View Jenis Usaha</a>
+                                        <!-- <select class="select2bs4" name="jenis_usaha[]" multiple data-placeholder="Pilih Jenis Usaha" style="width: 100%;">
                                             <?php foreach ($get_jenis_usaha as $key => $value) { ?>
                                                 <option value="<?= $value['id_jenis_usaha'] ?>"><?= $value['nama_jenis_usaha'] ?></option>
                                             <?php } ?>
-                                        </select>
+                                        </select> -->
                                     </div>
                                 </td>
                                 <td class="col-sm-3 bg-light">
@@ -48,7 +50,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-city"></i></span>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm" placeholder="Kreatif Intelegensi Teknologi" disabled>
+                                            <input type="text" name="nama_usaha" value="<?= $row_vendor['nama_usaha'] ?>" class="form-control form-control-sm" placeholder="Kreatif Intelegensi Teknologi" readonly>
                                         </div>
                                     </div>
                                 </td>
@@ -65,7 +67,8 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-th"></i></span>
                                             </div>
-                                            <select class="custom-select rounded-11 text-sm" id="exampleSelectRounded11" disabled>
+                                            <select name="bentuk_usaha" class="custom-select rounded-11 text-sm" id="exampleSelectRounded11">
+                                                <option value="<?= $row_vendor['bentuk_usaha'] ?>"><?= $row_vendor['bentuk_usaha'] ?></option>
                                                 <option>Perseroan Terbatas (PT)</option>
                                                 <option>Commanditaire Vennootschap (CV)</option>
                                                 <option>Firma</option>
@@ -85,7 +88,8 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-th-list"></i></span>
                                             </div>
-                                            <select class="custom-select rounded-1 text-sm" id="exampleSelectRounded1" disabled>
+                                            <select name="kualifikasi_usaha" class="custom-select rounded-1 text-sm" id="exampleSelectRounded1" readonly>
+                                                <option value="<?= $row_vendor['kualifikasi_usaha'] ?>"><?= $row_vendor['kualifikasi_usaha'] ?></option>
                                                 <option>Usaha Besar</option>
                                                 <option>Usaha Menengah</option>
                                                 <option>Usaha Kecil (Mikro UMKM)</option>
@@ -106,7 +110,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-id-card"></i></span>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm" placeholder="95.725.637.3-411.000" data-inputmask='"mask": "99.999.999.9-999.999"' data-mask disabled>
+                                    <input type="text" class="form-control form-control-sm" value="<?= $row_vendor['npwp'] ?>" placeholder="95.725.637.3-411.000" data-inputmask='"mask": "99.999.999.9-999.999"' data-mask readonly>
                                 </div>
                             </div>
                         </td>
@@ -121,7 +125,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-envelope-open-text"></i></span>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm" placeholder="kreatifintelegnsi@gmail.com" disabled>
+                                    <input type="email" value="<?= $row_vendor['email'] ?>" class="form-control form-control-sm" placeholder="kreatifintelegnsi@gmail.com" readonly>
                                 </div>
                             </div>
                         </td>
@@ -138,7 +142,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-road"></i></span>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Jl. Kodiklat TNI No. 15 Raya Puspitek" disabled>
+                                    <textarea type="text" class="form-control form-control-sm" readonly> <?= $row_vendor['alamat'] ?> </textarea>
                                 </div>
                             </div>
                         </td>
@@ -151,10 +155,11 @@
                         </td>
                         <td class="col-sm-3">
                             <div class="col-sm-12">
-                                <select class="form-control select2bs4" style="width: 100%;" disabled>
-                                    <option selected="selected">DKI Jakarta</option>
-                                    <option>Banten</option>
-                                    <option>Jawa Barat</option>
+                                <select name="id_provinsi" required id="provinsitambah" class="form-control select2bs4" disabled>
+                                    <option value="<?= $row_vendor['id_provinsi'] ?>"><?= $row_vendor['nama_provinsi'] ?></option>
+                                    <?php foreach ($provinsi as $key => $value) { ?>
+                                        <option value="<?= $value['id_provinsi'] ?>"><?= $value['nama_provinsi'] ?></option>
+                                    <?php  } ?>
                                 </select>
                             </div>
                         </td>
@@ -165,10 +170,9 @@
                         </td>
                         <td class="col-sm-4">
                             <div class="col-sm-12">
-                                <select class="form-control select2bs4" style="width: 100%;" disabled>
-                                    <option selected="selected">Jakarta Timur</option>
-                                    <option>Tangerang Selatan</option>
-                                    <option>Bandung</option>
+                                <select name="id_kabupaten" required id="kabupatentambah" class="form-control select2bs4" disabled>
+                                    <option value="<?= $row_vendor['id_kabupaten'] ?>"><?= $row_vendor['nama_kabupaten'] ?></option>
+                                    <option value="">Pilih Kabupaten</option>
                                 </select>
                             </div>
                         </td>
@@ -181,10 +185,9 @@
                         </td>
                         <td class="col-sm-3">
                             <div class="col-sm-12">
-                                <select class="form-control select2bs4" style="width: 100%;" disabled>
-                                    <option selected="selected">Cawang</option>
-                                    <option>Serpong</option>
-                                    <option>Bandung Barat</option>
+                                <select name="id_kecamtan" required id="kecamatantambah" class="form-control select2bs4" disabled>
+                                    <option value="<?= $row_vendor['id_kecamatan'] ?>"><?= $row_vendor['nama_kecamatan'] ?></option>
+                                    <option value="">Pilih Kecamatan</option>
                                 </select>
                             </div>
                         </td>
@@ -195,11 +198,7 @@
                         </td>
                         <td class="col-sm-4">
                             <div class="col-sm-12">
-                                <select class="form-control select2bs4" style="width: 100%;" disabled>
-                                    <option selected="selected">Kramat Jati</option>
-                                    <option>Buaran</option>
-                                    <option>Dago</option>
-                                </select>
+                                <input type="text" required value="<?= $row_vendor['kelurahan'] ?>" name="kelurahan" placeholder="Nama Kelurahan..." class="form-control">
                             </div>
                         </td>
                     </tr>
@@ -215,7 +214,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-map-pin"></i></span>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm" placeholder="15310" data-inputmask='"mask": "99999"' data-mask disabled>
+                                    <input type="text" name="kode_pos" value="<?= $row_vendor['kode_pos'] ?>" class="form-control form-control-sm" placeholder="15310" data-inputmask='"mask": "99999"' data-mask readonly>
                                 </div>
                             </div>
                         </td>
@@ -230,7 +229,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-phone-alt"></i></span>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm" placeholder="08118333433" disabled>
+                                    <input type="text" name="no_telpon" value="<?= $row_vendor['no_telpon'] ?>" class="form-control form-control-sm" placeholder="08118333433" readonly>
                                 </div>
                             </div>
                         </td>
@@ -247,9 +246,31 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-laptop-house"></i></span>
                                     </div>
-                                    <select class="custom-select rounded-0 text-sm" id="exampleSelectRounded0" disabled>
-                                        <option>Tidak Ada</option>
-                                        <option>Ada</option>
+                                    <select name="sts_kantor_cabang" class="custom-select rounded-0 text-sm" id="exampleSelectRounded0" readonly>
+                                        <?php if ($row_vendor['sts_kantor_cabang'] == 1) { ?>
+                                            <option value="<?= $row_vendor['sts_kantor_cabang'] ?>">
+                                                <?php if ($row_vendor['sts_kantor_cabang'] == 1) { ?>
+                                                    Ada
+                                                <?php   } else { ?>
+                                                    Tidak Ada
+                                                <?php  }
+                                                ?>
+                                            </option>
+                                            <option value="1">Ada</option>
+                                            <option value="2">Tidak Ada</option>
+                                        <?php   } else { ?>
+                                            <option value="<?= $row_vendor['sts_kantor_cabang'] ?>">
+                                                <?php if ($row_vendor['sts_kantor_cabang'] == 1) { ?>
+                                                    Ada
+                                                <?php   } else { ?>
+                                                    Tidak Ada
+                                                <?php  }
+                                                ?>
+                                            </option>
+                                            <option value="1">Ada</option>
+                                            <option value="2">Tidak Ada</option>
+                                        <?php  }
+                                        ?>
                                     </select>
                                 </div>
                             </div>
@@ -265,7 +286,13 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-laptop-house"></i></span>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm" placeholder="" disabled>
+                                    <?php if ($row_vendor['sts_kantor_cabang'] == 1) { ?>
+                                        <textarea name="alamat_kantor_cabang" type="text" class="form-control form-control-sm"><?= $row_vendor['alamat_kantor_cabang'] ?></textarea>
+                                    <?php   } else { ?>
+                                        <textarea name="alamat_kantor_cabang" readonly type="text" class="form-control form-control-sm"></textarea>
+                                    <?php  }
+                                    ?>
+
                                 </div>
                             </div>
                         </td>
@@ -277,12 +304,12 @@
                             </label>
                         </td>
                         <td class="col-sm-3">
-                            <div class="col-sm-8">
+                            <div class="col-sm-12">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-user-lock"></i></span>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Email || NPWP" disabled>
+                                    <input type="text" class="form-control form-control-sm" value="<?= $row_vendor['email'] . ' || ' . $row_vendor['npwp'] ?>" placeholder="Email || NPWP" readonly>
                                 </div>
                             </div>
                         </td>
@@ -297,7 +324,11 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-key"></i></span>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm" placeholder="********" disabled>
+                                    <input type="password" name="password" value="<?= $row_vendor['password']?>" id="myInput" class="form-control" readonly>
+                                    <div class="input-group-prepend" style="display:none;">
+                                        <span class="input-group-text"> <a href="javascript:;" onclick="myFunction()"><i class="text-navy fas fa fa-eye"></i></a></span>
+                                    </div>
+
                                 </div>
                             </div>
                         </td>
@@ -305,7 +336,7 @@
                     </table>
                 </div>
                 <div class="card-footer">
-                    <button type="button" class="btn btn-success btn-sm" disabled>
+                    <button type="button" class="btn btn-success btn-sm" readonly>
                         <i class="fas fa-save mr-2"></i>
                         Save Changes
                     </button>
