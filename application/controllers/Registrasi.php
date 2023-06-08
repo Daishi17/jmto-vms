@@ -167,7 +167,7 @@ class Registrasi extends CI_Controller
 					$this->load->view('datapenyedia/registrasi/identitas', $data);
 					$this->load->view('template/footer');
 					$this->load->view('datapenyedia/registrasi/redirect_identitas');
-					$this->session->sess_destroy();
+					// $this->session->sess_destroy();
 				}
 			}
 		} else {
