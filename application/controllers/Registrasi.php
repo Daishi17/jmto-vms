@@ -111,7 +111,8 @@ class Registrasi extends CI_Controller
 						'password2' => form_error('password2'),
 					];
 					$this->session->set_flashdata('password2', $data['password']);
-					redirect('registrasi/identitas');
+					$token = $this->session->userdata('token_regis');
+					redirect(base_url('registrasi/identitas', $token));
 				} else {
 					$nama_usaha = $this->input->post('nama_usaha');
 					if (!is_dir('file_vms/' . $nama_usaha)) {
@@ -157,11 +158,14 @@ class Registrasi extends CI_Controller
 					];
 					$this->M_datapenyedia->insert_vendor($data_vendor);
 					// insert ke trx jenis usaha
+
 					$this->session->set_flashdata('success', 'Registrasi Berhasil');
+					$data['token_regis'] = $this->session->userdata('token_regis');
 					$data['widget'] = $this->recaptcha->getWidget();
 					$data['script'] = $this->recaptcha->getScriptTag();
 					$data['get_jenis_usaha']  = $this->M_jenis_usaha->get_result_jenis_usaha();
 					$data['provinsi']  = $this->Wilayah_model->getProvinsi();
+					$data['token_regis'] = $this->session->userdata('token_regis');
 					$this->load->view('template/header_registrasi');
 					$this->load->view('template/sidebar_registrasi');
 					$this->load->view('datapenyedia/registrasi/identitas', $data);

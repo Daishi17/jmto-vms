@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EPROC - JMTO</title>
+    <title>DRT - JMTO</title>
 
     <!-- Favicon -->
     <!-- <link rel="shortcut icon" href="https://themes.potenzaglobalsolutions.com/html/academic/images/favicon.ico" /> -->
@@ -186,9 +185,9 @@
                 <img src="<?= base_url('assets/img/volume_logo.png') ?>" width="32" height="32">
                 <p><a href="javascript:;" onclick="matikan()">Kelik Untuk <br>Backsound</a></p>
             </li>
-            <li>
+            <li class="bg-dark">
                 <img src="<?= base_url('assets/img/wa_logo.png') ?>" width="32" height="32">
-                <p><a href="#" target="_blank">Kontak Kami<br>08978201075</a></p>
+                <p><a class="text-white" href="#" target="_blank">Kontak Kami<br>08978201075</a></p>
             </li>
         </ul>
     </div>

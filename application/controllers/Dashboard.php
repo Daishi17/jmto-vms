@@ -24,7 +24,5 @@ class Dashboard extends CI_Controller
         $this->load->view('template/sidebar');
         $this->load->view('dashboard/index', $data);
         $this->load->view('template/footer');
-        // angga
-        // $this->load->view('dashboard/ajax');
     }
 }
