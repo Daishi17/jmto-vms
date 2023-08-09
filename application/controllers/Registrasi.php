@@ -34,26 +34,38 @@ class Registrasi extends CI_Controller
 					$data['script'] = $this->recaptcha->getScriptTag();
 					$email = $this->input->post('email');
 					$npwp = $this->input->post('npwp');
-					$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-					$charactersLength = strlen($characters);
-					$randomString = '';
-					for ($i = 0; $i < 10; $i++) {
-						$randomString .= $characters[random_int(0, $charactersLength - 1)];
+					$cek_npwp = json_decode(file_get_contents("https://bts.kintekindo.net/main.php/" . $npwp));
+					$result_ceking = json_decode(json_encode($cek_npwp), true);
+					if ($result_ceking['message'] == 'The NPWP number is valid') {
+						$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+						$charactersLength = strlen($characters);
+						$randomString = '';
+						for ($i = 0; $i < 10; $i++) {
+							$randomString .= $characters[random_int(0, $charactersLength - 1)];
+						}
+						$randomString;
+						$this->session->set_userdata('token_regis', $randomString);
+						$this->session->set_userdata('email', $email);
+						$this->session->set_userdata('npwp', $npwp);
+						$this->session->set_flashdata('success', 'Email : ' . $email . ' Terdaftar Silakan Check Email Anda Untuk Mengetahui Link Untuk Mengisi Identitas Vendor Dan Pastikan Masih 1 Perangkat (Terkadang Email Masuk Ke Spam!!)');
+						// START EMAIL SEND TYPE
+						$type_send_email = 'registrasi';
+						$data_send_email = [
+							'email' => $email,
+							'token_regis' => $randomString
+						];
+						$this->email_send->sen_row_email($type_send_email, $data_send_email);
+						$this->session->set_flashdata('npwp_api', 'NPWP ANDA TERDAFTAR');
+						$this->session->set_flashdata('no_npwp', $result_ceking['data']['npwp']);
+						$this->session->set_flashdata('nama_npwp', $result_ceking['data']['name']);
+						$this->session->set_flashdata('address', $result_ceking['data']['address']);
+						$this->session->set_flashdata('spt', $result_ceking['data']['status_spt']);
+						redirect('registrasi');
+						// END EMAIL SEND TYPE
+					} else {
+						$this->session->set_flashdata('npwp_api_tidak', 'NPWP ANDA TIDAK VALID DI DIREKTORAT JENDRAL PAJAK');
+						redirect('registrasi');
 					}
-					$randomString;
-					$this->session->set_userdata('token_regis', $randomString);
-					$this->session->set_userdata('email', $email);
-					$this->session->set_userdata('npwp', $npwp);
-					$this->session->set_flashdata('success', 'Email : ' . $email . ' Terdaftar Silakan Check Email Anda Untuk Mengetahui Link Untuk Mengisi Identitas Vendor Dan Pastikan Masih 1 Perangkat (Terkadang Email Masuk Ke Spam!!)');
-					// START EMAIL SEND TYPE
-					$type_send_email = 'registrasi';
-					$data_send_email = [
-						'email' => $email,
-						'token_regis' => $randomString
-					];
-					$this->email_send->sen_row_email($type_send_email, $data_send_email);
-					redirect('registrasi');
-					// END EMAIL SEND TYPE
 				}
 			}
 		}
