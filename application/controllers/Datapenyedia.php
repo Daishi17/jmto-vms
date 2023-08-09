@@ -4801,6 +4801,6 @@ class Datapenyedia extends CI_Controller
 		$date = date('Y');
 		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/Laporan_Keuangan-' . $date . '/' . $fileDownload, NULL);
 	}
-	
+
 	// end crud laporan keuangan
 }
