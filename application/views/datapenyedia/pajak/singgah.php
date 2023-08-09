@@ -109,7 +109,7 @@
                                                     <div class="flex-grow-1 bd-highlight">
                                                         <span class="text-dark">
                                                             <i class="fa-regular fa-file-lines px-1"></i>
-                                                            <small><strong>Form Pajak - Surat Pengukuhan Pengusaha Kena Pajak (SPPKP)</strong></small>
+                                                            <small><strong>Form - Surat Pengukuhan Pengusaha Kena Pajak (SPPKP)</strong></small>
                                                         </span>
                                                     </div>
                                                     <div class="bd-highlight">
@@ -210,7 +210,7 @@
                                                     <div class="flex-grow-1 bd-highlight">
                                                         <span class="text-dark">
                                                             <i class="fa-regular fa-file-lines px-1"></i>
-                                                            <small><strong>Form Pajak - Nomor Pokok Wajib Pajak (NPWP)</strong></small>
+                                                            <small><strong>Form - Nomor Pokok Wajib Pajak (NPWP)</strong></small>
                                                         </span>
                                                     </div>
                                                     <div class="bd-highlight">
@@ -311,7 +311,7 @@
                                                     <div class="p-1 flex-grow-1 bd-highlight">
                                                         <span class="text-dark">
                                                             <i class="fa-regular fa-file-lines px-1"></i>
-                                                            <small><strong>Form Pajak - Surat Pemberitahuan Tahunan (SPT)</strong></small>
+                                                            <small><strong>Form - Surat Pemberitahuan Tahunan (SPT)</strong></small>
                                                         </span>
                                                     </div>
                                                     <div class="bd-highlight">
@@ -357,7 +357,7 @@
                                                     <div class="p-1 flex-grow-1 bd-highlight">
                                                         <span class="text-dark">
                                                             <i class="fa-regular fa-file-lines px-1"></i>
-                                                            <small><strong>Form Pajak - Laporan Keuangan</strong></small>
+                                                            <small><strong>Form - Laporan Keuangan</strong></small>
                                                         </span>
                                                     </div>
                                                     <div class="bd-highlight">
@@ -408,7 +408,7 @@
                                                     <div class="p-1 flex-grow-1 bd-highlight">
                                                         <span class="text-dark">
                                                             <i class="fa-regular fa-file-lines px-1"></i>
-                                                            <small><strong>Form Pajak - Neraca Keuangan</strong></small>
+                                                            <small><strong>Form - Neraca Keuangan</strong></small>
                                                         </span>
                                                     </div>
                                                     <div class="bd-highlight">

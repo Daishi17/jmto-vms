@@ -100,35 +100,6 @@ function get_row_vendor() {
                 $('#button_edit_kbli_siup').removeClass("disabled");
             }
 
-            if (response['row_skdp']) {
-                if (response['row_skdp']['sts_validasi'] == 1) {
-                    $('#sts_validasi_skdp_1').css('display','block');
-                    $('#sts_validasi_skdp_2').css('display','none');
-                } else {
-                    $('#sts_validasi_skdp_1').css('display','none');
-                    $('#sts_validasi_skdp_2').css('display','block');
-                }
-                $('.nomor_surat_skdp').attr("readonly", true);
-                $('.sts_seumur_hidup_skdp').attr("disabled", true);
-                $('.tgl_berlaku_skdp').attr("readonly", true);
-                $('.kualifikasi_izin_skdp').attr("disabled", true);
-                $('.file_dokumen_skdp').attr("readonly", true);
-                $('.kbli_skdp').attr("readonly", true);
-                $('#on_save_skdp').attr("disabled", true);
-                $('#button_save_kbli_skdp').addClass("disabled");
-                $('#button_edit_kbli_skdp').addClass("disabled");
-            } else {
-                $('.nomor_surat_skdp').attr("readonly", false);
-                $('.sts_seumur_hidup_skdp').attr("disabled", false);
-                $('.tgl_berlaku_skdp').attr("readonly", false);
-                $('.kualifikasi_izin_skdp').attr("disabled", false);
-                $('.file_dokumen_skdp').attr("readonly", false);
-                $('.kbli_skdp').attr("readonly", false);
-                $('#on_save_skdp').attr("disabled", false);
-                $('#button_save_kbli_skdp').removeClass("disabled");
-                $('#button_edit_kbli_skdp').removeClass("disabled");
-            }
-
             if (response['row_sbu']) {
                 if (response['row_sbu']['sts_validasi'] == 1) {
                     $('#sts_validasi_sbu_1').css('display','block');
@@ -186,6 +157,64 @@ function get_row_vendor() {
                 $('#button_save_kbli_siujk').removeClass("disabled");
                 $('#button_edit_kbli_siujk').removeClass("disabled");
             }
+
+            if (response['row_skdp']) {
+                if (response['row_skdp']['sts_validasi'] == 1) {
+                    $('#sts_validasi_skdp_1').css('display','block');
+                    $('#sts_validasi_skdp_2').css('display','none');
+                } else {
+                    $('#sts_validasi_skdp_1').css('display','none');
+                    $('#sts_validasi_skdp_2').css('display','block');
+                }
+                $('.nomor_surat_skdp').attr("readonly", true);
+                $('.sts_seumur_hidup_skdp').attr("disabled", true);
+                $('.tgl_berlaku_skdp').attr("readonly", true);
+                $('.kualifikasi_izin_skdp').attr("disabled", true);
+                $('.file_dokumen_skdp').attr("readonly", true);
+                $('.kbli_skdp').attr("readonly", true);
+                $('#on_save_skdp').attr("disabled", true);
+                $('#button_save_kbli_skdp').addClass("disabled");
+                $('#button_edit_kbli_skdp').addClass("disabled");
+            } else {
+                $('.nomor_surat_skdp').attr("readonly", false);
+                $('.sts_seumur_hidup_skdp').attr("disabled", false);
+                $('.tgl_berlaku_skdp').attr("readonly", false);
+                $('.kualifikasi_izin_skdp').attr("disabled", false);
+                $('.file_dokumen_skdp').attr("readonly", false);
+                $('.kbli_skdp').attr("readonly", false);
+                $('#on_save_skdp').attr("disabled", false);
+                $('#button_save_kbli_skdp').removeClass("disabled");
+                $('#button_edit_kbli_skdp').removeClass("disabled");
+            }
+
+            if (response['row_lainnya']) {
+                if (response['row_lainnya']['sts_validasi'] == 1) {
+                $('#sts_validasi_lainnya_1').css('display','block');
+                $('#sts_validasi_lainnya_2').css('display','none');
+                } else {
+                $('#sts_validasi_lainnya_1').css('display','none');
+                $('#sts_validasi_lainnya_2').css('display','block');
+                }
+                $('.nomor_surat_lainnya').attr("readonly", true);
+                $('.sts_seumur_hidup_lainnya').attr("disabled", true);
+                $('.tgl_berlaku_lainnya').attr("readonly", true);
+                $('.kualifikasi_izin_lainnya').attr("disabled", true);
+                $('.file_dokumen_lainnya').attr("readonly", true);
+                $('.kbli_lainnya').attr("readonly", true);
+                $('#on_save_lainnya').attr("disabled", true);
+                $('#button_save_kbli_lainnya').addClass("disabled");
+                $('#button_edit_kbli_lainnya').addClass("disabled");
+                } else {
+                $('.nomor_surat_lainnya').attr("readonly", false);
+                $('.sts_seumur_hidup_lainnya').attr("disabled", false);
+                $('.tgl_berlaku_lainnya').attr("readonly", false);
+                $('.kualifikasi_izin_lainnya').attr("disabled", false);
+                $('.file_dokumen_lainnya').attr("readonly", false);
+                $('.kbli_lainnya').attr("readonly", false);
+                $('#on_save_lainnya').attr("disabled", false);
+                $('#button_save_kbli_lainnya').removeClass("disabled");
+                $('#button_edit_kbli_lainnya').removeClass("disabled");
+                }
 
             if (response == 'maaf') {
                 alert('Maaf Anda Kurang Beruntung');

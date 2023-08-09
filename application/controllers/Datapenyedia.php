@@ -3052,6 +3052,7 @@ class Datapenyedia extends CI_Controller
 		$instansi_pemberi = $this->input->post('instansi_pemberi');
 		$nilai_kontrak = $this->input->post('nilai_kontrak');
 		$lokasi_pekerjaan = $this->input->post('lokasi_pekerjaan');
+		$jangka_waktu = $this->input->post('jangka_waktu');
 		$this->form_validation->set_rules('no_kontrak', 'No Kontrak', 'required|trim', ['required' => 'No Kontrak Wajib Diisi!']);
 		$this->form_validation->set_rules('nama_pekerjaan', 'Nama Pekerjaan', 'required|trim', ['required' => 'Nama Pekerjaan Wajib Diisi!']);
 		$this->form_validation->set_rules('id_jenis_usaha', 'Jenis Pengadaan', 'required|trim', ['required' => 'Jenis Pengadaan  Wajib Diisi!']);
@@ -3107,6 +3108,7 @@ class Datapenyedia extends CI_Controller
 				'instansi_pemberi' => $instansi_pemberi,
 				'nilai_kontrak' => $nilai_kontrak,
 				'lokasi_pekerjaan' => $lokasi_pekerjaan,
+				'jangka_waktu' => $jangka_waktu,
 				'file_kontrak_pengalaman' => openssl_encrypt($file_kontrak_pengalaman['file_name'], $chiper, $secret_token_dokumen1),
 				'sts_token_dokumen_pengalaman' => 1,
 				'sts_validasi' => 0
@@ -3257,6 +3259,7 @@ class Datapenyedia extends CI_Controller
 		$instansi_pemberi = $this->input->post('instansi_pemberi');
 		$nilai_kontrak = $this->input->post('nilai_kontrak');
 		$lokasi_pekerjaan = $this->input->post('lokasi_pekerjaan');
+		$jangka_waktu = $this->input->post('jangka_waktu');
 		$this->form_validation->set_rules('no_kontrak', 'No Kontrak', 'required|trim', ['required' => 'No Kontrak Wajib Diisi!']);
 		$this->form_validation->set_rules('nama_pekerjaan', 'Nama Pekerjaan', 'required|trim', ['required' => 'Nama Pekerjaan Wajib Diisi!']);
 		$this->form_validation->set_rules('id_jenis_usaha', 'Jenis Pengadaan', 'required|trim', ['required' => 'Jenis Pengadaan  Wajib Diisi!']);
@@ -3316,6 +3319,7 @@ class Datapenyedia extends CI_Controller
 				'instansi_pemberi' => $instansi_pemberi,
 				'nilai_kontrak' => $nilai_kontrak,
 				'lokasi_pekerjaan' => $lokasi_pekerjaan,
+				'jangka_waktu' => $jangka_waktu,
 				'file_kontrak_pengalaman' => $post_file_kontrak_pengalaman,
 				'sts_token_dokumen_pengalaman' => 1,
 				'sts_validasi' => 2

@@ -55,7 +55,7 @@
                                         <th style="width:23%;"><small class="text-white">Nama Pekerjaan</small></th>
                                         <th style="width:9%;"><small class="text-white">Nilai (Rp.)</small></th>
                                         <th style="width:9%;"><small class="text-white">Jenis Tender</small></th>
-                                        <th style="width:10%;"><small class="text-white">Instansi</small></th>
+                                        <th style="width:10%;"><small class="text-white">Instansi Pemberi Kerja</small></th>
                                         <th style="width:10%;"><small class="text-white">Lokasi</small></th>
                                         <th style="width:8%;"><small class="text-white">
                                                 <div class="text-center">Status Validasi</div>
@@ -66,7 +66,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  
+
                                 </tbody>
                             </table>
                         </div>
@@ -167,14 +167,14 @@
                                                     <span class="input-group-text">Rp.</span>
                                                     <input name="nilai_kontrak" type="text" id="tanpa-rupiah" class="form-control">
                                                 </div>
-                                                  <!-- nilai_kontrak -->
-                                                  <small class="nilai_kontrak_error text-danger"></small>
+                                                <!-- nilai_kontrak -->
+                                                <small class="nilai_kontrak_error text-danger"></small>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="col-sm-2 bg-light">
-                                            <label class="form-label col-form-label-sm"><b>Instansi Pemberi</b></label>
+                                            <label class="form-label col-form-label-sm"><b>Instansi Pemberi Kerja</b></label>
                                         </td>
                                         <td class="col-sm-3">
                                             <div class="col-sm-12">
@@ -195,8 +195,8 @@
                                                     <span class="input-group-text"><i class="fa-solid fa-road"></i></span>
                                                     <input name="lokasi_pekerjaan" type="text" class="form-control">
                                                 </div>
-                                                 <!-- lokasi_pekerjaan -->
-                                                 <small class="lokasi_pekerjaan_error text-danger"></small>
+                                                <!-- lokasi_pekerjaan -->
+                                                <small class="lokasi_pekerjaan_error text-danger"></small>
                                             </div>
                                         </td>
                                     </tr>
@@ -205,10 +205,17 @@
                                             <label class="form-label col-form-label-sm"><b>Upload File Kontrak</b></label>
                                         </td>
                                         <td class="col-sm-3">
-                                        <input type="hidden" name="file_dokumen_manipulasi_pengalaman">
+                                            <input type="hidden" name="file_dokumen_manipulasi_pengalaman">
                                             <input type="file" class="file_valid_pengalaman" name="file_kontrak_pengalaman" id="file" accept=".pdf">
                                         </td>
+                                        <td class="col-sm-2 bg-light">
+                                            <label class="form-label col-form-label-sm"><b>Jangka Waktu Pekerjaan (Bulan)</b></label>
+                                        </td>
+                                        <td class="col-sm-3">
+                                            <input type="number" class="form-control" min="0" name="jangka_waktu">
+                                        </td>
                                     </tr>
+
                                     <tr>
                                         <td class="col-sm-12" colspan="4">
                                             <button type="button" class="btn btn-danger btn-sm shadow-lg" data-bs-dismiss="modal">
@@ -221,6 +228,7 @@
                                             </button>
                                         </td>
                                     </tr>
+
                                 </table>
                             </form>
                         </div>
@@ -315,7 +323,7 @@
                                                     </th>
                                                     <th>
                                                         <small class="text-white">
-                                                            <div class="text-center">Instansi</div>
+                                                            <div class="text-center">Instansi Pemberi Kerja</div>
                                                         </small>
                                                     </th>
                                                     <th>
@@ -385,8 +393,8 @@
                                                 <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
                                                 <input name="no_kontrak" type="text" class="form-control">
                                             </div>
-                                             <!-- no_kontrak -->
-                                             <small class="no_kontrak_error text-danger"></small>
+                                            <!-- no_kontrak -->
+                                            <small class="no_kontrak_error text-danger"></small>
                                         </div>
                                     </td>
                                     <td class="col-sm-2 bg-light">
@@ -413,8 +421,8 @@
                                                 <span class="input-group-text"><i class="fa-solid fa-user-pen"></i></span>
                                                 <textarea name="nama_pekerjaan" type="text" class="form-control" rows="2"></textarea>
                                             </div>
-                                             <!-- nama_pekerjaan -->
-                                             <small class="nama_pekerjaan_error text-danger"></small>
+                                            <!-- nama_pekerjaan -->
+                                            <small class="nama_pekerjaan_error text-danger"></small>
                                         </div>
                                     </td>
                                 </tr>
@@ -434,8 +442,8 @@
                                                     <option value="Sewa Kelola">Sewa Kelola</option>
                                                 </select>
                                             </div>
-                                             <!-- id_jenis_usaha -->
-                                             <small class="id_jenis_usaha_error text-danger"></small>
+                                            <!-- id_jenis_usaha -->
+                                            <small class="id_jenis_usaha_error text-danger"></small>
                                         </div>
                                     </td>
                                     <td class="col-sm-2 bg-light">
@@ -447,14 +455,14 @@
                                                 <span class="input-group-text">Rp.</span>
                                                 <input name="nilai_kontrak" type="text" id="tanpa-rupiah" class="form-control">
                                             </div>
-                                             <!-- nilai_kontrak -->
-                                             <small class="nilai_kontrak_error text-danger"></small>
+                                            <!-- nilai_kontrak -->
+                                            <small class="nilai_kontrak_error text-danger"></small>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-sm-2 bg-light">
-                                        <label class="form-label col-form-label-sm"><b>Instansi Pemberi</b></label>
+                                        <label class="form-label col-form-label-sm"><b>Instansi Pemberi Kerja</b></label>
                                     </td>
                                     <td class="col-sm-3">
                                         <div class="col-sm-12">
@@ -485,8 +493,20 @@
                                         <label class="form-label col-form-label-sm"><b>Upload File Kontrak</b></label>
                                     </td>
                                     <td class="col-sm-3">
-                                    <input type="hidden" name="file_dokumen_manipulasi_pengalaman">
-                                            <input type="file" class="file_valid_pengalaman" name="file_kontrak_pengalaman" id="file" accept=".pdf">
+                                        <input type="hidden" name="file_dokumen_manipulasi_pengalaman">
+                                        <input type="file" class="file_valid_pengalaman" name="file_kontrak_pengalaman" id="file" accept=".pdf">
+                                    </td>
+                                    <td class="col-sm-2 bg-light">
+                                        <label class="form-label col-form-label-sm"><b>Jangka Waktu Pekerjaan (Bulan)</b></label>
+                                    </td>
+                                    <td class="col-sm-3">
+                                        <input type="number" class="form-control" min="0" name="jangka_waktu">
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="col-sm-3">
+                                        <label class="form-label col-form-label-sm"><b>File Dokumen</b></label>
                                     </td>
                                     <td class="col-sm-4">
                                         <div class="button_nama_file_kontrak_pengalaman">

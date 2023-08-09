@@ -115,6 +115,7 @@
                     $('[name="instansi_pemberi"]').val(response['row_excel_pengalaman_manajerial'].instansi_pemberi);
                     $('[name="nilai_kontrak"]').val(response['row_excel_pengalaman_manajerial'].nilai_kontrak);
                     $('[name="lokasi_pekerjaan"]').val(response['row_excel_pengalaman_manajerial'].lokasi_pekerjaan);
+                    $('[name="jangka_waktu"]').val(response['row_excel_pengalaman_manajerial'].jangka_waktu);
                     $('[name="file_kontrak_pengalaman"]').val(response['row_excel_pengalaman_manajerial'].file_kontrak_pengalaman);
                 } else if (type == 'hapus') {
                     // Question_hapus_excel_pengalaman(response['row_excel_pengalaman_manajerial'].id_url, response['row_excel_pengalaman_manajerial'].nama_pekerjaan);
@@ -189,8 +190,8 @@
                         reloaddata_pengalaman_manajerial();
                         $('.btn_simpan').attr('disabled', false);
                         form_edit_excel_pengalaman_manajerial[0].reset();
-                         // no_kontrak
-                         $(".no_kontrak_error").css('display', 'none');
+                        // no_kontrak
+                        $(".no_kontrak_error").css('display', 'none');
                         // nama_pekerjaan
                         $(".nama_pekerjaan_error").css('display', 'none');
                         // id_jenis_usaha
@@ -556,6 +557,7 @@
                     $('[name="instansi_pemberi"]').val(response['row_pengalaman_manajerial'].instansi_pemberi);
                     $('[name="nilai_kontrak"]').val(response['row_pengalaman_manajerial'].nilai_kontrak);
                     $('[name="lokasi_pekerjaan"]').val(response['row_pengalaman_manajerial'].lokasi_pekerjaan);
+                    $('[name="jangka_waktu"]').val(response['row_pengalaman_manajerial'].jangka_waktu);
                     $('[name="file_kontrak_pengalaman"]').val(response['row_pengalaman_manajerial'].file_kontrak_pengalaman);
                 } else if (type == 'hapus') {
                     Question_hapus_pengalaman(response['row_pengalaman_manajerial'].id_url, response['row_pengalaman_manajerial'].nama_pekerjaan);

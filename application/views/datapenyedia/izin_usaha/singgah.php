@@ -120,7 +120,7 @@
                                                                 </td>
                                                                 <td class="col-sm-3">
                                                                     <input type="hidden" name="file_dokumen_nib_manipulasi">
-                                                                    <input type="file" name="file_dokumen_nib" class="file_dokumen_nib file_valid_nib"  accept=".pdf, .xlsx, .xls">
+                                                                    <input type="file" name="file_dokumen_nib" class="file_dokumen_nib file_valid_nib" accept=".pdf, .xlsx, .xls">
                                                                     <small class="file_dokumen_nib_error text-danger"></small>
                                                                 </td>
                                                                 <td class="col-sm-2 bg-light">
@@ -337,7 +337,7 @@
                                                                     <label class="form-label col-form-label-sm"><b>Upload File</b></label>
                                                                 </td>
                                                                 <td class="col-sm-3">
-                                                                <input type="hidden" name="file_dokumen_sbu_manipulasi">
+                                                                    <input type="hidden" name="file_dokumen_sbu_manipulasi">
                                                                     <input type="file" name="file_dokumen_sbu" class="file_dokumen_sbu file_valid_sbu" accept=".pdf, .xlsx, .xls">
                                                                     <small class="file_dokumen_sbu_error text-danger"></small>
 
@@ -355,7 +355,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <td class="col-sm-2 bg-light">
-                                                                    <label class="form-label col-form-label-sm"><b>Input KBLI</b></label>
+                                                                    <label class="form-label col-form-label-sm"><b>Input SubKlasifikasi</b></label>
                                                                 </td>
                                                                 <td class="col-sm-3">
                                                                     <button type="button" class="btn btn-danger btn-sm col-sm-8 shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-kbli-sbu">
@@ -542,9 +542,9 @@
                                                                         <div class="input-group mb-2">
                                                                             <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
                                                                             <select name="sts_seumur_hidup_skdp" class="form-select text-sm sts_seumur_hidup_skdp" aria-label="Default select example" onchange="sts_berlaku_skdp()">
-                                                                            <option value="2">Seumur Hidup</option>   
-                                                                            <option value="1">Tanggal</option>
-                                                                             
+                                                                                <option value="2">Seumur Hidup</option>
+                                                                                <option value="1">Tanggal</option>
+
                                                                             </select>
                                                                         </div>
                                                                         <input type="date" id="tgl_berlaku_skdp" name="tgl_berlaku_skdp" class="form-control tgl_berlaku_skdp" readonly data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
@@ -573,7 +573,7 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                              
+
                                                                 <td class="col-sm-2 bg-light">
                                                                     <label class="form-label col-form-label-sm"><b>Status Validasi Dokumen</b></label>
                                                                 </td>
@@ -1786,60 +1786,120 @@
 
 <!-- modal skdp -->
 <div class="modal fade" id="apply_edit_skdp" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-warning">
-                    <h5 class="modal-title">Anda Yakin Ingin Mengedit Data Anda ??</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title">Anda Yakin Ingin Mengedit Data Anda ??</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <center>
+                    <img src="<?= base_url('assets34543543/img/tanya.jpg') ?>" width="200px" alt="">
+                </center>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" onclick="EditChangeGlobal_skdp()" class="btn btn-success"> <i class="fas fa fa-check"> </i> Yakin !!</a>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa fa-ban"> </i> Tidak !!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal_dekrip_skdp" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title">DEKRIP FILE</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form_dekrip_skdp" method="post">
+                    <input type="hidden" name="id_url_skdp">
+                    <input type="hidden" name="secret_token" value="<?= $row_vendor['token_scure_vendor'] ?>">
                     <center>
-                        <img src="<?= base_url('assets34543543/img/tanya.jpg') ?>" width="200px" alt="">
+                        <img src="<?= base_url('assets34543543/img/private.jpg') ?>" width="100%" alt="">
+                        <p>Silakan Masukan Token Untuk Mendkrip File Anda </p>
+                        <div class="token_generate_skdp">
+
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            <input type="text" name="token_dokumen_skdp" value="" class="form-control">
+                        </div>
                     </center>
-                </div>
-                <div class="modal-footer">
-                    <a href="javascript:;" onclick="EditChangeGlobal_skdp()" class="btn btn-success"> <i class="fas fa fa-check"> </i> Yakin !!</a>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa fa-ban"> </i> Tidak !!</button>
-                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" id="button_dekrip_generate_skdp" onclick="GenerateDekrip_skdp()" class="btn btn-success"> <i class="fas fa fa-check"> </i> Generate !!</a>
+                <button disabled style="display:none" id="button_dekrip_generate_manipulasi_skdp" class="btn btn-success"> <i class="fas fa fa-check"> </i> Generate !!</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa fa-ban"> </i> Batal !!</button>
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="modal_dekrip_skdp" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-warning">
-                    <h5 class="modal-title">DEKRIP FILE</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="form_dekrip_skdp" method="post">
-                        <input type="hidden" name="id_url_skdp">
-                        <input type="hidden" name="secret_token" value="<?= $row_vendor['token_scure_vendor'] ?>">
-                        <center>
-                            <img src="<?= base_url('assets34543543/img/private.jpg') ?>" width="100%" alt="">
-                            <p>Silakan Masukan Token Untuk Mendkrip File Anda </p>
-                            <div class="token_generate_skdp">
-
-                            </div>
-                            <br>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-key"></i></span>
-                                <input type="text" name="token_dokumen_skdp" value="" class="form-control">
-                            </div>
-                        </center>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <a href="javascript:;" id="button_dekrip_generate_skdp" onclick="GenerateDekrip_skdp()" class="btn btn-success"> <i class="fas fa fa-check"> </i> Generate !!</a>
-                    <button disabled style="display:none" id="button_dekrip_generate_manipulasi_skdp" class="btn btn-success"> <i class="fas fa fa-check"> </i> Generate !!</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa fa-ban"> </i> Batal !!</button>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
 <!-- end modal skdp -->
+
+<!-- modal lainnya -->
+<div class="modal fade" id="apply_edit_lainnya" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title">Anda Yakin Ingin Mengedit Data Anda ??</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <center>
+                    <img src="<?= base_url('assets34543543/img/tanya.jpg') ?>" width="200px" alt="">
+                </center>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" onclick="EditChangeGlobal_lainnya()" class="btn btn-success"> <i class="fas fa fa-check"> </i> Yakin !!</a>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa fa-ban"> </i> Tidak !!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal_dekrip_lainnya" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title">DEKRIP FILE</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form_dekrip_lainnya" method="post">
+                    <input type="hidden" name="id_url_lainnya">
+                    <input type="hidden" name="secret_token" value="<?= $row_vendor['token_scure_vendor'] ?>">
+                    <center>
+                        <img src="<?= base_url('assets34543543/img/private.jpg') ?>" width="100%" alt="">
+                        <p>Silakan Masukan Token Untuk Mendkrip File Anda </p>
+                        <div class="token_generate_lainnya">
+
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            <input type="text" name="token_dokumen_lainnya" value="" class="form-control">
+                        </div>
+                    </center>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" id="button_dekrip_generate_lainnya" onclick="GenerateDekrip_lainnya()" class="btn btn-success"> <i class="fas fa fa-check"> </i> Generate !!</a>
+                <button disabled style="display:none" id="button_dekrip_generate_manipulasi_lainnya" class="btn btn-success"> <i class="fas fa fa-check"> </i> Generate !!</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa fa-ban"> </i> Batal !!</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal lainnya -->
