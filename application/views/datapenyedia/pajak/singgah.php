@@ -1152,18 +1152,15 @@
                                         <th class="tg-9wq8" rowspan="2">NO</th>
                                         <th class="tg-9wq8" rowspan="2">Uraian</th>
                                         <th class="tg-9wq8" colspan="2">
-                                            <select name="tahun_mulai" class="form-control">
+                                            <select name="tahun_mulai" class="form-control" onchange="tahun_awal()">
+                                                <option value="">--Pilih Tahun--</option>
                                                 <?php for ($i = 10; $i < 30; $i++) {  ?>
                                                     <option value="20<?= $i ?>">20<?= $i ?></option>
                                                 <?php } ?>
                                             </select>
                                         </th>
                                         <th class="tg-9wq8" colspan="2">
-                                            <select name="tahun_selesai" class="form-control">
-                                                <?php for ($i = 10; $i < 30; $i++) {  ?>
-                                                    <option value="20<?= $i ?>">20<?= $i ?></option>
-                                                <?php } ?>
-                                            </select>
+                                            <input type="text" name="tahun_selesai" readonly class="form-control">
                                         </th>
                                     </tr>
                                     <tr>
@@ -1303,11 +1300,8 @@
                                             </select>
                                         </th>
                                         <th class="tg-9wq8" colspan="2">
-                                            <select name="tahun_selesai" class="form-control">
-                                                <?php for ($i = 10; $i < 30; $i++) {  ?>
-                                                    <option value="20<?= $i ?>">20<?= $i ?></option>
-                                                <?php } ?>
-                                            </select>
+                                            <input type="text" name="tahun_selesai" readonly>
+
                                         </th>
                                     </tr>
                                     <tr>
