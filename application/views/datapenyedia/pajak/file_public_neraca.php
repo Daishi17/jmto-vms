@@ -94,4 +94,10 @@
             }
         })
     })
+
+    function tahun_awal() {
+        var tahun_mulai = $('[name="tahun_mulai"]').val()
+        var tahun_plus = parseInt(tahun_mulai) + 1;
+        $('[name="tahun_selesai"]').val(tahun_plus)
+    }
 </script>
