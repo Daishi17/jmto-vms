@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
+error_reporting(0);
 class Registrasi extends CI_Controller
 {
 

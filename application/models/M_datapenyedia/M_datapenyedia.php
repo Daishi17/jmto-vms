@@ -1954,7 +1954,6 @@ class M_datapenyedia extends CI_Model
     }
 
 
-
     public function get_row_neraca($id_neraca)
     {
         $this->db->select('*');
@@ -1990,4 +1989,102 @@ class M_datapenyedia extends CI_Model
         $this->db->delete('tbl_vendor_neraca_keuangan', $where);
         return $this->db->affected_rows();
     }
+
+
+        // SKDP
+        public function tambah_skdp($data)
+        {
+            $this->db->insert('tbl_vendor_skdp', $data);
+            return $this->db->affected_rows();
+        }
+    
+        public function update_skdp($data, $where)
+        {
+            $this->db->update('tbl_vendor_skdp', $data);
+            $this->db->where($where);
+            return $this->db->affected_rows();
+        }
+    
+    
+    
+        public function update_enkrip_skdp($where, $data)
+        {
+            $this->db->update('tbl_vendor_skdp', $data, $where);
+            return $this->db->affected_rows();
+        }
+    
+        public function update_dekrip_skdp($where, $data)
+        {
+            $this->db->update('tbl_vendor_skdp', $data, $where);
+            return $this->db->affected_rows();
+        }
+    
+    
+        public function get_row_skdp_url($id_url)
+        {
+            $this->db->select('*');
+            $this->db->from('tbl_vendor_skdp');
+            $this->db->where('tbl_vendor_skdp.id_url', $id_url);
+            $query = $this->db->get();
+            return $query->row_array();
+        }
+    
+        public function get_row_skdp($id_vendor)
+        {
+            $this->db->select('*');
+            $this->db->from('tbl_vendor_skdp');
+            $this->db->where('tbl_vendor_skdp.id_vendor', $id_vendor);
+            $query = $this->db->get();
+            return $query->row_array();
+        }
+        // SKDP
+
+
+        // lainnya
+public function tambah_lainnya($data)
+{
+    $this->db->insert('tbl_vendor_izin_lain', $data);
+    return $this->db->affected_rows();
+}
+
+public function update_lainnya($data, $where)
+{
+    $this->db->update('tbl_vendor_izin_lain', $data);
+    $this->db->where($where);
+    return $this->db->affected_rows();
+}
+
+
+
+public function update_enkrip_lainnya($where, $data)
+{
+    $this->db->update('tbl_vendor_izin_lain', $data, $where);
+    return $this->db->affected_rows();
+}
+
+public function update_dekrip_lainnya($where, $data)
+{
+    $this->db->update('tbl_vendor_izin_lain', $data, $where);
+    return $this->db->affected_rows();
+}
+
+
+public function get_row_lainnya_url($id_url)
+{
+    $this->db->select('*');
+    $this->db->from('tbl_vendor_izin_lain');
+    $this->db->where('tbl_vendor_izin_lain.id_url', $id_url);
+    $query = $this->db->get();
+    return $query->row_array();
+}
+
+public function get_row_lainnya($id_vendor)
+{
+    $this->db->select('*');
+    $this->db->from('tbl_vendor_izin_lain');
+    $this->db->where('tbl_vendor_izin_lain.id_vendor', $id_vendor);
+    $query = $this->db->get();
+    return $query->row_array();
+}
+        // end lainnya
 }

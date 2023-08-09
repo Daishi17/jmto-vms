@@ -115,9 +115,10 @@
                     $('[name="instansi_pemberi"]').val(response['row_excel_pengalaman_manajerial'].instansi_pemberi);
                     $('[name="nilai_kontrak"]').val(response['row_excel_pengalaman_manajerial'].nilai_kontrak);
                     $('[name="lokasi_pekerjaan"]').val(response['row_excel_pengalaman_manajerial'].lokasi_pekerjaan);
+                    $('[name="jangka_waktu"]').val(response['row_excel_pengalaman_manajerial'].jangka_waktu);
                     $('[name="file_kontrak_pengalaman"]').val(response['row_excel_pengalaman_manajerial'].file_kontrak_pengalaman);
                 } else if (type == 'hapus') {
-                    Question_hapus_excel_pengalaman(response['row_excel_pengalaman_manajerial'].id_url, response['row_excel_pengalaman_manajerial'].nama_pekerjaan);
+                    // Question_hapus_excel_pengalaman(response['row_excel_pengalaman_manajerial'].id_url, response['row_excel_pengalaman_manajerial'].nama_pekerjaan);
                 } else {
 
                 }
@@ -184,7 +185,7 @@
                         $('.btn_simpan').attr("disabled", false);
                     } else {
                         modal_edit_excel_pengalaman_manajerial.modal('hide')
-                        Swal.fire('Good job!', 'Data Berhasil Di Edit!', 'success');
+                        Swal.fire('Good job!', 'Data Beharhasil Di Edit!', 'success');
                         reloaddata_excel_pengalaman_manajerial()
                         reloaddata_pengalaman_manajerial();
                         $('.btn_simpan').attr('disabled', false);
@@ -265,7 +266,7 @@
                         $('.btn_simpan').attr("disabled", false);
                     } else {
                         modal_pengalaman.modal('hide')
-                        Swal.fire('Good job!', 'Data Berhasil Di Buat!', 'success');
+                        Swal.fire('Good job!', 'Data Beharhasil Di Buat!', 'success');
                         reloaddata_pengalaman_manajerial()
                         $('.btn_simpan').attr('disabled', false);
                         form_simpan_pengalaman[0].reset();
@@ -305,19 +306,15 @@
             },
             success: function(response) {
                 $('.btn_simpan').attr('disabled', false);
-                if (response['gagal']) {
-                    Swal.fire('Maaf!', response['gagal'], 'warning');
+                if (response['message']) {
+                    Swal.fire('Good job!', 'Behasil Import Excel', 'success');
+                    reloaddata_excel_pengalaman_manajerial()
+                    form_import_excel_pengalaman[0].reset();
                 } else {
-                    if (response['message']) {
-                        Swal.fire('Good job!', 'Behasil Import Excel', 'success');
-                        reloaddata_excel_pengalaman_manajerial()
-                        form_import_excel_pengalaman[0].reset();
-                    } else {
-                        Swal.fire('Maaf!', 'Kesalahan', 'warning');
-                        reloaddata_excel_pengalaman_manajerial()
-                        reloaddata_pengalaman_manajerial();
-                        form_import_excel_pengalaman[0].reset();
-                    }
+                    Swal.fire('Maaf!', 'Kesalahan', 'warning');
+                    reloaddata_excel_pengalaman_manajerial()
+                    reloaddata_pengalaman_manajerial();
+                    form_import_excel_pengalaman[0].reset();
                 }
             }
         });
@@ -338,7 +335,7 @@
                     url: '<?= base_url('datapenyedia/hapus_row_import_excel_pengalaman/') ?>' + id_url,
                     dataType: "JSON",
                     success: function(response) {
-                        Swal.fire('Good job!', 'Data Berhasil Dihapus!', 'success');
+                        Swal.fire('Good job!', 'Data Beharhasil Dihapus!', 'success');
                         reloaddata_excel_pengalaman_manajerial()
                     }
                 })
@@ -356,7 +353,7 @@
                 $('.data_tervalidasi_pengalaman').css('display', 'none');
             },
             success: function(response) {
-                Swal.fire('Good job!', 'Data Berhasil Simpan!', 'success');
+                Swal.fire('Good job!', 'Data Beharhasil Simpan!', 'success');
                 form_import_excel_pengalaman[0].reset();
                 reloaddata_excel_pengalaman_manajerial();
                 reloaddata_pengalaman_manajerial();
@@ -396,7 +393,7 @@
                     url: '<?= base_url('datapenyedia/hapus_import_excel_pengalaman') ?>',
                     dataType: "JSON",
                     success: function(response) {
-                        Swal.fire('Good job!', 'Data Berhasil Dihapus!', 'success');
+                        Swal.fire('Good job!', 'Data Beharhasil Dihapus!', 'success');
                         reloaddata_excel_pengalaman_manajerial()
 
                     }
@@ -560,6 +557,7 @@
                     $('[name="instansi_pemberi"]').val(response['row_pengalaman_manajerial'].instansi_pemberi);
                     $('[name="nilai_kontrak"]').val(response['row_pengalaman_manajerial'].nilai_kontrak);
                     $('[name="lokasi_pekerjaan"]').val(response['row_pengalaman_manajerial'].lokasi_pekerjaan);
+                    $('[name="jangka_waktu"]').val(response['row_pengalaman_manajerial'].jangka_waktu);
                     $('[name="file_kontrak_pengalaman"]').val(response['row_pengalaman_manajerial'].file_kontrak_pengalaman);
                 } else if (type == 'hapus') {
                     Question_hapus_pengalaman(response['row_pengalaman_manajerial'].id_url, response['row_pengalaman_manajerial'].nama_pekerjaan);
@@ -584,7 +582,7 @@
                     url: '<?= base_url('datapenyedia/hapus_row_pengalaman/') ?>' + id_url,
                     dataType: "JSON",
                     success: function(response) {
-                        Swal.fire('Good job!', 'Data Berhasil Dihapus!', 'success');
+                        Swal.fire('Good job!', 'Data Beharhasil Dihapus!', 'success');
                         reloaddata_pengalaman_manajerial()
                     }
                 })

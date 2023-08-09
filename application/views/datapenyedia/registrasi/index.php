@@ -41,7 +41,6 @@
                             echo  $this->session->flashdata('success');
                             echo ' </div>';
                         } ?>
-                        
                     <div class="card card-primary text-sm">
                         <div class="card-header">
                             <h4 class="card-title">

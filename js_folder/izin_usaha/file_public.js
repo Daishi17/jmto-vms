@@ -158,6 +158,64 @@ function get_row_vendor() {
                 $('#button_edit_kbli_siujk').removeClass("disabled");
             }
 
+            if (response['row_skdp']) {
+                if (response['row_skdp']['sts_validasi'] == 1) {
+                    $('#sts_validasi_skdp_1').css('display','block');
+                    $('#sts_validasi_skdp_2').css('display','none');
+                } else {
+                    $('#sts_validasi_skdp_1').css('display','none');
+                    $('#sts_validasi_skdp_2').css('display','block');
+                }
+                $('.nomor_surat_skdp').attr("readonly", true);
+                $('.sts_seumur_hidup_skdp').attr("disabled", true);
+                $('.tgl_berlaku_skdp').attr("readonly", true);
+                $('.kualifikasi_izin_skdp').attr("disabled", true);
+                $('.file_dokumen_skdp').attr("readonly", true);
+                $('.kbli_skdp').attr("readonly", true);
+                $('#on_save_skdp').attr("disabled", true);
+                $('#button_save_kbli_skdp').addClass("disabled");
+                $('#button_edit_kbli_skdp').addClass("disabled");
+            } else {
+                $('.nomor_surat_skdp').attr("readonly", false);
+                $('.sts_seumur_hidup_skdp').attr("disabled", false);
+                $('.tgl_berlaku_skdp').attr("readonly", false);
+                $('.kualifikasi_izin_skdp').attr("disabled", false);
+                $('.file_dokumen_skdp').attr("readonly", false);
+                $('.kbli_skdp').attr("readonly", false);
+                $('#on_save_skdp').attr("disabled", false);
+                $('#button_save_kbli_skdp').removeClass("disabled");
+                $('#button_edit_kbli_skdp').removeClass("disabled");
+            }
+
+            if (response['row_lainnya']) {
+                if (response['row_lainnya']['sts_validasi'] == 1) {
+                $('#sts_validasi_lainnya_1').css('display','block');
+                $('#sts_validasi_lainnya_2').css('display','none');
+                } else {
+                $('#sts_validasi_lainnya_1').css('display','none');
+                $('#sts_validasi_lainnya_2').css('display','block');
+                }
+                $('.nomor_surat_lainnya').attr("readonly", true);
+                $('.sts_seumur_hidup_lainnya').attr("disabled", true);
+                $('.tgl_berlaku_lainnya').attr("readonly", true);
+                $('.kualifikasi_izin_lainnya').attr("disabled", true);
+                $('.file_dokumen_lainnya').attr("readonly", true);
+                $('.kbli_lainnya').attr("readonly", true);
+                $('#on_save_lainnya').attr("disabled", true);
+                $('#button_save_kbli_lainnya').addClass("disabled");
+                $('#button_edit_kbli_lainnya').addClass("disabled");
+                } else {
+                $('.nomor_surat_lainnya').attr("readonly", false);
+                $('.sts_seumur_hidup_lainnya').attr("disabled", false);
+                $('.tgl_berlaku_lainnya').attr("readonly", false);
+                $('.kualifikasi_izin_lainnya').attr("disabled", false);
+                $('.file_dokumen_lainnya').attr("readonly", false);
+                $('.kbli_lainnya').attr("readonly", false);
+                $('#on_save_lainnya').attr("disabled", false);
+                $('#button_save_kbli_lainnya').removeClass("disabled");
+                $('#button_edit_kbli_lainnya').removeClass("disabled");
+                }
+
             if (response == 'maaf') {
                 alert('Maaf Anda Kurang Beruntung');
             } else {
@@ -242,6 +300,48 @@ function get_row_vendor() {
                     var html2 = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_siujk(\'' + id_url_siujk + '\')" class="btn btn-sm btn-warning btn-block">' + response['row_siujk']['file_dokumen'] + '</a>';
                     $('#tampil_dokumen_siujk').html(html2);
                 }
+
+                  // skdp
+                  var id_url_skdp = response['row_skdp']['id_url'];
+                  $('[name="file_dokumen_skdp_manipulasi"]').val(response['row_skdp']['file_dokumen']);
+                  $('[name="jenis_izin_skdp"]').val(response['row_skdp']['jenis_izin']);
+                  $('[name="no_urut_skdp"]').val(response['row_skdp']['no_urut']);
+                  $('[name="nomor_surat_skdp"]').val(response['row_skdp']['nomor_surat']);
+                  $('[name="kualifikasi_izin_skdp"]').val(response['row_skdp']['kualifikasi_izin']);
+                  $('[name="tgl_berlaku_skdp"]').val(response['row_skdp']['tgl_berlaku']);
+                  $('.file_dokumen_skdp').text(response['row_skdp']['file_dokumen'])
+                  if (response['row_skdp']['sts_token_dokumen'] == 1) {
+                      $('.button_enkrip_skdp').html('<a href="javascript:;"  onclick="DekripEnkrip_skdp(\'' + id_url_skdp + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>');
+                      var html2 = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" class="btn btn-sm btn-info btn-block">' +
+                          response['row_skdp']['file_dokumen'] + '</a>';
+                      $('#tampil_dokumen_skdp').html(html2);
+                      $('.token_generate_skdp').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_skdp']['token_dokumen'] + '</textarea></div>');
+                  } else {
+                      $('.button_enkrip_skdp').html('<a href="javascript:;" onclick="DekripEnkrip_skdp(\'' + id_url_skdp + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i> Enkripsi Dokumen</a>');
+                      var html2 = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_skdp(\'' + id_url_skdp + '\')" class="btn btn-sm btn-warning btn-block">' + response['row_skdp']['file_dokumen'] + '</a>';
+                      $('#tampil_dokumen_skdp').html(html2);
+                  }
+
+                  // lainnya
+                  var id_url_lainnya = response['row_lainnya']['id_url'];
+                  $('[name="file_dokumen_lainnya_manipulasi"]').val(response['row_lainnya']['file_dokumen']);
+                  $('[name="jenis_izin_lainnya"]').val(response['row_lainnya']['jenis_izin']);
+                  $('[name="no_urut_lainnya"]').val(response['row_lainnya']['no_urut']);
+                  $('[name="nomor_surat_lainnya"]').val(response['row_lainnya']['nomor_surat']);
+                  $('[name="kualifikasi_izin_lainnya"]').val(response['row_lainnya']['kualifikasi_izin']);
+                  $('[name="tgl_berlaku_lainnya"]').val(response['row_lainnya']['tgl_berlaku']);
+                  $('.file_dokumen_lainnya').text(response['row_lainnya']['file_dokumen'])
+                  if (response['row_lainnya']['sts_token_dokumen'] == 1) {
+                      $('.button_enkrip_lainnya').html('<a href="javascript:;"  onclick="DekripEnkrip_lainnya(\'' + id_url_lainnya + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>');
+                      var html2 = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" class="btn btn-sm btn-info btn-block">' +
+                          response['row_lainnya']['file_dokumen'] + '</a>';
+                      $('#tampil_dokumen_lainnya').html(html2);
+                      $('.token_generate_lainnya').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_lainnya']['token_dokumen'] + '</textarea></div>');
+                  } else {
+                      $('.button_enkrip_lainnya').html('<a href="javascript:;" onclick="DekripEnkrip_lainnya(\'' + id_url_lainnya + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i> Enkripsi Dokumen</a>');
+                      var html2 = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_lainnya(\'' + id_url_lainnya + '\')" class="btn btn-sm btn-warning btn-block">' + response['row_lainnya']['file_dokumen'] + '</a>';
+                      $('#tampil_dokumen_lainnya').html(html2);
+                  }
 
             }
 
@@ -510,7 +610,7 @@ function simpan_kbli_nib() {
             },
             success: function(response) {
                 if (response['message'] == 'success') {
-                    Swal.fire('Good job!', 'Data Berhasil Ditambah!', 'success');
+                    Swal.fire('Good job!', 'Data Beharhasil Ditambah!', 'success');
                     form_simpan_kbli_nib[0].reset();
                     reloadTable_kbli_nib()
                     $(".id_kbli_nib").css('display','none');
@@ -597,7 +697,7 @@ function Question_kbli_nib(id_url_kbli_nib, token_kbli_nib) {
                 dataType: "JSON",
                 success: function(response) {
                     if (response['message'] == 'success') {
-                        Swal.fire('Good job!', 'Data Berhasil Dihapus!', 'success');
+                        Swal.fire('Good job!', 'Data Beharhasil Dihapus!', 'success');
                         form_simpan_kbli_nib[0].reset();
                         reloadTable_kbli_nib()
                     } else {
@@ -625,7 +725,7 @@ function edit_kbli_nib() {
             success: function(response) {
                 if (response['message'] == 'success') {
                         modal_edit_kbli_nib.modal('hide');
-                        Swal.fire('Good job!', 'Data Berhasil Edit!', 'success');
+                        Swal.fire('Good job!', 'Data Beharhasil Edit!', 'success');
                         form_simpan_kbli_nib[0].reset();
                         form_edit_kbli_nib[0].reset();
                         reloadTable_kbli_nib();
@@ -925,7 +1025,7 @@ function simpan_kbli_siup() {
             success: function(response) {
                 if (response['message'] == 'success') {
                     reloadTable_kbli_siup()
-                    Swal.fire('Good job!', 'Data Berhasil Ditambah!', 'success');
+                    Swal.fire('Good job!', 'Data Beharhasil Ditambah!', 'success');
                     form_simpan_kbli_siup[0].reset();
                     $(".id_kbli_siup_error").css('display','none');
                     $(".id_kualifikasi_izin_kbli_siup_error").css('display','none');
@@ -1011,7 +1111,7 @@ function Question_kbli_siup(id_url_kbli_siup, token_kbli_siup) {
                 dataType: "JSON",
                 success: function(response) {
                     if (response['message'] == 'success') {
-                        Swal.fire('Good job!', 'Data Berhasil Dihapus!', 'success');
+                        Swal.fire('Good job!', 'Data Beharhasil Dihapus!', 'success');
                         form_simpan_kbli_siup[0].reset();
                         reloadTable_kbli_siup()
                     } else {
@@ -1039,7 +1139,7 @@ function edit_kbli_siup() {
         success: function(response) {
             if (response['message'] == 'success') {
                 reloadTable_kbli_siup()
-                Swal.fire('Good job!', 'Data Berhasil Ditambah!', 'success');
+                Swal.fire('Good job!', 'Data Beharhasil Ditambah!', 'success');
                 form_edit_kbli_siup[0].reset();
                 form_simpan_kbli_siup[0].reset();
                 $(".id_kbli_siup_error").css('display','none');
@@ -1336,7 +1436,7 @@ function simpan_kbli_sbu() {
             success: function(response) {
                 if (response['message'] == 'success') {
                     reloadTable_kbli_sbu()
-                    Swal.fire('Good job!', 'Data Berhasil Ditambah!', 'success');
+                    Swal.fire('Good job!', 'Data Beharhasil Ditambah!', 'success');
                     form_simpan_kbli_sbu[0].reset();
                     $(".id_kbli_sbu_error").css('display','none');
                     $(".id_kualifikasi_izin_kbli_sbu_error").css('display','none');
@@ -1421,7 +1521,7 @@ function Question_kbli_sbu(id_url_kbli_sbu, token_kbli_sbu) {
               dataType: "JSON",
               success: function(response) {
                   if (response['message'] == 'success') {
-                      Swal.fire('Good job!', 'Data Berhasil Dihapus!', 'success');
+                      Swal.fire('Good job!', 'Data Beharhasil Dihapus!', 'success');
                       form_simpan_kbli_sbu[0].reset();
                       reloadTable_kbli_sbu()
                   } else {
@@ -1449,7 +1549,7 @@ function edit_kbli_sbu() {
         success: function(response) {
             if (response['message'] == 'success') {
                 reloadTable_kbli_sbu()
-                Swal.fire('Good job!', 'Data Berhasil Ditambah!', 'success');
+                Swal.fire('Good job!', 'Data Beharhasil Ditambah!', 'success');
                 form_edit_kbli_sbu[0].reset();
                 form_simpan_kbli_sbu[0].reset();
                 $(".id_kbli_sbu_error").css('display','none');
@@ -1744,7 +1844,7 @@ function simpan_kbli_siujk() {
         success: function(response) {
             if (response['message'] == 'success') {
                 reloadTable_kbli_siujk()
-                Swal.fire('Good job!', 'Data Berhasil Ditambah!', 'success');
+                Swal.fire('Good job!', 'Data Beharhasil Ditambah!', 'success');
                 form_simpan_kbli_siujk[0].reset();
                 $(".id_kbli_siujk_error").css('display', 'none');
                 $(".id_kualifikasi_izin_kbli_siujk_error").css('display', 'none');
@@ -1830,7 +1930,7 @@ function Question_kbli_siujk(id_url_kbli_siujk, token_kbli_siujk) {
                 dataType: "JSON",
                 success: function(response) {
                     if (response['message'] == 'success') {
-                        Swal.fire('Good job!', 'Data Berhasil Dihapus!', 'success');
+                        Swal.fire('Good job!', 'Data Beharhasil Dihapus!', 'success');
                         form_simpan_kbli_siujk[0].reset();
                         reloadTable_kbli_siujk()
                     } else {
@@ -1858,7 +1958,7 @@ function edit_kbli_siujk() {
         success: function(response) {
             if (response['message'] == 'success') {
                 reloadTable_kbli_siujk()
-                Swal.fire('Good job!', 'Data Berhasil Ditambah!', 'success');
+                Swal.fire('Good job!', 'Data Beharhasil Ditambah!', 'success');
                 form_edit_kbli_siujk[0].reset();
                 form_simpan_kbli_siujk[0].reset();
                 $(".id_kbli_siujk_error").css('display', 'none');
@@ -1891,3 +1991,431 @@ function edit_kbli_siujk() {
     })
 }
 
+// skdp
+var form_skdp = $('#form_skdp')
+form_skdp.on('submit', function(e) {
+    var url_post_skdp = $('[name="url_post_skdp"]').val();
+    var file_dokumen_skdp = $('[name="file_dokumen_skdp"]').val();
+    if (file_dokumen_skdp == '') {
+        e.preventDefault();
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Dokumen Wajib Di Isi!',
+          })
+    } else {
+        e.preventDefault();
+        $.ajax({
+            url: url_post_skdp,
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function() {
+                $('#on_save_skdp').attr("disabled", true);
+            },
+            success: function(response) {
+                if (response['error']) {
+                    $(".nomor_surat_skdp_error").css('display', 'block');
+                    $(".sts_seumur_hidup_skdp_error").css('display', 'block');
+                    $(".file_dokumen_skdp_error").css('display', 'block');
+                    $(".file_dokumen_skdp_error").html(response['error']['file_dokumen_skdp']);
+                    $(".nomor_surat_skdp_error").html(response['error']['nomor_surat_skdp']);
+                    $(".sts_seumur_hidup_skdp_error").html(response['error']['sts_seumur_hidup_skdp']);
+                    $('#on_save_skdp').attr("disabled", false);
+                } else {
+                let timerInterval
+                Swal.fire({
+                    title: 'Sedang Proses Menyimpan Data!',
+                    html: 'Membuat Data <b></b>',
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            // b.textContent = Swal.getTimerRight()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                        Swal.fire('Data Berhasil Di Simpan!', '', 'success')
+                        get_row_vendor();
+                        $('#on_save_skdp').attr("disabled", false);
+                        $(".nomor_surat_skdp_error").css('display', 'none');
+                        $(".sts_seumur_hidup_skdp_error").css('display', 'none');
+                        $(".file_dokumen_skdp_error").css('display', 'none');
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+
+                    }
+                })
+                 }
+            }
+        })
+            }
+})
+
+function sts_berlaku_skdp() {
+    var sts_seumur_hidup_skdp = $('[name="sts_seumur_hidup_skdp"]').val()
+    if (sts_seumur_hidup_skdp == 1) {
+        $('.tgl_berlaku_skdp').attr("readonly", false);
+    } else {
+        $('.tgl_berlaku_skdp').attr("readonly", true);
+    }
+}
+
+function EditChangeGlobal_skdp() {
+    $('#apply_edit_skdp').modal('hide')
+    $('.nomor_surat_skdp').attr("readonly", false);
+    $('.sts_seumur_hidup_skdp').attr("disabled", false);
+    $('.tgl_berlaku_skdp').attr("readonly", false);
+    $('.kualifikasi_izin_skdp').attr("disabled", false);
+    $('.file_dokumen_skdp').attr("readonly", false);
+    $('.kbli_skdp').attr("readonly", false);
+    $('.file_dokumen_skdp').attr("disabled", false);
+    $('#on_save_skdp').attr("disabled", false);
+    $('#button_save_kbli_skdp').removeClass("disabled");
+    $('#button_edit_kbli_skdp').removeClass("disabled");
+}
+
+function BatalChangeGlobal_skdp() {
+    $('#apply_edit_skdp').modal('hide')
+    $('.nomor_surat_skdp').attr("readonly", true);
+    $('.sts_seumur_hidup_skdp').attr("disabled", true);
+    $('.tgl_berlaku_skdp').attr("readonly", true);
+    $('.kualifikasi_izin_skdp').attr("disabled", true);
+    $('.file_dokumen_skdp').attr("readonly", true);
+    $('.kbli_skdp').attr("readonly", true);
+    $('.file_dokumen_skdp').attr("disabled", true);
+    $('#on_save_skdp').attr("disabled", true);
+    $('#button_save_kbli_skdp').addClass("disabled");
+    $('#button_edit_kbli_skdp').addClass("disabled");
+}
+
+$('#modal_dekrip_skdp').on('hidden.bs.modal', function() {
+    get_row_vendor();
+})
+
+
+function DekripEnkrip_skdp(id_url_skdp, type) {
+    var secret_token = $('[name="secret_token"]').val()
+    var url_encryption_skdp = $('[name="url_encryption_skdp"]').val();
+    var modal_dekrip_skdp = $('#modal_dekrip_skdp');
+    if (type == 'dekrip') {
+        modal_dekrip_skdp.modal('show');
+        $('input').attr("readonly", false);
+        $('[name="id_url_skdp"]').val(id_url_skdp);
+    } else {
+        $.ajax({
+            method: "POST",
+            url: url_encryption_skdp + id_url_skdp,
+            dataType: "JSON",
+            data: {
+                secret_token: secret_token,
+                type: type
+            },
+            success: function(response) {
+                let timerInterval
+                Swal.fire({
+                    title: 'Sedang Proses Enkripsi!',
+                    html: 'Proses Enkripsi <b></b>',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            // b.textContent = Swal.getTimerRight()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                        Swal.fire('Dokumen Berhasil Di Enkripsi', '', 'success')
+                        get_row_vendor();
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+
+                    }
+                })
+            }
+        })
+    }
+
+}
+
+function GenerateDekrip_skdp() {
+    var url_dekrip_skdp = $('[name="url_dekrip_skdp"]').val();
+    var modal_dekrip_skdp = $('#modal_dekrip_skdp');
+    $.ajax({
+        method: "POST",
+        url: url_dekrip_skdp,
+        dataType: "JSON",
+        data: $('#form_dekrip_skdp').serialize(),
+        beforeSend: function() {
+            $('#button_dekrip_generate_skdp').css('display', 'none');
+            $('#button_dekrip_generate_manipulasi_skdp').css('display', 'block');
+        },
+        success: function(response) {
+            if (response['maaf']) {
+                $('#button_dekrip_generate_skdp').css('display', 'block');
+                $('#button_dekrip_generate_manipulasi_skdp').css('display', 'none');
+                Swal.fire(response['maaf'], '', 'warning')
+            } else {
+                let timerInterval
+                Swal.fire({
+                    title: 'Sedang Proses Deskripsi!',
+                    html: 'Proses Deksripsi <b></b>',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            // b.textContent = Swal.getTimerRight()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                        Swal.fire('Dokumen Berhasil Di Deskripsi!', '', 'success')
+                        get_row_vendor();
+                        $('#button_dekrip_generate_skdp').css('display', 'block');
+                        $('#button_dekrip_generate_manipulasi_skdp').css('display', 'none');
+                        modal_dekrip_skdp.modal('hide');
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+
+                    }
+                })
+            }
+        }
+    })
+}
+
+function DownloadFile_skdp(id_url_skdp) {
+    var url_download_skdp = $('[name="url_download_skdp"]').val()
+    location.href = url_download_skdp + id_url_skdp;
+}
+// end skdp
+
+
+// lainnya
+var form_lainnya = $('#form_lainnya')
+form_lainnya.on('submit', function(e) {
+    var url_post_lainnya = $('[name="url_post_lainnya"]').val();
+    var file_dokumen_lainnya = $('[name="file_dokumen_lainnya"]').val();
+    if (file_dokumen_lainnya == '') {
+        e.preventDefault();
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Dokumen Wajib Di Isi!',
+          })
+    } else {
+        e.preventDefault();
+        $.ajax({
+            url: url_post_lainnya,
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function() {
+                $('#on_save_lainnya').attr("disabled", true);
+            },
+            success: function(response) {
+                if (response['error']) {
+                    $(".nomor_surat_lainnya_error").css('display', 'block');
+                    $(".sts_seumur_hidup_lainnya_error").css('display', 'block');
+                    $(".file_dokumen_lainnya_error").css('display', 'block');
+                    $(".file_dokumen_lainnya_error").html(response['error']['file_dokumen_lainnya']);
+                    $(".nomor_surat_lainnya_error").html(response['error']['nomor_surat_lainnya']);
+                    $(".sts_seumur_hidup_lainnya_error").html(response['error']['sts_seumur_hidup_lainnya']);
+                    $('#on_save_lainnya').attr("disabled", false);
+                } else {
+                let timerInterval
+                Swal.fire({
+                    title: 'Sedang Proses Menyimpan Data!',
+                    html: 'Membuat Data <b></b>',
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            // b.textContent = Swal.getTimerRight()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                        Swal.fire('Data Berhasil Di Simpan!', '', 'success')
+                        get_row_vendor();
+                        $('#on_save_lainnya').attr("disabled", false);
+                        $(".nomor_surat_lainnya_error").css('display', 'none');
+                        $(".sts_seumur_hidup_lainnya_error").css('display', 'none');
+                        $(".file_dokumen_lainnya_error").css('display', 'none');
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+
+                    }
+                })
+                 }
+            }
+        })
+            }
+})
+
+function sts_berlaku_lainnya() {
+    var sts_seumur_hidup_lainnya = $('[name="sts_seumur_hidup_lainnya"]').val()
+    if (sts_seumur_hidup_lainnya == 1) {
+        $('.tgl_berlaku_lainnya').attr("readonly", false);
+    } else {
+        $('.tgl_berlaku_lainnya').attr("readonly", true);
+    }
+}
+
+function EditChangeGlobal_lainnya() {
+    $('#apply_edit_lainnya').modal('hide')
+    $('.nomor_surat_lainnya').attr("readonly", false);
+    $('.sts_seumur_hidup_lainnya').attr("disabled", false);
+    $('.tgl_berlaku_lainnya').attr("readonly", false);
+    $('.kualifikasi_izin_lainnya').attr("disabled", false);
+    $('.file_dokumen_lainnya').attr("readonly", false);
+    $('.kbli_lainnya').attr("readonly", false);
+    $('.file_dokumen_lainnya').attr("disabled", false);
+    $('#on_save_lainnya').attr("disabled", false);
+    $('#button_save_kbli_lainnya').removeClass("disabled");
+    $('#button_edit_kbli_lainnya').removeClass("disabled");
+}
+
+function BatalChangeGlobal_lainnya() {
+    $('#apply_edit_lainnya').modal('hide')
+    $('.nomor_surat_lainnya').attr("readonly", true);
+    $('.sts_seumur_hidup_lainnya').attr("disabled", true);
+    $('.tgl_berlaku_lainnya').attr("readonly", true);
+    $('.kualifikasi_izin_lainnya').attr("disabled", true);
+    $('.file_dokumen_lainnya').attr("readonly", true);
+    $('.kbli_lainnya').attr("readonly", true);
+    $('.file_dokumen_lainnya').attr("disabled", true);
+    $('#on_save_lainnya').attr("disabled", true);
+    $('#button_save_kbli_lainnya').addClass("disabled");
+    $('#button_edit_kbli_lainnya').addClass("disabled");
+}
+
+$('#modal_dekrip_lainnya').on('hidden.bs.modal', function() {
+    get_row_vendor();
+})
+
+
+function DekripEnkrip_lainnya(id_url_lainnya, type) {
+    var secret_token = $('[name="secret_token"]').val()
+    var url_encryption_lainnya = $('[name="url_encryption_lainnya"]').val();
+    var modal_dekrip_lainnya = $('#modal_dekrip_lainnya');
+    if (type == 'dekrip') {
+        modal_dekrip_lainnya.modal('show');
+        $('input').attr("readonly", false);
+        $('[name="id_url_lainnya"]').val(id_url_lainnya);
+    } else {
+        $.ajax({
+            method: "POST",
+            url: url_encryption_lainnya + id_url_lainnya,
+            dataType: "JSON",
+            data: {
+                secret_token: secret_token,
+                type: type
+            },
+            success: function(response) {
+                let timerInterval
+                Swal.fire({
+                    title: 'Sedang Proses Enkripsi!',
+                    html: 'Proses Enkripsi <b></b>',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            // b.textContent = Swal.getTimerRight()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                        Swal.fire('Dokumen Berhasil Di Enkripsi', '', 'success')
+                        get_row_vendor();
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+
+                    }
+                })
+            }
+        })
+    }
+
+}
+
+function GenerateDekrip_lainnya() {
+    var url_dekrip_lainnya = $('[name="url_dekrip_lainnya"]').val();
+    var modal_dekrip_lainnya = $('#modal_dekrip_lainnya');
+    $.ajax({
+        method: "POST",
+        url: url_dekrip_lainnya,
+        dataType: "JSON",
+        data: $('#form_dekrip_lainnya').serialize(),
+        beforeSend: function() {
+            $('#button_dekrip_generate_lainnya').css('display', 'none');
+            $('#button_dekrip_generate_manipulasi_lainnya').css('display', 'block');
+        },
+        success: function(response) {
+            if (response['maaf']) {
+                $('#button_dekrip_generate_lainnya').css('display', 'block');
+                $('#button_dekrip_generate_manipulasi_lainnya').css('display', 'none');
+                Swal.fire(response['maaf'], '', 'warning')
+            } else {
+                let timerInterval
+                Swal.fire({
+                    title: 'Sedang Proses Deskripsi!',
+                    html: 'Proses Deksripsi <b></b>',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            // b.textContent = Swal.getTimerRight()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                        Swal.fire('Dokumen Berhasil Di Deskripsi!', '', 'success')
+                        get_row_vendor();
+                        $('#button_dekrip_generate_lainnya').css('display', 'block');
+                        $('#button_dekrip_generate_manipulasi_lainnya').css('display', 'none');
+                        modal_dekrip_lainnya.modal('hide');
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+
+                    }
+                })
+            }
+        }
+    })
+}
+
+function DownloadFile_lainnya(id_url_lainnya) {
+    var url_download_lainnya = $('[name="url_download_lainnya"]').val()
+    location.href = url_download_lainnya + id_url_lainnya;
+}
+// end lainnya

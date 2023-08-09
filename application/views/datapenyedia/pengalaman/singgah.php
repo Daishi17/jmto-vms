@@ -55,7 +55,7 @@
                                         <th style="width:23%;"><small class="text-white">Nama Pekerjaan</small></th>
                                         <th style="width:9%;"><small class="text-white">Nilai (Rp.)</small></th>
                                         <th style="width:9%;"><small class="text-white">Jenis Tender</small></th>
-                                        <th style="width:10%;"><small class="text-white">Instansi</small></th>
+                                        <th style="width:10%;"><small class="text-white">Instansi Pemberi Kerja</small></th>
                                         <th style="width:10%;"><small class="text-white">Lokasi</small></th>
                                         <th style="width:8%;"><small class="text-white">
                                                 <div class="text-center">Status Validasi</div>
@@ -174,7 +174,7 @@
                                     </tr>
                                     <tr>
                                         <td class="col-sm-2 bg-light">
-                                            <label class="form-label col-form-label-sm"><b>Instansi Pemberi</b></label>
+                                            <label class="form-label col-form-label-sm"><b>Instansi Pemberi Kerja</b></label>
                                         </td>
                                         <td class="col-sm-3">
                                             <div class="col-sm-12">
@@ -208,7 +208,14 @@
                                             <input type="hidden" name="file_dokumen_manipulasi_pengalaman">
                                             <input type="file" class="file_valid_pengalaman" name="file_kontrak_pengalaman" id="file" accept=".pdf">
                                         </td>
+                                        <td class="col-sm-2 bg-light">
+                                            <label class="form-label col-form-label-sm"><b>Jangka Waktu Pekerjaan (Bulan)</b></label>
+                                        </td>
+                                        <td class="col-sm-3">
+                                            <input type="number" class="form-control" min="0" name="jangka_waktu">
+                                        </td>
                                     </tr>
+
                                     <tr>
                                         <td class="col-sm-12" colspan="4">
                                             <button type="button" class="btn btn-danger btn-sm shadow-lg" data-bs-dismiss="modal">
@@ -221,6 +228,7 @@
                                             </button>
                                         </td>
                                     </tr>
+
                                 </table>
                             </form>
                         </div>
@@ -246,17 +254,9 @@
                                 <h4 class="text-white">Import Data Pengalaman Perusahaan</h4>
                             </div>
                             <div class="card-body">
-                                <div class="alert alert-warning shadow-lg" role="alert">
-                                    <h5 class="alert-heading">
-                                        <i class="fa-solid fa-circle-warning px-1"></i>
-                                        Catatan!
-                                    </h5>
-                                    <hr>
-                                    <small>1. Pastikan Format Anda Isi Semua.</small><br>
-                                    <small>2. Jika Field Dalam Keadaan Kosong Maka Data Row Tersebut Tidak Sah / Tidak Akan Masuk Ke View Import.</small><br>
-                                </div>
                                 <div class="row">
                                     <div class="col-md-4">
+
                                     </div>
                                     <div class="col-md-4">
                                         <center>
@@ -323,7 +323,7 @@
                                                     </th>
                                                     <th>
                                                         <small class="text-white">
-                                                            <div class="text-center">Instansi</div>
+                                                            <div class="text-center">Instansi Pemberi Kerja</div>
                                                         </small>
                                                     </th>
                                                     <th>
@@ -462,7 +462,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-sm-2 bg-light">
-                                        <label class="form-label col-form-label-sm"><b>Instansi Pemberi</b></label>
+                                        <label class="form-label col-form-label-sm"><b>Instansi Pemberi Kerja</b></label>
                                     </td>
                                     <td class="col-sm-3">
                                         <div class="col-sm-12">
@@ -495,6 +495,18 @@
                                     <td class="col-sm-3">
                                         <input type="hidden" name="file_dokumen_manipulasi_pengalaman">
                                         <input type="file" class="file_valid_pengalaman" name="file_kontrak_pengalaman" id="file" accept=".pdf">
+                                    </td>
+                                    <td class="col-sm-2 bg-light">
+                                        <label class="form-label col-form-label-sm"><b>Jangka Waktu Pekerjaan (Bulan)</b></label>
+                                    </td>
+                                    <td class="col-sm-3">
+                                        <input type="number" class="form-control" min="0" name="jangka_waktu">
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="col-sm-3">
+                                        <label class="form-label col-form-label-sm"><b>File Dokumen</b></label>
                                     </td>
                                     <td class="col-sm-4">
                                         <div class="button_nama_file_kontrak_pengalaman">
