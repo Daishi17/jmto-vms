@@ -61,17 +61,4 @@
 <!-- end link post nib -->
 
 
-<!-- skdp -->
-<input type="hidden" name="url_dekrip_skdp" value="<?= base_url('datapenyedia/dekrip_skdp') ?>">
-<input type="hidden" name="url_encryption_skdp" value="<?= base_url('datapenyedia/encryption_skdp/') ?>">
-<input type="hidden" name="url_download_skdp" value="<?= base_url('datapenyedia/url_download_skdp/') ?>">
-<input type="hidden" value="<?= base_url('datapenyedia/add_skdp') ?>" name="url_post_skdp">
-<!-- end skdp -->
 
-
-<!-- lainnya -->
-<input type="hidden" name="url_dekrip_lainnya" value="<?= base_url('datapenyedia/dekrip_lainnya') ?>">
-<input type="hidden" name="url_encryption_lainnya" value="<?= base_url('datapenyedia/encryption_lainnya/') ?>">
-<input type="hidden" name="url_download_lainnya" value="<?= base_url('datapenyedia/url_download_lainnya/') ?>">
-<input type="hidden" value="<?= base_url('datapenyedia/add_lainnya') ?>" name="url_post_lainnya">
-<!-- end lainnya -->

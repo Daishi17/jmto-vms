@@ -42,28 +42,20 @@
                                 <div class="card-header">
                                     <div class="nav nav-tabs mb-3 bg-warning" id="nav-tab" role="tablist">
                                         <button class="nav-link active" id="nav-nib-tab" data-bs-toggle="tab" data-bs-target="#nav-nib" type="button" role="tab" aria-controls="nav-nib" aria-selected="false">
-                                            <i class="fa-regular fa-file-pdf"></i>
+                                            <i class="fa-regular fa-file-word"></i>
                                             <small><b>NIB/TDP</b></small>
                                         </button>
                                         <button class="nav-link" id="nav-siup-tab" data-bs-toggle="tab" data-bs-target="#nav-siup" type="button" role="tab" aria-controls="nav-siup" aria-selected="true">
-                                            <i class="fa-regular fa-file-pdf"></i>
+                                            <i class="fa-regular fa-file-powerpoint"></i>
                                             <small><b>SIUP</b></small>
                                         </button>
                                         <button class="nav-link" id="nav-sbu-tab" data-bs-toggle="tab" data-bs-target="#nav-sbu" type="button" role="tab" aria-controls="nav-sbu" aria-selected="false">
-                                            <i class="fa-regular fa-file-pdf"></i>
+                                            <i class="fa-regular fa-file-excel"></i>
                                             <small><b>SBU</b></small>
                                         </button>
                                         <button class="nav-link" id="nav-siujk-tab" data-bs-toggle="tab" data-bs-target="#nav-siujk" type="button" role="tab" aria-controls="nav-siujk" aria-selected="false">
                                             <i class="fa-regular fa-file-pdf"></i>
                                             <small><b>SIUJK</b></small>
-                                        </button>
-                                        <button class="nav-link" id="nav-skdp-tab" data-bs-toggle="tab" data-bs-target="#nav-skdp" type="button" role="tab" aria-controls="nav-skdp" aria-selected="false">
-                                            <i class="fa-regular fa-file-pdf"></i>
-                                            <small><b>SKDP</b></small>
-                                        </button>
-                                        <button class="nav-link" id="nav-lainnya-tab" data-bs-toggle="tab" data-bs-target="#nav-lainnya" type="button" role="tab" aria-controls="nav-lainnya" aria-selected="false">
-                                            <i class="fa-regular fa-file-pdf"></i>
-                                            <small><b>Izin Lainnya</b></small>
                                         </button>
                                     </div>
                                     <div class="tab-content p-3 border bg-light" id="nav-tabContent">
@@ -120,7 +112,7 @@
                                                                 </td>
                                                                 <td class="col-sm-3">
                                                                     <input type="hidden" name="file_dokumen_nib_manipulasi">
-                                                                    <input type="file" name="file_dokumen_nib" class="file_dokumen_nib file_valid_nib" accept=".pdf, .xlsx, .xls">
+                                                                    <input type="file" name="file_dokumen_nib" class="file_dokumen_nib file_valid_nib"  accept=".pdf">
                                                                     <small class="file_dokumen_nib_error text-danger"></small>
                                                                 </td>
                                                                 <td class="col-sm-2 bg-light">
@@ -229,7 +221,7 @@
                                                                 </td>
                                                                 <td class="col-sm-3">
                                                                     <input type="hidden" name="file_dokumen_siup_manipulasi">
-                                                                    <input type="file" name="file_dokumen_siup" class="file_dokumen_siup file_valid_siup" accept=".pdf, .xlsx, .xls">
+                                                                    <input type="file" name="file_dokumen_siup" class="file_dokumen_siup file_valid_siup" accept=".pdf">
                                                                     <small class="file_dokumen_siup_error text-danger"></small>
                                                                 </td>
                                                                 <td class="col-sm-2 bg-light">
@@ -337,8 +329,8 @@
                                                                     <label class="form-label col-form-label-sm"><b>Upload File</b></label>
                                                                 </td>
                                                                 <td class="col-sm-3">
-                                                                    <input type="hidden" name="file_dokumen_sbu_manipulasi">
-                                                                    <input type="file" name="file_dokumen_sbu" class="file_dokumen_sbu file_valid_sbu" accept=".pdf, .xlsx, .xls">
+                                                                <input type="hidden" name="file_dokumen_sbu_manipulasi">
+                                                                    <input type="file" name="file_dokumen_sbu" class="file_dokumen_sbu file_valid_sbu" accept=".pdf">
                                                                     <small class="file_dokumen_sbu_error text-danger"></small>
 
                                                                 </td>
@@ -355,7 +347,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <td class="col-sm-2 bg-light">
-                                                                    <label class="form-label col-form-label-sm"><b>Input SubKlasifikasi</b></label>
+                                                                    <label class="form-label col-form-label-sm"><b>Input KBLI</b></label>
                                                                 </td>
                                                                 <td class="col-sm-3">
                                                                     <button type="button" class="btn btn-danger btn-sm col-sm-8 shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-kbli-sbu">
@@ -447,7 +439,7 @@
                                                                 </td>
                                                                 <td class="col-sm-3">
                                                                     <input type="hidden" name="file_dokumen_siujk_manipulasi">
-                                                                    <input type="file" name="file_dokumen_siujk" class="file_dokumen_siujk file_valid_siujk" accept=".pdf, .xlsx, .xls">
+                                                                    <input type="file" name="file_dokumen_siujk" class="file_dokumen_siujk file_valid_siujk" accept=".pdf">
                                                                     <small class="file_dokumen_siujk_error text-danger"></small>
 
                                                                 </td>
@@ -495,195 +487,6 @@
                                                                             Simpan
                                                                         </button>
                                                                         <a href="javascript:;" id="on_cancel_siujk" onclick="BatalChangeGlobal_siujk()" class="btn btn-dark btn-sm shadow-lg"> <i class="fa-solid fa-angles-left px-1"> </i> Cancel</a>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="tab-pane fade show" id="nav-skdp" role="tabpanel" aria-labelledby="nav-skdp-tab">
-                                            <div class="card border-danger shadow-sm">
-                                                <div class="card-header border-danger d-flex justify-content-between align-items-center">
-                                                    <div class="card-title">
-                                                        <span class="text-dark">
-                                                            <i class="fa-regular fa-folder-open"></i>
-                                                            <small><strong>Form Dokumen - SKDP</strong></small>
-                                                        </span>
-                                                    </div>
-                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#apply_edit_skdp" class="btn btn-secondary btn-sm shadow-lg">
-                                                        <i class="fa-solid fa-pen-to-square px-1"></i>
-                                                        Edit Changes
-                                                    </button>
-                                                </div>
-                                                <div class="card-body">
-                                                    <form id="form_skdp" enctype="multipart/form-data">
-                                                        <table style="width: 100%;" class="table">
-                                                            <tr>
-                                                                <td class="col-sm-2 bg-light">
-                                                                    <label class="form-label col-form-label-sm"><b>Nomor Surat</b></label>
-                                                                </td>
-                                                                <td class="col-sm-3">
-                                                                    <div class="col-sm-10">
-                                                                        <div class="input-group mb-2">
-                                                                            <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
-                                                                            <input type="text" name="nomor_surat_skdp" class="form-control form-control-sm nomor_surat_skdp">
-                                                                        </div>
-                                                                    </div>
-                                                                    <small class="nomor_surat_skdp_error text-danger"></small>
-                                                                </td>
-                                                                <td class="col-sm-2 bg-light">
-                                                                    <label class="form-label col-sm-12 col-form-label-sm"><b>Berlaku Sampai</b></label>
-                                                                </td>
-                                                                <td class="col-sm-12">
-                                                                    <div class="col-sm-12">
-                                                                        <div class="input-group mb-2">
-                                                                            <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
-                                                                            <select name="sts_seumur_hidup_skdp" class="form-select text-sm sts_seumur_hidup_skdp" aria-label="Default select example" onchange="sts_berlaku_skdp()">
-                                                                                <option value="2">Seumur Hidup</option>
-                                                                                <option value="1">Tanggal</option>
-
-                                                                            </select>
-                                                                        </div>
-                                                                        <input type="date" id="tgl_berlaku_skdp" name="tgl_berlaku_skdp" class="form-control tgl_berlaku_skdp" readonly data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
-                                                                    </div>
-                                                                    <small class="sts_seumur_hidup_skdp_error text-danger"></small>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="col-sm-2 bg-light">
-                                                                    <label class="form-label col-form-label-sm"><b>Upload File</b></label>
-                                                                </td>
-                                                                <td class="col-sm-3">
-                                                                    <input type="hidden" name="file_dokumen_skdp_manipulasi">
-                                                                    <input type="file" name="file_dokumen_skdp" class="file_dokumen_skdp file_valid_skdp" accept=".pdf, .xlsx, .xls">
-                                                                    <small class="file_dokumen_skdp_error text-danger"></small>
-                                                                </td>
-                                                                <td class="col-sm-2 bg-light">
-                                                                    <div id="tampil_dokumen_skdp">
-
-                                                                    </div>
-                                                                </td>
-                                                                <td class="col-sm-5">
-                                                                    <div class="button_enkrip_skdp">
-
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-
-                                                                <td class="col-sm-2 bg-light">
-                                                                    <label class="form-label col-form-label-sm"><b>Status Validasi Dokumen</b></label>
-                                                                </td>
-                                                                <td class="col-sm-5">
-                                                                    <div id="sts_validasi_skdp_1" style="display: none;">
-                                                                        <span class="badge bg-success">Tervalidasi</span>
-                                                                    </div>
-                                                                    <div id="sts_validasi_skdp_2" style="display: none;">
-                                                                        <span class="badge bg-secondary">Belum Tervalidasi</span>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="col-sm-12 bg-dark" colspan="4"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="col-sm-12" colspan="4">
-                                                                    <div class="card-footer">
-                                                                        <button type="submit" id="on_save_skdp" class="btn btn-primary btn-sm shadow-lg">
-                                                                            <i class="fa-solid fa-floppy-disk px-1"></i>
-                                                                            Simpan
-                                                                        </button>
-                                                                        <a href="javascript:;" id="on_cancel_skdp" onclick="BatalChangeGlobal_siup()" class="btn btn-dark btn-sm shadow-lg"> <i class="fa-solid fa-angles-left px-1"> </i> Cancel</a>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="tab-pane fade show" id="nav-lainnya" role="tabpanel" aria-labelledby="nav-lainnya-tab">
-                                            <div class="card border-danger shadow-sm">
-                                                <div class="card-header border-danger d-flex justify-content-between align-items-center">
-                                                    <div class="card-title">
-                                                        <span class="text-dark">
-                                                            <i class="fa-regular fa-folder-open"></i>
-                                                            <small><strong>Form Dokumen - Izin Lainnya</strong></small>
-                                                        </span>
-                                                    </div>
-                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#apply_edit_lainnya" class="btn btn-secondary btn-sm shadow-lg">
-                                                        <i class="fa-solid fa-pen-to-square px-1"></i>
-                                                        Edit Changes
-                                                    </button>
-                                                </div>
-                                                <div class="card-body">
-                                                    <form id="form_lainnya" enctype="multipart/form-data">
-                                                        <table style="width: 100%;" class="table">
-                                                            <tr>
-                                                                <td class="col-sm-2 bg-light">
-                                                                    <label class="form-label col-form-label-sm"><b>Nomor Surat</b></label>
-                                                                </td>
-                                                                <td class="col-sm-3">
-                                                                    <div class="col-sm-10">
-                                                                        <div class="input-group mb-2">
-                                                                            <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
-                                                                            <input type="text" name="nomor_surat_lainnya" class="form-control form-control-sm nomor_surat_lainnya">
-                                                                        </div>
-                                                                    </div>
-                                                                    <small class="nomor_surat_lainnya_error text-danger"></small>
-                                                                </td>
-                                                                <td class="col-sm-2 bg-light">
-                                                                    <label class="form-label col-sm-12 col-form-label-sm"><b>Berlaku Sampai</b></label>
-                                                                </td>
-                                                                <td class="col-sm-5">
-                                                                    <div class="col-sm-5">
-                                                                        <div class="input-group mb-2">
-                                                                            <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
-                                                                            <select name="sts_seumur_hidup_lainnya" class="form-select text-sm sts_seumur_hidup_lainnya" aria-label="Default select example" onchange="sts_berlaku_lainnya()">
-                                                                                <option value="2">Seumur Hidup</option>
-                                                                                <option value="1">Tanggal</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <input type="date" id="tgl_berlaku_lainnya" name="tgl_berlaku_lainnya" class="form-control tgl_berlaku_lainnya" readonly data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
-                                                                    </div>
-                                                                    <small class="sts_seumur_hidup_lainnya_error text-danger"></small>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="col-sm-2 bg-light">
-                                                                    <label class="form-label col-form-label-sm"><b>Upload File</b></label>
-                                                                </td>
-                                                                <td class="col-sm-3">
-                                                                    <input type="hidden" name="file_dokumen_lainnya_manipulasi">
-                                                                    <input type="file" name="file_dokumen_lainnya" class="file_dokumen_lainnya file_valid_lainnya" accept=".pdf, .xlsx, .xls">
-                                                                    <small class="file_dokumen_lainnya_error text-danger"></small>
-                                                                </td>
-                                                                <td class="col-sm-2 bg-light">
-                                                                    <div id="tampil_dokumen_lainnya">
-
-                                                                    </div>
-                                                                </td>
-                                                                <td class="col-sm-5">
-                                                                    <div class="button_enkrip_lainnya">
-
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="col-sm-12 bg-dark" colspan="4"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="col-sm-12" colspan="4">
-                                                                    <div class="card-footer">
-                                                                        <button type="submit" id="on_save_lainnya" class="btn btn-primary btn-sm shadow-lg">
-                                                                            <i class="fa-solid fa-floppy-disk px-1"></i>
-                                                                            Simpan
-                                                                        </button>
-                                                                        <a href="javascript:;" id="on_cancel_lainnya" onclick="BatalChangeGlobal_lainnya()" class="btn btn-dark btn-sm shadow-lg"> <i class="fa-solid fa-angles-left px-1"> </i> Cancel</a>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -864,7 +667,7 @@
                         <input type="hidden" name="id_url_nib">
                         <input type="hidden" name="secret_token" value="<?= $row_vendor['token_scure_vendor'] ?>">
                         <center>
-                            <img src="<?= base_url('assets34543543/img/private.jpg') ?>" width="100%" alt="">
+                            <img src="<?= base_url('assets34543543/img//private.jpg') ?>" width="100%" alt="">
                             <p>Silakan Masukan Token Untuk Mendkrip File Anda </p>
                             <div class="token_generate_nib">
 
@@ -1134,7 +937,7 @@
                         <input type="hidden" name="id_url_siup">
                         <input type="hidden" name="secret_token" value="<?= $row_vendor['token_scure_vendor'] ?>">
                         <center>
-                            <img src="<?= base_url('assets34543543/img/private.jpg') ?>" width="100%" alt="">
+                            <img src="<?= base_url('assets34543543/img//private.jpg') ?>" width="100%" alt="">
                             <p>Silakan Masukan Token Untuk Mendkrip File Anda </p>
                             <div class="token_generate_siup">
 
@@ -1406,7 +1209,7 @@
                         <input type="hidden" name="id_url_sbu">
                         <input type="hidden" name="secret_token" value="<?= $row_vendor['token_scure_vendor'] ?>">
                         <center>
-                            <img src="<?= base_url('assets34543543/img/private.jpg') ?>" width="100%" alt="">
+                            <img src="<?= base_url('assets34543543/img//private.jpg') ?>" width="100%" alt="">
                             <p>Silakan Masukan Token Untuk Mendkrip File Anda </p>
                             <div class="token_generate_sbu">
 
@@ -1678,7 +1481,7 @@
                         <input type="hidden" name="id_url_siujk">
                         <input type="hidden" name="secret_token" value="<?= $row_vendor['token_scure_vendor'] ?>">
                         <center>
-                            <img src="<?= base_url('assets34543543/img/private.jpg') ?>" width="100%" alt="">
+                            <img src="<?= base_url('assets34543543/img//private.jpg') ?>" width="100%" alt="">
                             <p>Silakan Masukan Token Untuk Mendkrip File Anda </p>
                             <div class="token_generate_siujk">
 
@@ -1783,123 +1586,3 @@
         </div>
     </div>
 </div>
-
-<!-- modal skdp -->
-<div class="modal fade" id="apply_edit_skdp" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-warning">
-                <h5 class="modal-title">Anda Yakin Ingin Mengedit Data Anda ??</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <center>
-                    <img src="<?= base_url('assets34543543/img/tanya.jpg') ?>" width="200px" alt="">
-                </center>
-            </div>
-            <div class="modal-footer">
-                <a href="javascript:;" onclick="EditChangeGlobal_skdp()" class="btn btn-success"> <i class="fas fa fa-check"> </i> Yakin !!</a>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa fa-ban"> </i> Tidak !!</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="modal_dekrip_skdp" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-warning">
-                <h5 class="modal-title">DEKRIP FILE</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="form_dekrip_skdp" method="post">
-                    <input type="hidden" name="id_url_skdp">
-                    <input type="hidden" name="secret_token" value="<?= $row_vendor['token_scure_vendor'] ?>">
-                    <center>
-                        <img src="<?= base_url('assets34543543/img/private.jpg') ?>" width="100%" alt="">
-                        <p>Silakan Masukan Token Untuk Mendkrip File Anda </p>
-                        <div class="token_generate_skdp">
-
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-key"></i></span>
-                            <input type="text" name="token_dokumen_skdp" value="" class="form-control">
-                        </div>
-                    </center>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <a href="javascript:;" id="button_dekrip_generate_skdp" onclick="GenerateDekrip_skdp()" class="btn btn-success"> <i class="fas fa fa-check"> </i> Generate !!</a>
-                <button disabled style="display:none" id="button_dekrip_generate_manipulasi_skdp" class="btn btn-success"> <i class="fas fa fa-check"> </i> Generate !!</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa fa-ban"> </i> Batal !!</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end modal skdp -->
-
-<!-- modal lainnya -->
-<div class="modal fade" id="apply_edit_lainnya" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-warning">
-                <h5 class="modal-title">Anda Yakin Ingin Mengedit Data Anda ??</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <center>
-                    <img src="<?= base_url('assets34543543/img/tanya.jpg') ?>" width="200px" alt="">
-                </center>
-            </div>
-            <div class="modal-footer">
-                <a href="javascript:;" onclick="EditChangeGlobal_lainnya()" class="btn btn-success"> <i class="fas fa fa-check"> </i> Yakin !!</a>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa fa-ban"> </i> Tidak !!</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="modal_dekrip_lainnya" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-warning">
-                <h5 class="modal-title">DEKRIP FILE</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="form_dekrip_lainnya" method="post">
-                    <input type="hidden" name="id_url_lainnya">
-                    <input type="hidden" name="secret_token" value="<?= $row_vendor['token_scure_vendor'] ?>">
-                    <center>
-                        <img src="<?= base_url('assets34543543/img/private.jpg') ?>" width="100%" alt="">
-                        <p>Silakan Masukan Token Untuk Mendkrip File Anda </p>
-                        <div class="token_generate_lainnya">
-
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-key"></i></span>
-                            <input type="text" name="token_dokumen_lainnya" value="" class="form-control">
-                        </div>
-                    </center>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <a href="javascript:;" id="button_dekrip_generate_lainnya" onclick="GenerateDekrip_lainnya()" class="btn btn-success"> <i class="fas fa fa-check"> </i> Generate !!</a>
-                <button disabled style="display:none" id="button_dekrip_generate_manipulasi_lainnya" class="btn btn-success"> <i class="fas fa fa-check"> </i> Generate !!</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa fa-ban"> </i> Batal !!</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end modal lainnya -->

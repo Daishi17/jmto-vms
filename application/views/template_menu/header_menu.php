@@ -207,7 +207,7 @@
                         <li>
                             <a class="dropdown-item" href="<?= base_url() ?>datapenyedia/pajak">
                                 <i class="fa-solid fa-calculator px-2"></i>
-                                <small>Pajak & Keuangan</small>
+                                <small>Pajak</small>
                             </a>
                         </li>
                         <!-- <li>
