@@ -50,13 +50,13 @@
                                 <thead class="bg-danger">
                                     <tr>
                                         <th class="text-white">No</th>
-                                        <th style="width:8%;"><small class="text-white">No. Kontrak</small></th>
-                                        <th style="width:8%;"><small class="text-white">Tgl. Kontrak</small></th>
-                                        <th style="width:23%;"><small class="text-white">Nama Pekerjaan</small></th>
-                                        <th style="width:9%;"><small class="text-white">Nilai (Rp.)</small></th>
-                                        <th style="width:9%;"><small class="text-white">Jenis Tender</small></th>
-                                        <th style="width:10%;"><small class="text-white">Instansi Pemberi Kerja</small></th>
-                                        <th style="width:10%;"><small class="text-white">Lokasi</small></th>
+                                        <th style="width:8%;"><small class="text-white">Nama Pekerjaan</small></th>
+                                        <th style="width:8%;"><small class="text-white">Pemberi Kerja / Tugas</small></th>
+                                        <th style="width:23%;"><small class="text-white">Nomor Kontrak & Tanggal Mulai Awal Kontrak Tgl/Bln/Tahun</small></th>
+                                        <th style="width:9%;"><small class="text-white">Tanggal Akhir Kontrak Tgl/Bln/Tahun</small></th>
+                                        <th style="width:9%;"><small class="text-white">Nilai Kontrak</small></th>
+                                        <th style="width:10%;"><small class="text-white">Progres</small></th>
+                                        <th style="width:10%;"><small class="text-white">Jangka Waktu Pelaksanaan</small></th>
                                         <th style="width:8%;">
                                             <small class="text-white">
                                                 <div class="text-center">Status Validasi</div>

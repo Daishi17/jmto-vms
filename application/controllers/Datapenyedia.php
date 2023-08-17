@@ -3185,13 +3185,15 @@ class Datapenyedia extends CI_Controller
 		foreach ($resultss as $rs) {
 			$row = array();
 			$row[] = ++$no;
-			$row[] = $rs->no_kontrak;
-			$row[] = $rs->tanggal_kontrak;
 			$row[] = $rs->nama_pekerjaan;
-			$row[] = $rs->nilai_kontrak;
-			$row[] = $rs->id_jenis_usaha;
 			$row[] = $rs->instansi_pemberi;
-			$row[] = $rs->lokasi_pekerjaan;
+			$row[] = $rs->no_kontrak . ' & ' . date('d-m-Y', strtotime($rs->tanggal_kontrak));
+			$row[] = date('d-m-Y', strtotime($rs->tanggal_akhir_kontrak));
+
+			$row[] = $rs->nilai_kontrak;
+			$row[] = $rs->progres . '%';
+
+			$row[] = $rs->jangka_waktu . ' Bulan';
 			if ($rs->sts_validasi == 1) {
 				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
 			} else if ($rs->sts_validasi == 0) {
