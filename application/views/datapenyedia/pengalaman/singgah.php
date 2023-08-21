@@ -175,7 +175,7 @@
                                             <div class="col-sm-10">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text">Rp.</span>
-                                                    <input name="nilai_kontrak" type="text" id="tanpa-rupiah" class="form-control">
+                                                    <input name="nilai_kontrak" type="text" class="form-control" onkeyup="nilai_badan_sharing()">
                                                 </div>
                                                 <!-- nilai_kontrak -->
                                                 <small class="nilai_kontrak_error text-danger"></small>
@@ -212,13 +212,13 @@
                                     </tr>
                                     <tr>
                                         <td class="col-sm-2 bg-light">
-                                            <label class="form-label col-form-label-sm"><b>Progres Pekerjaan</b></label>
+                                            <label class="form-label col-form-label-sm"><b>Persentase Sharing atau KSO (Kerja Sama Operasi)</b></label>
                                         </td>
                                         <td class="col-sm-3">
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-2">
-                                                    <span class="input-group-text"><i class="fa-solid fa-business-time"></i></span>
-                                                    <input name="progres" type="text" class="form-control">
+                                                    <span class="input-group-text">%</span>
+                                                    <input name="progres" type="number" max="100" min="0" class="form-control" onkeyup="nilai_badan_sharing()">
                                                 </div>
                                                 <!-- instansi_pemberi -->
                                                 <small class="progres_error text-danger"></small>
@@ -231,7 +231,7 @@
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text">Rp.</span>
-                                                    <input name="nilai_sharing" type="text" class="form-control">
+                                                    <input name="nilai_sharing" type="text" class="form-control" readonly>
                                                 </div>
                                                 <!-- lokasi_pekerjaan -->
                                                 <small class="lokasi_pekerjaan_error text-danger"></small>

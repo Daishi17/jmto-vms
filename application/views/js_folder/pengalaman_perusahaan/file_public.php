@@ -613,4 +613,11 @@
         $('[name="jangka_waktu"]').val(parseInt(total_final));
 
     }
+
+    function nilai_badan_sharing() {
+        var nilai_kontrak = $('[name="nilai_kontrak"]').val()
+        var progres = $('[name="progres"]').val()
+        var total = nilai_kontrak * progres / 100
+        $('[name="nilai_sharing"]').val(total)
+    }
 </script>
