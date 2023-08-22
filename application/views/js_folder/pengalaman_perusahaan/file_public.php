@@ -112,6 +112,7 @@
                     $('[name="nama_pekerjaan"]').val(response['row_excel_pengalaman_manajerial'].nama_pekerjaan);
                     $('[name="id_jenis_usaha"]').val(response['row_excel_pengalaman_manajerial'].id_jenis_usaha);
                     $('[name="tanggal_kontrak"]').val(response['row_excel_pengalaman_manajerial'].tanggal_kontrak);
+
                     $('[name="instansi_pemberi"]').val(response['row_excel_pengalaman_manajerial'].instansi_pemberi);
                     $('[name="nilai_kontrak"]').val(response['row_excel_pengalaman_manajerial'].nilai_kontrak);
                     $('[name="lokasi_pekerjaan"]').val(response['row_excel_pengalaman_manajerial'].lokasi_pekerjaan);
@@ -554,6 +555,9 @@
                     $('[name="nama_pekerjaan"]').val(response['row_pengalaman_manajerial'].nama_pekerjaan);
                     $('[name="id_jenis_usaha"]').val(response['row_pengalaman_manajerial'].id_jenis_usaha);
                     $('[name="tanggal_kontrak"]').val(response['row_pengalaman_manajerial'].tanggal_kontrak);
+                    $('[name="tanggal_kontrak_akhir"]').val(response['row_pengalaman_manajerial'].tanggal_akhir_kontrak);
+                    $('[name="progres"]').val(response['row_pengalaman_manajerial'].progres);
+                    $('[name="nilai_sharing"]').val(response['row_pengalaman_manajerial'].nilai_sharing);
                     $('[name="instansi_pemberi"]').val(response['row_pengalaman_manajerial'].instansi_pemberi);
                     $('[name="nilai_kontrak"]').val(response['row_pengalaman_manajerial'].nilai_kontrak);
                     $('[name="lokasi_pekerjaan"]').val(response['row_pengalaman_manajerial'].lokasi_pekerjaan);
@@ -588,5 +592,32 @@
                 })
             }
         });
+    }
+
+    function dateDiffInDays(a, b) {
+        const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+        // Discard the time and time-zone information.
+        const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+        const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+        return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+    }
+
+    function jumlah_waktu() {
+        var tgl_awal_kontrak = $('[name="tanggal_kontrak"]').val()
+        var tgl_selesai_kontrak = $('[name="tanggal_kontrak_akhir"]').val()
+        var a = new Date(tgl_awal_kontrak);
+        var b = new Date(tgl_selesai_kontrak);
+        var difference = dateDiffInDays(a, b);
+        var total_final = difference / 30;
+        $('[name="jangka_waktu"]').val(parseInt(total_final));
+
+    }
+
+    function nilai_badan_sharing() {
+        var nilai_kontrak = $('[name="nilai_kontrak"]').val()
+        var progres = $('[name="progres"]').val()
+        var total = nilai_kontrak * progres / 100
+        $('[name="nilai_sharing"]').val(total)
     }
 </script>

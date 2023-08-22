@@ -625,6 +625,20 @@
                                                         <table style="width: 100%;" class="table">
                                                             <tr>
                                                                 <td class="col-sm-2 bg-light">
+                                                                    <label class="form-label col-form-label-sm"><b>Nama Surat</b></label>
+                                                                </td>
+                                                                <td class="col-sm-3">
+                                                                    <div class="col-sm-10">
+                                                                        <div class="input-group mb-2">
+                                                                            <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
+                                                                            <input type="text" name="nama_surat" class="form-control form-control-sm nama_surat">
+                                                                        </div>
+                                                                    </div>
+                                                                    <small class="nama_surat_error text-danger"></small>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="col-sm-2 bg-light">
                                                                     <label class="form-label col-form-label-sm"><b>Nomor Surat</b></label>
                                                                 </td>
                                                                 <td class="col-sm-3">

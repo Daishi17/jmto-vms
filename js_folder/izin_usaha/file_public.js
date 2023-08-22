@@ -28,7 +28,6 @@ get_row_vendor();
     });
 
 
-
 function get_row_vendor() {
     var secret_token = $('[name="secret_token"]').val()
     var id_url_vendor = $('[name="id_url_vendor"]').val()
@@ -41,6 +40,7 @@ function get_row_vendor() {
             secret_token: secret_token,
         },
         success: function(response) {
+
             if (response['row_nib']) {
                 if (response['row_nib']['sts_validasi'] == 1) {
                     $('#sts_validasi_nib_1').css('display','block');
@@ -189,13 +189,14 @@ function get_row_vendor() {
 
             if (response['row_lainnya']) {
                 if (response['row_lainnya']['sts_validasi'] == 1) {
-                $('#sts_validasi_lainnya_1').css('display','block');
-                $('#sts_validasi_lainnya_2').css('display','none');
+                    $('#sts_validasi_lainnya_1').css('display','block');
+                    $('#sts_validasi_lainnya_2').css('display','none');
                 } else {
-                $('#sts_validasi_lainnya_1').css('display','none');
-                $('#sts_validasi_lainnya_2').css('display','block');
+                    $('#sts_validasi_lainnya_1').css('display','none');
+                    $('#sts_validasi_lainnya_2').css('display','block');
                 }
                 $('.nomor_surat_lainnya').attr("readonly", true);
+                $('.nama_surat').attr("readonly", true);
                 $('.sts_seumur_hidup_lainnya').attr("disabled", true);
                 $('.tgl_berlaku_lainnya').attr("readonly", true);
                 $('.kualifikasi_izin_lainnya').attr("disabled", true);
@@ -204,8 +205,9 @@ function get_row_vendor() {
                 $('#on_save_lainnya').attr("disabled", true);
                 $('#button_save_kbli_lainnya').addClass("disabled");
                 $('#button_edit_kbli_lainnya').addClass("disabled");
-                } else {
+            } else {
                 $('.nomor_surat_lainnya').attr("readonly", false);
+                $('.nama_surat').attr("readonly", false);
                 $('.sts_seumur_hidup_lainnya').attr("disabled", false);
                 $('.tgl_berlaku_lainnya').attr("readonly", false);
                 $('.kualifikasi_izin_lainnya').attr("disabled", false);
@@ -214,7 +216,7 @@ function get_row_vendor() {
                 $('#on_save_lainnya').attr("disabled", false);
                 $('#button_save_kbli_lainnya').removeClass("disabled");
                 $('#button_edit_kbli_lainnya').removeClass("disabled");
-                }
+            }
 
             if (response == 'maaf') {
                 alert('Maaf Anda Kurang Beruntung');
@@ -321,13 +323,13 @@ function get_row_vendor() {
                       var html2 = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_skdp(\'' + id_url_skdp + '\')" class="btn btn-sm btn-warning btn-block">' + response['row_skdp']['file_dokumen'] + '</a>';
                       $('#tampil_dokumen_skdp').html(html2);
                   }
-
                   // lainnya
                   var id_url_lainnya = response['row_lainnya']['id_url'];
                   $('[name="file_dokumen_lainnya_manipulasi"]').val(response['row_lainnya']['file_dokumen']);
                   $('[name="jenis_izin_lainnya"]').val(response['row_lainnya']['jenis_izin']);
                   $('[name="no_urut_lainnya"]').val(response['row_lainnya']['no_urut']);
                   $('[name="nomor_surat_lainnya"]').val(response['row_lainnya']['nomor_surat']);
+                  $('[name="nama_surat"]').val(response['row_lainnya']['nama_surat']);
                   $('[name="kualifikasi_izin_lainnya"]').val(response['row_lainnya']['kualifikasi_izin']);
                   $('[name="tgl_berlaku_lainnya"]').val(response['row_lainnya']['tgl_berlaku']);
                   $('.file_dokumen_lainnya').text(response['row_lainnya']['file_dokumen'])
@@ -2286,6 +2288,7 @@ function sts_berlaku_lainnya() {
 function EditChangeGlobal_lainnya() {
     $('#apply_edit_lainnya').modal('hide')
     $('.nomor_surat_lainnya').attr("readonly", false);
+    $('.nama_surat').attr("readonly", false);
     $('.sts_seumur_hidup_lainnya').attr("disabled", false);
     $('.tgl_berlaku_lainnya').attr("readonly", false);
     $('.kualifikasi_izin_lainnya').attr("disabled", false);
