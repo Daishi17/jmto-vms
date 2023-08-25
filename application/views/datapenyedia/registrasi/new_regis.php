@@ -24,6 +24,13 @@
                             <span class="text-danger">Link form pengisian identitas perusahan/individu akan dikirimkan melalui Email setelah anda melakukan registrasi dengan mengisi Email & NPWP pada form dibawah ini.</span>
                         </small><br>
                     </div>
+                    <?php if ($this->session->flashdata('npwp_api_tidak')) {
+                        echo '  <div class="alert alert-danger alert-dismissible">
+               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+               <h5><i class="icon fas fa-exclamation-triangle"></i> Cehecking NPWP!</h5>';
+                        echo  $this->session->flashdata('npwp_api_tidak');
+                        echo ' </div>';
+                    } ?>
                     <?php if ($this->session->flashdata('email_salah')) {
                         echo '  <div class="alert alert-warning alert-dismissible">
                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -38,6 +45,32 @@
                         echo  $this->session->flashdata('success');
                         echo ' </div>';
                     } ?>
+                    <?php if ($this->session->flashdata('npwp_api')) { ?>
+                        <center>
+                            <div class="card">
+                                <div class="card-header bg-success text-white">
+                                    DATA NPWP ANDA TERDAFTAR DI DJP
+                                </div>
+                                <div class="card-body">
+                                    <table class="table">
+                                        <tr>
+                                            <th>NO NPWP</th>
+                                            <th>NAMA NPWP</th>
+                                            <th>ALAMAT</th>
+                                            <th>STATUS</th>
+                                        </tr>
+                                        <tr>
+                                            <td><?= $this->session->flashdata('no_npwp') ?></td>
+                                            <td><?= $this->session->flashdata('nama_npwp') ?></td>
+                                            <td><?= $this->session->flashdata('address') ?></td>
+                                            <td><?= $this->session->flashdata('npwp_api') ?></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </center>
+                        <br>
+                    <?php } ?>
                     <div class="card border-dark">
                         <div class="card-header bg-dark border-dark">
                             <div class="card-title">
@@ -57,7 +90,7 @@
                                     </div>
                                     <div class="input-group mb-2">
                                         <span class="input-group-text"><i class="fa-solid fa-address-card"></i></span>
-                                        <input required type="text" name="npwp" class="form-control" placeholder="Masukan NPWP" data-masked="" data-inputmask="'mask': '99.999.999.9-999.99'">
+                                        <input required type="text" name="npwp" class="form-control" placeholder="Masukan NPWP">
                                     </div>
                                     <div class="col-auto">
                                         <button type="submit" class="btn btn-primary">

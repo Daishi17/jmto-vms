@@ -12,7 +12,10 @@
 	},
 	"require": {
 		"php": ">=5.3.7",
-		"phpoffice/phpspreadsheet": "^1.29"
+		"phpoffice/phpspreadsheet": "^1.29",
+		"guzzlehttp/guzzle": "^7.0",
+        "nesbot/carbon": "^2.54",
+        "vlucas/phpdotenv": "^5.4"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"

@@ -14,8 +14,8 @@ class Auth extends CI_Controller
 
 	public function index()
 	{
-		$this->form_validation->set_rules('userName', 'Username', 'required|trim');
-		$this->form_validation->set_rules('password', 'Password', 'required|trim');
+		$this->form_validation->set_rules('userName', 'Username', 'required|xss_clean|trim');
+		$this->form_validation->set_rules('password', 'Password', 'required|xss_clean|trim');
 		$recaptcha = $this->input->post('g-recaptcha-response');
 		if (!empty($recaptcha)) {
 			$response = $this->recaptcha->verifyResponse($recaptcha);
