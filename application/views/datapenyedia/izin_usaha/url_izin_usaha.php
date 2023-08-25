@@ -67,6 +67,13 @@
 <input type="hidden" name="url_download_skdp" value="<?= base_url('datapenyedia/url_download_skdp/') ?>">
 <input type="hidden" value="<?= base_url('datapenyedia/add_skdp') ?>" name="url_post_skdp">
 <!-- end skdp -->
+<!-- kbli skdp-->
+<input type="hidden" name="url_tambah_kbli_skdp" value="<?= base_url('datapenyedia/tambah_kbli_skdp') ?>">
+<input type="hidden" name="url_table_kbli_skdp" value="<?= base_url('datapenyedia/get_data_kbli_skdp') ?>">
+<input type="hidden" name="url_byid_kbli_skdp" value="<?= base_url('datapenyedia/get_byid_kbli_skdp/') ?>">
+<input type="hidden" name="url_edit_kbli_skdp" value="<?= base_url('datapenyedia/edit_kbli_skdp') ?>">
+<input type="hidden" name="url_hapus_kbli_skdp" value="<?= base_url('datapenyedia/hapus_kbli_skdp') ?>">
+<!-- end link post nib -->
 
 
 <!-- lainnya -->

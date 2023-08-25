@@ -5179,6 +5179,165 @@ class Datapenyedia extends CI_Controller
 		}
 	}
 
+	// get_data_kbli_skdp
+	public function get_data_kbli_skdp()
+	{
+		$id_vendor = $this->session->userdata('id_vendor');
+		$resultss = $this->M_datapenyedia->gettable_kbli_skdp($id_vendor);
+		$data = [];
+		$no = $_POST['start'];
+		foreach ($resultss as $rs) {
+			$row = array();
+			$row[] = ++$no;
+			$row[] = $rs->kode_kbli . ' || ' . $rs->nama_kbli;
+			$row[] = $rs->nama_kualifikasi;
+			if ($rs->sts_kbli_skdp == 1) {
+				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
+			} else {
+				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
+			}
+			$row[] = '<a  href="javascript:;" class="btn btn-warning btn-sm button_edit" onClick="byid_kbli_skdp(' . "'" . $rs->id_url_kbli_skdp . "','edit'" . ')"><i 		class="fa fa-edit"></i> Edit</a>
+							<a  href="javascript:;" class="btn btn-danger btn-sm button_hapus" onClick="byid_kbli_skdp(' . "'" . $rs->id_url_kbli_skdp . "','hapus'" . ')"><i class="fas fa fa-trash"></i> Hapus</a>';
+			$data[] = $row;
+		}
+		$output = array(
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->M_datapenyedia->count_all_data_kbli_skdp($id_vendor),
+			"recordsFiltered" => $this->M_datapenyedia->count_filtered_data_kbli_skdp($id_vendor),
+			"data" => $data
+		);
+		$this->output->set_content_type('application/json')->set_output(json_encode($output));
+	}
+
+
+	function get_byid_kbli_skdp($id_url_kbli_skdp)
+	{
+		$response = [
+			'row_kbli_skdp' => $this->M_datapenyedia->get_row_kbli_skdp($id_url_kbli_skdp),
+		];
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+	// tambah kbli_skdp 
+	function tambah_kbli_skdp()
+	{
+		$id_vendor = $this->session->userdata('id_vendor');
+		$id = $this->uuid->v4();
+		$id = str_replace('-', '', $id);
+		$token = $this->token->data_token();
+		// post
+		$id_kbli = $this->input->post('id_kbli_skdp');
+		$id_kualifikasi_izin = $this->input->post('id_kualifikasi_izin_kbli_skdp');
+		$ket_kbli_skdp = $this->input->post('ket_kbli_skdp');
+		$row_vendor = $this->M_datapenyedia->get_row_kbli_skdp_by_vendor($id_vendor);
+
+		if ($row_vendor) {
+			if ($id_kbli == $row_vendor['id_kbli']) {
+				$is_uniq_id_kbli =  '|is_unique[tbl_vendor_kbli_skdp.id_kbli]';
+			} else {
+				$is_uniq_id_kbli =  '';
+			}
+		} else {
+			$is_uniq_id_kbli =  '';
+		}
+		$this->form_validation->set_rules('id_kbli_skdp', 'Kode Kbli', 'required|trim|xss_clean' . $is_uniq_id_kbli, ['required' => 'Kode Kbli Wajib Diisi!', 'is_unique' => 'Kode Kbli Sudah Ada Di Table Anda']);
+		$this->form_validation->set_rules('id_kualifikasi_izin_kbli_skdp', 'Kualifikasi Kbli', 'required|trim', ['required' => 'Kualifikasi Kbli Wajib Diisi!']);
+		if ($this->form_validation->run() == false) {
+			$response = [
+				'error' => [
+					'id_kbli_skdp' => form_error('id_kbli_skdp'),
+					'id_kualifikasi_izin_kbli_skdp' => form_error('id_kualifikasi_izin_kbli_skdp'),
+					'ket_kbli_skdp' => form_error('ket_kbli_skdp'),
+				],
+			];
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
+		} else {
+			$data = [
+				'id_url_kbli_skdp' => $id,
+				'token_kbli_skdp' => $token,
+				'id_vendor' => $id_vendor,
+				'id_kbli' => $id_kbli,
+				'id_kualifikasi_izin' => $id_kualifikasi_izin,
+				'ket_kbli_skdp' => $ket_kbli_skdp,
+				'sts_kbli_skdp' => 0,
+			];
+			$this->M_datapenyedia->tambah_kbli_skdp($data);
+			$response = [
+				'message' => 'success',
+			];
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
+		}
+	}
+	function edit_kbli_skdp()
+	{
+
+		$id_url_kbli_skdp = $this->input->post('id_url_kbli_skdp');
+		$token_kbli_skdp = $this->input->post('token_kbli_skdp');
+		$id_kbli = $this->input->post('id_kbli_skdp');
+		$id_kualifikasi_izin = $this->input->post('id_kualifikasi_izin_kbli_skdp');
+		$ket_kbli_skdp = $this->input->post('ket_kbli_skdp');
+		$cek_token = $this->M_datapenyedia->get_row_kbli_skdp($id_url_kbli_skdp);
+		$id_vendor = $this->session->userdata('id_vendor');
+		$row_vendor = $this->M_datapenyedia->get_row_kbli_skdp_by_vendor($id_vendor);
+		if ($id_kbli == $row_vendor['id_kbli']) {
+			$is_uniq_id_kbli =  '|is_unique[tbl_vendor_kbli_skdp.id_kbli]';
+		} else {
+			$is_uniq_id_kbli =  '';
+		}
+		$this->form_validation->set_rules('id_kbli_skdp', 'Kode Kbli', 'required|trim|xss_clean' . $is_uniq_id_kbli, ['required' => 'Kode Kbli Wajib Diisi!', 'is_unique' => 'Kode Kbli Sudah Ada Di Table Anda']);
+		$this->form_validation->set_rules('id_kualifikasi_izin_kbli_skdp', 'Kualifikasi Kbli', 'required|trim', ['required' => 'Kualifikasi Kbli Wajib Diisi!']);
+		if ($this->form_validation->run() == false) {
+			$response = [
+				'error' => [
+					'id_kbli_skdp' => form_error('id_kbli_skdp'),
+					'id_kualifikasi_izin_kbli_skdp' => form_error('id_kualifikasi_izin_kbli_skdp'),
+					'ket_kbli_skdp' => form_error('ket_kbli_skdp'),
+				],
+			];
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
+		} else {
+			if ($token_kbli_skdp == $cek_token['token_kbli_skdp']) {
+				$where = [
+					'id_url_kbli_skdp' => $id_url_kbli_skdp
+				];
+				$data = [
+					'id_kbli' => $id_kbli,
+					'id_kualifikasi_izin' => $id_kualifikasi_izin,
+					'ket_kbli_skdp' => $ket_kbli_skdp,
+					'sts_kbli_skdp' => 2,
+				];
+				$this->M_datapenyedia->edit_kbli_skdp($data, $where);
+				$response = [
+					'message' => 'success',
+				];
+			} else {
+				$response = [
+					'maaf' => 'Token Tidak Valid !!!',
+				];
+			}
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
+		}
+	}
+	function hapus_kbli_skdp()
+	{
+		$id_url_kbli_skdp = $this->input->post('id_url_kbli_skdp');
+		$token_kbli_skdp = $this->input->post('token_kbli_skdp');
+		$cek_token = $this->M_datapenyedia->get_row_kbli_skdp($id_url_kbli_skdp);
+		if ($token_kbli_skdp == $cek_token['token_kbli_skdp']) {
+			$where = [
+				'id_url_kbli_skdp' => $id_url_kbli_skdp
+			];
+			$this->M_datapenyedia->hapus_kbli_skdp($where);
+			$response = [
+				'message' => 'success',
+			];
+		} else {
+			$response = [
+				'maaf' => 'Token Tidak Valid !!!',
+			];
+		}
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
 	public function encryption_skdp($id_url)
 	{
 		$type = $this->input->post('type');
@@ -5466,4 +5625,11 @@ class Datapenyedia extends CI_Controller
 		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/Izin_Lainnya-' . $date . '/' . $get_row_enkrip['file_dokumen'], NULL);
 	}
 	// end crud lainnya
+
+	public function cek_kondisi_undangan()
+	{
+		$data['cek_terundang'] =  $this->M_datapenyedia->cek_terundang();
+		// var_dump($data['cek_terundang']);die;
+		$this->load->view('datapenyedia/cek_terundang', $data);
+	}
 }

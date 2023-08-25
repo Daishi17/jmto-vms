@@ -27,6 +27,12 @@ get_row_vendor();
         $('[name="file_dokumen_siujk_manipulasi"]').val(geekss);
     });
 
+        // skdp
+        $('.file_valid_skdp').change(function(e) {
+            var geekss = e.target.files[0].name;
+            $('[name="file_dokumen_skdp_manipulasi"]').val(geekss);
+        });
+
 
 function get_row_vendor() {
     var secret_token = $('[name="secret_token"]').val()
@@ -1997,8 +2003,8 @@ function edit_kbli_siujk() {
 var form_skdp = $('#form_skdp')
 form_skdp.on('submit', function(e) {
     var url_post_skdp = $('[name="url_post_skdp"]').val();
-    var file_dokumen_skdp = $('[name="file_dokumen_skdp"]').val();
-    if (file_dokumen_skdp == '') {
+    var file_dokumen_skdp_manipulasi = $('[name="file_dokumen_skdp_manipulasi"]').val();
+    if (file_dokumen_skdp_manipulasi == '') {
         e.preventDefault();
         Swal.fire({
             icon: 'error',
@@ -2101,6 +2107,203 @@ function BatalChangeGlobal_skdp() {
 $('#modal_dekrip_skdp').on('hidden.bs.modal', function() {
     get_row_vendor();
 })
+
+
+// GET TABLE KBLI skdp
+var table_kbli_skdp = $('#table_kbli_skdp')
+$(document).ready(function() {
+    var url_table_kbli_skdp = $('[name="url_table_kbli_skdp"]').val();
+    table_kbli_skdp.DataTable({
+        "responsive": false,
+        "ordering": true,
+        "processing": true,
+        "serverSide": true,
+        "dom": 'Bfrtip',
+        "buttons": ["excel", "pdf", "print", "colvis"],
+        "order": [],
+        "ajax": {
+            "url": url_table_kbli_skdp,
+            "type": "POST",
+        },
+        "columnDefs": [{
+            "target": [-1],
+            "orderable": false
+        }],
+        "oLanguage": {
+            "sSearch": "Pencarian : ",
+            "sEmptyTable": "Data Tidak Tersedia",
+            "sLoadingRecords": "Silahkan Tunggu - loading...",
+            "sLengthMenu": "Menampilkan &nbsp;  _MENU_  &nbsp;   Data",
+            "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+            "sProcessing": "Memuat Data...."
+        }
+    }).buttons().container().appendTo('#table_kbli_skdp .col-md-6:eq(0)');
+});
+
+function reloadTable_kbli_skdp() {
+    table_kbli_skdp.DataTable().ajax.reload();
+}
+
+function simpan_kbli_skdp() {
+    var form_simpan_kbli_skdp = $('#form_simpan_kbli_skdp');
+    var url_tambah_kbli_skdp = $('[name="url_tambah_kbli_skdp"]').val();
+    $.ajax({
+        method: "POST",
+        url: url_tambah_kbli_skdp,
+        data: form_simpan_kbli_skdp.serialize(),
+        dataType: "JSON",
+        beforeSend: function() {
+            $('#button_save_kbli_skdp').attr("disabled", true);
+        },
+        success: function(response) {
+            if (response['message'] == 'success') {
+                reloadTable_kbli_skdp()
+                Swal.fire('Good job!', 'Data Beharhasil Ditambah!', 'success');
+                form_simpan_kbli_skdp[0].reset();
+                $(".id_kbli_skdp_error").css('display', 'none');
+                $(".id_kualifikasi_izin_kbli_skdp_error").css('display', 'none');
+                $(".ket_kbli_skdp_error").css('display', 'none');
+                $('#button_save_kbli_skdp').attr("disabled", false);
+            } else {
+                if (response['error']['id_kbli_skdp'] == '<p>Kode Kbli Sudah Ada Di Table Anda</p>') {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'KODE KBLI SUDAH ADA',
+                    })
+                    $(".id_kualifikasi_izin_kbli_skdp_error").css('display', 'block');
+                    $(".ket_kbli_skdp_error").css('display', 'block');
+                    $(".id_kualifikasi_izin_kbli_skdp_error").html(response['error']['id_kualifikasi_izin_kbli_skdp']);
+                    $(".ket_kbli_skdp_error").html(response['error']['ket_kbli_skdp']);
+                    $('#button_save_kbli_skdp').attr("disabled", false);
+                } else {
+                    $(".id_kbli_skdp_error").css('display', 'block');
+                    $(".id_kualifikasi_izin_kbli_skdp_error").css('display', 'block');
+                    $(".ket_kbli_skdp_error_error").css('display', 'block');
+                    $(".id_kbli_skdp_error").html(response['error']['id_kbli_skdp']);
+                    $(".id_kualifikasi_izin_kbli_skdp_error").html(response['error']['id_kualifikasi_izin_kbli_skdp']);
+                    $(".ket_kbli_skdp_error").html(response['error']['ket_kbli_skdp']);
+                    $('#button_save_kbli_skdp').attr("disabled", false);
+                }
+            }
+        }
+    })
+}
+
+
+function byid_kbli_skdp(id_url_kbli_skdp, type) {
+    var modal_edit_kbli_skdp = $('#modal_edit_kbli_skdp');
+    var url_byid_kbli_skdp = $('[name="url_byid_kbli_skdp"]').val();
+    if (type == 'edit') {
+        saveData = 'edit';
+    }
+
+    if (type == 'hapus') {
+        saveData = 'hapus';
+    }
+
+    $.ajax({
+        type: "GET",
+        url: url_byid_kbli_skdp + id_url_kbli_skdp,
+        dataType: "JSON",
+        success: function(response) {
+            if (type == 'edit') {
+                modal_edit_kbli_skdp.modal('show');
+                $('[name="id_url_kbli_skdp"]').val(response['row_kbli_skdp'].id_url_kbli_skdp);
+                $('[name="token_kbli_skdp"]').val(response['row_kbli_skdp'].token_kbli_skdp);
+                $('[name="id_kbli_skdp"]').val(response['row_kbli_skdp'].id_kbli);
+                $('[name="id_kualifikasi_izin_kbli_skdp"]').val(response['row_kbli_skdp'].id_kualifikasi_izin);
+                $('[name="ket_kbli_skdp"]').val(response['row_kbli_skdp'].ket_kbli_skdp);
+                $('#pilihan_kbli_skdp').html(response['row_kbli_skdp'].kode_kbli + ' || ' + response['row_kbli_skdp'].nama_kbli);
+                $('#pilihan_kualifikasi_kbli_skdp').html(response['row_kbli_skdp'].nama_kualifikasi);
+            } else {
+                Question_kbli_skdp(id_url_kbli_skdp, response['row_kbli_skdp'].token_kbli_skdp);
+            }
+        }
+    })
+}
+
+function Question_kbli_skdp(id_url_kbli_skdp, token_kbli_skdp) {
+    var form_simpan_kbli_skdp = $('#form_simpan_kbli_skdp');
+    var url_hapus_kbli_skdp = $('[name="url_hapus_kbli_skdp"]').val();
+    Swal.fire({
+        title: "Data Di Hapus",
+        text: 'Kbli Ini Mau Di hapus?',
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                type: "POST",
+                url: url_hapus_kbli_skdp,
+                data: {
+                    id_url_kbli_skdp: id_url_kbli_skdp,
+                    token_kbli_skdp: token_kbli_skdp
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    if (response['message'] == 'success') {
+                        Swal.fire('Good job!', 'Data Beharhasil Dihapus!', 'success');
+                        form_simpan_kbli_skdp[0].reset();
+                        reloadTable_kbli_skdp()
+                    } else {
+                        Swal.fire('Maaf', response['maaf'], 'warning');
+                    }
+                }
+            })
+        }
+    });
+}
+
+function edit_kbli_skdp() {
+    var form_simpan_kbli_skdp = $('#form_simpan_kbli_skdp');
+    var form_edit_kbli_skdp = $('#form_edit_kbli_skdp');
+    var modal_edit_kbli_skdp = $('#modal_edit_kbli_skdp');
+    var url_edit_kbli_skdp = $('[name="url_edit_kbli_skdp"]').val();
+    $.ajax({
+        method: "POST",
+        url: url_edit_kbli_skdp,
+        data: form_edit_kbli_skdp.serialize(),
+        dataType: "JSON",
+        beforeSend: function() {
+            $('#button_edit_kbli_skdp').attr("disabled", true);
+        },
+        success: function(response) {
+            if (response['message'] == 'success') {
+                reloadTable_kbli_skdp()
+                Swal.fire('Good job!', 'Data Beharhasil Ditambah!', 'success');
+                form_edit_kbli_skdp[0].reset();
+                form_simpan_kbli_skdp[0].reset();
+                $(".id_kbli_skdp_error").css('display', 'none');
+                $(".id_kualifikasi_izin_kbli_skdp_error").css('display', 'none');
+                $(".ket_kbli_skdp_error").css('display', 'none');
+                $('#button_edit_kbli_skdp').attr("disabled", false);
+            } else {
+                if (response['error']['id_kbli_skdp'] == '<p>Kode Kbli Sudah Ada Di Table Anda</p>') {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'KODE KBLI SUDAH ADA',
+                    })
+                    $(".id_kualifikasi_izin_kbli_skdp_error").css('display', 'block');
+                    $(".ket_kbli_skdp_error").css('display', 'block');
+                    $(".id_kualifikasi_izin_kbli_skdp_error").html(response['error']['id_kualifikasi_izin_kbli_skdp']);
+                    $(".ket_kbli_skdp_error").html(response['error']['ket_kbli_skdp']);
+                    $('#button_edit_kbli_skdp').attr("disabled", false);
+                } else {
+                    $(".id_kbli_skdp_error").css('display', 'block');
+                    $(".id_kualifikasi_izin_kbli_skdp_error").css('display', 'block');
+                    $(".ket_kbli_skdp_error_error").css('display', 'block');
+                    $(".id_kbli_skdp_error").html(response['error']['id_kbli_skdp']);
+                    $(".id_kualifikasi_izin_kbli_skdp_error").html(response['error']['id_kualifikasi_izin_kbli_skdp']);
+                    $(".ket_kbli_skdp_error").html(response['error']['ket_kbli_skdp']);
+                    $('#button_edit_kbli_skdp').attr("disabled", false);
+                }
+            }
+        }
+    })
+}
 
 
 function DekripEnkrip_skdp(id_url_skdp, type) {
@@ -2212,8 +2415,8 @@ function DownloadFile_skdp(id_url_skdp) {
 var form_lainnya = $('#form_lainnya')
 form_lainnya.on('submit', function(e) {
     var url_post_lainnya = $('[name="url_post_lainnya"]').val();
-    var file_dokumen_lainnya = $('[name="file_dokumen_lainnya"]').val();
-    if (file_dokumen_lainnya == '') {
+    var file_dokumen_lainnya_manipulasi = $('[name="file_dokumen_lainnya_manipulasi"]').val();
+    if (file_dokumen_lainnya_manipulasi == '') {
         e.preventDefault();
         Swal.fire({
             icon: 'error',

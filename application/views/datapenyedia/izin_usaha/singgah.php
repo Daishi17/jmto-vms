@@ -573,7 +573,15 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-
+                                                                <td class="col-sm-2 bg-light">
+                                                                    <label class="form-label col-form-label-sm"><b>Input KBLI</b></label>
+                                                                </td>
+                                                                <td class="col-sm-3">
+                                                                    <button type="button" class="btn btn-danger btn-sm col-sm-8 shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-kbli-skdp">
+                                                                        <i class="fa-solid fa-clone px-1"></i>
+                                                                        Input Data KBLI
+                                                                    </button>
+                                                                </td>
                                                                 <td class="col-sm-2 bg-light">
                                                                     <label class="form-label col-form-label-sm"><b>Status Validasi Dokumen</b></label>
                                                                 </td>
@@ -1799,6 +1807,132 @@
 </div>
 
 <!-- modal skdp -->
+<div class="modal" tabindex="-1" id="modal-xl-kbli-skdp">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a class="navbar-brand">
+                    <img src="<?php echo base_url(); ?>/assets/brand/jm1.png" alt="" width="25" height="25" class="d-inline-block align-text-top">
+                    <b><span class="text-primary">Jasamarga Tollroad Operator</span></b>
+                </a>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card border-primary shadow-lg">
+                    <div class="card-header bg-primary d-flex bd-highlight">
+                        <div class="flex-grow-1 bd-highlight">
+                            <span class="text-white">
+                                <i class="fa-solid fa-align-justify px-1"></i>
+                                <small><strong>Form Input - Skdp</strong></small>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form id="form_simpan_kbli_skdp" method="post">
+                            <table style="width: 100%;" class="table">
+                                <tr>
+                                    <td class="col-sm-2 bg-light">
+                                        <label class="form-label col-form-label-sm"><b>Kode KBLI</b></label>
+                                    </td>
+                                    <td class="col-sm-5">
+                                        <div class="col-sm-12">
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text"></span>
+                                                <select class="form-select form-select-sm single-select-field" data-placeholder="Cari Kode Kbli..." name="id_kbli_skdp">
+                                                    <option value=""></option>
+                                                    <?php foreach ($data_kbli as $key => $value) { ?>
+                                                        <option value="<?= $value['id_kbli'] ?>"><?= $value['kode_kbli'] ?> || <?= $value['nama_kbli'] ?></option>
+                                                    <?php  } ?>
+                                                </select>
+                                            </div>
+                                            <small class="id_kbli_skdp_error text-danger"></small>
+                                        </div>
+                                    </td>
+                                    <td class="col-sm-2 bg-light">
+                                        <label class="form-label col-form-label-sm"><b>Kualifikasi KBLI</b></label>
+                                    </td>
+                                    <td class="col-sm-3">
+                                        <div class="col-sm-12">
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
+                                                <select class="form-select form-select-sm single-select-field" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_skdp">
+                                                    <option value=""></option>
+                                                    <?php foreach ($kualifikasi as $key => $value) { ?>
+                                                        <option value="<?= $value['id_kualifikasi_izin'] ?>"><?= $value['nama_kualifikasi'] ?></option>
+                                                    <?php  } ?>
+                                                </select>
+                                            </div>
+                                            <small class="id_kualifikasi_izin_kbli_skdp_error text-danger"></small>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-sm-2 bg-light">
+                                        <label class="form-label col-form-label-sm"><b>Keterangan KBLI</b></label>
+                                    </td>
+                                    <td class="col-sm-10" colspan="3">
+                                        <div class="col-sm-12">
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text"><i class="fa-solid fa-building-flag"></i></span>
+                                                <textarea name="ket_kbli_skdp" class="form-control form-control-sm" rows="2"></textarea>
+                                            </div>
+                                        </div>
+                                        <small class="ket_kbli_skdp_error text-danger"></small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-sm-12 bg-light" colspan="4">
+                                        <a href="javascript:;" id="button_save_kbli_skdp" onclick="simpan_kbli_skdp()" class="btn btn-primary btn-sm shadow-lg">
+                                            <i class="fa-solid fa-floppy-disk px-1"></i>
+                                            Add Changes
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                        <hr>
+                        <div class="card border-primary shadow-lg">
+                            <div class="card-header bg-primary d-flex bd-highlight">
+                                <div class="flex-grow-1 bd-highlight">
+                                    <span class="text-white">
+                                        <i class="fa-solid fa-table-list px-1"></i>
+                                        <small><strong>Tabel Data KBLI - SKDP Yang Terinput</strong></small>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <table id="table_kbli_skdp" style="width: 100%;" class="table table-bordered table-striped">
+                                    <thead class="bg-primary">
+                                        <tr>
+                                            <th><small class="text-white">No</small></th>
+                                            <th style="width:50%;"><small class="text-white">Kode & Jenis KBLI</small></th>
+                                            <th style="width:10%;"><small class="text-white">Kualifikasi</small></th>
+                                            <th style="width:15%;"><small class="text-white">
+                                                    <div class="text-center">Status Validasi</div>
+                                                </small></th>
+                                            <th style="width:20%;"><small class="text-white">
+                                                    <div class="text-center">More Options</div>
+                                                </small></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-start">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                    <i class="fa-solid fa-rectangle-xmark px-1"></i>
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="apply_edit_skdp" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
