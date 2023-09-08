@@ -178,7 +178,11 @@ class Datapenyedia extends CI_Controller
 		// post
 		$nomor_surat = $this->input->post('nomor_surat_nib');
 		$sts_seumur_hidup = $this->input->post('sts_seumur_hidup_nib');
-		$tgl_berlaku = $this->input->post('tgl_berlaku_nib');
+		if ($sts_seumur_hidup == 2) {
+			$tgl_berlaku = NULL;
+		} else {
+			$tgl_berlaku = $this->input->post('tgl_berlaku_nib');
+		}
 
 		$this->form_validation->set_rules('nomor_surat_nib', 'Nomor Surat', 'required|trim', ['required' => 'Nomor Surat Wajib Diisi!']);
 		$this->form_validation->set_rules('sts_seumur_hidup_nib', 'Berlaku Sampai', 'required|trim', ['required' => 'Berlaku Sampai Wajib Diisi!']);
@@ -208,11 +212,11 @@ class Datapenyedia extends CI_Controller
 			];
 			$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			$date = date('Y');
-			if (!is_dir('file_vms/' . $nama_usaha . '/NIB-' . $date)) {
-				mkdir('file_vms/' . $nama_usaha . '/NIB-' . $date, 0777, TRUE);
+			if (!is_dir('file_vms/' . $nama_usaha . '/NIB')) {
+				mkdir('file_vms/' . $nama_usaha . '/NIB', 0777, TRUE);
 			}
 
-			$config['upload_path'] = './file_vms/' . $nama_usaha . '/NIB-' . $date;
+			$config['upload_path'] = './file_vms/' . $nama_usaha . '/NIB';
 			$config['allowed_types'] = 'pdf';
 			$config['max_size'] = 0;
 			$config['remove_spaces'] = TRUE;
@@ -224,45 +228,71 @@ class Datapenyedia extends CI_Controller
 				$chiper = "AES-128-ECB";
 				$secret = $token;
 				$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret);
-				$upload = [
-					'id_url' => $id,
-					'id_vendor' => $id_vendor,
-					'no_urut' => '322',
-					'nomor_surat' => $nomor_surat,
-					'sts_seumur_hidup' => $sts_seumur_hidup,
-					'password_dokumen' => $password_dokumen,
-					'file_dokumen' => $enckrips_string,
-					'token_dokumen' => $secret,
-					'tgl_berlaku' => $tgl_berlaku,
-					'sts_token_dokumen' => 1,
-					'sts_validasi' => 0,
-				];
-				$where = [
-					'id_vendor' => $id_vendor
-				];
+
 				if (!$row_nib) {
+					$upload = [
+						'id_url' => $id,
+						'id_vendor' => $id_vendor,
+						'no_urut' => '322',
+						'nomor_surat' => $nomor_surat,
+						'sts_seumur_hidup' => $sts_seumur_hidup,
+						'password_dokumen' => $password_dokumen,
+						'file_dokumen' => $enckrips_string,
+						'token_dokumen' => $secret,
+						'tgl_berlaku' => $tgl_berlaku,
+						'sts_token_dokumen' => 1,
+						'sts_validasi' => 0,
+					];
+					$where = [
+						'id_vendor' => $id_vendor
+					];
 					$this->M_datapenyedia->tambah_nib($upload);
 				} else {
+					$upload = [
+						'id_url' => $id,
+						'id_vendor' => $id_vendor,
+						'no_urut' => '322',
+						'nomor_surat' => $nomor_surat,
+						'sts_seumur_hidup' => $sts_seumur_hidup,
+						'password_dokumen' => $password_dokumen,
+						'file_dokumen' => $enckrips_string,
+						'token_dokumen' => $secret,
+						'tgl_berlaku' => $tgl_berlaku,
+						'sts_token_dokumen' => 1,
+						'sts_validasi' => 3,
+					];
+					$where = [
+						'id_vendor' => $id_vendor
+					];
 					$this->M_datapenyedia->update_nib($upload, $where);
 				}
-
 				$response = [
 					'row_nib' => $this->M_datapenyedia->get_row_nib($id_vendor),
 				];
 				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 			} else {
-				$upload = [
-					'id_url' => $id,
-					'id_vendor' => $id_vendor,
-					'no_urut' => '322',
-					'nomor_surat' => $nomor_surat,
-					'sts_seumur_hidup' => $sts_seumur_hidup,
-					'tgl_berlaku' => $tgl_berlaku,
-					'sts_validasi' => 0,
-				];
+
 				if (!$row_nib) {
+					$upload = [
+						'id_url' => $id,
+						'id_vendor' => $id_vendor,
+						'no_urut' => '322',
+						'nomor_surat' => $nomor_surat,
+						'sts_seumur_hidup' => $sts_seumur_hidup,
+						'tgl_berlaku' => $tgl_berlaku,
+						'sts_validasi' => 0,
+					];
 					$this->M_datapenyedia->tambah_nib($upload);
 				} else {
+					$upload = [
+						'id_url' => $id,
+						'id_vendor' => $id_vendor,
+						'no_urut' => '322',
+						'nomor_surat' => $nomor_surat,
+						'sts_seumur_hidup' => $sts_seumur_hidup,
+						'tgl_berlaku' => $tgl_berlaku,
+						'sts_validasi' => 3,
+					];
 					$where = [
 						'id_vendor' => $id_vendor
 					];
@@ -361,7 +391,7 @@ class Datapenyedia extends CI_Controller
 		$date = date('Y');
 		// $nama_file = $get_row_enkrip['nomor_surat'];
 		// $file_dokumen =  $get_row_enkrip['file_dokumen'];
-		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/NIB-' . $date . '/' . $get_row_enkrip['file_dokumen'], NULL);
+		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/NIB' . '/' . $get_row_enkrip['file_dokumen'], NULL);
 	}
 
 	// get_data_kbli_nib
@@ -545,7 +575,11 @@ class Datapenyedia extends CI_Controller
 		// post
 		$nomor_surat = $this->input->post('nomor_surat_siup');
 		$sts_seumur_hidup = $this->input->post('sts_seumur_hidup_siup');
-		$tgl_berlaku = $this->input->post('tgl_berlaku_siup');
+		if ($sts_seumur_hidup == 2) {
+			$tgl_berlaku = NULL;
+		} else {
+			$tgl_berlaku = $this->input->post('tgl_berlaku_siup');
+		}
 		$password_dokumen = '1234';
 		$this->form_validation->set_rules('nomor_surat_siup', 'Nomor Surat', 'required|trim', ['required' => 'Nomor Surat Wajib Diisi!']);
 		$this->form_validation->set_rules('sts_seumur_hidup_siup', 'Berlaku Sampai', 'required|trim', ['required' => 'Berlaku Sampai Wajib Diisi!']);
@@ -574,11 +608,11 @@ class Datapenyedia extends CI_Controller
 			];
 			$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			$date = date('Y');
-			if (!is_dir('file_vms/' . $nama_usaha . '/SIUP-' . $date)) {
-				mkdir('file_vms/' . $nama_usaha . '/SIUP-' . $date, 0777, TRUE);
+			if (!is_dir('file_vms/' . $nama_usaha . '/SIUP')) {
+				mkdir('file_vms/' . $nama_usaha . '/SIUP', 0777, TRUE);
 			}
 
-			$config['upload_path'] = './file_vms/' . $nama_usaha . '/SIUP-' . $date;
+			$config['upload_path'] = './file_vms/' . $nama_usaha . '/SIUP';
 			$config['allowed_types'] = 'pdf';
 			$config['max_size'] = 0;
 			$config['remove_spaces'] = TRUE;
@@ -592,25 +626,42 @@ class Datapenyedia extends CI_Controller
 				$chiper = "AES-128-ECB";
 				$secret = $token;
 				$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret);
-				$upload = [
-					'id_url' => $id,
-					'id_vendor' => $id_vendor,
-					'no_urut' => '322',
-					'nomor_surat' => $nomor_surat,
-					'sts_seumur_hidup' => $sts_seumur_hidup,
-					'password_dokumen' => $password_dokumen,
-					'file_dokumen' => $enckrips_string,
-					'token_dokumen' => $secret,
-					'tgl_berlaku' => $tgl_berlaku,
-					'sts_token_dokumen' => 1,
-					'sts_validasi' => 0,
-				];
-				$where = [
-					'id_vendor' => $id_vendor
-				];
+
 				if (!$row_siup) {
+					$upload = [
+						'id_url' => $id,
+						'id_vendor' => $id_vendor,
+						'no_urut' => '322',
+						'nomor_surat' => $nomor_surat,
+						'sts_seumur_hidup' => $sts_seumur_hidup,
+						'password_dokumen' => $password_dokumen,
+						'file_dokumen' => $enckrips_string,
+						'token_dokumen' => $secret,
+						'tgl_berlaku' => $tgl_berlaku,
+						'sts_token_dokumen' => 1,
+						'sts_validasi' => 0,
+					];
+					$where = [
+						'id_vendor' => $id_vendor
+					];
 					$this->M_datapenyedia->tambah_siup($upload);
 				} else {
+					$upload = [
+						'id_url' => $id,
+						'id_vendor' => $id_vendor,
+						'no_urut' => '322',
+						'nomor_surat' => $nomor_surat,
+						'sts_seumur_hidup' => $sts_seumur_hidup,
+						'password_dokumen' => $password_dokumen,
+						'file_dokumen' => $enckrips_string,
+						'token_dokumen' => $secret,
+						'tgl_berlaku' => $tgl_berlaku,
+						'sts_token_dokumen' => 1,
+						'sts_validasi' => 3,
+					];
+					$where = [
+						'id_vendor' => $id_vendor
+					];
 					$this->M_datapenyedia->update_siup($upload, $where);
 				}
 
@@ -619,18 +670,28 @@ class Datapenyedia extends CI_Controller
 				];
 				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 			} else {
-				$upload = [
-					'id_url' => $id,
-					'id_vendor' => $id_vendor,
-					'no_urut' => '322',
-					'nomor_surat' => $nomor_surat,
-					'sts_seumur_hidup' => $sts_seumur_hidup,
-					'tgl_berlaku' => $tgl_berlaku,
-					'sts_validasi' => 0,
-				];
+
 				if (!$row_siup) {
+					$upload = [
+						'id_url' => $id,
+						'id_vendor' => $id_vendor,
+						'no_urut' => '322',
+						'nomor_surat' => $nomor_surat,
+						'sts_seumur_hidup' => $sts_seumur_hidup,
+						'tgl_berlaku' => $tgl_berlaku,
+						'sts_validasi' => 0,
+					];
 					$this->M_datapenyedia->tambah_siup($upload);
 				} else {
+					$upload = [
+						'id_url' => $id,
+						'id_vendor' => $id_vendor,
+						'no_urut' => '322',
+						'nomor_surat' => $nomor_surat,
+						'sts_seumur_hidup' => $sts_seumur_hidup,
+						'tgl_berlaku' => $tgl_berlaku,
+						'sts_validasi' => 3,
+					];
 					$where = [
 						'id_vendor' => $id_vendor
 					];
@@ -729,7 +790,7 @@ class Datapenyedia extends CI_Controller
 		$date = date('Y');
 		// $nama_file = $get_row_enkrip['nomor_surat'];
 		// $file_dokumen =  $get_row_enkrip['file_dokumen'];
-		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/SIUP-' . $date . '/' . $get_row_enkrip['file_dokumen'], NULL);
+		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/SIUP' . '/' . $get_row_enkrip['file_dokumen'], NULL);
 	}
 
 	// get_data_kbli_siup
@@ -910,7 +971,11 @@ class Datapenyedia extends CI_Controller
 		$nomor_surat = $this->input->post('nomor_surat_siujk');
 		$kualifikasi_izin = $this->input->post('kualifikasi_izin_siujk');
 		$sts_seumur_hidup = $this->input->post('sts_seumur_hidup_siujk');
-		$tgl_berlaku = $this->input->post('tgl_berlaku_siujk');
+		if ($sts_seumur_hidup == 2) {
+			$tgl_berlaku = NULL;
+		} else {
+			$tgl_berlaku = $this->input->post('tgl_berlaku_siujk');
+		}
 		$password_dokumen = '1234';
 		$this->form_validation->set_rules('nomor_surat_siujk', 'Nomor Surat', 'required|trim', ['required' => 'Nomor Surat Wajib Diisi!']);
 		$this->form_validation->set_rules('sts_seumur_hidup_siujk', 'Berlaku Sampai', 'required|trim', ['required' => 'Berlaku Sampai Wajib Diisi!']);
@@ -932,11 +997,11 @@ class Datapenyedia extends CI_Controller
 			];
 			$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			$date = date('Y');
-			if (!is_dir('file_vms/' . $nama_usaha . '/siujk-' . $date)) {
-				mkdir('file_vms/' . $nama_usaha . '/siujk-' . $date, 0777, TRUE);
+			if (!is_dir('file_vms/' . $nama_usaha . '/SIUJK')) {
+				mkdir('file_vms/' . $nama_usaha . '/SIUJK', 0777, TRUE);
 			}
 
-			$config['upload_path'] = './file_vms/' . $nama_usaha . '/siujk-' . $date;
+			$config['upload_path'] = './file_vms/' . $nama_usaha . '/SIUJK';
 			$config['allowed_types'] = 'pdf';
 			$config['max_size'] = 0;
 			$config['remove_spaces'] = TRUE;
@@ -948,26 +1013,44 @@ class Datapenyedia extends CI_Controller
 				$chiper = "AES-128-ECB";
 				$secret = $token;
 				$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret);
-				$upload = [
-					'id_url' => $id,
-					'id_vendor' => $id_vendor,
-					'no_urut' => '322',
-					'nomor_surat' => $nomor_surat,
-					'kualifikasi_izin' => $kualifikasi_izin,
-					'sts_seumur_hidup' => $sts_seumur_hidup,
-					'password_dokumen' => $password_dokumen,
-					'file_dokumen' => $enckrips_string,
-					'token_dokumen' => $secret,
-					'tgl_berlaku' => $tgl_berlaku,
-					'sts_token_dokumen' => 1,
-					'sts_validasi' => 0
-				];
-				$where = [
-					'id_vendor' => $id_vendor
-				];
+
 				if (!$row_siujk) {
+					$upload = [
+						'id_url' => $id,
+						'id_vendor' => $id_vendor,
+						'no_urut' => '322',
+						'nomor_surat' => $nomor_surat,
+						'kualifikasi_izin' => $kualifikasi_izin,
+						'sts_seumur_hidup' => $sts_seumur_hidup,
+						'password_dokumen' => $password_dokumen,
+						'file_dokumen' => $enckrips_string,
+						'token_dokumen' => $secret,
+						'tgl_berlaku' => $tgl_berlaku,
+						'sts_token_dokumen' => 1,
+						'sts_validasi' => 0
+					];
+					$where = [
+						'id_vendor' => $id_vendor
+					];
 					$this->M_datapenyedia->tambah_siujk($upload);
 				} else {
+					$upload = [
+						'id_url' => $id,
+						'id_vendor' => $id_vendor,
+						'no_urut' => '322',
+						'nomor_surat' => $nomor_surat,
+						'kualifikasi_izin' => $kualifikasi_izin,
+						'sts_seumur_hidup' => $sts_seumur_hidup,
+						'password_dokumen' => $password_dokumen,
+						'file_dokumen' => $enckrips_string,
+						'token_dokumen' => $secret,
+						'tgl_berlaku' => $tgl_berlaku,
+						'sts_token_dokumen' => 1,
+						'sts_validasi' => 3
+					];
+					$where = [
+						'id_vendor' => $id_vendor
+					];
 					$this->M_datapenyedia->update_siujk($upload, $where);
 				}
 
@@ -976,19 +1059,30 @@ class Datapenyedia extends CI_Controller
 				];
 				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 			} else {
-				$upload = [
-					'id_url' => $id,
-					'id_vendor' => $id_vendor,
-					'no_urut' => '322',
-					'nomor_surat' => $nomor_surat,
-					'kualifikasi_izin' => $kualifikasi_izin,
-					'sts_seumur_hidup' => $sts_seumur_hidup,
-					'tgl_berlaku' => $tgl_berlaku,
-					'sts_validasi' => 2
-				];
+
 				if (!$row_siujk) {
+					$upload = [
+						'id_url' => $id,
+						'id_vendor' => $id_vendor,
+						'no_urut' => '322',
+						'nomor_surat' => $nomor_surat,
+						'kualifikasi_izin' => $kualifikasi_izin,
+						'sts_seumur_hidup' => $sts_seumur_hidup,
+						'tgl_berlaku' => $tgl_berlaku,
+						'sts_validasi' => 0
+					];
 					$this->M_datapenyedia->tambah_siujk($upload);
 				} else {
+					$upload = [
+						'id_url' => $id,
+						'id_vendor' => $id_vendor,
+						'no_urut' => '322',
+						'nomor_surat' => $nomor_surat,
+						'kualifikasi_izin' => $kualifikasi_izin,
+						'sts_seumur_hidup' => $sts_seumur_hidup,
+						'tgl_berlaku' => $tgl_berlaku,
+						'sts_validasi' => 3
+					];
 					$where = [
 						'id_vendor' => $id_vendor
 					];
@@ -1087,7 +1181,7 @@ class Datapenyedia extends CI_Controller
 		$date = date('Y');
 		// $nama_file = $get_row_enkrip['nomor_surat'];
 		// $file_dokumen =  $get_row_enkrip['file_dokumen'];
-		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/siujk-' . $date . '/' . $get_row_enkrip['file_dokumen'], NULL);
+		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/siujk' . '/' . $get_row_enkrip['file_dokumen'], NULL);
 	}
 
 	// get_data_kbli_siujk
@@ -1267,7 +1361,11 @@ class Datapenyedia extends CI_Controller
 		$nomor_surat = $this->input->post('nomor_surat_sbu');
 		$kualifikasi_izin = $this->input->post('kualifikasi_izin_sbu');
 		$sts_seumur_hidup = $this->input->post('sts_seumur_hidup_sbu');
-		$tgl_berlaku = $this->input->post('tgl_berlaku_sbu');
+		if ($sts_seumur_hidup == 2) {
+			$tgl_berlaku = NULL;
+		} else {
+			$tgl_berlaku = $this->input->post('tgl_berlaku_sbu');
+		}
 		$password_dokumen = '1234';
 		$this->form_validation->set_rules('nomor_surat_sbu', 'Nomor Surat', 'required|trim', ['required' => 'Nomor Surat Wajib Diisi!']);
 		$this->form_validation->set_rules('sts_seumur_hidup_sbu', 'Berlaku Sampai', 'required|trim', ['required' => 'Berlaku Sampai Wajib Diisi!']);
@@ -1289,11 +1387,11 @@ class Datapenyedia extends CI_Controller
 			];
 			$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			$date = date('Y');
-			if (!is_dir('file_vms/' . $nama_usaha . '/SBU-' . $date)) {
-				mkdir('file_vms/' . $nama_usaha . '/SBU-' . $date, 0777, TRUE);
+			if (!is_dir('file_vms/' . $nama_usaha . '/SBU')) {
+				mkdir('file_vms/' . $nama_usaha . '/SBU', 0777, TRUE);
 			}
 
-			$config['upload_path'] = './file_vms/' . $nama_usaha . '/SBU-' . $date;
+			$config['upload_path'] = './file_vms/' . $nama_usaha . '/SBU';
 			$config['allowed_types'] = 'pdf';
 			$config['max_size'] = 0;
 			$config['remove_spaces'] = TRUE;
@@ -1305,26 +1403,44 @@ class Datapenyedia extends CI_Controller
 				$chiper = "AES-128-ECB";
 				$secret = $token;
 				$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret);
-				$upload = [
-					'id_url' => $id,
-					'id_vendor' => $id_vendor,
-					'no_urut' => '322',
-					'nomor_surat' => $nomor_surat,
-					'kualifikasi_izin' => $kualifikasi_izin,
-					'sts_seumur_hidup' => $sts_seumur_hidup,
-					'password_dokumen' => $password_dokumen,
-					'file_dokumen' => $enckrips_string,
-					'token_dokumen' => $secret,
-					'tgl_berlaku' => $tgl_berlaku,
-					'sts_token_dokumen' => 1,
-					'sts_validasi' => 0
-				];
-				$where = [
-					'id_vendor' => $id_vendor
-				];
+
 				if (!$row_sbu) {
+					$upload = [
+						'id_url' => $id,
+						'id_vendor' => $id_vendor,
+						'no_urut' => '322',
+						'nomor_surat' => $nomor_surat,
+						'kualifikasi_izin' => $kualifikasi_izin,
+						'sts_seumur_hidup' => $sts_seumur_hidup,
+						'password_dokumen' => $password_dokumen,
+						'file_dokumen' => $enckrips_string,
+						'token_dokumen' => $secret,
+						'tgl_berlaku' => $tgl_berlaku,
+						'sts_token_dokumen' => 1,
+						'sts_validasi' => 0
+					];
+					$where = [
+						'id_vendor' => $id_vendor
+					];
 					$this->M_datapenyedia->tambah_sbu($upload);
 				} else {
+					$upload = [
+						'id_url' => $id,
+						'id_vendor' => $id_vendor,
+						'no_urut' => '322',
+						'nomor_surat' => $nomor_surat,
+						'kualifikasi_izin' => $kualifikasi_izin,
+						'sts_seumur_hidup' => $sts_seumur_hidup,
+						'password_dokumen' => $password_dokumen,
+						'file_dokumen' => $enckrips_string,
+						'token_dokumen' => $secret,
+						'tgl_berlaku' => $tgl_berlaku,
+						'sts_token_dokumen' => 1,
+						'sts_validasi' => 3
+					];
+					$where = [
+						'id_vendor' => $id_vendor
+					];
 					$this->M_datapenyedia->update_sbu($upload, $where);
 				}
 
@@ -1333,19 +1449,30 @@ class Datapenyedia extends CI_Controller
 				];
 				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 			} else {
-				$upload = [
-					'id_url' => $id,
-					'id_vendor' => $id_vendor,
-					'no_urut' => '322',
-					'nomor_surat' => $nomor_surat,
-					'kualifikasi_izin' => $kualifikasi_izin,
-					'sts_seumur_hidup' => $sts_seumur_hidup,
-					'tgl_berlaku' => $tgl_berlaku,
-					'sts_validasi' => 2
-				];
+
 				if (!$row_sbu) {
+					$upload = [
+						'id_url' => $id,
+						'id_vendor' => $id_vendor,
+						'no_urut' => '322',
+						'nomor_surat' => $nomor_surat,
+						'kualifikasi_izin' => $kualifikasi_izin,
+						'sts_seumur_hidup' => $sts_seumur_hidup,
+						'tgl_berlaku' => $tgl_berlaku,
+						'sts_validasi' => 0
+					];
 					$this->M_datapenyedia->tambah_sbu($upload);
 				} else {
+					$upload = [
+						'id_url' => $id,
+						'id_vendor' => $id_vendor,
+						'no_urut' => '322',
+						'nomor_surat' => $nomor_surat,
+						'kualifikasi_izin' => $kualifikasi_izin,
+						'sts_seumur_hidup' => $sts_seumur_hidup,
+						'tgl_berlaku' => $tgl_berlaku,
+						'sts_validasi' => 3
+					];
 					$where = [
 						'id_vendor' => $id_vendor
 					];
@@ -1443,7 +1570,7 @@ class Datapenyedia extends CI_Controller
 		$date = date('Y');
 		// $nama_file = $get_row_enkrip['nomor_surat'];
 		// $file_dokumen =  $get_row_enkrip['file_dokumen'];
-		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/SBU-' . $date . '/' . $get_row_enkrip['file_dokumen'], NULL);
+		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/SBU' . '/' . $get_row_enkrip['file_dokumen'], NULL);
 	}
 
 	// get_data_kbli_sbu
@@ -1613,6 +1740,8 @@ class Datapenyedia extends CI_Controller
 		$data['type']  = 'akta';
 		$id_vendor = $this->session->userdata('id_vendor');
 		$data['notifikasi'] = $this->M_dashboard->count_notifikasi($id_vendor);
+		$data['akta_perubahan'] = $this->M_datapenyedia->get_row_akta_perubahan($id_vendor);
+		$data['akta_pendirian'] = $this->M_datapenyedia->get_row_akta_pendirian($id_vendor);
 		$this->load->view('template_menu/header_menu', $data);
 		$this->load->view('datapenyedia/akta_pendirian/singga', $data);
 		$this->load->view('template_menu/new_footer');
@@ -1632,21 +1761,25 @@ class Datapenyedia extends CI_Controller
 
 		// post
 		$nomor_surat = $this->input->post('no_surat_akta');
+		$no_sk_kumham_pendirian = $this->input->post('no_sk_kumham_pendirian');
 		$sts_seumur_hidup = $this->input->post('sts_seumur_hidup');
 		$jumlah_setor_modal = $this->input->post('jumlah_setor_modal');
 		$kualifikasi_usaha = $this->input->post('kualifikasi_usaha');
-		$tgl_berlaku_akta = $this->input->post('berlaku_sampai');
+		if ($sts_seumur_hidup == 2) {
+			$tgl_berlaku_akta = NULL;
+		} else {
+			$tgl_berlaku_akta = $this->input->post('berlaku_sampai');
+		}
 		$password_dokumen = '1234';
 
 		$this->form_validation->set_rules('no_surat_akta', 'Nomor Surat', 'required|trim', ['required' => 'Nomor Surat Wajib Diisi!']);
-		$this->form_validation->set_rules('sts_seumur_hidup', 'Berlaku Sampai', 'required|trim', ['required' => 'Berlaku Sampai Wajib Diisi!']);
+
 		$this->form_validation->set_rules('jumlah_setor_modal', 'Jumlah Setor Modal', 'required|trim', ['required' => 'Jumlah Setor Modal Wajib Diisi!']);
 		$this->form_validation->set_rules('kualifikasi_usaha', 'Kualifikasi Usaha', 'required|trim', ['required' => 'Kualifikasi Usaha Wajib Diisi!']);
 		if ($this->form_validation->run() == false) {
 			$response = [
 				'error' => [
 					'nomor_surat' => form_error('no_surat_akta'),
-					'sts_seumur_hidup' => form_error('sts_seumur_hidup'),
 					'jumlah_setor_modal' => form_error('jumlah_setor_modal'),
 					'kualifikasi_usaha' => form_error('kualifikasi_usaha'),
 				],
@@ -1662,106 +1795,125 @@ class Datapenyedia extends CI_Controller
 			];
 			$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			$date = date('Y');
-			if (!is_dir('file_vms/' . $nama_usaha . '/Akta_Pendirian-' . $date)) {
-				mkdir('file_vms/' . $nama_usaha . '/Akta_Pendirian-' . $date, 0777, TRUE);
+			if (!is_dir('file_vms/' . $nama_usaha . '/Akta_pendirian')) {
+				mkdir('file_vms/' . $nama_usaha . '/Akta_pendirian', 0777, TRUE);
 			}
-			$config['upload_path'] = './file_vms/' . $nama_usaha . '/Akta_Pendirian-' . $date;
+
+			$chiper = "AES-128-ECB";
+			$secret_token_dokumen1 = 'jmto.1' . $id;
+			$secret_token_dokumen2 = 'jmto.2' . $id;
+
+			$config['upload_path'] = './file_vms/' . $nama_usaha . '/Akta_Pendirian';
 			$config['allowed_types'] = 'pdf';
 			$config['max_size'] = 0;
 			$config['remove_spaces'] = TRUE;
 			// $config['encrypt_name'] = TRUE;
+
 			$this->load->library('upload', $config);
 			if ($this->upload->do_upload('file_dokumen')) {
-				$fileData = $this->upload->data();
-				$file_dokumen = $fileData['file_name'];
-				$chiper = "AES-128-ECB";
-				$secret = $token;
-				$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret);
-				$sts_upload = [
-					'sts_upload_dokumen' => 1
-				];
-				$where = [
-					'id_vendor' => $id_vendor
-				];
-				if (!$row_akta_pendirian) {
-					$upload = [
-						'id_url' => $id,
-						'id_vendor' => $id_vendor,
-						'no_surat' => $nomor_surat,
-						'kualifikasi_usaha' => $kualifikasi_usaha,
-						'sts_seumur_hidup' => $sts_seumur_hidup,
-						'password_dokumen' => $password_dokumen,
-						'file_dokumen' => $enckrips_string,
-						'token_dokumen' => $secret,
-						'tgl_berlaku_akta' => $tgl_berlaku_akta,
-						'jumlah_setor_modal' => $jumlah_setor_modal,
-						'sts_token_dokumen' => 1,
-						'sts_validasi' => 0,
-					];
-					$this->M_datapenyedia->tambah_akta_pendirian($upload);
-					$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
-				} else {
-					$upload = [
-						'id_url' => $id,
-						'id_vendor' => $id_vendor,
-						'no_surat' => $nomor_surat,
-						'kualifikasi_usaha' => $kualifikasi_usaha,
-						'sts_seumur_hidup' => $sts_seumur_hidup,
-						'password_dokumen' => $password_dokumen,
-						'file_dokumen' => $enckrips_string,
-						'token_dokumen' => $secret,
-						'tgl_berlaku_akta' => $tgl_berlaku_akta,
-						'jumlah_setor_modal' => $jumlah_setor_modal,
-						'sts_token_dokumen' => 1,
-						'sts_validasi' => 2,
-					];
-					$this->M_datapenyedia->update_akta_pendirian($upload, $where);
-					$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
-				}
-				$response = [
-					'row_akta' => $this->M_datapenyedia->get_row_akta_pendirian($id_vendor),
-				];
-				$this->output->set_content_type('application/json')->set_output(json_encode($response));
-			} else {
-				if (!$row_akta_pendirian) {
-					$upload = [
-						'id_url' => $id,
-						'id_vendor' => $id_vendor,
-						'no_surat' => $nomor_surat,
-						'kualifikasi_usaha' => $kualifikasi_usaha,
-						'sts_seumur_hidup' => $sts_seumur_hidup,
-						'password_dokumen' => $password_dokumen,
-						'tgl_berlaku_akta' => $tgl_berlaku_akta,
-						'jumlah_setor_modal' => $jumlah_setor_modal,
-						'sts_token_dokumen' => 1,
-						'sts_validasi' => 0,
-					];
-					$this->M_datapenyedia->tambah_akta_pendirian($upload);
-				} else {
-					$upload = [
-						'id_url' => $id,
-						'id_vendor' => $id_vendor,
-						'no_surat' => $nomor_surat,
-						'kualifikasi_usaha' => $kualifikasi_usaha,
-						'sts_seumur_hidup' => $sts_seumur_hidup,
-						'password_dokumen' => $password_dokumen,
-						'tgl_berlaku_akta' => $tgl_berlaku_akta,
-						'jumlah_setor_modal' => $jumlah_setor_modal,
-						'sts_token_dokumen' => 1,
-						'sts_validasi' => 2,
-					];
-					$where = [
-						'id_vendor' => $id_vendor
-					];
-					$this->M_datapenyedia->update_akta_pendirian($upload, $where);
-				}
-
-				$response = [
-					'row_akta' => $this->M_datapenyedia->get_row_akta_pendirian($id_vendor),
-				];
-				$this->output->set_content_type('application/json')->set_output(json_encode($response));
-				// redirect(base_url('upload'));
+				$file_data_pendirian = $this->upload->data();
+				$file_dok_pendirian = openssl_encrypt($file_data_pendirian['file_name'], $chiper, $secret_token_dokumen1);
 			}
+			if ($this->upload->do_upload('file_dok_kumham_pendirian')) {
+				$file_data_kumham = $this->upload->data();
+				$file_dok_kumham = openssl_encrypt($file_data_kumham['file_name'], $chiper, $secret_token_dokumen2);
+			}
+
+			$sts_upload = [
+				'sts_upload_dokumen' => 1
+			];
+			$where = [
+				'id_vendor' => $id_vendor
+			];
+			if (!$row_akta_pendirian) {
+				$upload = [
+					'id_url' => $id,
+					'id_vendor' => $id_vendor,
+					'no_surat' => $nomor_surat,
+					'no_sk_kumham' => $no_sk_kumham_pendirian,
+					'kualifikasi_usaha' => $kualifikasi_usaha,
+					'sts_seumur_hidup' => $sts_seumur_hidup,
+					'password_dokumen' => $password_dokumen,
+					'file_dokumen' => $file_dok_pendirian,
+					'file_dok_kumham' => $file_dok_kumham,
+					'tgl_berlaku_akta' => $tgl_berlaku_akta,
+					'jumlah_setor_modal' => $jumlah_setor_modal,
+					'sts_token_dokumen' => 1,
+					'sts_validasi' => 0,
+				];
+				$this->M_datapenyedia->tambah_akta_pendirian($upload);
+				$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
+			} else {
+				$upload = [
+					'id_url' => $id,
+					'id_vendor' => $id_vendor,
+					'no_surat' => $nomor_surat,
+					'no_sk_kumham' => $no_sk_kumham_pendirian,
+					'kualifikasi_usaha' => $kualifikasi_usaha,
+					'sts_seumur_hidup' => $sts_seumur_hidup,
+					'password_dokumen' => $password_dokumen,
+					'file_dokumen' => $file_dok_pendirian,
+					'file_dok_kumham' => $file_dok_kumham,
+					'tgl_berlaku_akta' => $tgl_berlaku_akta,
+					'jumlah_setor_modal' => $jumlah_setor_modal,
+					'sts_token_dokumen' => 1,
+					'sts_validasi' => 3,
+				];
+				$this->M_datapenyedia->update_akta_pendirian($upload, $where);
+				$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
+			}
+			$response = [
+				'row_akta' => $this->M_datapenyedia->get_row_akta_pendirian($id_vendor),
+			];
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
+
+			// if ($this->upload->do_upload('file_dokumen')) {
+			// 	$fileData = $this->upload->data();
+			// 	$file_dokumen = $fileData['file_name'];
+			// 	$chiper = "AES-128-ECB";
+			// 	$secret = $token;
+			// 	$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret);
+
+			// } else {
+			// 	if (!$row_akta_pendirian) {
+			// 		$upload = [
+			// 			'id_url' => $id,
+			// 			'id_vendor' => $id_vendor,
+			// 			'no_surat' => $nomor_surat,
+			// 			'kualifikasi_usaha' => $kualifikasi_usaha,
+			// 			'sts_seumur_hidup' => $sts_seumur_hidup,
+			// 			'password_dokumen' => $password_dokumen,
+			// 			'tgl_berlaku_akta' => $tgl_berlaku_akta,
+			// 			'jumlah_setor_modal' => $jumlah_setor_modal,
+			// 			'sts_token_dokumen' => 1,
+			// 			'sts_validasi' => 0,
+			// 		];
+			// 		$this->M_datapenyedia->tambah_akta_pendirian($upload);
+			// 	} else {
+			// 		$upload = [
+			// 			'id_url' => $id,
+			// 			'id_vendor' => $id_vendor,
+			// 			'no_surat' => $nomor_surat,
+			// 			'kualifikasi_usaha' => $kualifikasi_usaha,
+			// 			'sts_seumur_hidup' => $sts_seumur_hidup,
+			// 			'password_dokumen' => $password_dokumen,
+			// 			'tgl_berlaku_akta' => $tgl_berlaku_akta,
+			// 			'jumlah_setor_modal' => $jumlah_setor_modal,
+			// 			'sts_token_dokumen' => 1,
+			// 			'sts_validasi' => 3,
+			// 		];
+			// 		$where = [
+			// 			'id_vendor' => $id_vendor
+			// 		];
+			// 		$this->M_datapenyedia->update_akta_pendirian($upload, $where);
+			// 	}
+
+			// 	$response = [
+			// 		'row_akta' => $this->M_datapenyedia->get_row_akta_pendirian($id_vendor),
+			// 	];
+			// 	$this->output->set_content_type('application/json')->set_output(json_encode($response));
+			// 	// redirect(base_url('upload'));
+			// }
 		}
 	}
 
@@ -1806,7 +1958,7 @@ class Datapenyedia extends CI_Controller
 
 	public function encryption_akta_pendirian($id_url)
 	{
-		$id_url = $this->input->post('id_url');
+		// $id_url = $this->input->post('id_url');
 		$token_dokumen = $this->input->post('token_dokumen');
 		// $secret_token = $this->input->post('secret_token');
 
@@ -1814,49 +1966,62 @@ class Datapenyedia extends CI_Controller
 
 		$get_row_enkrip = $this->M_datapenyedia->get_row_akta_pendirian_url($id_url);
 		$id_vendor = $get_row_enkrip['id_vendor'];
-		// $row_vendor = $this->M_datapenyedia->get_row_vendor($id_vendor);
+		$row_vendor = $this->M_datapenyedia->get_row_vendor($id_vendor);
 		$chiper = "AES-128-ECB";
-		$secret_token_dokumen = $get_row_enkrip['token_dokumen'];
+		$secret_token_dokumen1 = 'jmto.1' . $id_url;
+		$secret_token_dokumen2 = 'jmto.2' . $id_url;
 
 		if ($type == 'enkrip') {
 
-			$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret_token_dokumen);
+			$encryption_string1 = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret_token_dokumen1);
+			$encryption_string2 = openssl_encrypt($get_row_enkrip['file_dok_kumham'], $chiper, $secret_token_dokumen2);
 			$where = [
 				'id_url' => $id_url
 			];
 			$data = [
 				'sts_token_dokumen' => 1,
-				'file_dokumen' => $encryption_string,
+				'file_dokumen' => $encryption_string1,
+				'file_dok_kumham' => $encryption_string2,
 			];
-			if ($token_dokumen == $secret_token_dokumen) {
-				$response = [
-					'message' => 'success'
-				];
-				$this->M_datapenyedia->update_akta_pendirian($data, $where);
-			} else {
-				$response = [
-					'maaf' => 'Maaf Anda Memerlukan Token Yang Valid',
-				];
-			}
+			$response = [
+				'message' => 'success'
+			];
+			$this->M_datapenyedia->update_akta_pendirian($data, $where);
+			// if ($token_dokumen == $secret_token_dokumen) {
+			// 	$response = [
+			// 		'message' => 'success'
+			// 	];
+			// 	$this->M_datapenyedia->update_akta_pendirian($data, $where);
+			// } else {
+			// 	$response = [
+			// 		'maaf' => 'Maaf Anda Memerlukan Token Yang Valid',
+			// 	];
+			// }
 		} else {
-			$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret_token_dokumen);
+			$encryption_string1 = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret_token_dokumen1);
+			$encryption_string2 = openssl_decrypt($get_row_enkrip['file_dok_kumham'], $chiper, $secret_token_dokumen2);
 			$where = [
 				'id_url' => $id_url
 			];
 			$data = [
 				'sts_token_dokumen' => 2,
-				'file_dokumen' => $encryption_string,
+				'file_dokumen' => $encryption_string1,
+				'file_dok_kumham' => $encryption_string2,
 			];
-			if ($token_dokumen == $secret_token_dokumen) {
-				$response = [
-					'message' => 'success'
-				];
-				$this->M_datapenyedia->update_akta_pendirian($data, $where);
-			} else {
-				$response = [
-					'maaf' => 'Maaf Anda Memerlukan Token Yang Valid',
-				];
-			}
+			$response = [
+				'message' => 'success'
+			];
+			$this->M_datapenyedia->update_akta_pendirian($data, $where);
+			// if ($token_dokumen == $secret_token_dokumen) {
+			// 	$response = [
+			// 		'message' => 'success'
+			// 	];
+			// 	$this->M_datapenyedia->update_akta_pendirian($data, $where);
+			// } else {
+			// 	$response = [
+			// 		'maaf' => 'Maaf Anda Memerlukan Token Yang Valid',
+			// 	];
+			// }
 		}
 
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
@@ -1874,7 +2039,21 @@ class Datapenyedia extends CI_Controller
 		$date = date('Y');
 		// $nama_file = $get_row_enkrip['nomor_surat'];
 		// $file_dokumen =  $get_row_enkrip['file_dokumen'];
-		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/Akta_Pendirian-' . $date . '/' . $get_row_enkrip['file_dokumen'], NULL);
+		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/Akta_Pendirian' . '/' . $get_row_enkrip['file_dokumen'], NULL);
+	}
+
+	public function url_download_kumham_pendirian($id_url)
+	{
+		if ($id_url == '') {
+			// tendang not found
+		}
+		$get_row_enkrip = $this->M_datapenyedia->get_row_akta_pendirian_url($id_url);
+		$id_vendor = $get_row_enkrip['id_vendor'];
+		$row_vendor = $this->M_datapenyedia->get_row_vendor($id_vendor);
+		$date = date('Y');
+		// $nama_file = $get_row_enkrip['nomor_surat'];
+		// $file_dokumen =  $get_row_enkrip['file_dokumen'];
+		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/Akta_Pendirian' . '/' . $get_row_enkrip['file_dok_kumham'], NULL);
 	}
 
 	// end akta pendirian
@@ -1893,20 +2072,24 @@ class Datapenyedia extends CI_Controller
 
 		// post
 		$nomor_surat = $this->input->post('no_surat_perubahan');
+		$no_sk_kumham = $this->input->post('no_sk_kumham');
 		$sts_seumur_hidup = $this->input->post('sts_seumur_hidup_perubahan');
-		$tgl_berlaku_akta = $this->input->post('tgl_masa_berlaku_perubahan');
 		$jumlah_setor_modal = $this->input->post('jumlah_setor_perubahan');
 		$kualifikasi_usaha = $this->input->post('kualifikasi_usaha_perubahan');
+
+		if ($sts_seumur_hidup == 2) {
+			$tgl_berlaku_akta = NULL;
+		} else {
+			$tgl_berlaku_akta = $this->input->post('tgl_masa_berlaku_perubahan');
+		}
 		$password_dokumen = '1234';
 		$this->form_validation->set_rules('no_surat_perubahan', 'Nomor Surat', 'required|trim', ['required' => 'Nomor Surat Wajib Diisi!']);
-		$this->form_validation->set_rules('sts_seumur_hidup_perubahan', 'Berlaku Sampai', 'required|trim', ['required' => 'Berlaku Sampai Wajib Diisi!']);
 		$this->form_validation->set_rules('jumlah_setor_perubahan', 'Jumlah Setor Modal', 'required|trim', ['required' => 'Jumlah Setor Modal Wajib Diisi!']);
 		$this->form_validation->set_rules('kualifikasi_usaha_perubahan', 'Kualifikasi Usaha', 'required|trim', ['required' => 'Kualifikasi Usaha Wajib Diisi!']);
 		if ($this->form_validation->run() == false) {
 			$response = [
 				'error' => [
 					'no_surat_perubahan' => form_error('no_surat_perubahan'),
-					'sts_seumur_hidup_perubahan' => form_error('sts_seumur_hidup_perubahan'),
 					'jumlah_setor_perubahan' => form_error('jumlah_setor_perubahan'),
 					'kualifikasi_usaha_perubahan' => form_error('kualifikasi_usaha_perubahan'),
 				],
@@ -1920,13 +2103,18 @@ class Datapenyedia extends CI_Controller
 			$where = [
 				'id_vendor' => $id_vendor
 			];
+
 			$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
+
+			$chiper = "AES-128-ECB";
+			$secret_token_dokumen1 = 'jmto.1' . $id;
+			$secret_token_dokumen2 = 'jmto.2' . $id;
 			$date = date('Y');
-			if (!is_dir('file_vms/' . $nama_usaha . '/Akta_Perubahan-' . $date)) {
-				mkdir('file_vms/' . $nama_usaha . '/Akta_Perubahan-' . $date, 0777, TRUE);
+			if (!is_dir('file_vms/' . $nama_usaha . '/Akta_perubahan')) {
+				mkdir('file_vms/' . $nama_usaha . '/Akta_perubahan', 0777, TRUE);
 			}
 
-			$config['upload_path'] = './file_vms/' . $nama_usaha . '/Akta_Perubahan-' . $date;
+			$config['upload_path'] = './file_vms/' . $nama_usaha . '/Akta_Perubahan';
 			$config['allowed_types'] = 'pdf';
 			$config['max_size'] = 0;
 			$config['remove_spaces'] = TRUE;
@@ -1935,71 +2123,97 @@ class Datapenyedia extends CI_Controller
 
 			$this->load->library('upload', $config);
 			if ($this->upload->do_upload('file_dokumen_perubahan')) {
-				$fileData = $this->upload->data();
-				$file_dokumen = $fileData['file_name'];
-				$chiper = "AES-128-ECB";
-				$secret = $token;
-				$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret);
+				$file_data_perubahan = $this->upload->data();
+				$file_dok_perubahan = openssl_encrypt($file_data_perubahan['file_name'], $chiper, $secret_token_dokumen1);
+			}
+			if ($this->upload->do_upload('file_dok_kumham')) {
+				$file_data_kumham = $this->upload->data();
+				$file_dok_kumham = openssl_encrypt($file_data_kumham['file_name'], $chiper, $secret_token_dokumen2);
+			}
+
+			$sts_upload = [
+				'sts_upload_dokumen' => 1
+			];
+			$where = [
+				'id_vendor' => $id_vendor
+			];
+			if (!$row_akta_perubahan) {
 				$upload = [
 					'id_url' => $id,
 					'id_vendor' => $id_vendor,
 					'no_surat' => $nomor_surat,
+					'no_sk_kumham' => $no_sk_kumham,
 					'kualifikasi_usaha' => $kualifikasi_usaha,
 					'sts_seumur_hidup' => $sts_seumur_hidup,
 					'password_dokumen' => $password_dokumen,
-					'file_dokumen' => $enckrips_string,
-					'token_dokumen' => $secret,
+					'file_dokumen' => $file_dok_perubahan,
+					'file_dok_kumham' => $file_dok_kumham,
 					'tgl_berlaku_akta' => $tgl_berlaku_akta,
 					'jumlah_setor_modal' => $jumlah_setor_modal,
 					'sts_token_dokumen' => 1,
+					'sts_validasi' => 0
 				];
-				// var_dump($upload);
-				// die;
-				$sts_upload = [
-					'sts_upload_dokumen' => 1
-				];
-				$where = [
-					'id_vendor' => $id_vendor
-				];
-				if (!$row_akta_perubahan) {
-					$this->M_datapenyedia->tambah_akta_perubahan($upload);
-					$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
-				} else {
-					$this->M_datapenyedia->update_akta_perubahan($upload, $where);
-					$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
-				}
-
-				$response = [
-					'row_akta' => $this->M_datapenyedia->get_row_akta_perubahan($id_vendor),
-				];
-				$this->output->set_content_type('application/json')->set_output(json_encode($response));
+				$this->M_datapenyedia->tambah_akta_perubahan($upload);
+				$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			} else {
 				$upload = [
 					'id_url' => $id,
 					'id_vendor' => $id_vendor,
 					'no_surat' => $nomor_surat,
+					'no_sk_kumham' => $no_sk_kumham,
 					'kualifikasi_usaha' => $kualifikasi_usaha,
 					'sts_seumur_hidup' => $sts_seumur_hidup,
 					'password_dokumen' => $password_dokumen,
+					'file_dokumen' => $file_dok_perubahan,
+					'file_dok_kumham' => $file_dok_kumham,
 					'tgl_berlaku_akta' => $tgl_berlaku_akta,
 					'jumlah_setor_modal' => $jumlah_setor_modal,
 					'sts_token_dokumen' => 1,
+					'sts_validasi' => 3
 				];
-				if (!$row_akta_perubahan) {
-					$this->M_datapenyedia->tambah_akta_perubahan($upload);
-				} else {
-					$where = [
-						'id_vendor' => $id_vendor
-					];
-					$this->M_datapenyedia->update_akta_perubahan($upload, $where);
-				}
-
-				$response = [
-					'row_akta_perubahan' => $this->M_datapenyedia->get_row_akta_perubahan($id_vendor),
-				];
-				$this->output->set_content_type('application/json')->set_output(json_encode($response));
-				// redirect(base_url('upload'));
+				$this->M_datapenyedia->update_akta_perubahan($upload, $where);
+				$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			}
+
+			$response = [
+				'row_akta' => $this->M_datapenyedia->get_row_akta_perubahan($id_vendor),
+			];
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
+
+
+			// PERUBAHAN DRASTIIISSSSSSSSSS
+
+
+			// if ($this->upload->do_upload('')) {
+			// 	$fileData = $this->upload->data();
+
+			// } else {
+			// 	$upload = [
+			// 		'id_url' => $id,
+			// 		'id_vendor' => $id_vendor,
+			// 		'no_surat' => $nomor_surat,
+			// 		'kualifikasi_usaha' => $kualifikasi_usaha,
+			// 		'sts_seumur_hidup' => $sts_seumur_hidup,
+			// 		'password_dokumen' => $password_dokumen,
+			// 		'tgl_berlaku_akta' => $tgl_berlaku_akta,
+			// 		'jumlah_setor_modal' => $jumlah_setor_modal,
+			// 		'sts_token_dokumen' => 1,
+			// 	];
+			// 	if (!$row_akta_perubahan) {
+			// 		$this->M_datapenyedia->tambah_akta_perubahan($upload);
+			// 	} else {
+			// 		$where = [
+			// 			'id_vendor' => $id_vendor
+			// 		];
+			// 		$this->M_datapenyedia->update_akta_perubahan($upload, $where);
+			// 	}
+
+			// 	$response = [
+			// 		'row_akta_perubahan' => $this->M_datapenyedia->get_row_akta_perubahan($id_vendor),
+			// 	];
+			// 	$this->output->set_content_type('application/json')->set_output(json_encode($response));
+			// 	// redirect(base_url('upload'));
+			// }
 		}
 	}
 
@@ -2014,47 +2228,60 @@ class Datapenyedia extends CI_Controller
 		$id_vendor = $get_row_enkrip['id_vendor'];
 		$row_vendor = $this->M_datapenyedia->get_row_vendor($id_vendor);
 		$chiper = "AES-128-ECB";
-		$secret_token_dokumen = $get_row_enkrip['token_dokumen'];
+		$secret_token_dokumen1 = 'jmto.1' . $id_url;
+		$secret_token_dokumen2 = 'jmto.2' . $id_url;
 
 		if ($type == 'enkrip') {
 
-			$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret_token_dokumen);
+			$encryption_string1 = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret_token_dokumen1);
+			$encryption_string2 = openssl_encrypt($get_row_enkrip['file_dok_kumham'], $chiper, $secret_token_dokumen2);
 			$where = [
 				'id_url' => $id_url
 			];
 			$data = [
 				'sts_token_dokumen' => 1,
-				'file_dokumen' => $encryption_string,
+				'file_dokumen' => $encryption_string1,
+				'file_dok_kumham' =>  $encryption_string2,
 			];
-			if ($token_dokumen == $secret_token_dokumen) {
-				$response = [
-					'message' => 'success'
-				];
-				$this->M_datapenyedia->update_akta_perubahan($data, $where);
-			} else {
-				$response = [
-					'maaf' => 'Maaf Anda Memerlukan Token Yang Valid',
-				];
-			}
+			$response = [
+				'message' => 'success'
+			];
+			$this->M_datapenyedia->update_akta_perubahan($data, $where);
+			// if ($token_dokumen == $secret_token_dokumen) {
+			// 	$response = [
+			// 		'message' => 'success'
+			// 	];
+			// 	$this->M_datapenyedia->update_akta_perubahan($data, $where);
+			// } else {
+			// 	$response = [
+			// 		'maaf' => 'Maaf Anda Memerlukan Token Yang Valid',
+			// 	];
+			// }
 		} else {
-			$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret_token_dokumen);
+			$encryption_string1 = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret_token_dokumen1);
+			$encryption_string2 = openssl_decrypt($get_row_enkrip['file_dok_kumham'], $chiper, $secret_token_dokumen2);
 			$where = [
 				'id_url' => $id_url
 			];
 			$data = [
 				'sts_token_dokumen' => 2,
-				'file_dokumen' => $encryption_string,
+				'file_dokumen' => $encryption_string1,
+				'file_dok_kumham' =>  $encryption_string2,
 			];
-			if ($token_dokumen == $secret_token_dokumen) {
-				$response = [
-					'message' => 'success'
-				];
-				$this->M_datapenyedia->update_akta_perubahan($data, $where);
-			} else {
-				$response = [
-					'maaf' => 'Maaf Anda Memerlukan Token Yang Valid',
-				];
-			}
+			$response = [
+				'message' => 'success'
+			];
+			$this->M_datapenyedia->update_akta_perubahan($data, $where);
+			// if ($token_dokumen == $secret_token_dokumen) {
+			// 	$response = [
+			// 		'message' => 'success'
+			// 	];
+			// 	$this->M_datapenyedia->update_akta_perubahan($data, $where);
+			// } else {
+			// 	$response = [
+			// 		'maaf' => 'Maaf Anda Memerlukan Token Yang Valid',
+			// 	];
+			// }
 		}
 
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
@@ -2071,7 +2298,21 @@ class Datapenyedia extends CI_Controller
 		$date = date('Y');
 		// $nama_file = $get_row_enkrip['nomor_surat'];
 		// $file_dokumen =  $get_row_enkrip['file_dokumen'];
-		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/Akta_Perubahan-' . $date . '/' . $get_row_enkrip['file_dokumen'], NULL);
+		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/Akta_Perubahan' . '/' . $get_row_enkrip['file_dokumen'], NULL);
+	}
+
+	public function url_download_kumham($id_url)
+	{
+		if ($id_url == '') {
+			// tendang not found
+		}
+		$get_row_enkrip = $this->M_datapenyedia->get_row_akta_perubahan_url($id_url);
+		$id_vendor = $get_row_enkrip['id_vendor'];
+		$row_vendor = $this->M_datapenyedia->get_row_vendor($id_vendor);
+		$date = date('Y');
+		// $nama_file = $get_row_enkrip['nomor_surat'];
+		// $file_dokumen =  $get_row_enkrip['file_dokumen'];
+		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/Akta_Perubahan' . '/' . $get_row_enkrip['file_dok_kumham'], NULL);
 	}
 	// end akta pendirian
 
@@ -2103,12 +2344,16 @@ class Datapenyedia extends CI_Controller
 			$row[] = $rs->warganegara;
 			$row[] = $rs->alamat_pemilik;
 			$row[] = $rs->saham;
-			if ($rs->sts_validasi == 1) {
-				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
-			} else if ($rs->sts_validasi == 0) {
+			if ($rs->sts_validasi == 0) {
 				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
-			} else {
+			} else if ($rs->sts_validasi == 1) {
+				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
+			} else if ($rs->sts_validasi == 2) {
 				$row[] = '<span class="badge bg-danger">Tidak Valid</span>';
+			} else if ($rs->sts_validasi == 3) {
+				$row[] = '<span class="badge bg-warning">Revisi</span>';
+			} else {
+				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
 			}
 			$row[] = '<a  href="javascript:;" class="btn btn-info btn-sm" onClick="by_id_pemilik_manajerial(' . "'" . $rs->id_pemilik . "','edit'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i> View</a>
 			<a  href="javascript:;" class="btn btn-danger btn-sm" onClick="by_id_pemilik_manajerial(' . "'" . $rs->id_pemilik . "','hapus'" . ')"><i class="fas fa fa-trash"></i> Delete</a>';
@@ -2151,7 +2396,7 @@ class Datapenyedia extends CI_Controller
 		$no = $_POST['start'];
 		$nama_usaha = $this->session->userdata('nama_usaha');
 		$date = date('Y');
-		$file_path = 'file_vms/' . $nama_usaha . '/Pemilik-' . $date;
+		$file_path = 'file_vms/' . $nama_usaha . '/Pemilik';
 		foreach ($resultss as $rs) {
 			$row = array();
 			$row[] = ++$no;
@@ -2233,10 +2478,10 @@ class Datapenyedia extends CI_Controller
 			];
 			$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			$date = date('Y');
-			if (!is_dir('file_vms/' . $nama_usaha . '/Pemilik-' . $date)) {
-				mkdir('file_vms/' . $nama_usaha . '/Pemilik-' . $date, 0777, TRUE);
+			if (!is_dir('file_vms/' . $nama_usaha . '/Pemilik')) {
+				mkdir('file_vms/' . $nama_usaha . '/Pemilik', 0777, TRUE);
 			}
-			$config['upload_path'] = './file_vms/' . $nama_usaha . '/Pemilik-' . $date;
+			$config['upload_path'] = './file_vms/' . $nama_usaha . '/Pemilik';
 			$config['allowed_types'] = 'pdf';
 			$config['max_size'] = 0;
 			$this->load->library('upload', $config);
@@ -2319,10 +2564,10 @@ class Datapenyedia extends CI_Controller
 			];
 			$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			$date = date('Y');
-			if (!is_dir('file_vms/' . $nama_usaha . '/Pemilik-' . $date)) {
-				mkdir('file_vms/' . $nama_usaha . '/Pemilik-' . $date, 0777, TRUE);
+			if (!is_dir('file_vms/' . $nama_usaha . '/Pemilik')) {
+				mkdir('file_vms/' . $nama_usaha . '/Pemilik', 0777, TRUE);
 			}
-			$config['upload_path'] = './file_vms/' . $nama_usaha . '/Pemilik-' . $date;
+			$config['upload_path'] = './file_vms/' . $nama_usaha . '/Pemilik';
 			$config['allowed_types'] = 'pdf';
 			$config['max_size'] = 0;
 			$this->load->library('upload', $config);
@@ -2435,7 +2680,7 @@ class Datapenyedia extends CI_Controller
 		$id_vendor = $get_row_enkrip['id_vendor'];
 		$row_vendor = $this->M_datapenyedia->get_row_vendor($id_vendor);
 		$date = date('Y');
-		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/Pemilik-' . $date . '/' . $fileDownload, NULL);
+		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/Pemilik' . '/' . $fileDownload, NULL);
 	}
 
 
@@ -2563,12 +2808,14 @@ class Datapenyedia extends CI_Controller
 			$row[] = $rs->jabatan_pengurus;
 			$row[] = $rs->jabatan_mulai;
 			$row[] = $rs->jabatan_selesai;
-			if ($rs->sts_validasi == 1) {
-				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
-			} else if ($rs->sts_validasi == 0) {
+			if ($rs->sts_validasi == 0) {
 				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
-			} else {
+			} else if ($rs->sts_validasi == 1) {
+				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
+			} else if ($rs->sts_validasi == 2) {
 				$row[] = '<span class="badge bg-danger">Tidak Valid</span>';
+			} else if ($rs->sts_validasi == 3) {
+				$row[] = '<span class="badge bg-warning">Revisi</span>';
 			}
 			$row[] = '<a  href="javascript:;" class="btn btn-info btn-sm" onClick="by_id_pengurus_manajerial(' . "'" . $rs->id_pengurus . "','edit'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i> View</a>
 			<a  href="javascript:;" class="btn btn-danger btn-sm" onClick="by_id_pengurus_manajerial(' . "'" . $rs->id_pengurus . "','hapus'" . ')"><i class="fas fa fa-trash"></i> Delete</a>';
@@ -2632,10 +2879,10 @@ class Datapenyedia extends CI_Controller
 			];
 			$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			$date = date('Y');
-			if (!is_dir('file_vms/' . $nama_usaha . '/Pengurus-' . $date)) {
-				mkdir('file_vms/' . $nama_usaha . '/Pengurus-' . $date, 0777, TRUE);
+			if (!is_dir('file_vms/' . $nama_usaha . '/Pengurus')) {
+				mkdir('file_vms/' . $nama_usaha . '/Pengurus', 0777, TRUE);
 			}
-			$config['upload_path'] = './file_vms/' . $nama_usaha . '/Pengurus-' . $date;
+			$config['upload_path'] = './file_vms/' . $nama_usaha . '/Pengurus';
 			$config['allowed_types'] = 'pdf';
 			$config['max_size'] = 0;
 			$this->load->library('upload', $config);
@@ -2674,7 +2921,7 @@ class Datapenyedia extends CI_Controller
 		$no = $_POST['start'];
 		$nama_usaha = $this->session->userdata('nama_usaha');
 		$date = date('Y');
-		$file_path = 'file_vms/' . $nama_usaha . '/PENGURUS-' . $date;
+		$file_path = 'file_vms/' . $nama_usaha . '/PENGURUS';
 		foreach ($resultss as $rs) {
 			$row = array();
 			$row[] = ++$no;
@@ -2811,10 +3058,10 @@ class Datapenyedia extends CI_Controller
 			];
 			$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			$date = date('Y');
-			if (!is_dir('file_vms/' . $nama_usaha . '/PENGURUS-' . $date)) {
-				mkdir('file_vms/' . $nama_usaha . '/PENGURUS-' . $date, 0777, TRUE);
+			if (!is_dir('file_vms/' . $nama_usaha . '/Pengurus')) {
+				mkdir('file_vms/' . $nama_usaha . '/Pengurus', 0777, TRUE);
 			}
-			$config['upload_path'] = './file_vms/' . $nama_usaha . '/PENGURUS-' . $date;
+			$config['upload_path'] = './file_vms/' . $nama_usaha . '/Pengurus';
 			$config['allowed_types'] = 'pdf';
 			$config['max_size'] = 0;
 			$this->load->library('upload', $config);
@@ -2947,7 +3194,7 @@ class Datapenyedia extends CI_Controller
 		$id_vendor = $get_row_enkrip['id_vendor'];
 		$row_vendor = $this->M_datapenyedia->get_row_vendor($id_vendor);
 		$date = date('Y');
-		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/PENGURUS-' . $date . '/' . $fileDownload, NULL);
+		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/PENGURUS' . '/' . $fileDownload, NULL);
 	}
 
 	public function simpan_import_excel_pengurus()
@@ -3083,10 +3330,10 @@ class Datapenyedia extends CI_Controller
 			];
 			$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			$date = date('Y');
-			if (!is_dir('file_vms/' . $nama_usaha . '/Pengalaman-' . $date)) {
-				mkdir('file_vms/' . $nama_usaha . '/Pengalaman-' . $date, 0777, TRUE);
+			if (!is_dir('file_vms/' . $nama_usaha . '/Pengalaman')) {
+				mkdir('file_vms/' . $nama_usaha . '/Pengalaman', 0777, TRUE);
 			}
-			$config['upload_path'] = './file_vms/' . $nama_usaha . '/Pengalaman-' . $date;
+			$config['upload_path'] = './file_vms/' . $nama_usaha . '/Pengalaman';
 			$config['allowed_types'] = 'pdf';
 			$config['max_size'] = 0;
 			$this->load->library('upload', $config);
@@ -3194,12 +3441,14 @@ class Datapenyedia extends CI_Controller
 			$row[] = $rs->progres . '%';
 
 			$row[] = $rs->jangka_waktu . ' Bulan';
-			if ($rs->sts_validasi == 1) {
-				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
-			} else if ($rs->sts_validasi == 0) {
-				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
-			} else {
+			if ($rs->sts_validasi == 0) {
+				$row[] = '<span class="badge bg-success">Belum Tervalidasi</span>';
+			} else if ($rs->sts_validasi == 1) {
+				$row[] = '<span class="badge bg-secondary">Sudah Tervalidasi</span>';
+			} else if ($rs->sts_validasi == 2) {
 				$row[] = '<span class="badge bg-danger">Tidak Valid</span>';
+			} else if ($rs->sts_validasi == 3) {
+				$row[] = '<span class="badge bg-warning">Revisi</span>';
 			}
 			$row[] = '<a  href="javascript:;" class="btn btn-info btn-sm" onClick="by_id_pengalaman_manajerial(' . "'" . $rs->id_pengalaman . "','edit'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i> View</a>
 			<a  href="javascript:;" class="btn btn-danger btn-sm" onClick="by_id_pengalaman_manajerial(' . "'" . $rs->id_pengalaman . "','hapus'" . ')"><i class="fas fa fa-trash"></i> Delete</a>';
@@ -3221,7 +3470,7 @@ class Datapenyedia extends CI_Controller
 		$no = $_POST['start'];
 		$nama_usaha = $this->session->userdata('nama_usaha');
 		$date = date('Y');
-		$file_path = 'file_vms/' . $nama_usaha . '/Pengalaman-' . $date;
+		$file_path = 'file_vms/' . $nama_usaha . '/Pengalaman';
 		foreach ($resultss as $rs) {
 			$row = array();
 			$row[] = ++$no;
@@ -3304,10 +3553,10 @@ class Datapenyedia extends CI_Controller
 			];
 			$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			$date = date('Y');
-			if (!is_dir('file_vms/' . $nama_usaha . '/Pengalaman-' . $date)) {
-				mkdir('file_vms/' . $nama_usaha . '/Pengalaman-' . $date, 0777, TRUE);
+			if (!is_dir('file_vms/' . $nama_usaha . '/Pengalaman')) {
+				mkdir('file_vms/' . $nama_usaha . '/Pengalaman', 0777, TRUE);
 			}
-			$config['upload_path'] = './file_vms/' . $nama_usaha . '/Pengalaman-' . $date;
+			$config['upload_path'] = './file_vms/' . $nama_usaha . '/Pengalaman';
 			$config['allowed_types'] = 'pdf';
 			$config['max_size'] = 0;
 			$this->load->library('upload', $config);
@@ -3422,7 +3671,7 @@ class Datapenyedia extends CI_Controller
 		}
 		$row_vendor = $this->M_datapenyedia->get_row_vendor($id_vendor);
 		$date = date('Y');
-		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/Pengalaman-' . $date . '/' . $fileDownload, NULL);
+		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/Pengalaman' . '/' . $fileDownload, NULL);
 	}
 
 	public function simpan_import_excel_pengalaman()
@@ -3581,11 +3830,11 @@ class Datapenyedia extends CI_Controller
 		];
 		$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 		$date = date('Y');
-		if (!is_dir('file_vms/' . $nama_usaha . '/Neraca-' . $date)) {
-			mkdir('file_vms/' . $nama_usaha . '/Neraca-' . $date, 0777, TRUE);
+		if (!is_dir('file_vms/' . $nama_usaha . '/Neraca')) {
+			mkdir('file_vms/' . $nama_usaha . '/Neraca', 0777, TRUE);
 		}
 		$fileName =  'neraca_keuangan-' . $id . '.xlsx';
-		$pathUpload = './file_vms/' . $nama_usaha . '/Neraca-' . $date . '/' . $fileName;
+		$pathUpload = './file_vms/' . $nama_usaha . '/Neraca' . '/' . $fileName;
 		$saveFile = $pathUpload;
 		$writer->save($saveFile);
 		$upload = [
@@ -3593,6 +3842,8 @@ class Datapenyedia extends CI_Controller
 			'id_url_neraca' => $id,
 			'file_dokumen_neraca' => openssl_encrypt($fileName, $chiper, $secret_token_dokumen1),
 			'sts_token_dokumen' => 1,
+			'tahun_mulai' => $tahun_mulai,
+			'tahun_selesai' => $tahun_selesai
 		];
 		$this->M_datapenyedia->tambah_tbl_vendor_neraca($upload);
 		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
@@ -3635,8 +3886,8 @@ class Datapenyedia extends CI_Controller
 		// 8
 		$nilai_tahun_kolom_1_8 = $this->input->post('nilai_tahun_kolom_1_8');
 		$nilai_tahun_kolom_2_8 = $this->input->post('nilai_tahun_kolom_2_8');
-		$tahun_mulai = $this->input->post('tahun_mulai');
-		$tahun_selesai = $this->input->post('tahun_selesai');
+		$tahun_mulai = $this->input->post('tahun_mulai_edit');
+		$tahun_selesai = $this->input->post('tahun_selesai_edit');
 		$data = [
 			['No', 'Uraian', 'Tahun ' . $tahun_mulai . '',  'Tahun ' . $tahun_selesai . ''],
 			['1', 'Penjelasan/Opini dari Auditor Kantor Akuntan Publik', $nilai_tahun_kolom_1_1, $nilai_tahun_kolom_2_1],
@@ -3674,15 +3925,15 @@ class Datapenyedia extends CI_Controller
 		];
 		$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 		$date = date('Y');
-		if (!is_dir('file_vms/' . $nama_usaha . '/Neraca-' . $date)) {
-			mkdir('file_vms/' . $nama_usaha . '/Neraca-' . $date, 0777, TRUE);
+		if (!is_dir('file_vms/' . $nama_usaha . '/Neraca')) {
+			mkdir('file_vms/' . $nama_usaha . '/Neraca', 0777, TRUE);
 		}
 		$date = date('Y');
-		if (!is_dir('file_vms/' . $nama_usaha . '/Neraca-' . $date)) {
-			mkdir('file_vms/' . $nama_usaha . '/Neraca-' . $date, 0777, TRUE);
+		if (!is_dir('file_vms/' . $nama_usaha . '/Neraca')) {
+			mkdir('file_vms/' . $nama_usaha . '/Neraca', 0777, TRUE);
 		}
 		$fileName =  'neraca_keuangan-' . $id . '.xlsx';
-		$pathUpload = './file_vms/' . $nama_usaha . '/Neraca-' . $date . '/' . $fileName;
+		$pathUpload = './file_vms/' . $nama_usaha . '/Neraca' . '/' . $fileName;
 		$saveFile = $pathUpload;
 		$writer->save($saveFile);
 		$where = [
@@ -3692,99 +3943,12 @@ class Datapenyedia extends CI_Controller
 			'id_vendor' => $id_vendor,
 			'sts_token_dokumen' => 1,
 			'file_dokumen_neraca' => openssl_encrypt($fileName, $chiper, $secret_token_dokumen1),
+			'tahun_mulai' => $tahun_mulai,
+			'tahun_selesai' => $tahun_selesai
 		];
 		$this->M_datapenyedia->update_neraca($upload, $where);
 		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 	}
-
-
-
-	// public function simpan_neraca_keuangan()
-	// {
-	// 	$id_vendor = $this->session->userdata('id_vendor');
-	// 	$nama_usaha = $this->session->userdata('nama_usaha');
-	// 	$id = $this->uuid->v4();
-	// 	$id = str_replace('-', '', $id);
-	// 	// seeting enkrip dokumen
-	// 	$chiper = "AES-128-ECB";
-	// 	$secret_token_dokumen1 = 'jmto.1' . $id;
-	// 	// SETTING PATH 
-	// 	$sts_upload = [
-	// 		'sts_upload_dokumen' => 1
-	// 	];
-	// 	$where = [
-	// 		'id_vendor' => $id_vendor
-	// 	];
-	// 	$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
-	// 	$date = date('Y');
-	// 	if (!is_dir('file_vms/' . $nama_usaha . '/Neraca-' . $date)) {
-	// 		mkdir('file_vms/' . $nama_usaha . '/Neraca-' . $date, 0777, TRUE);
-	// 	}
-	// 	$config['upload_path'] = './file_vms/' . $nama_usaha . '/Neraca-' . $date;
-	// 	$config['allowed_types'] = '*';
-	// 	$config['max_size'] = 0;
-	// 	$this->load->library('upload', $config);
-	// 	if ($this->upload->do_upload('file_dokumen_neraca')) {
-	// 		$filedata_neraca = $this->upload->data();
-	// 	}
-	// 	$upload = [
-	// 		'id_vendor' => $id_vendor,
-	// 		'id_url_neraca' => $id,
-	// 		'file_dokumen_neraca' => openssl_encrypt($filedata_neraca['file_name'], $chiper, $secret_token_dokumen1),
-	// 		'sts_token_dokumen' => 1,
-	// 	];
-	// 	$this->M_datapenyedia->tambah_tbl_vendor_neraca($upload);
-	// 	$response = [
-	// 		'message' => 'success'
-	// 	];
-	// 	$this->output->set_content_type('application/json')->set_output(json_encode($response));
-	// }
-
-	// public function edit_neraca_keuangan()
-	// {
-	// 	$id_vendor = $this->session->userdata('id_vendor');
-	// 	$nama_usaha = $this->session->userdata('nama_usaha');
-	// 	$id_neraca = $this->input->post('id_neraca');
-	// 	$get_row_enkrip = $this->M_datapenyedia->get_row_neraca($id_neraca);
-	// 	// seeting enkrip dokumen
-	// 	$chiper = "AES-128-ECB";
-	// 	$secret_token_dokumen1 = 'jmto.1' . $get_row_enkrip['id_url_neraca'];
-	// 	// SETTING PATH 
-	// 	$sts_upload = [
-	// 		'sts_upload_dokumen' => 1
-	// 	];
-	// 	$where = [
-	// 		'id_vendor' => $id_vendor
-	// 	];
-	// 	$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
-	// 	$date = date('Y');
-	// 	if (!is_dir('file_vms/' . $nama_usaha . '/Neraca-' . $date)) {
-	// 		mkdir('file_vms/' . $nama_usaha . '/Neraca-' . $date, 0777, TRUE);
-	// 	}
-	// 	$config['upload_path'] = './file_vms/' . $nama_usaha . '/Neraca-' . $date;
-	// 	$config['allowed_types'] = 'pdf|xlsx|xls';
-	// 	$config['max_size'] = 0;
-	// 	$this->load->library('upload', $config);
-	// 	if ($this->upload->do_upload('file_dokumen_neraca')) {
-	// 		$fileDataKtp = $this->upload->data();
-	// 		$post_file_dokumen_neraca = openssl_encrypt($fileDataKtp['file_name'], $chiper, $secret_token_dokumen1);
-	// 	} else {
-	// 		$fileDataKtp = $get_row_enkrip['file_dokumen_neraca'];
-	// 		$post_file_dokumen_neraca = $fileDataKtp;
-	// 	}
-	// 	$where = [
-	// 		'id_neraca' => $id_neraca
-	// 	];
-	// 	$upload = [
-	// 		'id_vendor' => $id_vendor,
-	// 		'sts_token_dokumen' => 1,
-	// 		'file_dokumen_neraca' => $post_file_dokumen_neraca,
-	// 	];
-	// 	$this->M_datapenyedia->update_neraca($upload, $where);
-
-	// 	$this->output->set_content_type('application/json')->set_output(json_encode('success'));
-	// }
-
 
 
 
@@ -3796,7 +3960,7 @@ class Datapenyedia extends CI_Controller
 		$no = $_POST['start'];
 		$nama_usaha = $this->session->userdata('nama_usaha');
 		$date = date('Y');
-		$file_path = 'file_vms/' . $nama_usaha . '/Neraca-' . $date;
+		$file_path = 'file_vms/' . $nama_usaha . '/Neraca';
 		foreach ($resultss as $rs) {
 			$row = array();
 			$row[] = ++$no;
@@ -3815,12 +3979,16 @@ class Datapenyedia extends CI_Controller
 				$row[] = '<center>
             	<a href="javascript:;" class="btn btn-warning btn-sm shadow-lg" onClick="DekripEnkrip_neraca(' . "'" . $rs->id_url_neraca . "','dekrip'" . ')"> <i class="fa-solid fa-lock-open px-1"></i> Dekrip</a></center>';
 			}
-			if ($rs->sts_validasi == 1) {
-				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
-			} else if ($rs->sts_validasi == 0) {
+			if ($rs->sts_validasi == 0) {
 				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
-			} else {
+			} else if ($rs->sts_validasi == 1) {
+				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
+			} else if ($rs->sts_validasi == 2) {
 				$row[] = '<span class="badge bg-danger">Tidak Valid</span>';
+			} else if ($rs->sts_validasi == 3) {
+				$row[] = '<span class="badge bg-warning">Revisi</span>';
+			} else {
+				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
 			}
 			$row[] = '<a  href="javascript:;" class="btn btn-info btn-sm" style="width:150px" onClick="by_id_neraca_keuangan(' . "'" . $rs->id_neraca . "','edit'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i> View</a>
 			<a  href="javascript:;" class="btn btn-danger btn-sm" style="width:150px" onClick="by_id_neraca_keuangan(' . "'" . $rs->id_neraca . "','hapus'" . ')"><i class="fas fa fa-trash"></i> Delete</a>';
@@ -3841,16 +4009,16 @@ class Datapenyedia extends CI_Controller
 		$row_neraca = $this->M_datapenyedia->get_row_neraca($id_neraca);
 		$nama_usaha = $this->session->userdata('nama_usaha');
 		$date = date('Y');
-		if (!is_dir('file_vms/' . $nama_usaha . '/Neraca-' . $date)) {
-			mkdir('file_vms/' . $nama_usaha . '/Neraca-' . $date, 0777, TRUE);
+		if (!is_dir('file_vms/' . $nama_usaha . '/Neraca')) {
+			mkdir('file_vms/' . $nama_usaha . '/Neraca', 0777, TRUE);
 		}
 		if ($row_neraca['sts_token_dokumen'] == 1) {
 			$chiper = "AES-128-ECB";
 			$secret_token_dokumen1 = 'jmto.1' . $row_neraca['id_url_neraca'];
 			$file_dokumen_neraca = openssl_decrypt($row_neraca['file_dokumen_neraca'], $chiper, $secret_token_dokumen1);
-			$excelFilePath = './file_vms/' . $nama_usaha . '/Neraca-' . $date . '/' . $file_dokumen_neraca . ''; // Replace with the actual path to your Excel file
+			$excelFilePath = './file_vms/' . $nama_usaha . '/Neraca' . '/' . $file_dokumen_neraca . ''; // Replace with the actual path to your Excel file
 		} else {
-			$excelFilePath = './file_vms/' . $nama_usaha . '/Neraca-' . $date . '/' . $row_neraca['file_dokumen_neraca'] . ''; // Replace with the actual path to your Excel file
+			$excelFilePath = './file_vms/' . $nama_usaha . '/Neraca' . '/' . $row_neraca['file_dokumen_neraca'] . ''; // Replace with the actual path to your Excel file
 		}
 		$spreadsheet = IOFactory::load($excelFilePath);
 		$sheet = $spreadsheet->getActiveSheet();
@@ -3916,7 +4084,7 @@ class Datapenyedia extends CI_Controller
 		$id_vendor = $get_row_enkrip['id_vendor'];
 		$row_vendor = $this->M_datapenyedia->get_row_vendor($id_vendor);
 		$date = date('Y');
-		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/Neraca-' . $date . '/' . $fileDownload, NULL);
+		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/Neraca' . '/' . $fileDownload, NULL);
 	}
 	public function hapus_row_neraca($id_url_neraca)
 	{
@@ -3969,7 +4137,11 @@ class Datapenyedia extends CI_Controller
 		// post
 		$no_surat = $this->input->post('no_surat_sppkp');
 		$sts_seumur_hidup = $this->input->post('sts_seumur_hidup_sppkp');
-		$tgl_berlaku = $this->input->post('tgl_berlaku_sppkp');
+		if ($sts_seumur_hidup == 2) {
+			$tgl_berlaku = NULL;
+		} else {
+			$tgl_berlaku = $this->input->post('tgl_berlaku_sppkp');
+		}
 		$password_dokumen = '1234';
 		$this->form_validation->set_rules('no_surat_sppkp', 'SPPKP', 'required|trim', ['required' => 'SPPKP Wajib Diisi!']);
 		$this->form_validation->set_rules('sts_seumur_hidup_sppkp', 'Berlaku Sampai', 'required|trim', ['required' => 'Berlaku Sampai Wajib Diisi!']);
@@ -3993,10 +4165,10 @@ class Datapenyedia extends CI_Controller
 			];
 			$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			$date = date('Y');
-			if (!is_dir('file_vms/' . $nama_usaha . '/SPPKP-' . $date)) {
-				mkdir('file_vms/' . $nama_usaha . '/SPPKP-' . $date, 0777, TRUE);
+			if (!is_dir('file_vms/' . $nama_usaha . '/SPPKP')) {
+				mkdir('file_vms/' . $nama_usaha . '/SPPKP', 0777, TRUE);
 			}
-			$config['upload_path'] = './file_vms/' . $nama_usaha . '/SPPKP-' . $date;
+			$config['upload_path'] = './file_vms/' . $nama_usaha . '/SPPKP';
 			$config['allowed_types'] = 'pdf';
 			$config['max_size'] = 0;
 			$config['remove_spaces'] = TRUE;
@@ -4148,7 +4320,7 @@ class Datapenyedia extends CI_Controller
 		$date = date('Y');
 		// $nama_file = $get_row_enkrip['nomor_surat'];
 		// $file_dokumen =  $get_row_enkrip['file_dokumen'];
-		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/SPPKP-' . $date . '/' . $get_row_enkrip['file_dokumen'], NULL);
+		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/SPPKP' . '/' . $get_row_enkrip['file_dokumen'], NULL);
 	}
 
 
@@ -4165,6 +4337,11 @@ class Datapenyedia extends CI_Controller
 		$no_surat = $this->input->post('no_npwp');
 		$sts_seumur_hidup = $this->input->post('sts_seumur_hidup_npwp');
 		$tgl_berlaku = $this->input->post('tgl_berlaku_npwp');
+		if ($sts_seumur_hidup == 2) {
+			$tgl_berlaku = NULL;
+		} else {
+			$tgl_berlaku = $this->input->post('tgl_berlaku_npwp');
+		}
 		$password_dokumen = '1234';
 		$this->form_validation->set_rules('no_npwp', 'NPWP', 'required|trim', ['required' => 'NPWP Wajib Diisi!']);
 		$this->form_validation->set_rules('sts_seumur_hidup_npwp', 'Berlaku Sampai', 'required|trim', ['required' => 'Berlaku Sampai Wajib Diisi!']);
@@ -4188,10 +4365,10 @@ class Datapenyedia extends CI_Controller
 			];
 			$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			$date = date('Y');
-			if (!is_dir('file_vms/' . $nama_usaha . '/NPWP-' . $date)) {
-				mkdir('file_vms/' . $nama_usaha . '/NPWP-' . $date, 0777, TRUE);
+			if (!is_dir('file_vms/' . $nama_usaha . '/NPWP')) {
+				mkdir('file_vms/' . $nama_usaha . '/NPWP', 0777, TRUE);
 			}
-			$config['upload_path'] = './file_vms/' . $nama_usaha . '/NPWP-' . $date;
+			$config['upload_path'] = './file_vms/' . $nama_usaha . '/NPWP';
 			$config['allowed_types'] = 'pdf';
 			$config['max_size'] = 0;
 			$config['remove_spaces'] = TRUE;
@@ -4360,7 +4537,7 @@ class Datapenyedia extends CI_Controller
 		$date = date('Y');
 		// $nama_file = $get_row_enkrip['nomor_surat'];
 		// $file_dokumen =  $get_row_enkrip['file_dokumen'];
-		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/NPWP-' . $date . '/' . $get_row_enkrip['file_dokumen'], NULL);
+		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/NPWP' . '/' . $get_row_enkrip['file_dokumen'], NULL);
 	}
 
 	// CRUD SPT
@@ -4384,12 +4561,16 @@ class Datapenyedia extends CI_Controller
 				$row[] = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_spt(\'' . $rs->id_url . '\')" class="btn btn-sm btn-warning btn-block">' . $rs->file_dokumen . '</a>';
 			}
 			// nanti main kondisi hitung dokumen dimari
-			if ($rs->sts_validasi == 1) {
-				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
-			} else if ($rs->sts_validasi == 0) {
+			if ($rs->sts_validasi == 0) {
 				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
-			} else {
+			} else if ($rs->sts_validasi == 1) {
+				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
+			} else if ($rs->sts_validasi == 2) {
 				$row[] = '<span class="badge bg-danger">Tidak Valid</span>';
+			} else if ($rs->sts_validasi == 3) {
+				$row[] = '<span class="badge bg-warning">Revisi</span>';
+			} else {
+				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
 			}
 
 			if ($rs->sts_token_dokumen == 1) {
@@ -4452,10 +4633,10 @@ class Datapenyedia extends CI_Controller
 			];
 			$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			$date = date('Y');
-			if (!is_dir('file_vms/' . $nama_usaha . '/SPT-' . $date)) {
-				mkdir('file_vms/' . $nama_usaha . '/SPT-' . $date, 0777, TRUE);
+			if (!is_dir('file_vms/' . $nama_usaha . '/SPT')) {
+				mkdir('file_vms/' . $nama_usaha . '/SPT', 0777, TRUE);
 			}
-			$config['upload_path'] = './file_vms/' . $nama_usaha . '/SPT-' . $date;
+			$config['upload_path'] = './file_vms/' . $nama_usaha . '/SPT';
 			$config['allowed_types'] = 'pdf';
 			$config['max_size'] = 0;
 			$config['remove_spaces'] = TRUE;
@@ -4549,11 +4730,11 @@ class Datapenyedia extends CI_Controller
 			];
 			$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			$date = date('Y');
-			if (!is_dir('file_vms/' . $nama_usaha . '/SPT-' . $date)) {
-				mkdir('file_vms/' . $nama_usaha . '/SPT-' . $date, 0777, TRUE);
+			if (!is_dir('file_vms/' . $nama_usaha . '/SPT')) {
+				mkdir('file_vms/' . $nama_usaha . '/SPT', 0777, TRUE);
 			}
 
-			$config['upload_path'] = './file_vms/' . $nama_usaha . '/SPT-' . $date;
+			$config['upload_path'] = './file_vms/' . $nama_usaha . '/SPT';
 			$config['allowed_types'] = 'pdf';
 			$config['max_size'] = 0;
 			$config['remove_spaces'] = TRUE;
@@ -4692,7 +4873,7 @@ class Datapenyedia extends CI_Controller
 		$date = date('Y');
 		// $nama_file = $get_row_enkrip['nomor_surat'];
 		// $file_dokumen = $get_row_enkrip['file_dokumen'];
-		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/SPT-' . $date . '/' . $get_row_enkrip['file_dokumen'], NULL);
+		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/SPT' . '/' . $get_row_enkrip['file_dokumen'], NULL);
 	}
 	public function hapus_row_spt($id_url)
 	{
@@ -4732,12 +4913,16 @@ class Datapenyedia extends CI_Controller
 			} else {
 				$row[] = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_keuangan(\'' . $rs->id_url . '\')" class="btn btn-sm btn-warning btn-block">' . $rs->file_laporan_keuangan . '</a>';
 			}
-			if ($rs->sts_validasi == 1) {
-				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
-			} else if ($rs->sts_validasi == 0) {
+			if ($rs->sts_validasi == 0) {
 				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
-			} else {
+			} else if ($rs->sts_validasi == 1) {
+				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
+			} else if ($rs->sts_validasi == 2) {
 				$row[] = '<span class="badge bg-danger">Tidak Valid</span>';
+			} else if ($rs->sts_validasi == 3) {
+				$row[] = '<span class="badge bg-warning">Revisi</span>';
+			} else {
+				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
 			}
 
 			if ($rs->sts_token_dokumen == 1) {
@@ -4787,10 +4972,10 @@ class Datapenyedia extends CI_Controller
 				];
 				$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 				$date = date('Y');
-				if (!is_dir('file_vms/' . $nama_usaha . '/Laporan_Keuangan-' . $date)) {
-					mkdir('file_vms/' . $nama_usaha . '/Laporan_Keuangan-' . $date, 0777, TRUE);
+				if (!is_dir('file_vms/' . $nama_usaha . '/Laporan_keuangan')) {
+					mkdir('file_vms/' . $nama_usaha . '/Laporan_keuangan', 0777, TRUE);
 				}
-				$config['upload_path'] = './file_vms/' . $nama_usaha . '/Laporan_Keuangan-' . $date;
+				$config['upload_path'] = './file_vms/' . $nama_usaha . '/Laporan_keuangan';
 				$config['allowed_types'] = 'pdf';
 				$config['max_size'] = 0;
 				$this->load->library('upload', $config);
@@ -4839,10 +5024,10 @@ class Datapenyedia extends CI_Controller
 				];
 				$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 				$date = date('Y');
-				if (!is_dir('file_vms/' . $nama_usaha . '/Laporan_Keuangan-' . $date)) {
-					mkdir('file_vms/' . $nama_usaha . '/Laporan_Keuangan-' . $date, 0777, TRUE);
+				if (!is_dir('file_vms/' . $nama_usaha . '/Laporan_keuangan')) {
+					mkdir('file_vms/' . $nama_usaha . '/Laporan_keuangan', 0777, TRUE);
 				}
-				$config['upload_path'] = './file_vms/' . $nama_usaha . '/Laporan_Keuangan-' . $date;
+				$config['upload_path'] = './file_vms/' . $nama_usaha . '/Laporan_keuangan';
 				$config['allowed_types'] = 'pdf';
 				$config['max_size'] = 0;
 				$this->load->library('upload', $config);
@@ -4898,10 +5083,10 @@ class Datapenyedia extends CI_Controller
 				];
 				$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 				$date = date('Y');
-				if (!is_dir('file_vms/' . $nama_usaha . '/Laporan_Keuangan-' . $date)) {
-					mkdir('file_vms/' . $nama_usaha . '/Laporan_Keuangan-' . $date, 0777, TRUE);
+				if (!is_dir('file_vms/' . $nama_usaha . '/Laporan_keuangan')) {
+					mkdir('file_vms/' . $nama_usaha . '/Laporan_keuangan', 0777, TRUE);
 				}
-				$config['upload_path'] = './file_vms/' . $nama_usaha . '/Laporan_Keuangan-' . $date;
+				$config['upload_path'] = './file_vms/' . $nama_usaha . '/Laporan_keuangan';
 				$config['allowed_types'] = 'pdf';
 				$config['max_size'] = 0;
 				$this->load->library('upload', $config);
@@ -4946,10 +5131,10 @@ class Datapenyedia extends CI_Controller
 				];
 				$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 				$date = date('Y');
-				if (!is_dir('file_vms/' . $nama_usaha . '/Laporan_Keuangan-' . $date)) {
-					mkdir('file_vms/' . $nama_usaha . '/Laporan_Keuangan-' . $date, 0777, TRUE);
+				if (!is_dir('file_vms/' . $nama_usaha . '/Laporan_keuangan')) {
+					mkdir('file_vms/' . $nama_usaha . '/Laporan_keuangan', 0777, TRUE);
 				}
-				$config['upload_path'] = './file_vms/' . $nama_usaha . '/Laporan_Keuangan-' . $date;
+				$config['upload_path'] = './file_vms/' . $nama_usaha . '/Laporan_keuangan';
 				$config['allowed_types'] = 'pdf';
 				$config['max_size'] = 0;
 				$this->load->library('upload', $config);
@@ -5061,7 +5246,7 @@ class Datapenyedia extends CI_Controller
 		}
 		$row_vendor = $this->M_datapenyedia->get_row_vendor($id_vendor);
 		$date = date('Y');
-		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/Laporan_Keuangan-' . $date . '/' . $fileDownload, NULL);
+		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/Laporan_Keuangan' . '/' . $fileDownload, NULL);
 	}
 
 	// end crud laporan keuangan
@@ -5080,7 +5265,11 @@ class Datapenyedia extends CI_Controller
 		// post
 		$nomor_surat = $this->input->post('nomor_surat_skdp');
 		$sts_seumur_hidup = $this->input->post('sts_seumur_hidup_skdp');
-		$tgl_berlaku = $this->input->post('tgl_berlaku_skdp');
+		if ($sts_seumur_hidup == 2) {
+			$tgl_berlaku = NULL;
+		} else {
+			$tgl_berlaku = $this->input->post('tgl_berlaku_skdp');
+		}
 		$password_dokumen = '1234';
 		$this->form_validation->set_rules('nomor_surat_skdp', 'Nomor Surat', 'required|trim', ['required' => 'Nomor Surat Wajib Diisi!']);
 		$this->form_validation->set_rules('sts_seumur_hidup_skdp', 'Berlaku Sampai', 'required|trim', ['required' => 'Berlaku Sampai Wajib Diisi!']);
@@ -5109,11 +5298,11 @@ class Datapenyedia extends CI_Controller
 			];
 			$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			$date = date('Y');
-			if (!is_dir('file_vms/' . $nama_usaha . '/SKDP-' . $date)) {
-				mkdir('file_vms/' . $nama_usaha . '/SKDP-' . $date, 0777, TRUE);
+			if (!is_dir('file_vms/' . $nama_usaha . '/SKDP')) {
+				mkdir('file_vms/' . $nama_usaha . '/SKDP', 0777, TRUE);
 			}
 
-			$config['upload_path'] = './file_vms/' . $nama_usaha . '/SKDP-' . $date;
+			$config['upload_path'] = './file_vms/' . $nama_usaha . '/SKDP';
 			$config['allowed_types'] = 'pdf';
 			$config['max_size'] = 0;
 			$config['remove_spaces'] = TRUE;
@@ -5127,24 +5316,37 @@ class Datapenyedia extends CI_Controller
 				$chiper = "AES-128-ECB";
 				$secret = $token;
 				$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret);
-				$upload = [
-					'id_url' => $id,
-					'id_vendor' => $id_vendor,
-					'nomor_surat' => $nomor_surat,
-					'sts_seumur_hidup' => $sts_seumur_hidup,
-					'password_dokumen' => $password_dokumen,
-					'file_dokumen' => $enckrips_string,
-					'token_dokumen' => $secret,
-					'tgl_berlaku' => $tgl_berlaku,
-					'sts_token_dokumen' => 1,
-					'sts_validasi' => 0,
-				];
-				$where = [
-					'id_vendor' => $id_vendor
-				];
+
 				if (!$row_skdp) {
+					$upload = [
+						'id_url' => $id,
+						'id_vendor' => $id_vendor,
+						'nomor_surat' => $nomor_surat,
+						'sts_seumur_hidup' => $sts_seumur_hidup,
+						'password_dokumen' => $password_dokumen,
+						'file_dokumen' => $enckrips_string,
+						'token_dokumen' => $secret,
+						'tgl_berlaku' => $tgl_berlaku,
+						'sts_token_dokumen' => 1,
+						'sts_validasi' => 0,
+					];
 					$this->M_datapenyedia->tambah_skdp($upload);
 				} else {
+					$upload = [
+						'id_url' => $id,
+						'id_vendor' => $id_vendor,
+						'nomor_surat' => $nomor_surat,
+						'sts_seumur_hidup' => $sts_seumur_hidup,
+						'password_dokumen' => $password_dokumen,
+						'file_dokumen' => $enckrips_string,
+						'token_dokumen' => $secret,
+						'tgl_berlaku' => $tgl_berlaku,
+						'sts_token_dokumen' => 1,
+						'sts_validasi' => 3,
+					];
+					$where = [
+						'id_vendor' => $id_vendor
+					];
 					$this->M_datapenyedia->update_skdp($upload, $where);
 				}
 
@@ -5421,7 +5623,7 @@ class Datapenyedia extends CI_Controller
 		$date = date('Y');
 		// $nama_file = $get_row_enkrip['nomor_surat'];
 		// $file_dokumen =  $get_row_enkrip['file_dokumen'];
-		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/SKDP-' . $date . '/' . $get_row_enkrip['file_dokumen'], NULL);
+		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/SKDP' . '/' . $get_row_enkrip['file_dokumen'], NULL);
 	}
 	// end crud skdp
 
@@ -5439,7 +5641,11 @@ class Datapenyedia extends CI_Controller
 		$nomor_surat = $this->input->post('nomor_surat_lainnya');
 		$nama_surat = $this->input->post('nama_surat');
 		$sts_seumur_hidup = $this->input->post('sts_seumur_hidup_lainnya');
-		$tgl_berlaku = $this->input->post('tgl_berlaku_lainnya');
+		if ($sts_seumur_hidup == 2) {
+			$tgl_berlaku = NULL;
+		} else {
+			$tgl_berlaku = $this->input->post('tgl_berlaku_lainnya');
+		}
 		$password_dokumen = '1234';
 		$this->form_validation->set_rules('nomor_surat_lainnya', 'Nomor Surat', 'required|trim', ['required' => 'Nomor Surat Wajib Diisi!']);
 		$this->form_validation->set_rules('sts_seumur_hidup_lainnya', 'Berlaku Sampai', 'required|trim', ['required' => 'Berlaku Sampai Wajib Diisi!']);
@@ -5468,11 +5674,11 @@ class Datapenyedia extends CI_Controller
 			];
 			$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			$date = date('Y');
-			if (!is_dir('file_vms/' . $nama_usaha . '/Izin_Lainnya-' . $date)) {
-				mkdir('file_vms/' . $nama_usaha . '/Izin_Lainnya-' . $date, 0777, TRUE);
+			if (!is_dir('file_vms/' . $nama_usaha . '/Izin_lainnya')) {
+				mkdir('file_vms/' . $nama_usaha . '/Izin_lainnya', 0777, TRUE);
 			}
 
-			$config['upload_path'] = './file_vms/' . $nama_usaha . '/Izin_Lainnya-' . $date;
+			$config['upload_path'] = './file_vms/' . $nama_usaha . '/Izin_lainnya';
 			$config['allowed_types'] = 'pdf';
 			$config['max_size'] = 0;
 			$config['remove_spaces'] = TRUE;
@@ -5486,25 +5692,42 @@ class Datapenyedia extends CI_Controller
 				$chiper = "AES-128-ECB";
 				$secret = $token;
 				$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret);
-				$upload = [
-					'id_url' => $id,
-					'id_vendor' => $id_vendor,
-					'nomor_surat' => $nomor_surat,
-					'nama_surat' => $nama_surat,
-					'sts_seumur_hidup' => $sts_seumur_hidup,
-					'password_dokumen' => $password_dokumen,
-					'file_dokumen' => $enckrips_string,
-					'token_dokumen' => $secret,
-					'tgl_berlaku' => $tgl_berlaku,
-					'sts_token_dokumen' => 1,
-					'sts_validasi' => 0,
-				];
-				$where = [
-					'id_vendor' => $id_vendor
-				];
+
 				if (!$row_lainnya) {
+					$upload = [
+						'id_url' => $id,
+						'id_vendor' => $id_vendor,
+						'nomor_surat' => $nomor_surat,
+						'nama_surat' => $nama_surat,
+						'sts_seumur_hidup' => $sts_seumur_hidup,
+						'password_dokumen' => $password_dokumen,
+						'file_dokumen' => $enckrips_string,
+						'token_dokumen' => $secret,
+						'tgl_berlaku' => $tgl_berlaku,
+						'sts_token_dokumen' => 1,
+						'sts_validasi' => 0,
+					];
+					$where = [
+						'id_vendor' => $id_vendor
+					];
 					$this->M_datapenyedia->tambah_lainnya($upload);
 				} else {
+					$upload = [
+						'id_url' => $id,
+						'id_vendor' => $id_vendor,
+						'nomor_surat' => $nomor_surat,
+						'nama_surat' => $nama_surat,
+						'sts_seumur_hidup' => $sts_seumur_hidup,
+						'password_dokumen' => $password_dokumen,
+						'file_dokumen' => $enckrips_string,
+						'token_dokumen' => $secret,
+						'tgl_berlaku' => $tgl_berlaku,
+						'sts_token_dokumen' => 1,
+						'sts_validasi' => 3,
+					];
+					$where = [
+						'id_vendor' => $id_vendor
+					];
 					$this->M_datapenyedia->update_lainnya($upload, $where);
 				}
 
@@ -5622,7 +5845,7 @@ class Datapenyedia extends CI_Controller
 		$date = date('Y');
 		// $nama_file = $get_row_enkrip['nomor_surat'];
 		// $file_dokumen =  $get_row_enkrip['file_dokumen'];
-		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/Izin_Lainnya-' . $date . '/' . $get_row_enkrip['file_dokumen'], NULL);
+		return force_download('file_vms/' . $row_vendor['nama_usaha'] . '/Izin_Lainnya' . '/' . $get_row_enkrip['file_dokumen'], NULL);
 	}
 	// end crud lainnya
 

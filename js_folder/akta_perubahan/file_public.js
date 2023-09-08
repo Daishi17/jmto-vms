@@ -7,8 +7,9 @@
 var form_akta_perubahan = $('#form_akta_perubahan')
 form_akta_perubahan.on('submit', function(e) {
     var url_post = $('[name="url_post_perubahan"]').val()
-    var file_dokumen_manipulasi_perubahan = $('[name="file_dokumen_manipulasi_perubahan"]').val()
-    if (file_dokumen_manipulasi_perubahan == '') {
+    var file_dokumen_perubahan = $('[name="file_dokumen_perubahan"]').val()
+    var file_dok_kumham = $('[name="file_dok_kumham"]').val()
+    if (file_dokumen_perubahan == '' && file_dok_kumham == '') {
       e.preventDefault();
       Swal.fire({
           icon: 'error',
@@ -56,7 +57,7 @@ form_akta_perubahan.on('submit', function(e) {
                 willClose: () => {
                   clearInterval(timerInterval)
                   Swal.fire('Data Berhasil Di Simpan!', '', 'success')
-                  get_row_vendor();
+                  get_row_vendor_perubahan()
                   $(".no_surat_perubahan_error").css('display','none');
                   // sts_seumur_hidup
                   $(".sts_seumur_hidup_perubahan_error").css('display','none');
@@ -65,6 +66,13 @@ form_akta_perubahan.on('submit', function(e) {
                   // kualifikasi_usaha
                   $(".kualifikasi_usaha_perubahan_error").css('display','none');
                   $('#save_perubahan').attr("disabled", false);
+                  $('#button_edit_perubahan').attr("disabled", false);
+                  $('[name="no_surat_perubahan"]').attr("disabled", true);
+                  $('[name="tgl_masa_berlaku_perubahan"]').attr("disabled", true);
+                  $('[name="jumlah_setor_perubahan"]').attr("disabled", true);
+                  $('[name="kualifikasi_usaha_perubahan"]').attr("disabled", true);
+                  // $('.file_dokumen').attr("disabled", true);
+                  $('#save_perubahan').attr("disabled", true);
                   $('#button_edit_perubahan').attr("disabled", false);
                 }
               }).then((result) => {
@@ -108,10 +116,12 @@ function get_row_vendor_perubahan() {
         }
         $('[name="file_dokumen_manipulasi_perubahan"]').val(response['row_akta_perubahan']['file_dokumen']);
           $('[name="no_surat_perubahan"]').attr("disabled", true);
+          $('[name="no_sk_kumham"]').attr("disabled", true);
           $('[name="sts_seumur_hidup_perubahan"]').attr("disabled", true);
           $('[name="tgl_masa_berlaku_perubahan"]').attr("disabled", true);
           $('[name="jumlah_setor_perubahan"]').attr("disabled", true);
           $('[name="kualifikasi_usaha_perubahan"]').attr("disabled", true);
+          $('.file_valid_akta_perubahan').attr("disabled", true);
           // $('.file_dokumen').attr("disabled", true);
           $('#save_perubahan').attr("disabled", true);
           $('#button_edit_perubahan').attr("disabled", false);
@@ -120,6 +130,7 @@ function get_row_vendor_perubahan() {
           // $('#save_perubahan').attr("disabled", true);
         } else {
           $('[name="no_surat_perubahan"]').attr("disabled", false);
+          $('[name="no_sk_kumham"]').attr("disabled", false);
           $('[name="sts_seumur_hidup_perubahan"]').attr("disabled", false);
           $('[name="tgl_masa_berlaku_perubahan"]').attr("disabled", false);
           $('[name="jumlah_setor_perubahan"]').attr("disabled", false);
@@ -127,6 +138,7 @@ function get_row_vendor_perubahan() {
           // $('.file_dokumen').attr("disabled", true);
           $('#save_perubahan').attr("disabled", false);
           $('#button_edit_perubahan').attr("disabled", true);
+          $('.file_valid_akta_perubahan').attr("disabled", false);
         }
           if (response == 'maaf') {
               alert('Maaf Anda Kurang Beruntung');
@@ -134,6 +146,7 @@ function get_row_vendor_perubahan() {
               var id_url = response['row_akta_perubahan']['id_url'];
               $('[name="file_dokumen_manipulasi_perubahan"]').val(response['row_akta_perubahan']['file_dokumen']);
               $('[name="no_surat_perubahan"]').val(response['row_akta_perubahan']['no_surat']);
+              $('[name="no_sk_kumham"]').val(response['row_akta_perubahan']['no_sk_kumham']);
               $('[name="sts_seumur_hidup_perubahan"]').val(response['row_akta_perubahan']['sts_seumur_hidup']);
               $('[name="tgl_masa_berlaku_perubahan"]').val(response['row_akta_perubahan']['tgl_berlaku_akta']);
               $('[name="jumlah_setor_perubahan"]').val(response['row_akta_perubahan']['jumlah_setor_modal']);
@@ -144,13 +157,18 @@ function get_row_vendor_perubahan() {
                   $('.button_enkrip_perubahan').html('<a href="javascript:;"  onclick="DekripEnkrip_Perubahan(\'' + id_url +'\''+','+ '\'' + 'dekrip' +'\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>');
                   var html2 = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" class="btn btn-sm btn-info btn-block">' +
                   response['row_akta_perubahan']['file_dokumen'] +'</a>';
+                  var html3 = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" class="btn btn-sm btn-info btn-block">' +
+                  response['row_akta_perubahan']['file_dok_kumham'] +'</a>';
                   $('#tampil_dokumen_akta_perubahan').html(html2);
+                  $('#tampil_dokumen_kumhan').html(html3);
                   $('.token_generate_perubahan').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>'+response['row_akta_perubahan']['token_dokumen']+'</textarea></div>');
               } else {
                   $('.button_enkrip_perubahan').html('<a href="javascript:;" onclick="DekripEnkrip_Perubahan(\'' + id_url +'\''+','+ '\'' + 'enkrip' +'\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i> Enkripsi Dokumen</a>');
                   var html2 = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_perubahan(\''+ id_url +'\')" class="btn btn-sm btn-warning btn-block">' + response['row_akta_perubahan']['file_dokumen'] +'</a>';
+                  var html3 = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_kumham(\''+ id_url +'\')" class="btn btn-sm btn-warning btn-block">' + response['row_akta_perubahan']['file_dok_kumham'] +'</a>';
                   $('.token_generate_perubahan').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>'+response['row_akta_perubahan']['token_dokumen']+'</textarea></div>');
                   $('#tampil_dokumen_akta_perubahan').html(html2);
+                  $('#tampil_dokumen_kumhan').html(html3);
               }
           }
         
@@ -163,6 +181,11 @@ function DownloadFile_perubahan(id_url){
   location.href = url_download_perubahan + id_url;
 }
 
+function DownloadFile_kumham(id_url){
+  var url_download_kumham = $('[name="url_download_kumham"]').val()
+  location.href = url_download_kumham + id_url;
+}
+
 function DekripEnkrip_Perubahan(id_url, type){
 
   var secret_token = $('[name="secret_token"]').val()
@@ -170,21 +193,15 @@ function DekripEnkrip_Perubahan(id_url, type){
   var modal_dekrip_perubahan = $('#modal_dekrip_perubahan');
   var modal_enkrip_perubahan = $('#modal_enkrip_perubahan');
   if (type == 'dekrip') {
-    modal_dekrip_perubahan.modal('show');
-    $('input').attr("readonly", false);
-    $('[name="id_url_perubahan"]').val(id_url);
+    GenerateDekrip_Perubahan(id_url);
   } else {
-    modal_enkrip_perubahan.modal('show');
-    $('input').attr("readonly", false);
-    $('[name="id_url_perubahan"]').val(id_url);
-   
+    GenerateEnkrip_Perubahan(id_url);
   }
 }
 
-function GenerateDekrip_Perubahan(){
+function GenerateDekrip_Perubahan(id_url){
   var url_encryption_perubahan = $('[name="url_encryption_perubahan"]').val();
   var modal_dekrip_perubahan = $('#modal_dekrip_perubahan');
-  var id_url = $('[name="id_url_perubahan"]').val();
   $.ajax({
         method: "POST",
         url: url_encryption_perubahan + id_url,
@@ -231,10 +248,9 @@ function GenerateDekrip_Perubahan(){
 }
 
 
-function GenerateEnkrip_Perubahan(){
+function GenerateEnkrip_Perubahan(id_url){
   var url_encryption_perubahan = $('[name="url_encryption_perubahan"]').val();
   var modal_enkrip_perubahan = $('#modal_enkrip_perubahan');
-  var id_url =  $('[name="id_url_perubahan"]').val();
   $.ajax({
         method: "POST",
         url: url_encryption_perubahan + id_url,
@@ -264,7 +280,7 @@ function GenerateEnkrip_Perubahan(){
                   willClose: () => {
                     clearInterval(timerInterval)
                     Swal.fire('Dokumen Berhasil Di Enkripsi!', '', 'success')
-                    get_row_vendor();
+                   get_row_vendor_perubahan()
                     // $('#button_dekrip_generate').css('display', 'block');
                     // $('#button_dekrip_generate_manipulasi').css('display', 'none');
                     modal_enkrip_perubahan.modal('hide');
@@ -318,11 +334,13 @@ function Tidak_ada_akta_perubahan() {
 const EditChange_perubahan = () => {
   $('#modaledit_perubahan').modal('hide')
   $('[name="no_surat_perubahan"]').attr("disabled", false);
+  $('[name="no_sk_kumham"]').attr("disabled", false);
   $('[name="sts_seumur_hidup_perubahan"]').attr("disabled", false);
   $('[name="tgl_masa_berlaku_perubahan"]').attr("disabled", false);
   $('[name="jumlah_setor_perubahan"]').attr("disabled", false);
   $('[name="kualifikasi_usaha_perubahan"]').attr("disabled", false);
   // $('.file_dokumen').attr("disabled", true);
+  $('.file_valid_akta_perubahan').attr("disabled", false);
   $('#save_perubahan').attr("disabled", false);
   $('#button_edit_perubahan').attr("disabled", true);
 }

@@ -33,7 +33,6 @@ get_row_vendor();
             $('[name="file_dokumen_skdp_manipulasi"]').val(geekss);
         });
 
-
 function get_row_vendor() {
     var secret_token = $('[name="secret_token"]').val()
     var id_url_vendor = $('[name="id_url_vendor"]').val()
@@ -48,12 +47,26 @@ function get_row_vendor() {
         success: function(response) {
 
             if (response['row_nib']) {
-                if (response['row_nib']['sts_validasi'] == 1) {
+                if (response['row_nib']['sts_validasi'] == 0 || response['row_nib']['sts_validasi'] == '') {
+                    $('#sts_validasi_nib_0').css('display','block');
+                    $('#sts_validasi_nib_1').css('display','none');
+                    $('#sts_validasi_nib_2').css('display','none');
+                    $('#sts_validasi_nib_3').css('display','none');
+                } else if (response['row_nib']['sts_validasi'] == 1) {
+                    $('#sts_validasi_nib_0').css('display','none');
                     $('#sts_validasi_nib_1').css('display','block');
                     $('#sts_validasi_nib_2').css('display','none');
-                } else {
+                    $('#sts_validasi_nib_3').css('display','none');
+                } else if (response['row_nib']['sts_validasi'] == 2) {
+                    $('#sts_validasi_nib_0').css('display','none');
                     $('#sts_validasi_nib_1').css('display','none');
                     $('#sts_validasi_nib_2').css('display','block');
+                    $('#sts_validasi_nib_3').css('display','none');
+                } else if (response['row_nib']['sts_validasi'] == 3) {
+                    $('#sts_validasi_nib_0').css('display','none');
+                    $('#sts_validasi_nib_1').css('display','none');
+                    $('#sts_validasi_nib_2').css('display','none');
+                    $('#sts_validasi_nib_3').css('display','block');
                 }
                 $('.nomor_surat_nib').attr("readonly", true);
                 $('.sts_seumur_hidup_nib').attr("disabled", true);
@@ -78,12 +91,26 @@ function get_row_vendor() {
             }
 
             if (response['row_siup']) {
-                if (response['row_siup']['sts_validasi'] == 1) {
+                if (response['row_siup']['sts_validasi'] == 0 || response['row_siup']['sts_validasi'] == '') {
+                    $('#sts_validasi_siup_0').css('display','block');
+                    $('#sts_validasi_siup_1').css('display','none');
+                    $('#sts_validasi_siup_2').css('display','none');
+                    $('#sts_validasi_siup_3').css('display','none');
+                } else if (response['row_siup']['sts_validasi'] == 1) {
+                    $('#sts_validasi_siup_0').css('display','none');
                     $('#sts_validasi_siup_1').css('display','block');
                     $('#sts_validasi_siup_2').css('display','none');
-                } else {
+                    $('#sts_validasi_siup_3').css('display','none');
+                } else if (response['row_siup']['sts_validasi'] == 2) {
+                    $('#sts_validasi_siup_0').css('display','none');
                     $('#sts_validasi_siup_1').css('display','none');
                     $('#sts_validasi_siup_2').css('display','block');
+                    $('#sts_validasi_siup_3').css('display','none');
+                } else if (response['row_siup']['sts_validasi'] == 3) {
+                    $('#sts_validasi_siup_0').css('display','none');
+                    $('#sts_validasi_siup_1').css('display','none');
+                    $('#sts_validasi_siup_2').css('display','none');
+                    $('#sts_validasi_siup_3').css('display','block');
                 }
                 $('.nomor_surat_siup').attr("readonly", true);
                 $('.sts_seumur_hidup_siup').attr("disabled", true);
@@ -107,12 +134,26 @@ function get_row_vendor() {
             }
 
             if (response['row_sbu']) {
-                if (response['row_sbu']['sts_validasi'] == 1) {
+                if (response['row_sbu']['sts_validasi'] == 0 || response['row_sbu']['sts_validasi'] == '') {
+                    $('#sts_validasi_sbu_0').css('display','block');
+                    $('#sts_validasi_sbu_1').css('display','none');
+                    $('#sts_validasi_sbu_2').css('display','none');
+                    $('#sts_validasi_sbu_3').css('display','none');
+                } else if (response['row_sbu']['sts_validasi'] == 1) {
+                    $('#sts_validasi_sbu_0').css('display','none');
                     $('#sts_validasi_sbu_1').css('display','block');
                     $('#sts_validasi_sbu_2').css('display','none');
-                } else {
+                    $('#sts_validasi_sbu_3').css('display','none');
+                } else if (response['row_sbu']['sts_validasi'] == 2) {
+                    $('#sts_validasi_sbu_0').css('display','none');
                     $('#sts_validasi_sbu_1').css('display','none');
                     $('#sts_validasi_sbu_2').css('display','block');
+                    $('#sts_validasi_sbu_3').css('display','none');
+                } else if (response['row_sbu']['sts_validasi'] == 3) {
+                    $('#sts_validasi_sbu_0').css('display','none');
+                    $('#sts_validasi_sbu_1').css('display','none');
+                    $('#sts_validasi_sbu_2').css('display','none');
+                    $('#sts_validasi_sbu_3').css('display','block');
                 }
                 $('.nomor_surat_sbu').attr("readonly", true);
                 $('.sts_seumur_hidup_sbu').attr("disabled", true);
@@ -136,12 +177,26 @@ function get_row_vendor() {
             }
 
             if (response['row_siujk']) {
-                if (response['row_siujk']['sts_validasi'] == 1) {
+                if (response['row_siujk']['sts_validasi'] == 0 || response['row_siujk']['sts_validasi'] == '') {
+                    $('#sts_validasi_siujk_0').css('display','block');
+                    $('#sts_validasi_siujk_1').css('display','none');
+                    $('#sts_validasi_siujk_2').css('display','none');
+                    $('#sts_validasi_siujk_3').css('display','none');
+                } else if (response['row_siujk']['sts_validasi'] == 1) {
+                    $('#sts_validasi_siujk_0').css('display','none');
                     $('#sts_validasi_siujk_1').css('display','block');
                     $('#sts_validasi_siujk_2').css('display','none');
-                } else {
+                    $('#sts_validasi_siujk_3').css('display','none');
+                } else if (response['row_siujk']['sts_validasi'] == 2) {
+                    $('#sts_validasi_siujk_0').css('display','none');
                     $('#sts_validasi_siujk_1').css('display','none');
                     $('#sts_validasi_siujk_2').css('display','block');
+                    $('#sts_validasi_siujk_3').css('display','none');
+                } else if (response['row_siujk']['sts_validasi'] == 3) {
+                    $('#sts_validasi_siujk_0').css('display','none');
+                    $('#sts_validasi_siujk_1').css('display','none');
+                    $('#sts_validasi_siujk_2').css('display','none');
+                    $('#sts_validasi_siujk_3').css('display','block');
                 }
                 $('.nomor_surat_siujk').attr("readonly", true);
                 $('.sts_seumur_hidup_siujk').attr("disabled", true);
@@ -165,12 +220,26 @@ function get_row_vendor() {
             }
 
             if (response['row_skdp']) {
-                if (response['row_skdp']['sts_validasi'] == 1) {
+                if (response['row_skdp']['sts_validasi'] == 0 || response['row_skdp']['sts_validasi'] == '') {
+                    $('#sts_validasi_skdp_0').css('display','block');
+                    $('#sts_validasi_skdp_1').css('display','none');
+                    $('#sts_validasi_skdp_2').css('display','none');
+                    $('#sts_validasi_skdp_3').css('display','none');
+                } else if (response['row_skdp']['sts_validasi'] == 1) {
+                    $('#sts_validasi_skdp_0').css('display','none');
                     $('#sts_validasi_skdp_1').css('display','block');
                     $('#sts_validasi_skdp_2').css('display','none');
-                } else {
+                    $('#sts_validasi_skdp_3').css('display','none');
+                } else if (response['row_skdp']['sts_validasi'] == 2) {
+                    $('#sts_validasi_skdp_0').css('display','none');
                     $('#sts_validasi_skdp_1').css('display','none');
                     $('#sts_validasi_skdp_2').css('display','block');
+                    $('#sts_validasi_skdp_3').css('display','none');
+                } else if (response['row_skdp']['sts_validasi'] == 3) {
+                    $('#sts_validasi_skdp_0').css('display','none');
+                    $('#sts_validasi_skdp_1').css('display','none');
+                    $('#sts_validasi_skdp_2').css('display','none');
+                    $('#sts_validasi_skdp_3').css('display','block');
                 }
                 $('.nomor_surat_skdp').attr("readonly", true);
                 $('.sts_seumur_hidup_skdp').attr("disabled", true);
@@ -254,6 +323,7 @@ function get_row_vendor() {
                 $('[name="no_urut_siup"]').val(response['row_siup']['no_urut']);
                 $('[name="nomor_surat_siup"]').val(response['row_siup']['nomor_surat']);
                 $('[name="kualifikasi_izin_siup"]').val(response['row_siup']['kualifikasi_izin']);
+                // console.log(response['row_siup']['tgl_berlaku']);
                 $('[name="tgl_berlaku_siup"]').val(response['row_siup']['tgl_berlaku']);
                 $('.file_dokumen_siup').text(response['row_siup']['file_dokumen'])
                 if (response['row_siup']['sts_token_dokumen'] == 1) {

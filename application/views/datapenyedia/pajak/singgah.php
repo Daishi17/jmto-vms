@@ -141,9 +141,9 @@
                                                                 <td class="col-sm-5">
                                                                     <div class="input-group mb-2">
                                                                         <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
-                                                                        <select name="sts_seumur_hidup_sppkp" class="form-select" aria-label="Default select example">
-                                                                            <option value="1">Seumur Hidup</option>
-                                                                            <option value="2">Tanggal</option>
+                                                                        <select name="sts_seumur_hidup_sppkp" onchange="ubah_masa_berlaku_sppkp()" class="form-select" aria-label="Default select example">
+                                                                            <option value="2">Seumur Hidup</option>
+                                                                            <option value="1">Tanggal</option>
                                                                         </select>
                                                                         <input type="date" name="tgl_berlaku_sppkp" class="form-control" id="date">
                                                                     </div>
@@ -176,14 +176,17 @@
                                                                     <label class="form-label col-form-label-sm"><b>Status Validasi Dokumen</b></label>
                                                                 </td>
                                                                 <td class="col-sm-5" colspan="2">
+                                                                    <div id="sts_validasi_sppkp_0" style="display: none;">
+                                                                        <span class="badge bg-secondary">Belum Tervalidasi</span>
+                                                                    </div>
                                                                     <div id="sts_validasi_sppkp_1" style="display: none;">
                                                                         <span class="badge bg-success">Tervalidasi</span>
                                                                     </div>
                                                                     <div id="sts_validasi_sppkp_2" style="display: none;">
-                                                                        <span class="badge bg-danger">Belum Tervalidasi</span>
+                                                                        <span class="badge bg-danger">Tidak Valid</span>
                                                                     </div>
                                                                     <div id="sts_validasi_sppkp_3" style="display: none;">
-                                                                        <span class="badge bg-secondary">Belum Diperiksa</span>
+                                                                        <span class="badge bg-warning">Revisi</span>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -231,7 +234,7 @@
                                                                     <div class="col-sm-10">
                                                                         <div class="input-group mb-2">
                                                                             <span class="input-group-text"><i class="fa-solid fa-address-card"></i></span>
-                                                                            <input type="text" class="form-control" data-inputmask='"mask": "99.999.999.9-999.999"' data-mask name="no_npwp">
+                                                                            <input type="text" class="form-control" readonly style="background-color: #ddddd;" name="no_npwp" value="<?= $row_vendor['npwp'] ?>">
                                                                         </div>
                                                                         <small class="no_surat_npwp_error text-danger"></small>
                                                                     </div>
@@ -242,9 +245,9 @@
                                                                 <td class="col-sm-5">
                                                                     <div class="input-group mb-2">
                                                                         <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
-                                                                        <select class="form-select" aria-label="Default select example" name="sts_seumur_hidup_npwp">
-                                                                            <option value="1">Seumur Hidup</option>
-                                                                            <option value="2">Tanggal</option>
+                                                                        <select class="form-select" onchange="ubah_masa_berlaku_npwp()" aria-label="Default select example" name="sts_seumur_hidup_npwp">
+                                                                            <option value="2">Seumur Hidup</option>
+                                                                            <option value="1">Tanggal</option>
                                                                         </select>
                                                                         <input type="date" id="date" name="tgl_berlaku_npwp" class="form-control">
                                                                     </div>
@@ -277,14 +280,17 @@
                                                                     <label class="form-label col-form-label-sm"><b>Status Validasi Dokumen</b></label>
                                                                 </td>
                                                                 <td class="col-sm-5" colspan="2">
+                                                                    <div id="sts_validasi_npwp_0" style="display: none;">
+                                                                        <span class="badge bg-secondary">Belum Tervalidasi</span>
+                                                                    </div>
                                                                     <div id="sts_validasi_npwp_1" style="display: none;">
                                                                         <span class="badge bg-success">Tervalidasi</span>
                                                                     </div>
                                                                     <div id="sts_validasi_npwp_2" style="display: none;">
-                                                                        <span class="badge bg-danger">Belum Tervalidasi</span>
+                                                                        <span class="badge bg-danger">Tidak Valid</span>
                                                                     </div>
                                                                     <div id="sts_validasi_npwp_3" style="display: none;">
-                                                                        <span class="badge bg-secondary">Belum Diperiksa</span>
+                                                                        <span class="badge bg-warning">Revisi</span>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -1293,15 +1299,15 @@
                                         <th class="tg-9wq8" rowspan="2">NO</th>
                                         <th class="tg-9wq8" rowspan="2">Uraian</th>
                                         <th class="tg-9wq8" colspan="2">
-                                            <select name="tahun_mulai" class="form-control">
+                                            <select name="tahun_mulai_edit" class="form-control" onchange="tahun_awal_edit()">
+                                                <option value="">--Pilih Tahun--</option>
                                                 <?php for ($i = 10; $i < 30; $i++) {  ?>
                                                     <option value="20<?= $i ?>">20<?= $i ?></option>
                                                 <?php } ?>
                                             </select>
                                         </th>
                                         <th class="tg-9wq8" colspan="2">
-                                            <input type="text" name="tahun_selesai" readonly>
-
+                                            <input type="text" name="tahun_selesai_edit" readonly class="form-control">
                                         </th>
                                     </tr>
                                     <tr>

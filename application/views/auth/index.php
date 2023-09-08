@@ -143,7 +143,7 @@
 
         <div class="form-field d-flex align-items-center">
             <i class="fas fa fa-user"></i>
-            <input type="text" name="userName" id="userName" placeholder="Email Atau Npwp">
+            <input type="text" name="userName" id="userName" placeholder="Email">
         </div>
         <div class="form-field d-flex align-items-center">
             <i class="fas fa fa-key"></i>
@@ -160,7 +160,7 @@
 
         <?= form_close(); ?>
         <div class="text-center fs-6">
-            <a class="btn text-white mt-2" href="<?= base_url('auth/lupa_password')?>">Forgot Password</a>
+            <a class="btn text-white mt-2" href="<?= base_url('auth/lupa_password') ?>">Forgot Password</a>
         </div>
     </div>
 </body>

@@ -6,11 +6,13 @@
     <!-- pendirian -->
     <input type="hidden" name="url_post" value="<?= base_url('datapenyedia/add_akta_pendirian') ?>">
     <input type="hidden" name="url_download_pendirian" value="<?= base_url('datapenyedia/url_download_pendirian/') ?>">
+    <input type="hidden" name="url_download_kumham_pendirian" value="<?= base_url('datapenyedia/url_download_kumham_pendirian/') ?>">
     <input type="hidden" name="url_encryption_pendirian" value="<?= base_url('datapenyedia/encryption_akta_pendirian/') ?>">
 
     <!-- perubahan -->
     <input type="hidden" name="url_post_perubahan" value="<?= base_url('datapenyedia/add_akta_perubahan') ?>">
     <input type="hidden" name="url_download_perubahan" value="<?= base_url('datapenyedia/url_download_perubahan/') ?>">
+    <input type="hidden" name="url_download_kumham" value="<?= base_url('datapenyedia/url_download_kumham/') ?>">
     <input type="hidden" name="url_encryption_perubahan" value="<?= base_url('datapenyedia/encryption_akta_perubahan/') ?>">
     <div class="row">
         <div class="col">
@@ -31,7 +33,7 @@
                         </h5>
                         <hr>
                         <small>1. Upload dokumen-dokumen yang di butuhkan sesuai dengan keterangan form Akta Pendirian/Perubahan di bawah ini.</small><br>
-                        <small>2. Akta perubahan tidak wajib diisi jika tidak ada dokumen akta perubahan. Klik tombol <b>Tidak Ada</b> untuk status dokumen valid.</small><br>
+                        <small>2. Untuk Akta Perubahan, apabila telah berubah lebih dari 1 kali Perubahan Akta, maka yang diupload hanya Akta Perubahan Terkahir saja.</small><br>
                         <small>3. Semua dokumen wajib di upload dengan format file pdf, jika dokumen file lebih dari satu, harus di buat menjadi satu dokumen file pdf.</small><br>
                         <small>4. Jika salah upload atau status dokumen file <span class="text-danger"><b>tidak valid</b></span>, klik tombol <b>Edit Changes</b> untuk melakukan upload file dokumen yang terbaru atau file dokumen revisi.</small><br>
                         <small>5. Jika dokumen file sudah terenkripsi, untuk mendownload dan membuka dokumen file, mengklik tombol <b>dekripsi</b> dan masukan <b>token</b> yang keluar dalam form pop up dekripsi dokumen file.</small><br>
@@ -41,7 +43,7 @@
                             <h6 class="card-title">
                                 <span class="text-white">
                                     <i class="fa-regular fa-folder-open"></i>
-                                    <small><strong>Form Dokumen Akta Pendirian / Perubahan</strong></small>
+                                    <small><strong>Form Dokumen Akta Pendirian/Perubahan dan SK Kumham</strong></small>
                                 </span>
                             </h6>
                         </div>
@@ -78,7 +80,7 @@
                                                         <table class="table table-sm">
                                                             <tr>
                                                                 <td class="col-sm-2 bg-light">
-                                                                    <label class="form-label col-form-label-sm"><b>Nomor Surat Akta</b></label>
+                                                                    <label class="form-label col-form-label-sm"><b>Nomor Akta</b></label>
                                                                 </td>
                                                                 <td class="col-sm-3">
                                                                     <div class="col-sm-10">
@@ -90,18 +92,32 @@
                                                                     </div>
                                                                 </td>
                                                                 <td class="col-sm-2 bg-light">
-                                                                    <label class="form-label col-sm-12 col-form-label-sm"><b>Berlaku Sampai</b></label>
+                                                                    <label class="form-label col-sm-12 col-form-label-sm"><b>Tanggal Terbit Akta</b></label>
                                                                 </td>
                                                                 <td class="col-sm-5">
                                                                     <div class="input-group mb-2">
                                                                         <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
-                                                                        <select name="sts_seumur_hidup" class="form-select sts_seumur_hidup" aria-label="Default select example">
-                                                                            <option value="1">Seumur Hidup</option>
-                                                                            <option value="2">Tanggal</option>
-                                                                        </select>
+                                                                        <!-- <select name="sts_seumur_hidup" class="form-select sts_seumur_hidup" onchange="seumur_hidup()" aria-label="Default select example">
+                                                                            <option value="2">Seumur Hidup</option>
+                                                                            <option value="1" selected>Tanggal</option>
+                                                                        </select> -->
                                                                         <input type="date" id="date" name="berlaku_sampai" class="berlaku_sampai form-control">
                                                                     </div>
                                                                     <small class="sts_seumur_hidup_error text-danger"></small>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="col-sm-2 bg-light">
+                                                                    <label class="form-label col-form-label-sm"><b>Nomor SK Kumham</b></label>
+                                                                </td>
+                                                                <td class="col-sm-3">
+                                                                    <div class="col-sm-10">
+                                                                        <div class="input-group mb-2">
+                                                                            <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
+                                                                            <input name="no_sk_kumham_pendirian" type="text" class="form-control no_sk_kumham_pendirian">
+                                                                        </div>
+                                                                        <small class="nomor_sk_kumham_error text-danger"></small>
+                                                                    </div>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -113,7 +129,7 @@
                                                                         <div class="input-group mb-2">
                                                                             <span class="input-group-text">Rp.</span>
                                                                             <input name="jumlah_setor_modal" type="text" class="form-control jumlah_setor_modal"> <!--  id="tanpa-rupiah1"  -->
-                                                                            <input type="text" class="form-control" readonly id="tanpa_rupiah_akta_pendirian">
+                                                                            <input type="text" class="form-control" value="Rp. <?= number_format($akta_pendirian['jumlah_setor_modal'], 2, ',', '.');  ?>" readonly id="tanpa_rupiah_akta_pendirian">
                                                                             <br>
                                                                         </div>
                                                                     </div>
@@ -122,7 +138,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <td class="col-sm-2 bg-light">
-                                                                    <label class="form-label col-form-label-sm"><b>Upload File</b></label>
+                                                                    <label class="form-label col-form-label-sm"><b>Upload File Akta</b></label>
                                                                 </td>
                                                                 <td class="col-sm-3">
                                                                     <input type="hidden" name="file_dokumen_manipulasi_pendirian">
@@ -135,6 +151,19 @@
                                                                     <div class="button_enkrip">
 
                                                                     </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="col-sm-2 bg-light">
+                                                                    <label class="form-label col-form-label-sm"><b>Upload File SK KUMHAM</b></label>
+                                                                </td>
+                                                                <td class="col-sm-3">
+                                                                    <input type="hidden" name="file_dok_kumham_pendirian">
+                                                                    <input type="file" class="file_valid_akta_pendirian" name="file_dok_kumham_pendirian" accept=".pdf, .xlsx, .xls">
+                                                                </td>
+                                                                <td class="col-sm-2 bg-light">
+                                                                    <div id="tampil_dokumen_akta2"></div>
+                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="col-sm-2 bg-light">
@@ -145,13 +174,9 @@
                                                                         <div class="input-group mb-2">
                                                                             <span class="input-group-text"><i class="fa-solid fa-angles-right"></i></span>
                                                                             <select name="kualifikasi_usaha" class="form-select kualifikasi_usaha" aria-label="Default select example">
-                                                                                <option value="Besar - (B1)">Besar - (B1)</option>
-                                                                                <option value="Besar - (B2)">Besar - (B2)</option>
-                                                                                <option value="Menengah - (M1)">Menengah - (M1)</option>
-                                                                                <option value="Menengah - (M2)">Menengah - (M2)</option>
-                                                                                <option value="Kecil - (K3)">Kecil - (K3)</option>
-                                                                                <option value="Kecil - (K2)">Kecil - (K2)</option>
-                                                                                <option value="Kecil - (K1)">Kecil - (K1)</option>
+                                                                                <option value="Besar">Besar</option>
+                                                                                <option value="Menengah">Menengah</option>
+                                                                                <option value="Kecil">Kecil</option>
                                                                             </select>
                                                                         </div>
                                                                         <small class="kualifikasi_usaha_error text-danger"></small>
@@ -161,14 +186,17 @@
                                                                     <label class="form-label col-form-label-sm"><b>Status Validasi Dokumen</b></label>
                                                                 </td>
                                                                 <td class="col-sm-5">
+                                                                    <div id="sts_validasi_akta_pendirian_0" style="display: none;">
+                                                                        <span class="badge bg-secondary">Belum Tervalidasi</span>
+                                                                    </div>
                                                                     <div id="sts_validasi_akta_pendirian_1" style="display: none;">
                                                                         <span class="badge bg-success">Tervalidasi</span>
                                                                     </div>
                                                                     <div id="sts_validasi_akta_pendirian_2" style="display: none;">
-                                                                        <span class="badge bg-danger">Belum Tervalidasi</span>
+                                                                        <span class="badge bg-danger">Tidak Valid</span>
                                                                     </div>
                                                                     <div id="sts_validasi_akta_pendirian_3" style="display: none;">
-                                                                        <span class="badge bg-secondary">Belum Diperiksa</span>
+                                                                        <span class="badge bg-warning">Revisi</span>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -200,11 +228,11 @@
                                                             <i class="fa-regular fa-folder-open"></i>
                                                             <small><strong>Form Dokumen - Akta Perubahan</strong></small>
                                                         </span>
-                                                        <input type="hidden" name="url_tidak_ada_akta_perubahan" value="<?= base_url('datapenyedia/tidak_ada_akta_perubahan')?>">
-                                                        <a href="javascript:;" onclick="Tidak_ada_akta_perubahan()" class="btn btn-success btn-sm shadow-lg">
+                                                        <input type="hidden" name="url_tidak_ada_akta_perubahan" value="<?= base_url('datapenyedia/tidak_ada_akta_perubahan') ?>">
+                                                        <!-- <a href="javascript:;" onclick="Tidak_ada_akta_perubahan()" class="btn btn-success btn-sm shadow-lg">
                                                             <i class="fa-solid fa-circle-check px-1"></i>
                                                             Tidak Ada
-</a>
+                                                        </a> -->
                                                     </div>
                                                     <button data-bs-toggle="modal" data-bs-target="#modaledit_perubahan" id="button_edit_perubahan" type="button" class="btn btn-secondary btn-sm shadow-lg">
                                                         <i class="fa-solid fa-pen-to-square px-1"></i>
@@ -216,7 +244,7 @@
                                                         <table class="table table-sm">
                                                             <tr>
                                                                 <td class="col-sm-2 bg-light">
-                                                                    <label class="form-label col-form-label-sm"><b>Nomor Surat Akta</b></label>
+                                                                    <label class="form-label col-form-label-sm"><b>Nomor Akta</b></label>
                                                                 </td>
                                                                 <td class="col-sm-3">
                                                                     <div class="col-sm-10">
@@ -227,19 +255,34 @@
                                                                         <small class="no_surat_perubahan_error text-danger"></small>
                                                                     </div>
                                                                 </td>
+
                                                                 <td class="col-sm-2 bg-light">
-                                                                    <label class="form-label col-sm-12 col-form-label-sm"><b>Berlaku Sampai</b></label>
+                                                                    <label class="form-label col-sm-12 col-form-label-sm"><b>Tanggal Terbit Akta</b></label>
                                                                 </td>
                                                                 <td class="col-sm-5">
                                                                     <div class="input-group mb-2">
                                                                         <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
-                                                                        <select class="form-select" aria-label="Default select example" name="sts_seumur_hidup_perubahan">
-                                                                            <option value="1">Seumur Hidup</option>
-                                                                            <option value="2">Tanggal</option>
-                                                                        </select>
+                                                                        <!-- <select class="form-select" aria-label="Default select example" onchange="seumur_hidup_perubahan()" name="sts_seumur_hidup_perubahan">
+                                                                            <option value="2">Seumur Hidup</option>
+                                                                            <option value="1" selected>Tanggal</option>
+                                                                        </select> -->
                                                                         <input type="date" name="tgl_masa_berlaku_perubahan" id="date" class="form-control">
                                                                     </div>
                                                                     <small class="sts_seumur_hidup_perubahan_error text-danger"></small>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="col-sm-2 bg-light">
+                                                                    <label class="form-label col-form-label-sm"><b>Nomor SK Kumham</b></label>
+                                                                </td>
+                                                                <td class="col-sm-3">
+                                                                    <div class="col-sm-10">
+                                                                        <div class="input-group mb-2">
+                                                                            <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
+                                                                            <input type="text" class="form-control" name="no_sk_kumham">
+                                                                        </div>
+                                                                        <small class="no_sk_kumham_error text-danger"></small>
+                                                                    </div>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -251,7 +294,7 @@
                                                                         <div class="input-group mb-2">
                                                                             <span class="input-group-text">Rp.</span>
                                                                             <input type="text" class="form-control jumlah_setor_perubahan" name="jumlah_setor_perubahan">
-                                                                            <input type="text" class="form-control" readonly id="tanpa_rupiah_akta_perubahan">
+                                                                            <input type="text" class="form-control" value="Rp. <?= number_format($akta_perubahan['jumlah_setor_modal'], 2, ',', '.');  ?>" readonly id="tanpa_rupiah_akta_pendirian">
                                                                             <br>
                                                                         </div>
                                                                     </div>
@@ -259,11 +302,12 @@
                                                             </tr>
                                                             <tr>
                                                                 <td class="col-sm-2 bg-light">
-                                                                    <label class="form-label col-form-label-sm"><b>Upload File</b></label>
+                                                                    <label class="form-label col-form-label-sm"><b>Upload File Akta</b></label>
                                                                 </td>
                                                                 <td class="col-sm-3">
                                                                     <input type="hidden" name="file_dokumen_manipulasi_perubahan">
                                                                     <input type="file" class="file_valid_akta_perubahan" name="file_dokumen_perubahan" id="file" accept=".pdf, .xlsx, .xls">
+                                                                    <input type="hidden" name="file_name_dokumen" value="<?= $akta_perubahan['file_dokumen'] ?>">
                                                                 </td>
                                                                 <td class="col-sm-2 bg-light">
                                                                     <!-- <a href="javascript:;" class="btn btn-info btn-sm text-start col-sm-12 shadow-lg">
@@ -279,6 +323,27 @@
                                                             </tr>
                                                             <tr>
                                                                 <td class="col-sm-2 bg-light">
+                                                                    <label class="form-label col-form-label-sm"><b>Upload File SK-KUMHAM</b></label>
+                                                                </td>
+                                                                <td class="col-sm-3">
+                                                                    <input type="hidden" name="file_dokumen_manipulasi_perubahan">
+                                                                    <input type="file" class="file_valid_akta_perubahan" name="file_dok_kumham" id="file" accept=".pdf, .xlsx, .xls">
+                                                                    <input type="hidden" name="file_name_kumham" value="<?= $akta_perubahan['file_dok_kumham'] ?>">
+                                                                </td>
+                                                                <td class="col-sm-2 bg-light">
+                                                                    <!-- <a href="javascript:;" class="btn btn-info btn-sm text-start col-sm-12 shadow-lg">
+                                                                        <i class="fa-solid fa-file-pdf px-1"></i>
+                                                                        <span class="file_akta_pendirian"></span>
+                                                                    </a> -->
+                                                                    <div id="tampil_dokumen_kumhan"></div>
+                                                                </td>
+                                                                <td class="col-sm-5">
+                                                                    <!-- <div class="button_enkrip_perubahan">
+
+                                                                    </div> -->
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="col-sm-2 bg-light">
                                                                     <label class="form-label col-form-label-sm"><b>Kualifikasi Usaha</b></label>
                                                                 </td>
                                                                 <td class="col-sm-3">
@@ -286,13 +351,9 @@
                                                                         <div class="input-group mb-2">
                                                                             <span class="input-group-text"><i class="fa-solid fa-angles-right"></i></span>
                                                                             <select class="form-select" aria-label="Default select example" name="kualifikasi_usaha_perubahan">
-                                                                                <option value="Besar - (B1)">Besar - (B1)</option>
-                                                                                <option value="Besar - (B2)">Besar - (B2)</option>
-                                                                                <option value="Menengah - (M1)">Menengah - (M1)</option>
-                                                                                <option value="Menengah - (M2)">Menengah - (M2)</option>
-                                                                                <option value="Kecil - (K3)">Kecil - (K3)</option>
-                                                                                <option value="Kecil - (K2)">Kecil - (K2)</option>
-                                                                                <option value="Kecil - (K1)">Kecil - (K1)</option>
+                                                                                <option value="Besar">Besar</option>
+                                                                                <option value="Menengah">Menengah</option>
+                                                                                <option value="Kecil">Kecil</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -302,14 +363,17 @@
                                                                     <label class="form-label col-form-label-sm"><b>Status Validasi Dokumen</b></label>
                                                                 </td>
                                                                 <td class="col-sm-5">
+                                                                    <div id="sts_validasi_akta_perubahan_0" style="display: none;">
+                                                                        <span class="badge bg-danger">Belum Tervalidasi</span>
+                                                                    </div>
                                                                     <div id="sts_validasi_akta_perubahan_1" style="display: none;">
                                                                         <span class="badge bg-success">Tervalidasi</span>
                                                                     </div>
                                                                     <div id="sts_validasi_akta_perubahan_2" style="display: none;">
-                                                                        <span class="badge bg-danger">Belum Tervalidasi</span>
+                                                                        <span class="badge bg-warning">Tidak Valid</span>
                                                                     </div>
                                                                     <div id="sts_validasi_akta_perubahan_3" style="display: none;">
-                                                                        <span class="badge bg-secondary">Belum Diperiksa</span>
+                                                                        <span class="badge bg-warning">Revisi</span>
                                                                     </div>
                                                                 </td>
                                                             </tr>

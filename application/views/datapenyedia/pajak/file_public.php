@@ -29,18 +29,31 @@
                 secret_token: secret_token,
             },
             success: function(response) {
-                if (response['row_sppkp']['sts_validasi'] == 1) {
+                if (response['row_sppkp']['sts_validasi'] == 0) {
+                    $('#sts_validasi_sppkp_0').css('display', 'block');
+                    $('#sts_validasi_sppkp_1').css('display', 'none');
+                    $('#sts_validasi_sppkp_2').css('display', 'none');
+                    $('#sts_validasi_sppkp_3').css('display', 'none');
+                } else if (response['row_sppkp']['sts_validasi'] == 1) {
+                    $('#sts_validasi_sppkp_0').css('display', 'none');
                     $('#sts_validasi_sppkp_1').css('display', 'block');
                     $('#sts_validasi_sppkp_2').css('display', 'none');
                     $('#sts_validasi_sppkp_3').css('display', 'none');
                 } else if (response['row_sppkp']['sts_validasi'] == 2) {
+                    $('#sts_validasi_sppkp_0').css('display', 'none');
                     $('#sts_validasi_sppkp_1').css('display', 'none');
                     $('#sts_validasi_sppkp_2').css('display', 'block');
                     $('#sts_validasi_sppkp_3').css('display', 'none');
-                } else {
+                } else if (response['row_sppkp']['sts_validasi'] == 3) {
+                    $('#sts_validasi_sppkp_0').css('display', 'none');
                     $('#sts_validasi_sppkp_1').css('display', 'none');
                     $('#sts_validasi_sppkp_2').css('display', 'none');
                     $('#sts_validasi_sppkp_3').css('display', 'block');
+                } else {
+                    $('#sts_validasi_sppkp_0').css('display', 'block');
+                    $('#sts_validasi_sppkp_1').css('display', 'none');
+                    $('#sts_validasi_sppkp_2').css('display', 'none');
+                    $('#sts_validasi_sppkp_3').css('display', 'none');
                 }
                 if (response['row_sppkp']) {
                     $('[name="no_surat_sppkp"]').attr("readonly", true);
@@ -310,18 +323,31 @@
                 secret_token: secret_token,
             },
             success: function(response) {
-                if (response['row_npwp']['sts_validasi'] == 1) {
+                if (response['row_npwp']['sts_validasi'] == 0) {
+                    $('#sts_validasi_npwp_0').css('display', 'block');
+                    $('#sts_validasi_npwp_1').css('display', 'none');
+                    $('#sts_validasi_npwp_2').css('display', 'none');
+                    $('#sts_validasi_npwp_3').css('display', 'none');
+                } else if (response['row_npwp']['sts_validasi'] == 1) {
+                    $('#sts_validasi_npwp_0').css('display', 'none');
                     $('#sts_validasi_npwp_1').css('display', 'block');
                     $('#sts_validasi_npwp_2').css('display', 'none');
                     $('#sts_validasi_npwp_3').css('display', 'none');
                 } else if (response['row_npwp']['sts_validasi'] == 2) {
+                    $('#sts_validasi_npwp_0').css('display', 'none');
                     $('#sts_validasi_npwp_1').css('display', 'none');
                     $('#sts_validasi_npwp_2').css('display', 'block');
                     $('#sts_validasi_npwp_3').css('display', 'none');
-                } else {
+                } else if (response['row_npwp']['sts_validasi'] == 3) {
+                    $('#sts_validasi_npwp_0').css('display', 'none');
                     $('#sts_validasi_npwp_1').css('display', 'none');
                     $('#sts_validasi_npwp_2').css('display', 'none');
                     $('#sts_validasi_npwp_3').css('display', 'block');
+                } else {
+                    $('#sts_validasi_npwp_0').css('display', 'block');
+                    $('#sts_validasi_npwp_1').css('display', 'none');
+                    $('#sts_validasi_npwp_2').css('display', 'none');
+                    $('#sts_validasi_npwp_3').css('display', 'none');
                 }
                 if (response['row_npwp']) {
                     $('[name="no_npwp"]').attr("readonly", true);
@@ -431,6 +457,7 @@
                                 // tgl_berlaku_npwp
                                 $(".tgl_berlaku_npwp_error").css('display', 'none');
                                 $('#btn_save_npwp').attr("disabled", false);
+                                $('#btn_edit_npwp').attr("disabled", false);
                             }
                         }).then((result) => {
                             /* Read more about handling dismissals below */
@@ -560,7 +587,6 @@
 
     const edit_npwp = () => {
         $('#modaledit_perubahan_npwp').modal('hide')
-        $('[name="no_npwp"]').attr("readonly", false);
         $('[name="sts_seumur_hidup_npwp"]').attr("disabled", false);
         $('[name="tgl_berlaku_npwp"]').attr("readonly", false);
         $('[name="file_npwp"]').attr("disabled", false);
@@ -898,6 +924,11 @@
                     modal_edit_neraca.modal('show');
                     // tahun belom
                     console.log(response['row_file_excel']);
+
+
+                    $('[name="tahun_mulai_edit"]').val(response['row_neraca'].tahun_mulai);
+                    $('[name="tahun_selesai_edit"]').val(response['row_neraca'].tahun_selesai);
+
                     $('[name="nilai_tahun_kolom_1_1"]').val(response['row_file_excel'][1][2]);
                     $('[name="nilai_tahun_kolom_2_1"]').val(response['row_file_excel'][1][3]);
 
@@ -1087,8 +1118,6 @@
             }
         })
     })
-
-
     // crud sppkp
     var form_edit_neraca = $('#form_edit_neraca')
 
@@ -1131,8 +1160,8 @@
     rupiah2.addEventListener('keyup', function(e) {
         rupiah2.value = formatRupiah(this.value, 'Rp. ');
     });
-     // rupiah3
-     var rupiah3 = document.getElementById('rupiah3');
+    // rupiah3
+    var rupiah3 = document.getElementById('rupiah3');
     rupiah3.addEventListener('keyup', function(e) {
         rupiah3.value = formatRupiah(this.value, 'Rp. ');
     });
@@ -1191,7 +1220,7 @@
     rupiah14.addEventListener('keyup', function(e) {
         rupiah14.value = formatRupiah(this.value, 'Rp. ');
     });
-  
+
     // rupiah1_
     var rupiah1_1 = document.getElementById('rupiah1_1');
     rupiah1_1.addEventListener('keyup', function(e) {
@@ -1202,8 +1231,8 @@
     rupiah2_2.addEventListener('keyup', function(e) {
         rupiah2_2.value = formatRupiah(this.value, 'Rp. ');
     });
-     // rupiah3_3
-     var rupiah3_3 = document.getElementById('rupiah3_3');
+    // rupiah3_3
+    var rupiah3_3 = document.getElementById('rupiah3_3');
     rupiah3_3.addEventListener('keyup', function(e) {
         rupiah3_3.value = formatRupiah(this.value, 'Rp. ');
     });
@@ -1284,5 +1313,25 @@
 
         rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
         return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+    }
+</script>
+
+<script>
+    function ubah_masa_berlaku_sppkp() {
+        var sts_seumur_hidup_sppkp = $('[name="sts_seumur_hidup_sppkp"]').val();
+        if (sts_seumur_hidup_sppkp == 1) {
+            $('[name="tgl_berlaku_sppkp"]').attr("disabled", false);
+        } else {
+            $('[name="tgl_berlaku_sppkp"]').attr("disabled", true);
+        }
+    }
+
+    function ubah_masa_berlaku_npwp() {
+        var sts_seumur_hidup_npwp = $('[name="sts_seumur_hidup_npwp"]').val();
+        if (sts_seumur_hidup_npwp == 1) {
+            $('[name="tgl_berlaku_npwp"]').attr("disabled", false);
+        } else {
+            $('[name="tgl_berlaku_npwp"]').attr("disabled", true);
+        }
     }
 </script>

@@ -300,8 +300,8 @@
                         </ul>
                     </div>
                     <div class="flex-shrink-0 dropdown">
-                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <small class="text-white"><i class="fa-regular fa-file-pdf px-1"></i>Guide || FAQ</small>
+                        <a target="_blank" href="<?= base_url('file_vms/MANUAL_BOOK_JMTO.pdf') ?>" class="d-block link-dark text-decoration-none dropdown-toggle">
+                            <small class="text-white"><i class="fa-regular fa-file-pdf px-1"></i>Guide</small>
                         </a>
                         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
                             <li><a class="dropdown-item" href="#"><small>New project...</small></a></li>

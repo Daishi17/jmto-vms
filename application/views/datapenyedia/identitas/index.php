@@ -1,6 +1,7 @@
 <input type="hidden" name="url_simpan_identitas_vendor" value="<?= base_url('datapenyedia/simpan_penyedia') ?>">
 <input type="hidden" name="url_kabupaten" value="<?= base_url('wilayah/dataKecamatan/') ?>">
 <input type="hidden" name="url_provinsi" value="<?= base_url('registrasi/dataKabupaten/') ?>">
+<input type="hidden" name="dashboard" value="<?= base_url('dashboard') ?>">
 <main class="container-fluid mt-4">
     <div class="row">
         <div class="col">
@@ -36,7 +37,7 @@
                                 Edit Changes
                             </button> -->
                         </div>
-                        <form id="simpan_identitas_vendor"  method="POST" enctype="multipart/form-data">
+                        <form id="simpan_identitas_vendor" method="POST" enctype="multipart/form-data">
                             <div class="card-body">
                                 <table class="table table-sm">
                                     <tr>
@@ -118,7 +119,7 @@
                                             <div class="col-sm-8">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text"><i class="fa-solid fa-address-card"></i></span>
-                                                    <input type="text" class="form-control" data-inputmask='"mask": "99.999.999.9-999.999"' data-mask value="<?= $row_vendor['npwp'] ?>">
+                                                    <input type="text" class="form-control" readonly style="background-color: #dddddd;" data-inputmask='"mask": "99.999.999.9-999.999"' data-mask value="<?= $row_vendor['npwp'] ?>">
                                                 </div>
                                             </div>
                                         </td>
@@ -129,7 +130,7 @@
                                             <div class="col-sm-8">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
-                                                    <input type="text" class="form-control" value="<?= $row_vendor['email'] ?>">
+                                                    <input type="text" readonly style="background-color: #dddddd;" class="form-control" value="<?= $row_vendor['email'] ?>">
                                                 </div>
                                             </div>
                                         </td>
@@ -179,7 +180,7 @@
                                         </td>
                                         <td class="col-sm-4">
                                             <div class="col-sm-10">
-                                                <select  id="kecamatantambah"  name="id_kecamatan" class="form-control select2bs4">
+                                                <select id="kecamatantambah" name="id_kecamatan" class="form-control select2bs4">
                                                     <option value="<?= $row_vendor['id_kecamatan'] ?>"><?= $row_vendor['nama_kecamatan'] ?></option>
                                                     <option value="">Pilih Kecamatan</option>
                                                 </select>

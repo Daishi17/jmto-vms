@@ -49,12 +49,14 @@ class Registrasi extends CI_Controller
 						$this->session->set_userdata('npwp', $npwp);
 						$this->session->set_flashdata('success', 'Email : ' . $email . ' Terdaftar Silakan Check Email Anda Untuk Mengetahui Link Untuk Mengisi Identitas Vendor Dan Pastikan Masih 1 Perangkat (Terkadang Email Masuk Ke Spam!!)');
 						// START EMAIL SEND TYPE
+						// api get content
+						// json_decode(file_get_contents("https://jmto-vms.kintekindo.net/send_email_jmto/kirim_email_registrasi/" . $email . '/' . $randomString));
 						$type_send_email = 'registrasi';
-						$data_send_email = [
-							'email' => $email,
-							'token_regis' => $randomString
-						];
-						$this->email_send->sen_row_email($type_send_email, $data_send_email);
+                        			$data_send_email = [
+                            				'email' => $email,
+                            				'token_regis' => $randomString
+                        			];
+                        			$this->email_send->sen_row_email($type_send_email, $data_send_email);
 						$this->session->set_flashdata('npwp_api', 'NPWP ANDA TERDAFTAR');
 						$this->session->set_flashdata('no_npwp', $result_ceking['data']['npwp']);
 						$this->session->set_flashdata('nama_npwp', $result_ceking['data']['name']);

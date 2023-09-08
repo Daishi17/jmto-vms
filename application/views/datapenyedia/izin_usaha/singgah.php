@@ -148,11 +148,17 @@
                                                                     <label class="form-label col-form-label-sm"><b>Status Validasi Dokumen</b></label>
                                                                 </td>
                                                                 <td class="col-sm-5">
+                                                                    <div id="sts_validasi_nib_0" style="display: none;">
+                                                                        <span class="badge bg-secondary sts_validasi_nib_0">Belum Tervalidasi</span>
+                                                                    </div>
                                                                     <div id="sts_validasi_nib_1" style="display: none;">
                                                                         <span class="badge bg-success sts_validasi_nib_1">Tervalidasi</span>
                                                                     </div>
                                                                     <div id="sts_validasi_nib_2" style="display: none;">
-                                                                        <span class="badge bg-secondary sts_validasi_nib_1">Belum Tervalidasi</span>
+                                                                        <span class="badge bg-danger sts_validasi_nib_2">Tidak Valid</span>
+                                                                    </div>
+                                                                    <div id="sts_validasi_nib_3" style="display: none;">
+                                                                        <span class="badge bg-warning sts_validasi_nib_3">Revisi</span>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -218,7 +224,7 @@
                                                                                 <option value="2">Seumur Hidup</option>
                                                                             </select>
                                                                         </div>
-                                                                        <input type="date" id="tgl_berlaku_siup" name="tgl_berlaku_siup" class="form-control tgl_berlaku_siup" readonly data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                                                                        <input type="date" id="tgl_berlaku_siup" name="tgl_berlaku_siup" class="form-control tgl_berlaku_siup" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
                                                                     </div>
                                                                     <small class="sts_seumur_hidup_siup_error text-danger"></small>
                                                                 </td>
@@ -257,11 +263,17 @@
                                                                     <label class="form-label col-form-label-sm"><b>Status Validasi Dokumen</b></label>
                                                                 </td>
                                                                 <td class="col-sm-5">
+                                                                    <div id="sts_validasi_siup_0" style="display: none;">
+                                                                        <span class="badge bg-secondary sts_validasi_siup_0">Belum Tervalidasi</span>
+                                                                    </div>
                                                                     <div id="sts_validasi_siup_1" style="display: none;">
-                                                                        <span class="badge bg-success">Tervalidasi</span>
+                                                                        <span class="badge bg-success sts_validasi_siup_1">Tervalidasi</span>
                                                                     </div>
                                                                     <div id="sts_validasi_siup_2" style="display: none;">
-                                                                        <span class="badge bg-secondary">Belum Tervalidasi</span>
+                                                                        <span class="badge bg-danger sts_validasi_siup_2">Tidak Valid</span>
+                                                                    </div>
+                                                                    <div id="sts_validasi_siup_3" style="display: none;">
+                                                                        <span class="badge bg-warning sts_validasi_siup_3">Revisi</span>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -367,11 +379,17 @@
                                                                     <label class="form-label col-form-label-sm"><b>Status Validasi Dokumen</b></label>
                                                                 </td>
                                                                 <td class="col-sm-5">
+                                                                    <div id="sts_validasi_sbu_0" style="display: none;">
+                                                                        <span class="badge bg-secondary sts_validasi_sbu_0">Belum Tervalidasi</span>
+                                                                    </div>
                                                                     <div id="sts_validasi_sbu_1" style="display: none;">
-                                                                        <span class="badge bg-success">Tervalidasi</span>
+                                                                        <span class="badge bg-success sts_validasi_sbu_1">Tervalidasi</span>
                                                                     </div>
                                                                     <div id="sts_validasi_sbu_2" style="display: none;">
-                                                                        <span class="badge bg-secondary">Belum Tervalidasi</span>
+                                                                        <span class="badge bg-danger sts_validasi_sbu_2">Tidak Valid</span>
+                                                                    </div>
+                                                                    <div id="sts_validasi_sbu_3" style="display: none;">
+                                                                        <span class="badge bg-warning sts_validasi_sbu_3">Revisi</span>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -476,11 +494,17 @@
                                                                     <label class="form-label col-form-label-sm"><b>Status Validasi Dokumen</b></label>
                                                                 </td>
                                                                 <td class="col-sm-5">
+                                                                    <div id="sts_validasi_siujk_0" style="display: none;">
+                                                                        <span class="badge bg-secondary sts_validasi_siujk_0">Belum Tervalidasi</span>
+                                                                    </div>
                                                                     <div id="sts_validasi_siujk_1" style="display: none;">
-                                                                        <span class="badge bg-success">Tervalidasi</span>
+                                                                        <span class="badge bg-success sts_validasi_siujk_1">Tervalidasi</span>
                                                                     </div>
                                                                     <div id="sts_validasi_siujk_2" style="display: none;">
-                                                                        <span class="badge bg-secondary">Belum Tervalidasi</span>
+                                                                        <span class="badge bg-danger sts_validasi_siujk_2">Tidak Valid</span>
+                                                                    </div>
+                                                                    <div id="sts_validasi_siujk_3" style="display: none;">
+                                                                        <span class="badge bg-warning sts_validasi_siujk_3">Revisi</span>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -510,7 +534,7 @@
                                                     <div class="card-title">
                                                         <span class="text-dark">
                                                             <i class="fa-regular fa-folder-open"></i>
-                                                            <small><strong>Form Dokumen - SKDP</strong></small>
+                                                            <small><strong>Form Dokumen - SKDP/Izin Lokasi</strong></small>
                                                         </span>
                                                     </div>
                                                     <button type="button" data-bs-toggle="modal" data-bs-target="#apply_edit_skdp" class="btn btn-secondary btn-sm shadow-lg">
@@ -586,11 +610,17 @@
                                                                     <label class="form-label col-form-label-sm"><b>Status Validasi Dokumen</b></label>
                                                                 </td>
                                                                 <td class="col-sm-5">
+                                                                    <div id="sts_validasi_skdp_0" style="display: none;">
+                                                                        <span class="badge bg-secondary sts_validasi_skdp_0">Belum Tervalidasi</span>
+                                                                    </div>
                                                                     <div id="sts_validasi_skdp_1" style="display: none;">
-                                                                        <span class="badge bg-success">Tervalidasi</span>
+                                                                        <span class="badge bg-success sts_validasi_skdp_1">Tervalidasi</span>
                                                                     </div>
                                                                     <div id="sts_validasi_skdp_2" style="display: none;">
-                                                                        <span class="badge bg-secondary">Belum Tervalidasi</span>
+                                                                        <span class="badge bg-danger sts_validasi_skdp_2">Tidak Valid</span>
+                                                                    </div>
+                                                                    <div id="sts_validasi_skdp_3" style="display: none;">
+                                                                        <span class="badge bg-warning sts_validasi_skdp_3">Revisi</span>
                                                                     </div>
                                                                 </td>
                                                             </tr>

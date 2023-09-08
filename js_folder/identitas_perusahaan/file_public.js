@@ -35,6 +35,7 @@ function myFunction() {
 
 var simpan_identitas_vendor = $('#simpan_identitas_vendor');
 var url_simpan_identitas_vendor = $('[name="url_simpan_identitas_vendor"]').val();
+var dashboard = $('[name="dashboard"]').val();
 simpan_identitas_vendor.on('submit', function(e) {
     e.preventDefault();
     $.ajax({
@@ -48,10 +49,13 @@ simpan_identitas_vendor.on('submit', function(e) {
             $('.btn_simpan').attr('disabled', 'disabled');
         },
         success: function(response) {
-            Swal.fire('Good job!', 'Data Beharhasil Di Update!', 'success');
+            Swal.fire('Good job!', 'Data Berhasil Di Update!', 'success');
             $('.btn_simpan').attr('disabled', false);
             simpan_identitas_vendor[0].reset();
-            location.reload()
+            // location.reload()
+            setTimeout(() => {
+              window.location.href = dashboard
+          }, "2000");
         }
     });
 });

@@ -1,33 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+header("Content-Security-Policy: default-src 'self' *");
+header("Content-Security-Policy: img-src 'self' *");
+?>
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DRT - JMTO</title>
-
-    <!-- Favicon -->
-    <!-- <link rel="shortcut icon" href="https://themes.potenzaglobalsolutions.com/html/academic/images/favicon.ico" /> -->
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200&display=swap" rel="stylesheet">
     <!-- CSS Global Compulsory (Do not remove)-->
-    <link rel="stylesheet" href="https://themes.potenzaglobalsolutions.com/html/academic/css/bootstrap/bootstrap.min.css" />
-
-    <!-- Page CSS Implementing Plugins (Remove the plugin CSS here if site does not use that feature)-->
-    <link rel="stylesheet" href="https://themes.potenzaglobalsolutions.com/html/academic/css/owl-carousel/owl.carousel.min.css" />
-    <link rel="stylesheet" href="https://themes.potenzaglobalsolutions.com/html/academic/css/magnific-popup/magnific-popup.css" />
-    <link rel="stylesheet" href="https://themes.potenzaglobalsolutions.com/html/academic/css/swiper/swiper.min.css" />
-    <link rel="stylesheet" href="https://themes.potenzaglobalsolutions.com/html/academic/css/animate/animate.min.css" />
-
+    <link rel="stylesheet" href="<?= base_url('assets_landing/') ?>bootstrap.min.css" />
     <!-- dattable -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="<?= base_url('assets_landing/') ?>dataTables.bootstrap4.min.css" />
     <!-- Template Style -->
-    <link rel="stylesheet" href="https://themes.potenzaglobalsolutions.com/html/academic/css/style.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+    <link rel="stylesheet" href="<?= base_url('assets_landing/') ?>style.css" />
+    <link rel="stylesheet" href="<?= base_url('assets_landing/') ?>sticky.css" />
 </head>
 
 <body>
@@ -43,7 +31,7 @@
                             <!-- logo -->
                             <a class="navbar-brand text-lg-center" href="index.html">
                                 <img class="logo" src="<?= base_url() ?>assets/img/jmto_logo.png" alt="Logo">
-                                <img class="sticky-logo" src="https://media.licdn.com/dms/image/C5616AQEu8BWysPOY4g/profile-displaybackgroundimage-shrink_200_800/0/1629163094732?e=2147483647&v=beta&t=Q8dE2xAcWWwU9GuheMkq6cZB_qfUpQkN7Mgk_ezYBpY" alt="Logo">
+                                <img class="sticky-logo" src="<?= base_url() ?>assets_landing/foto_navbar.jpeg" alt="Logo">
                             </a>
                             <nav class="navbar navbar-expand-lg">
 
@@ -56,55 +44,7 @@
                                 <!-- Navbar START -->
                                 <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                                     <ul class="navbar-nav">
-                                        <!-- <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i>Home</i></a>
-                                        </li> -->
-                                        <!-- <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i>Pages</i><i class="fa fa-chevron-down"></i>
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="about-us.html"><i>About Us</i></a></li>
-                                                <li><a class="dropdown-item" href="teachers.html">Teachers</a></li>
-                                                <li><a class="dropdown-item" href="teachers-single.html">Teacher Single</a></li>
-                                                <li><a class="dropdown-item" href="gallery.html">Gallery</a></li>
-                                                <li><a class="dropdown-item" href="pricing.html">Pricing</a></li>
-                                                <li><a class="dropdown-item" href="faq.html">Faq</a></li>
-                                                <li><a class="dropdown-item" href="sign-in.html">Sign In</a></li>
-                                                <li><a class="dropdown-item" href="sign-up.html">Sign Up</a></li>
-                                                <li><a class="dropdown-item" href="error-page.html">Error Page</a></li>
-                                                <li><a class="dropdown-item" href="coming-soon.html">Coming Soon</a></li>
-                                                <li><a class="dropdown-item" href="privacy-policy.html">Privacy Policy</a></li>
-                                                <li><a class="dropdown-item" href="terms-and-conditions.html">Terms & Conditions</a></li>
-                                            </ul>
-                                        </li> -->
-                                        <!-- <li class="nav-item dropdown">
-                                            <a class="nav-link  dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i>Course</i><i class="fa fa-chevron-down"></i>
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="course.html"><i>Course</i></a></li>
-                                                <li><a class="dropdown-item" href="course-detail.html">Course Detail</a></li>
-                                            </ul>
-                                        </li> -->
-                                        <!-- <li class="nav-item dropdown">
-                                            <a class="nav-link  dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i>Event</i><i class="fa fa-chevron-down"></i>
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="events-list.html">Events List</a></li>
-                                                <li><a class="dropdown-item" href="events-grid.html">Events Grid</a></li>
-                                                <li><a class="dropdown-item" href="event-detail.html">Event Detail</a></li>
-                                            </ul>
-                                        </li> -->
-                                        <!-- <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i>Blog</i><i class="fa fa-chevron-down"></i>
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="blog.html"><i>Blog</i></a></li>
-                                                <li><a class="dropdown-item" href="blog-detail.html"><i>Blog Detail</i></a></li>
-                                            </ul>
-                                        </li> -->
-                                        <!-- <li class="nav-item">
-                                            <a class="nav-link" href="contact-us.html"><i>Contact Us</i></a>
-                                        </li> -->
+
                                     </ul>
                                 </div>
                                 <!-- Navbar END-->
@@ -113,8 +53,8 @@
                                     </a>
                                     <!-- Dropdown Menu -->
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="https://jmto-vms.kintekindo.net/auth"><i> Penyedia</i></a></li>
-                                        <li><a class="dropdown-item" href="https://jmto-eproc.kintekindo.net/auth"><i> Non Penyedia</i></a></li>
+                                        <li><a class="dropdown-item" href="https://drtproc.jmto.co.id/auth"><i> Penyedia</i></a></li>
+                                        <li><a class="dropdown-item" href="https://eprocurement.jmto.co.id/auth"><i> Non Penyedia</i></a></li>
                                     </ul>
                                 </li>
                                 <a href="https://jmto-vms.kintekindo.net/registrasi" class="btn btn-warning text-white btn-round ml-3"><i>REGISTRASI PENYEDIA</i></a>
@@ -183,11 +123,11 @@
         <ul class="sticky">
             <li>
                 <img src="<?= base_url('assets/img/volume_logo.png') ?>" width="32" height="32">
-                <p><a href="javascript:;" onclick="matikan()">Kelik Untuk <br>Backsound</a></p>
+                <p><a href="javascript:;" onclick="matikan()">Klik Untuk <br>Backsound</a></p>
             </li>
-            <li class="bg-dark">
+            <li>
                 <img src="<?= base_url('assets/img/wa_logo.png') ?>" width="32" height="32">
-                <p><a class="text-white" href="#" target="_blank">Kontak Kami<br>08978201075</a></p>
+                <p><a href="#" target="_blank">Kontak Kami<br>08978201075</a></p>
             </li>
         </ul>
     </div>
@@ -234,7 +174,7 @@
             <ul class="sticky">
                 <li>
                     <img src="<?= base_url('assets/img/volume_logo.png') ?>" width="32" height="32">
-                    <p><a href="javascript:;" onclick="matikan()">Kelik Untuk <br>Backsound</a></p>
+                    <p><a href="javascript:;" onclick="matikan()">Klik Untuk <br>Backsound</a></p>
                 </li>
                 <li>
                     <img src="<?= base_url('assets/img/wa_logo.png') ?>" width="32" height="32">
@@ -373,16 +313,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td scope="row">1</td>
-                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit</td>
-                                <td>20 Mei 2023</td>
-                            </tr>
-                            <tr>
-                                <td scope="row">2</td>
-                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit</td>
-                                <td>20 Mei 2023</td>
-                            </tr>
+                          
                         </tbody>
                     </table>
                 </div>
@@ -435,13 +366,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td scope="row">1</td>
-                                                    <td>Jasa Pemborongan Pekerjaan Pemeliharaan Periodik Scrapping Filling Overlay (SFO) Pada Ruas Jalan Tol Bali - Mandara Tahun 2023</td>
-                                                    <td>Rp 16.610.361.900,00</td>
-                                                    <td>10-May-2023 12:00</td>
-                                                    <td><a class="btn btn-sm btn-dark text-white" href="javascript:;"><i class="fas fa fa-file"></i> View</a></td>
-                                                </tr>
+                                               
                                             </tbody>
                                         </table>
                                     </div>
@@ -465,13 +390,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td scope="row">1</td>
-                                                    <td>Jasa Pemborongan Pekerjaan Pemeliharaan Periodik Scrapping Filling Overlay (SFO) Pada Ruas Jalan Tol Bali - Mandara Tahun 2023</td>
-                                                    <td>Rp 16.610.361.900,00</td>
-                                                    <td>10-May-2023 12:00</td>
-                                                    <td><a class="btn btn-sm btn-dark text-white" href="javascript:;"><i class="fas fa fa-file"></i> View</a></td>
-                                                </tr>
+                                              
                                             </tbody>
                                         </table>
                                     </div>
@@ -495,13 +414,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td scope="row">1</td>
-                                                    <td>Jasa Pemborongan Pekerjaan Pemeliharaan Periodik Scrapping Filling Overlay (SFO) Pada Ruas Jalan Tol Bali - Mandara Tahun 2023</td>
-                                                    <td>Rp 16.610.361.900,00</td>
-                                                    <td>10-May-2023 12:00</td>
-                                                    <td><a class="btn btn-sm btn-dark text-white" href="javascript:;"><i class="fas fa fa-file"></i> View</a></td>
-                                                </tr>
+                                               
                                             </tbody>
                                         </table>
                                     </div>
@@ -525,13 +438,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td scope="row">1</td>
-                                                    <td>Jasa Pemborongan Pekerjaan Pemeliharaan Periodik Scrapping Filling Overlay (SFO) Pada Ruas Jalan Tol Bali - Mandara Tahun 2023</td>
-                                                    <td>Rp 16.610.361.900,00</td>
-                                                    <td>10-May-2023 12:00</td>
-                                                    <td><a class="btn btn-sm btn-dark text-white" href="javascript:;"><i class="fas fa fa-file"></i> View</a></td>
-                                                </tr>
+                                               
                                             </tbody>
                                         </table>
                                     </div>
@@ -566,7 +473,7 @@
     Action box -->
     <!--=================================
     Footer-->
-    <footer class="space-pt bg-overlay-black-90 bg-holder footer" style="background-image: url(images/bg/03.jpg);">
+    <footer class="space-pt bg-overlay-black-90 bg-holder footer">
         <div class="container">
             <div class="row pb-5 pb-lg-6 mb-lg-3">
                 <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0 pr-lg-5">
@@ -606,11 +513,11 @@
                     <p class="text-white">Helped thousands of clients to find the right property for their needs.</p>
                     <div class="footer-link">
                         <ul class="list-unstyled mb-0">
-                            <li><a class="text-white" href="index.html">Corporate Internal Media (CIM)</a></li>
-                            <li><a class="text-white" href="about-us.html">Electronic Operational Performance Appraisal (EOPA)</a></li>
-                            <li><a class="text-white" href="course.html">Jasa Marga Livestreaming</a></li>
-                            <li><a class="text-white" href="privacy-policy.html">Privacy Policy</a></li>
-                            <li><a class="text-white" href="pricing.html">JMTO Internal Web Mail</a></li>
+                            <li><a class="text-white" href="#">Corporate Internal Media (CIM)</a></li>
+                            <li><a class="text-white" href="#">Electronic Operational Performance Appraisal (EOPA)</a></li>
+                            <li><a class="text-white" href="#">Jasa Marga Livestreaming</a></li>
+                            <li><a class="text-white" href="#">Privacy Policy</a></li>
+                            <li><a class="text-white" href="#">JMTO Internal Web Mail</a></li>
                         </ul>
                     </div>
                 </div>
@@ -620,7 +527,7 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-12 text-center">
-                        <p class="mb-0 text-white">Â©PT Jasamarga Tollroad Operator. 2023 <a href="index.html"></a> Privacy & Policy</p>
+                        <p class="mb-0 text-white">©PT Jasamarga Tollroad Operator. 2023 <a href="#"></a> Privacy & Policy</p>
                     </div>
                 </div>
             </div>
@@ -639,23 +546,13 @@
     Javascript -->
 
     <!-- JS Global Compulsory (Do not remove)-->
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/jquery-3.4.1.min.js"></script>
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/popper/popper.min.js"></script>
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/bootstrap/bootstrap.min.js"></script>
-
-    <!-- Page JS Implementing Plugins (Remove the plugin script here if site does not use that feature)-->
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/jquery.appear.js"></script>
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/counter/jquery.countTo.js"></script>
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/owl-carousel/owl.carousel.min.js"></script>
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/swiper/swiper.min.js"></script>
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/swiperanimation/SwiperAnimation.min.js"></script>
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/magnific-popup/jquery.magnific-popup.min.js"></script>
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/shuffle/shuffle.min.js"></script>
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/jarallax/jarallax.min.js"></script>
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/jarallax/jarallax-video.min.js"></script>
-
+    <script src="<?= base_url('assets_landing/') ?>jquery.min.js"></script>
+    <script src="<?php echo base_url() ?>/assets/plugins-lte/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url() ?>/assets/js/bootstrap.min.js"></script>
+    <script src="<?= base_url('assets_landing/') ?>jarallax.min.js"></script>
+    <script src="<?= base_url('assets_landing/') ?>jarallax-video.min.js"></script>
     <!-- Template Scripts (Do not remove)-->
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/custom.js"></script>
+    <script src="<?= base_url('assets_landing/') ?>custom.js"></script>
 
 </body>
 

@@ -119,8 +119,7 @@ class M_datapenyedia extends CI_Model
 
     public function update_nib($data, $where)
     {
-        $this->db->update('tbl_vendor_nib', $data);
-        $this->db->where($where);
+        $this->db->update('tbl_vendor_nib', $data, $where);
         return $this->db->affected_rows();
     }
 
@@ -278,10 +277,11 @@ class M_datapenyedia extends CI_Model
 
     public function update_siup($data, $where)
     {
-        $this->db->update('tbl_vendor_siup', $data);
-        $this->db->where($where);
+        $this->db->update('tbl_vendor_siup', $data, $where);
         return $this->db->affected_rows();
     }
+
+
 
 
 
@@ -457,8 +457,7 @@ class M_datapenyedia extends CI_Model
 
     public function update_siujk($data, $where)
     {
-        $this->db->update('tbl_vendor_siujk', $data);
-        $this->db->where($where);
+        $this->db->update('tbl_vendor_siujk', $data, $where);
         return $this->db->affected_rows();
     }
 
@@ -605,8 +604,7 @@ class M_datapenyedia extends CI_Model
 
     public function update_sbu($data, $where)
     {
-        $this->db->update('tbl_vendor_sbu', $data);
-        $this->db->where($where);
+        $this->db->update('tbl_vendor_sbu', $data, $where);
         return $this->db->affected_rows();
     }
 
@@ -757,8 +755,7 @@ class M_datapenyedia extends CI_Model
 
     public function update_akta_pendirian($data, $where)
     {
-        $this->db->update('tbl_vendor_akta_pendirian', $data);
-        $this->db->where($where);
+        $this->db->update('tbl_vendor_akta_pendirian', $data, $where);
         return $this->db->affected_rows();
     }
 
@@ -792,8 +789,7 @@ class M_datapenyedia extends CI_Model
 
     public function update_akta_perubahan($data, $where)
     {
-        $this->db->update('tbl_vendor_akta_perubahan', $data);
-        $this->db->where($where);
+        $this->db->update('tbl_vendor_akta_perubahan', $data, $where);
         return $this->db->affected_rows();
     }
 
@@ -1368,8 +1364,7 @@ class M_datapenyedia extends CI_Model
 
     public function update_sppkp($data, $where)
     {
-        $this->db->update('tbl_vendor_sppkp', $data);
-        $this->db->where($where);
+        $this->db->update('tbl_vendor_sppkp', $data, $where);
         return $this->db->affected_rows();
     }
 
@@ -1660,8 +1655,7 @@ class M_datapenyedia extends CI_Model
 
     public function update_npwp($data, $where)
     {
-        $this->db->update('tbl_vendor_npwp', $data);
-        $this->db->where($where);
+        $this->db->update('tbl_vendor_npwp', $data, $where);
         return $this->db->affected_rows();
     }
 
@@ -2000,8 +1994,7 @@ class M_datapenyedia extends CI_Model
 
     public function update_skdp($data, $where)
     {
-        $this->db->update('tbl_vendor_skdp', $data);
-        $this->db->where($where);
+        $this->db->update('tbl_vendor_skdp', $data, $where);
         return $this->db->affected_rows();
     }
 
@@ -2155,8 +2148,7 @@ class M_datapenyedia extends CI_Model
 
     public function update_lainnya($data, $where)
     {
-        $this->db->update('tbl_vendor_izin_lain', $data);
-        $this->db->where($where);
+        $this->db->update('tbl_vendor_izin_lain', $data, $where);
         return $this->db->affected_rows();
     }
 
@@ -2194,4 +2186,84 @@ class M_datapenyedia extends CI_Model
     }
     // end lainnya
 
+    private function get_syarat_kbli()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_syratat_kbli_tender');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    private function get_kbli_vendor()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_siup');
+        $this->db->where('id_vendor', $this->session->userdata('id_vendor'));
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    private function get_siup_vendor()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_siup');
+        $this->db->where('id_vendor', $this->session->userdata('id_vendor'));
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    private function get_nib_vendor()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_nib');
+        $this->db->where('id_vendor', $this->session->userdata('id_vendor'));
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function cek_terundang()
+    {
+        $get_kbli_vendor = $this->get_kbli_vendor();
+        $get_siup_vendor = $this->get_siup_vendor();
+        $get_nib_vendor = $this->get_nib_vendor();
+        $this->db->select('*');
+        $this->db->from('tbl_rup');
+        $this->db->join('tbl_izin_rup', 'tbl_izin_rup.id_rup = tbl_rup.id_rup', 'left');
+        $this->db->join('tbl_syratat_kbli_tender', 'tbl_syratat_kbli_tender.id_rup = tbl_rup.id_rup', 'left');
+        foreach ($get_kbli_vendor as $key => $value) {
+            $this->db->where('tbl_syratat_kbli_tender.id_kbli', $value['id_kbli']);
+        }
+        $this->db->group_by('tbl_rup.id_rup');
+        $query = $this->db->get();
+        $query_akhir = array();
+        foreach ($query->result_array() as $key => $value_row_cek_syarat) {
+            $this->db->select('*');
+            $this->db->from('tbl_rup');
+            $this->db->join('tbl_izin_rup', 'tbl_izin_rup.id_rup = tbl_rup.id_rup', 'left');
+            $this->db->join('tbl_syratat_kbli_tender', 'tbl_syratat_kbli_tender.id_rup = tbl_rup.id_rup', 'left');
+            foreach ($get_kbli_vendor as $key => $value) {
+                $this->db->where('tbl_syratat_kbli_tender.id_kbli', $value['id_kbli']);
+            }
+            // cek siup
+            if ($value_row_cek_syarat['sts_checked_siup'] == 1) {
+                if ($value_row_cek_syarat['sts_masa_berlaku_siup'] == 1) {
+                    $this->db->where('tbl_izin_rup.tgl_berlaku_siup >=', $get_siup_vendor['tgl_berlaku']);
+                } else {
+                    $this->db->where('tbl_izin_rup.sts_masa_berlaku_siup', $get_siup_vendor['sts_seumur_hidup']);
+                }
+            }
+            // cek nib
+            if ($value_row_cek_syarat['sts_checked_nib'] == 1) {
+                if ($value_row_cek_syarat['sts_masa_berlaku_nib'] == 1) {
+                    $this->db->where('tbl_izin_rup.tgl_berlaku_nib >=', $get_nib_vendor['tgl_berlaku']);
+                    // $this->db->where('tbl_izin_rup.sts_masa_berlaku_nib', $get_nib_vendor['sts_seumur_hidup']);
+                } else {
+                    $this->db->where('tbl_izin_rup.sts_masa_berlaku_nib', $get_nib_vendor['sts_seumur_hidup']);
+                }
+            }
+            $this->db->group_by('tbl_rup.id_rup');
+            $query_akhir = $this->db->get();
+            return $query_akhir->result_array();
+        }
+    }
 }

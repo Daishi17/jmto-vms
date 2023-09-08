@@ -63,6 +63,6 @@ class Login_vendor
     public function logout()
     {
         $this->ci->session->sess_destroy();
-        redirect(base_url(''));
+        redirect('https://eprocurement.jmto.co.id/');
     }
 }
