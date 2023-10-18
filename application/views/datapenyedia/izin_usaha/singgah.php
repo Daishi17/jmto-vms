@@ -139,7 +139,7 @@
                                                                     <label class="form-label col-form-label-sm"><b>Input KBLI</b></label>
                                                                 </td>
                                                                 <td class="col-sm-3">
-                                                                    <button type="button" class="btn btn-danger btn-sm col-sm-8 shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-kbli-nib">
+                                                                    <button type="button" class="btn btn-danger btn-sm col-sm-8 shadow-lg btn_nib" onclick="input_nib_edit()">
                                                                         <i class="fa-solid fa-clone px-1"></i>
                                                                         Input Data KBLI
                                                                     </button>
@@ -159,6 +159,26 @@
                                                                     </div>
                                                                     <div id="sts_validasi_nib_3" style="display: none;">
                                                                         <span class="badge bg-warning sts_validasi_nib_3">Revisi</span>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="col-sm-3">
+                                                                </td>
+                                                                <td class="col-sm-3">
+                                                                </td>
+                                                                <td class="col-sm-2 bg-light">
+                                                                    <label class="form-label col-form-label-sm"><b>Status Validasi KBLI</b></label>
+                                                                </td>
+                                                                <td class="col-sm-5">
+                                                                    <div id="sts_validasi_nib_kbli_0" style="display: none;">
+                                                                        <span class="badge bg-secondary sts_validasi_nib_kbli_0">Belum Tervalidasi</span>
+                                                                    </div>
+                                                                    <div id="sts_validasi_nib_kbli_1" style="display: none;">
+                                                                        <span class="badge bg-success sts_validasi_nib_kbli_1">Tervalidasi</span>
+                                                                    </div>
+                                                                    <div id="sts_validasi_nib_kbli_2" style="display: none;">
+                                                                        <span class="badge bg-danger sts_validasi_nib_kbli_2">Tidak Valid</span>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -254,7 +274,7 @@
                                                                     <label class="form-label col-form-label-sm"><b>Input KBLI</b></label>
                                                                 </td>
                                                                 <td class="col-sm-3">
-                                                                    <button type="button" class="btn btn-danger btn-sm col-sm-8 shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-kbli-siup">
+                                                                    <button type="button" class="btn btn-danger btn-sm col-sm-8 shadow-lg btn_siup" onclick="input_siup_edit()">
                                                                         <i class="fa-solid fa-clone px-1"></i>
                                                                         Input Data KBLI
                                                                     </button>
@@ -274,6 +294,27 @@
                                                                     </div>
                                                                     <div id="sts_validasi_siup_3" style="display: none;">
                                                                         <span class="badge bg-warning sts_validasi_siup_3">Revisi</span>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <!-- siup -->
+                                                            <tr>
+                                                                <td class="col-sm-3">
+                                                                </td>
+                                                                <td class="col-sm-3">
+                                                                </td>
+                                                                <td class="col-sm-2 bg-light">
+                                                                    <label class="form-label col-form-label-sm"><b>Status Validasi KBLI</b></label>
+                                                                </td>
+                                                                <td class="col-sm-5">
+                                                                    <div id="sts_validasi_siup_kbli_0" style="display: none;">
+                                                                        <span class="badge bg-secondary sts_validasi_siup_kbli_0">Belum Tervalidasi</span>
+                                                                    </div>
+                                                                    <div id="sts_validasi_siup_kbli_1" style="display: none;">
+                                                                        <span class="badge bg-success sts_validasi_siup_kbli_1">Tervalidasi</span>
+                                                                    </div>
+                                                                    <div id="sts_validasi_siup_kbli_2" style="display: none;">
+                                                                        <span class="badge bg-danger sts_validasi_siup_kbli_2">Tidak Valid</span>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -370,7 +411,7 @@
                                                                     <label class="form-label col-form-label-sm"><b>Input SubKlasifikasi</b></label>
                                                                 </td>
                                                                 <td class="col-sm-3">
-                                                                    <button type="button" class="btn btn-danger btn-sm col-sm-8 shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-kbli-sbu">
+                                                                    <button type="button" class="btn btn-danger btn-sm col-sm-8 shadow-lg btn_sbu" onclick="input_sbu_edit()">
                                                                         <i class="fa-solid fa-clone px-1"></i>
                                                                         Input Data SBU
                                                                     </button>
@@ -390,6 +431,27 @@
                                                                     </div>
                                                                     <div id="sts_validasi_sbu_3" style="display: none;">
                                                                         <span class="badge bg-warning sts_validasi_sbu_3">Revisi</span>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <!-- sbu -->
+                                                            <tr>
+                                                                <td class="col-sm-3">
+                                                                </td>
+                                                                <td class="col-sm-3">
+                                                                </td>
+                                                                <td class="col-sm-2 bg-light">
+                                                                    <label class="form-label col-form-label-sm"><b>Status Validasi KBLI</b></label>
+                                                                </td>
+                                                                <td class="col-sm-5">
+                                                                    <div id="sts_validasi_sbu_kbli_0" style="display: none;">
+                                                                        <span class="badge bg-secondary sts_validasi_sbu_kbli_0">Belum Tervalidasi</span>
+                                                                    </div>
+                                                                    <div id="sts_validasi_sbu_kbli_1" style="display: none;">
+                                                                        <span class="badge bg-success sts_validasi_sbu_kbli_1">Tervalidasi</span>
+                                                                    </div>
+                                                                    <div id="sts_validasi_sbu_kbli_2" style="display: none;">
+                                                                        <span class="badge bg-danger sts_validasi_sbu_kbli_2">Tidak Valid</span>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -418,7 +480,7 @@
                                                     <div class="card-title">
                                                         <span class="text-dark">
                                                             <i class="fa-regular fa-folder-open"></i>
-                                                            <small><strong>Form Dokumen - siujk</strong></small>
+                                                            <small><strong>Form Dokumen - SIUJK</strong></small>
                                                         </span>
                                                     </div>
                                                     <button type="button" data-bs-toggle="modal" data-bs-target="#apply_edit_siujk" class="btn btn-secondary btn-sm shadow-lg">
@@ -485,7 +547,7 @@
                                                                     <label class="form-label col-form-label-sm"><b>Input KBLI</b></label>
                                                                 </td>
                                                                 <td class="col-sm-3">
-                                                                    <button type="button" class="btn btn-danger btn-sm col-sm-8 shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-kbli-siujk">
+                                                                    <button type="button" class="btn btn-danger btn-sm col-sm-8 shadow-lg btn_siujk" onclick="input_siujk_edit()">
                                                                         <i class="fa-solid fa-clone px-1"></i>
                                                                         Input Data KBLI
                                                                     </button>
@@ -505,6 +567,27 @@
                                                                     </div>
                                                                     <div id="sts_validasi_siujk_3" style="display: none;">
                                                                         <span class="badge bg-warning sts_validasi_siujk_3">Revisi</span>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <!-- siujk -->
+                                                            <tr>
+                                                                <td class="col-sm-3">
+                                                                </td>
+                                                                <td class="col-sm-3">
+                                                                </td>
+                                                                <td class="col-sm-2 bg-light">
+                                                                    <label class="form-label col-form-label-sm"><b>Status Validasi KBLI</b></label>
+                                                                </td>
+                                                                <td class="col-sm-5">
+                                                                    <div id="sts_validasi_siujk_kbli_0" style="display: none;">
+                                                                        <span class="badge bg-secondary sts_validasi_siujk_kbli_0">Belum Tervalidasi</span>
+                                                                    </div>
+                                                                    <div id="sts_validasi_siujk_kbli_1" style="display: none;">
+                                                                        <span class="badge bg-success sts_validasi_siujk_kbli_1">Tervalidasi</span>
+                                                                    </div>
+                                                                    <div id="sts_validasi_siujk_kbli_2" style="display: none;">
+                                                                        <span class="badge bg-danger sts_validasi_siujk_kbli_2">Tidak Valid</span>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -566,9 +649,8 @@
                                                                         <div class="input-group mb-2">
                                                                             <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
                                                                             <select name="sts_seumur_hidup_skdp" class="form-select text-sm sts_seumur_hidup_skdp" aria-label="Default select example" onchange="sts_berlaku_skdp()">
-                                                                                <option value="2">Seumur Hidup</option>
                                                                                 <option value="1">Tanggal</option>
-
+                                                                                <option value="2">Seumur Hidup</option>
                                                                             </select>
                                                                         </div>
                                                                         <input type="date" id="tgl_berlaku_skdp" name="tgl_berlaku_skdp" class="form-control tgl_berlaku_skdp" readonly data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
@@ -601,7 +683,7 @@
                                                                     <label class="form-label col-form-label-sm"><b>Input KBLI</b></label>
                                                                 </td>
                                                                 <td class="col-sm-3">
-                                                                    <button type="button" class="btn btn-danger btn-sm col-sm-8 shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-kbli-skdp">
+                                                                    <button type="button" class="btn btn-danger btn-sm col-sm-8 shadow-lg btn_skdp" onclick="input_skdp_edit()">
                                                                         <i class="fa-solid fa-clone px-1"></i>
                                                                         Input Data KBLI
                                                                     </button>
@@ -621,6 +703,27 @@
                                                                     </div>
                                                                     <div id="sts_validasi_skdp_3" style="display: none;">
                                                                         <span class="badge bg-warning sts_validasi_skdp_3">Revisi</span>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <!-- skdp -->
+                                                            <tr>
+                                                                <td class="col-sm-3">
+                                                                </td>
+                                                                <td class="col-sm-3">
+                                                                </td>
+                                                                <td class="col-sm-2 bg-light">
+                                                                    <label class="form-label col-form-label-sm"><b>Status Validasi KBLI</b></label>
+                                                                </td>
+                                                                <td class="col-sm-5">
+                                                                    <div id="sts_validasi_skdp_kbli_0" style="display: none;">
+                                                                        <span class="badge bg-secondary sts_validasi_skdp_kbli_0">Belum Tervalidasi</span>
+                                                                    </div>
+                                                                    <div id="sts_validasi_skdp_kbli_1" style="display: none;">
+                                                                        <span class="badge bg-success sts_validasi_skdp_kbli_1">Tervalidasi</span>
+                                                                    </div>
+                                                                    <div id="sts_validasi_skdp_kbli_2" style="display: none;">
+                                                                        <span class="badge bg-danger sts_validasi_skdp_kbli_2">Tidak Valid</span>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -675,7 +778,9 @@
                                                                     <small class="nama_surat_error text-danger"></small>
                                                                 </td>
                                                             </tr>
+
                                                             <tr>
+
                                                                 <td class="col-sm-2 bg-light">
                                                                     <label class="form-label col-form-label-sm"><b>Nomor Surat</b></label>
                                                                 </td>
@@ -696,8 +801,8 @@
                                                                         <div class="input-group mb-2">
                                                                             <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
                                                                             <select name="sts_seumur_hidup_lainnya" class="form-select text-sm sts_seumur_hidup_lainnya" aria-label="Default select example" onchange="sts_berlaku_lainnya()">
-                                                                                <option value="2">Seumur Hidup</option>
                                                                                 <option value="1">Tanggal</option>
+                                                                                <option value="2">Seumur Hidup</option>
                                                                             </select>
                                                                         </div>
                                                                         <input type="date" id="tgl_berlaku_lainnya" name="tgl_berlaku_lainnya" class="form-control tgl_berlaku_lainnya" readonly data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
@@ -726,7 +831,23 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td class="col-sm-12 bg-dark" colspan="4"></td>
+                                                                <td class="col-sm-2 bg-light">
+                                                                    <label class="form-label col-sm-12 col-form-label-sm"><b>Status Validasi</b></label>
+                                                                </td>
+                                                                <td class="col-sm-5">
+                                                                    <div id="sts_validasi_lainnya_0" style="display: none;">
+                                                                        <span class="badge bg-secondary sts_validasi_lainnya_0">Belum Tervalidasi</span>
+                                                                    </div>
+                                                                    <div id="sts_validasi_lainnya_1" style="display: none;">
+                                                                        <span class="badge bg-success sts_validasi_lainnya_1">Tervalidasi</span>
+                                                                    </div>
+                                                                    <div id="sts_validasi_lainnya_2" style="display: none;">
+                                                                        <span class="badge bg-danger sts_validasi_lainnya_2">Tidak Valid</span>
+                                                                    </div>
+                                                                    <div id="sts_validasi_lainnya_3" style="display: none;">
+                                                                        <span class="badge bg-warning sts_validasi_lainnya_3">Revisi</span>
+                                                                    </div>
+                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="col-sm-12" colspan="4">
@@ -785,8 +906,8 @@
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
-                                                    <select class="form-select form-select-sm single-select-field" data-placeholder="Cari Kode Kbli..." name="id_kbli_nib">
-                                                        <option value=""></option>
+                                                    <select class="form-select form-select-sm" data-placeholder="Cari Kode Kbli..." name="id_kbli_nib">
+                                                        <option value="">Cari Kode Kbli...</option>
                                                         <?php foreach ($data_kbli as $key => $value) { ?>
                                                             <option value="<?= $value['id_kbli'] ?>"><?= $value['kode_kbli'] ?> || <?= $value['nama_kbli'] ?></option>
                                                         <?php  } ?>
@@ -802,8 +923,8 @@
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                                    <select class="form-select form-select-sm single-select-field" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_nib">
-                                                        <option value=""></option>
+                                                    <select class="form-select form-select-sm" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_nib">
+                                                        <option value="">Cari Kualifikasi Usaha...</option>
                                                         <?php foreach ($kualifikasi as $key => $value) { ?>
                                                             <option value="<?= $value['id_kualifikasi_izin'] ?>"><?= $value['nama_kualifikasi'] ?></option>
                                                         <?php  } ?>
@@ -896,7 +1017,7 @@
                 </div>
                 <div class="modal-footer">
                     <a href="javascript:;" onclick="EditChangeGlobal_nib()" class="btn btn-success"> <i class="fas fa fa-check"> </i> Yakin !!</a>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa fa-ban"> </i> Tidak !!</button>
+                    <a href="javascript:;" type="button" onclick="BatalChangeGlobal_nib()" class="btn btn-danger"><i class="fas fa fa-ban"> </i> Tidak !!</a>
                 </div>
             </div>
         </div>
@@ -960,8 +1081,8 @@
                                     <div class="col-sm-12">
                                         <div class="input-group mb-2">
                                             <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
-                                            <select class="form-select form-select-sm single-select-field" data-placeholder="Cari Kode Kbli..." name="id_kbli_nib">
-                                                <option value=""></option>
+                                            <select class="form-select form-select-sm" data-placeholder="Cari Kode Kbli..." name="id_kbli_nib">
+                                                <option value="">Cari Kode Kbli...</option>
                                                 <?php foreach ($data_kbli as $key => $value) { ?>
                                                     <option value="<?= $value['id_kbli'] ?>"><?= $value['kode_kbli'] ?> || <?= $value['nama_kbli'] ?></option>
                                                 <?php  } ?>
@@ -978,8 +1099,8 @@
                                     <div class="col-sm-12">
                                         <div class="input-group mb-2">
                                             <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                            <select class="form-select form-select-sm single-select-field" data-placeholder="Cari Kualifikasi..." name="id_kualifikasi_izin_kbli_nib">
-                                                <option value=""></option>
+                                            <select class="form-select form-select-sm" data-placeholder="Cari Kualifikasi..." name="id_kualifikasi_izin_kbli_nib">
+                                                <option value="">Cari Kualifikasi Usaha...</option>
                                                 <?php foreach ($kualifikasi as $key => $value) { ?>
                                                     <option value="<?= $value['id_kualifikasi_izin'] ?>"><?= $value['nama_kualifikasi'] ?></option>
                                                 <?php  } ?>
@@ -1055,8 +1176,8 @@
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
-                                                    <select class="form-select form-select-sm single-select-field" data-placeholder="Cari Kode Kbli..." name="id_kbli_siup">
-                                                        <option value=""></option>
+                                                    <select class="form-select form-select-sm" data-placeholder="Cari Kode Kbli..." name="id_kbli_siup">
+                                                        <option value="">Cari Kode Kbli...</option>
                                                         <?php foreach ($data_kbli as $key => $value) { ?>
                                                             <option value="<?= $value['id_kbli'] ?>"><?= $value['kode_kbli'] ?> || <?= $value['nama_kbli'] ?></option>
                                                         <?php  } ?>
@@ -1072,8 +1193,8 @@
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                                    <select class="form-select form-select-sm single-select-field" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_siup">
-                                                        <option value=""></option>
+                                                    <select class="form-select form-select-sm" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_siup">
+                                                        <option value="">Cari Kualifikasi Usaha...</option>
                                                         <?php foreach ($kualifikasi as $key => $value) { ?>
                                                             <option value="<?= $value['id_kualifikasi_izin'] ?>"><?= $value['nama_kualifikasi'] ?></option>
                                                         <?php  } ?>
@@ -1166,7 +1287,7 @@
                 </div>
                 <div class="modal-footer">
                     <a href="javascript:;" onclick="EditChangeGlobal_siup()" class="btn btn-success"> <i class="fas fa fa-check"> </i> Yakin !!</a>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa fa-ban"> </i> Tidak !!</button>
+                    <a href="javascript:;" type="button" onclick="BatalChangeGlobal_siup()" class="btn btn-danger"><i class="fas fa fa-ban"> </i> Tidak !!</a>
                 </div>
             </div>
         </div>
@@ -1230,8 +1351,8 @@
                                     <div class="col-sm-12">
                                         <div class="input-group mb-2">
                                             <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
-                                            <select class="form-select form-select-sm single-select-field" data-placeholder="Cari Kode Kbli..." name="id_kbli_siup">
-                                                <option value=""></option>
+                                            <select class="form-select form-select-sm" data-placeholder="Cari Kode Kbli..." name="id_kbli_siup">
+                                                <option value="">Cari Kode Kbli...</option>
                                                 <?php foreach ($data_kbli as $key => $value) { ?>
                                                     <option value="<?= $value['id_kbli'] ?>"><?= $value['kode_kbli'] ?> || <?= $value['nama_kbli'] ?></option>
                                                 <?php  } ?>
@@ -1248,8 +1369,8 @@
                                     <div class="col-sm-12">
                                         <div class="input-group mb-2">
                                             <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                            <select class="form-select form-select-sm single-select-field" data-placeholder="Cari Kualifikasi..." name="id_kualifikasi_izin_kbli_siup">
-                                                <option value=""></option>
+                                            <select class="form-select form-select-sm" data-placeholder="Cari Kualifikasi..." name="id_kualifikasi_izin_kbli_siup">
+                                                <option value="">Cari Kualifikasi Usaha...</option>
                                                 <?php foreach ($kualifikasi as $key => $value) { ?>
                                                     <option value="<?= $value['id_kualifikasi_izin'] ?>"><?= $value['nama_kualifikasi'] ?></option>
                                                 <?php  } ?>
@@ -1326,8 +1447,8 @@
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
-                                                    <select class="form-select form-select-sm single-select-field" data-placeholder="Cari Kode SBU..." name="id_kbli_sbu">
-                                                        <option value=""></option>
+                                                    <select class="form-select form-select-sm" data-placeholder="Cari Kode SBU..." name="id_kbli_sbu">
+                                                        <option value="">Cari Kode Kbli...</option>
                                                         <?php foreach ($data_sbu as $key => $value) { ?>
                                                             <option value="<?= $value['id_sbu'] ?>"><?= $value['kode_sbu'] ?> || <?= $value['nama_sbu'] ?></option>
                                                         <?php  } ?>
@@ -1343,8 +1464,8 @@
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                                    <select class="form-select form-select-sm single-select-field" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_sbu">
-                                                        <option value=""></option>
+                                                    <select class="form-select form-select-sm" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_sbu">
+                                                        <option value="">Cari Kualifikasi Usaha...</option>
                                                         <?php foreach ($kualifikasi_sbu as $key => $value) { ?>
                                                             <option value="<?= $value['id_kualifikasi_sbu'] ?>"><?= $value['nama_kualifikasi'] ?></option>
                                                         <?php  } ?>
@@ -1438,7 +1559,7 @@
                 </div>
                 <div class="modal-footer">
                     <a href="javascript:;" onclick="EditChangeGlobal_sbu()" class="btn btn-success"> <i class="fas fa fa-check"> </i> Yakin !!</a>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa fa-ban"> </i> Tidak !!</button>
+                    <a href="javascript:;" type="button" onclick="BatalChangeGlobal_sbu()" class="btn btn-danger"><i class="fas fa fa-ban"> </i> Tidak !!</a>
                 </div>
             </div>
         </div>
@@ -1502,8 +1623,8 @@
                                     <div class="col-sm-12">
                                         <div class="input-group mb-2">
                                             <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
-                                            <select class="form-select form-select-sm single-select-field" data-placeholder="Cari Kode SBU..." name="id_kbli_sbu">
-                                                <option value=""></option>
+                                            <select class="form-select form-select-sm" data-placeholder="Cari Kode SBU..." name="id_kbli_sbu">
+                                                <option value="">Cari Kode SBU...</option>
                                                 <?php foreach ($data_sbu as $key => $value) { ?>
                                                     <option value="<?= $value['id_sbu'] ?>"><?= $value['kode_sbu'] ?> || <?= $value['nama_sbu'] ?></option>
                                                 <?php  } ?>
@@ -1520,8 +1641,8 @@
                                     <div class="col-sm-12">
                                         <div class="input-group mb-2">
                                             <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                            <select class="form-select form-select-sm single-select-field" data-placeholder="Cari Kualifikasi SBU..." name="id_kualifikasi_izin_kbli_sbu">
-                                                <option value=""></option>
+                                            <select class="form-select form-select-sm" data-placeholder="Cari Kualifikasi SBU..." name="id_kualifikasi_izin_kbli_sbu">
+                                                <option value="">Cari Kualifikasi SBU...</option>
                                                 <?php foreach ($kualifikasi_sbu as $key => $value) { ?>
                                                     <option value="<?= $value['id_kualifikasi_sbu'] ?>"><?= $value['nama_kualifikasi'] ?></option>
                                                 <?php  } ?>
@@ -1598,8 +1719,8 @@
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text"></span>
-                                                    <select class="form-select form-select-sm single-select-field" data-placeholder="Cari Kode Kbli..." name="id_kbli_siujk">
-                                                        <option value=""></option>
+                                                    <select class="form-select form-select-sm" data-placeholder="Cari Kode Kbli..." name="id_kbli_siujk">
+                                                        <option value="">Cari Kode Kbli...</option>
                                                         <?php foreach ($data_kbli as $key => $value) { ?>
                                                             <option value="<?= $value['id_kbli'] ?>"><?= $value['kode_kbli'] ?> || <?= $value['nama_kbli'] ?></option>
                                                         <?php  } ?>
@@ -1615,8 +1736,8 @@
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                                    <select class="form-select form-select-sm single-select-field" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_siujk">
-                                                        <option value=""></option>
+                                                    <select class="form-select form-select-sm" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_siujk">
+                                                        <option value="">Cari Kualifikasi Usaha...</option>
                                                         <?php foreach ($kualifikasi as $key => $value) { ?>
                                                             <option value="<?= $value['id_kualifikasi_izin'] ?>"><?= $value['nama_kualifikasi'] ?></option>
                                                         <?php  } ?>
@@ -1710,7 +1831,7 @@
                 </div>
                 <div class="modal-footer">
                     <a href="javascript:;" onclick="EditChangeGlobal_siujk()" class="btn btn-success"> <i class="fas fa fa-check"> </i> Yakin !!</a>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa fa-ban"> </i> Tidak !!</button>
+                    <a href="javascript:;" type="button" onclick="BatalChangeGlobal_siujk()" class="btn btn-danger"><i class="fas fa fa-ban"> </i> Tidak !!</a>
                 </div>
             </div>
         </div>
@@ -1774,8 +1895,8 @@
                                     <div class="col-sm-12">
                                         <div class="input-group mb-2">
                                             <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
-                                            <select class="form-select form-select-sm single-select-field" data-placeholder="Cari Kode Kbli..." name="id_kbli_siujk">
-                                                <option value=""></option>
+                                            <select class="form-select form-select-sm" data-placeholder="Cari Kode Kbli..." name="id_kbli_siujk">
+                                                <option value="">Cari Kode Kbli...</option>
                                                 <?php foreach ($data_kbli as $key => $value) { ?>
                                                     <option value="<?= $value['id_kbli'] ?>"><?= $value['kode_kbli'] ?> || <?= $value['nama_kbli'] ?></option>
                                                 <?php  } ?>
@@ -1792,8 +1913,8 @@
                                     <div class="col-sm-12">
                                         <div class="input-group mb-2">
                                             <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                            <select class="form-select form-select-sm single-select-field" data-placeholder="Cari Kualifikasi..." name="id_kualifikasi_izin_kbli_siujk">
-                                                <option value=""></option>
+                                            <select class="form-select form-select-sm" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_siujk">
+                                                <option value="">Cari Kualifikasi Usaha</option>
                                                 <?php foreach ($kualifikasi as $key => $value) { ?>
                                                     <option value="<?= $value['id_kualifikasi_izin'] ?>"><?= $value['nama_kualifikasi'] ?></option>
                                                 <?php  } ?>
@@ -1868,8 +1989,8 @@
                                         <div class="col-sm-12">
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"></span>
-                                                <select class="form-select form-select-sm single-select-field" data-placeholder="Cari Kode Kbli..." name="id_kbli_skdp">
-                                                    <option value=""></option>
+                                                <select class="form-select form-select-sm" data-placeholder="Cari Kode Kbli..." name="id_kbli_skdp">
+                                                    <option value="">Cari Kode Kbli...</option>
                                                     <?php foreach ($data_kbli as $key => $value) { ?>
                                                         <option value="<?= $value['id_kbli'] ?>"><?= $value['kode_kbli'] ?> || <?= $value['nama_kbli'] ?></option>
                                                     <?php  } ?>
@@ -1885,8 +2006,8 @@
                                         <div class="col-sm-12">
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                                <select class="form-select form-select-sm single-select-field" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_skdp">
-                                                    <option value=""></option>
+                                                <select class="form-select form-select-sm" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_skdp">
+                                                    <option value="">Cari Kualifikasi Usaha...</option>
                                                     <?php foreach ($kualifikasi as $key => $value) { ?>
                                                         <option value="<?= $value['id_kualifikasi_izin'] ?>"><?= $value['nama_kualifikasi'] ?></option>
                                                     <?php  } ?>
@@ -1979,7 +2100,7 @@
             </div>
             <div class="modal-footer">
                 <a href="javascript:;" onclick="EditChangeGlobal_skdp()" class="btn btn-success"> <i class="fas fa fa-check"> </i> Yakin !!</a>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa fa-ban"> </i> Tidak !!</button>
+                <a href="javascript:;" type="button" onclick="BatalChangeGlobal_skdp()" class="btn btn-danger"><i class="fas fa fa-ban"> </i> Tidak !!</a>
             </div>
         </div>
     </div>
@@ -2039,7 +2160,7 @@
             </div>
             <div class="modal-footer">
                 <a href="javascript:;" onclick="EditChangeGlobal_lainnya()" class="btn btn-success"> <i class="fas fa fa-check"> </i> Yakin !!</a>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa fa-ban"> </i> Tidak !!</button>
+                <a href="javascript:;" type="button" onclick="BatalChangeGlobal_lainnya()" class="btn btn-danger"><i class="fas fa fa-ban"> </i> Tidak !!</a>
             </div>
         </div>
     </div>

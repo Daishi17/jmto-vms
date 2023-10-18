@@ -1,5 +1,6 @@
 
-get_row_vendor_siup() 
+get_row_vendor_siup()
+alert()
 function get_row_vendor_siup() {
   var secret_token = $('[name="secret_token"]').val()
   var id_url_vendor = $('[name="id_url_vendor"]').val()
@@ -41,7 +42,7 @@ function get_row_vendor_siup() {
               $('[name="no_urut_siup"]').val(response['row_siup']['no_urut_siup']);
               $('[name="nomor_surat_siup"]').val(response['row_siup']['nomor_surat']);
               $('[name="kualifikasi_izin_siup"]').val(response['row_siup']['kualifikasi_izin']);
-              $('[name="tgl_berlaku_siup"]').val(response['row_siup']['tgl_berlaku_siup']);
+              $('[name="tgl_berlaku_siup"]').val(response['row_siup']['tgl_berlaku']);
   
               // $('.file').text(response['row_siup']['file_dokumen'])
               if (response['row_siup']['sts_token_dokumen'] == 1) {

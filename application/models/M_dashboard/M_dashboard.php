@@ -486,4 +486,256 @@ class M_Dashboard extends CI_Model
         $query = $this->db->get();
         return $query->row_array();
     }
+
+    public function get_row_siup($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_siup');
+        $this->db->where('tbl_vendor_siup.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_result_siup_kbli($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_siup');
+        $this->db->join('tbl_kbli', 'tbl_vendor_kbli_siup.id_kbli = tbl_kbli.id_kbli', 'left');
+        $this->db->where('tbl_vendor_kbli_siup.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_row_nib($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_nib');
+        $this->db->where('tbl_vendor_nib.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_result_nib_kbli($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_nib');
+        $this->db->join('tbl_kbli', 'tbl_vendor_kbli_nib.id_kbli = tbl_kbli.id_kbli', 'left');
+        $this->db->where('tbl_vendor_kbli_nib.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_row_sbu($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_sbu');
+        $this->db->where('tbl_vendor_sbu.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+
+    public function get_result_sbu_kbli($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_sbu');
+        $this->db->join('tbl_sbu', 'tbl_vendor_kbli_sbu.id_sbu = tbl_sbu.id_sbu', 'left');
+        $this->db->where('tbl_vendor_kbli_sbu.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+
+
+    public function get_row_skdp($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_skdp');
+        $this->db->where('tbl_vendor_skdp.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_result_skdp_kbli($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_skdp');
+        $this->db->join('tbl_kbli', 'tbl_vendor_kbli_skdp.id_kbli = tbl_kbli.id_kbli', 'left');
+        $this->db->where('tbl_vendor_kbli_skdp.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_row_siujk($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_siujk');
+        $this->db->where('tbl_vendor_siujk.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_result_siujk_kbli($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_siujk');
+        $this->db->join('tbl_kbli', 'tbl_vendor_kbli_siujk.id_kbli = tbl_kbli.id_kbli', 'left');
+        $this->db->where('tbl_vendor_kbli_siujk.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    function get_row_akta_pendirian($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_akta_pendirian');
+        $this->db->where('tbl_vendor_akta_pendirian.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    function get_row_akta_perubahan($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_akta_perubahan');
+        $this->db->where('tbl_vendor_akta_perubahan.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_row_pemilik_manajerial($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_pemilik');
+        $this->db->where('tbl_vendor_pemilik.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_result_pemilik_manajerial($id_vendor)
+    {
+        $this->db->select('nik, sts_validasi, nama_validator, tgl_periksa');
+        $this->db->from('tbl_vendor_pemilik');
+        $this->db->where('tbl_vendor_pemilik.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_row_pengurus_manajerial($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_pengurus');
+        $this->db->where('tbl_vendor_pengurus.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+
+    public function get_result_pengurus_manajerial($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_pengurus');
+        $this->db->where('tbl_vendor_pengurus.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_row_pengalaman($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_pengalaman');
+        $this->db->where('tbl_vendor_pengalaman.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_result_pengalaman($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_pengalaman');
+        $this->db->where('tbl_vendor_pengalaman.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_row_sppkp($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_sppkp');
+        $this->db->where('tbl_vendor_sppkp.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_row_npwp($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_npwp');
+        $this->db->where('tbl_vendor_npwp.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_row_spt($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_spt');
+        $this->db->where('tbl_vendor_spt.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_result_spt($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_spt');
+        $this->db->where('tbl_vendor_spt.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_row_neraca($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_neraca_keuangan');
+        $this->db->where('tbl_vendor_neraca_keuangan.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_result_neraca($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_neraca_keuangan');
+        $this->db->where('tbl_vendor_neraca_keuangan.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_row_keuangan($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_keuangan');
+        $this->db->where('tbl_vendor_keuangan.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_result_keuangan($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_keuangan');
+        $this->db->where('tbl_vendor_keuangan.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    function get_row_lainnya($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_izin_lain');
+        $this->db->where('tbl_vendor_izin_lain.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
 }

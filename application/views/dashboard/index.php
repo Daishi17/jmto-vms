@@ -61,12 +61,12 @@
                                             <?php
                                             if ($count_validate == 18) { ?>
                                                 <td class="text-end">
-                                                    <small><span class="badge bg-success">Sudah Valid</span></small>
+                                                    <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#rincian_dokumen"><small><span class="badge bg-success">Sudah Valid</span></small></a>
                                                 </td>
 
                                             <?php } else { ?>
                                                 <td class="text-end">
-                                                    <small><span class="badge bg-danger">Belum Lengkap</span></small>
+                                                    <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#rincian_dokumen"><small><span class="badge bg-danger">Belum Lengkap</span></small></a>
                                                 </td>
                                             <?php  }  ?>
 
@@ -116,11 +116,11 @@
                                         </tr>
                                         <tr>
                                             <th class="bg-light">
-                                                <small><?= $row_vendor['nama_provinsi'] ?></small>
+                                                <small>Provinsi</small>
                                             </th>
                                             <td>
                                                 <i class="fa-solid fa-landmark px-1"></i>
-                                                <small>Banten</small>
+                                                <small><?= $row_vendor['nama_provinsi'] ?></small>
                                             </td>
                                         </tr>
                                         <tr>
@@ -313,3 +313,398 @@
     </div>
 </main>
 <br>
+
+<div class="modal fade" id="rincian_dokumen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white" id="exampleModalLabel">Rincian Dokumen Upload <?= $this->session->userdata('nama_usaha'); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">SIUP</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No Surat</th>
+                                    <th>Status Validasi</th>
+                                    <th>Tanggal Periksa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_siup">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">KBLI SIUP</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Kode KBLI/Jenis</th>
+                                    <th>Status Validasi</th>
+                                    <th>Tanggal Periksa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_kbli_siup">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">NIB</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No Surat</th>
+                                    <th>Status Validasi</th>
+                                    <th>Tanggal Periksa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_nib">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">KBLI NIB</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Kode KBLI/Jenis</th>
+                                    <th>Status Validasi</th>
+                                    <th>Tanggal Periksa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_kbli_nib">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">SBU</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No Surat</th>
+                                    <th>Status Validasi</th>
+                                    <th>Tanggal Periksa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_sbu">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">KODE SBU</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Kode SBU/Jenis</th>
+                                    <th>Status Validasi</th>
+                                    <th>Tanggal Periksa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_kbli_sbu">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">SIUJK</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No Surat</th>
+                                    <th>Status Validasi</th>
+                                    <th>Tanggal Periksa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_siujk">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">KBLI SIUJK</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Kode KBLI/Jenis</th>
+                                    <th>Status Validasi</th>
+                                    <th>Tanggal Periksa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_kbli_siujk">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">Akta Pendirian</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No Surat</th>
+                                    <th>Status Validasi</th>
+                                    <th>Tanggal Periksa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_akta_pendirian">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">Akta Perubahan</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No Surat</th>
+                                    <th>Status Validasi</th>
+                                    <th>Tanggal Periksa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_akta_perubahan">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">Pemilik Perusahaan</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Nik/Paspor</th>
+                                    <th>Status Validasi</th>
+                                    <th>Tanggal Periksa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_pemilik">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">Pengurus Perusahaan</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Nik/Paspor</th>
+                                    <th>Status Validasi</th>
+                                    <th>Tanggal Periksa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_pengurus">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">Pengalaman</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No Kontrak</th>
+                                    <th>Status Validasi</th>
+                                    <th>Tanggal Periksa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_pengalaman">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">SPPKP</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No Surat</th>
+                                    <th>Status Validasi</th>
+                                    <th>Tanggal Periksa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_sppkp">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">NPWP</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No NPWP</th>
+                                    <th>Status Validasi</th>
+                                    <th>Tanggal Periksa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_npwp">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">SPT</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No TTE/SPT</th>
+                                    <th>Status Validasi</th>
+                                    <th>Tanggal Periksa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_spt">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">Laporan Keuangan</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Tahun Laporan/Jenis Audit</th>
+                                    <th>Status Validasi</th>
+                                    <th>Tanggal Periksa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_keuangan">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>

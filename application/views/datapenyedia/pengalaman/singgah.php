@@ -175,7 +175,12 @@
                                             <div class="col-sm-10">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text">Rp.</span>
-                                                    <input name="nilai_kontrak" type="text" class="form-control" onkeyup="nilai_badan_sharing()">
+                                                    <input name="nilai_kontrak" type="text" class="form-control" onkeyup="nilai_badan_sharing()" id="nilai_kontrak">
+
+                                                </div>
+                                                <div class="input-group mb-2">
+                                                    <span class="input-group-text">Rp.</span>
+                                                    <input type="text" id="nilai_kontrak-rp" class="form-control" disabled>
                                                 </div>
                                                 <!-- nilai_kontrak -->
                                                 <small class="nilai_kontrak_error text-danger"></small>
@@ -231,7 +236,8 @@
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text">Rp.</span>
-                                                    <input name="nilai_sharing" type="text" class="form-control" readonly>
+                                                    <input type="text" id="nilai_sharing_rp" name="nilai_sharing_rp" class="form-control" readonly>
+                                                    <input name="nilai_sharing" type="hidden" class="form-control" readonly>
                                                 </div>
                                                 <!-- lokasi_pekerjaan -->
                                                 <small class="lokasi_pekerjaan_error text-danger"></small>

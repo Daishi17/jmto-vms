@@ -17,6 +17,7 @@ class Registrasi extends CI_Controller
 	{
 		$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[tbl_vendor.email]', ['required' => 'Email Wajib Diisi!', 'valid_email' => 'Email Tidak Valid',  'is_unique' => 'Email Sudah Terdaftar']);
 		$this->form_validation->set_rules('npwp', 'NPWP', 'trim|required|is_unique[tbl_vendor.npwp]', ['required' => 'NPWP Wajib Diisi!', 'is_unique' => 'NPWP Sudah Terdaftar']);
+		$this->form_validation->set_rules('npwp_checker', 'NPWP', '|is_unique[tbl_vendor.npwp]', ['is_unique' => 'NPWP Sudah Terdaftar']);
 		$recaptcha = $this->input->post('g-recaptcha-response');
 		if (!empty($recaptcha)) {
 			$response = $this->recaptcha->verifyResponse($recaptcha);
@@ -52,11 +53,11 @@ class Registrasi extends CI_Controller
 						// api get content
 						// json_decode(file_get_contents("https://jmto-vms.kintekindo.net/send_email_jmto/kirim_email_registrasi/" . $email . '/' . $randomString));
 						$type_send_email = 'registrasi';
-                        			$data_send_email = [
-                            				'email' => $email,
-                            				'token_regis' => $randomString
-                        			];
-                        			$this->email_send->sen_row_email($type_send_email, $data_send_email);
+						$data_send_email = [
+							'email' => $email,
+							'token_regis' => $randomString
+						];
+						$this->email_send->sen_row_email($type_send_email, $data_send_email);
 						$this->session->set_flashdata('npwp_api', 'NPWP ANDA TERDAFTAR');
 						$this->session->set_flashdata('no_npwp', $result_ceking['data']['npwp']);
 						$this->session->set_flashdata('nama_npwp', $result_ceking['data']['name']);
@@ -114,6 +115,7 @@ class Registrasi extends CI_Controller
 	{
 		$this->form_validation->set_rules('password', 'Password', 'required|trim|matches[password2]', ['required' => 'Password Wajib Diisi!', 'matches' => 'Password Tidak Sama']);
 		$this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password]', ['required' => 'Password Verifikasi harus diisi!', 'matches' => 'Password Tidak Sama']);
+
 		$recaptcha = $this->input->post('g-recaptcha-response');
 		if (!empty($recaptcha)) {
 			$response = $this->recaptcha->verifyResponse($recaptcha);

@@ -90,7 +90,8 @@
                                     </div>
                                     <div class="input-group mb-2">
                                         <span class="input-group-text"><i class="fa-solid fa-address-card"></i></span>
-                                        <input required type="text" name="npwp" class="form-control" placeholder="Masukan NPWP">
+                                        <input required type="text" name="npwp" class="form-control" placeholder="Masukan NPWP" onkeyup="npwp_check()">
+                                        <input required type="text" name="npwp_checker" class="form-control" placeholder="Masukan NPWP" data-inputmask='"mask": "99.999.999.9-999.999"' readonly data-mask>
                                     </div>
                                     <div class="col-auto">
                                         <button type="submit" class="btn btn-primary">

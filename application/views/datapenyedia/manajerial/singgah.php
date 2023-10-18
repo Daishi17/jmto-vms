@@ -267,7 +267,7 @@
                                     </tr>
                                     <tr>
                                         <td class="col-sm-2 bg-light">
-                                            <label class="form-label col-form-label-sm"><b>Jenis Kepemilik</b></label>
+                                            <label class="form-label col-form-label-sm"><b>Jenis Kepemilikan</b></label>
                                         </td>
                                         <td class="col-sm-3">
                                             <div class="col-sm-12">
@@ -730,7 +730,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-sm-2 bg-light">
-                                        <label class="form-label col-form-label-sm"><b>Jenis Kepemilik</b></label>
+                                        <label class="form-label col-form-label-sm"><b>Jenis Kepemilikan</b></label>
                                     </td>
                                     <td class="col-sm-3">
                                         <div class="col-sm-12">

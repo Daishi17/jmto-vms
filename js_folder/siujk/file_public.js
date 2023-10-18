@@ -19,7 +19,7 @@ function get_row_vendor_siujk() {
                 $('[name="no_urut_siujk"]').val(response['row_siujk']['no_urut_siujk']);
                 $('[name="nomor_surat_siujk"]').val(response['row_siujk']['nomor_surat']);
                 $('[name="kualifikasi_izin_siujk"]').val(response['row_siujk']['kualifikasi_izin']);
-                $('[name="tgl_berlaku_siujk"]').val(response['row_siujk']['tgl_berlaku_siujk']);
+                $('[name="tgl_berlaku_siujk"]').val(response['row_siujk']['tgl_berlaku']);
     
                 // $('.file').text(response['row_siujk']['file_dokumen'])
                 if (response['row_siujk']['sts_token_dokumen'] == 1) {

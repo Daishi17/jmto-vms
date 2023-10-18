@@ -5855,4 +5855,17 @@ class Datapenyedia extends CI_Controller
 		// var_dump($data['cek_terundang']);die;
 		$this->load->view('datapenyedia/cek_terundang', $data);
 	}
+
+	public function get_rupiah()
+	{
+		$angka = $this->input->post('angka');
+		$nilai_kontrak = $this->input->post('nilai_kontrak');
+		if ($angka) {
+			$hasil_rupiah = number_format($angka, 2, ',', '.');
+			$this->output->set_content_type('application/json')->set_output(json_encode($hasil_rupiah));
+		} else {
+			$nilai_kontrak = number_format($nilai_kontrak, 2, ',', '.');
+			$this->output->set_content_type('application/json')->set_output(json_encode($nilai_kontrak));
+		}
+	}
 }

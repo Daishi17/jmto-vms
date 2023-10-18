@@ -294,7 +294,7 @@
                                                                         <div class="input-group mb-2">
                                                                             <span class="input-group-text">Rp.</span>
                                                                             <input type="text" class="form-control jumlah_setor_perubahan" name="jumlah_setor_perubahan">
-                                                                            <input type="text" class="form-control" value="Rp. <?= number_format($akta_perubahan['jumlah_setor_modal'], 2, ',', '.');  ?>" readonly id="tanpa_rupiah_akta_pendirian">
+                                                                            <input type="text" class="form-control" value="Rp. <?= number_format($akta_perubahan['jumlah_setor_modal'], 2, ',', '.');  ?>" readonly id="tanpa_rupiah_akta_perubahan">
                                                                             <br>
                                                                         </div>
                                                                     </div>

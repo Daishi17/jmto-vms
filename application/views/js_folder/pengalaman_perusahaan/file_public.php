@@ -186,7 +186,7 @@
                         $('.btn_simpan').attr("disabled", false);
                     } else {
                         modal_edit_excel_pengalaman_manajerial.modal('hide')
-                        Swal.fire('Good job!', 'Data Beharhasil Di Edit!', 'success');
+                        Swal.fire('Good job!', 'Data Berhasil Di Edit!', 'success');
                         reloaddata_excel_pengalaman_manajerial()
                         reloaddata_pengalaman_manajerial();
                         $('.btn_simpan').attr('disabled', false);
@@ -267,7 +267,7 @@
                         $('.btn_simpan').attr("disabled", false);
                     } else {
                         modal_pengalaman.modal('hide')
-                        Swal.fire('Good job!', 'Data Beharhasil Di Buat!', 'success');
+                        Swal.fire('Good job!', 'Data Berhasil Di Buat!', 'success');
                         reloaddata_pengalaman_manajerial()
                         $('.btn_simpan').attr('disabled', false);
                         form_simpan_pengalaman[0].reset();
@@ -308,7 +308,7 @@
             success: function(response) {
                 $('.btn_simpan').attr('disabled', false);
                 if (response['message']) {
-                    Swal.fire('Good job!', 'Behasil Import Excel', 'success');
+                    Swal.fire('Good job!', 'Berhasil Import Excel', 'success');
                     reloaddata_excel_pengalaman_manajerial()
                     form_import_excel_pengalaman[0].reset();
                 } else {
@@ -336,7 +336,7 @@
                     url: '<?= base_url('datapenyedia/hapus_row_import_excel_pengalaman/') ?>' + id_url,
                     dataType: "JSON",
                     success: function(response) {
-                        Swal.fire('Good job!', 'Data Beharhasil Dihapus!', 'success');
+                        Swal.fire('Good job!', 'Data Berhasil Dihapus!', 'success');
                         reloaddata_excel_pengalaman_manajerial()
                     }
                 })
@@ -354,7 +354,7 @@
                 $('.data_tervalidasi_pengalaman').css('display', 'none');
             },
             success: function(response) {
-                Swal.fire('Good job!', 'Data Beharhasil Simpan!', 'success');
+                Swal.fire('Good job!', 'Data Berhasil Simpan!', 'success');
                 form_import_excel_pengalaman[0].reset();
                 reloaddata_excel_pengalaman_manajerial();
                 reloaddata_pengalaman_manajerial();
@@ -394,7 +394,7 @@
                     url: '<?= base_url('datapenyedia/hapus_import_excel_pengalaman') ?>',
                     dataType: "JSON",
                     success: function(response) {
-                        Swal.fire('Good job!', 'Data Beharhasil Dihapus!', 'success');
+                        Swal.fire('Good job!', 'Data Berhasil Dihapus!', 'success');
                         reloaddata_excel_pengalaman_manajerial()
 
                     }
@@ -586,7 +586,7 @@
                     url: '<?= base_url('datapenyedia/hapus_row_pengalaman/') ?>' + id_url,
                     dataType: "JSON",
                     success: function(response) {
-                        Swal.fire('Good job!', 'Data Beharhasil Dihapus!', 'success');
+                        Swal.fire('Good job!', 'Data Berhasil Dihapus!', 'success');
                         reloaddata_pengalaman_manajerial()
                     }
                 })
@@ -618,6 +618,47 @@
         var nilai_kontrak = $('[name="nilai_kontrak"]').val()
         var progres = $('[name="progres"]').val()
         var total = nilai_kontrak * progres / 100
-        $('[name="nilai_sharing"]').val(total)
+        $('[name="nilai_sharing"]').val(total);
+
+        $.ajax({
+            type: "POST",
+            url: '<?= base_url('datapenyedia/get_rupiah/') ?>',
+            data: {
+                nilai_kontrak: nilai_kontrak
+            },
+            dataType: "JSON",
+            success: function(response) {
+                $('#nilai_kontrak-rp').val(response);
+            }
+        })
+        $.ajax({
+            type: "POST",
+            url: '<?= base_url('datapenyedia/get_rupiah/') ?>',
+            data: {
+                angka: total
+            },
+            dataType: "JSON",
+            success: function(response) {
+                $('[name="nilai_sharing_rp"]').val(response);
+            }
+        })
+
+    }
+
+    function formatRupiah(angka, prefix) {
+        var number_string = angka.replace(/[^,\d]/g, '').toString(),
+            split = number_string.split(','),
+            sisa = split[0].length % 3,
+            rupiah = split[0].substr(0, sisa),
+            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+        // tambahkan titik jika yang di input sudah menjadi angka ribuan
+        if (ribuan) {
+            separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+
+        rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+        return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
     }
 </script>

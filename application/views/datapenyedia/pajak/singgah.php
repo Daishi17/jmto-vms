@@ -142,8 +142,8 @@
                                                                     <div class="input-group mb-2">
                                                                         <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
                                                                         <select name="sts_seumur_hidup_sppkp" onchange="ubah_masa_berlaku_sppkp()" class="form-select" aria-label="Default select example">
-                                                                            <option value="2">Seumur Hidup</option>
                                                                             <option value="1">Tanggal</option>
+                                                                            <option value="2">Seumur Hidup</option>
                                                                         </select>
                                                                         <input type="date" name="tgl_berlaku_sppkp" class="form-control" id="date">
                                                                     </div>
@@ -246,8 +246,8 @@
                                                                     <div class="input-group mb-2">
                                                                         <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
                                                                         <select class="form-select" onchange="ubah_masa_berlaku_npwp()" aria-label="Default select example" name="sts_seumur_hidup_npwp">
-                                                                            <option value="2">Seumur Hidup</option>
                                                                             <option value="1">Tanggal</option>
+                                                                            <option value="2">Seumur Hidup</option>
                                                                         </select>
                                                                         <input type="date" id="date" name="tgl_berlaku_npwp" class="form-control">
                                                                     </div>
