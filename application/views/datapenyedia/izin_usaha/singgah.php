@@ -100,11 +100,11 @@
                                                                 <td class="col-sm-2 bg-light">
                                                                     <label class="form-label col-sm-12 col-form-label-sm"><b>Berlaku Sampai</b></label>
                                                                 </td>
-                                                                <td class="col-sm-5">
-                                                                    <div class="col-sm-5">
+                                                                <td class="col-sm-12">
+                                                                    <div class="col-sm-12">
                                                                         <div class="input-group mb-2">
                                                                             <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
-                                                                            <select name="sts_seumur_hidup_nib" class="form-select text-sm sts_seumur_hidup_nib" aria-label="Default select example" onchange="sts_berlaku_nib()">
+                                                                            <select name="sts_seumur_hidup_nib" class="form-control text-sm sts_seumur_hidup_nib" aria-label="Default select example" onchange="sts_berlaku_nib()">
                                                                                 <option value="1">Tanggal</option>
                                                                                 <option value="2">Seumur Hidup</option>
                                                                             </select>
@@ -235,11 +235,11 @@
                                                                 <td class="col-sm-2 bg-light">
                                                                     <label class="form-label col-sm-12 col-form-label-sm"><b>Berlaku Sampai</b></label>
                                                                 </td>
-                                                                <td class="col-sm-5">
-                                                                    <div class="col-sm-5">
+                                                                <td class="col-sm-12">
+                                                                    <div class="col-sm-12">
                                                                         <div class="input-group mb-2">
                                                                             <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
-                                                                            <select name="sts_seumur_hidup_siup" class="form-select text-sm sts_seumur_hidup_siup" aria-label="Default select example" onchange="sts_berlaku_siup()">
+                                                                            <select name="sts_seumur_hidup_siup" class="form-control text-sm sts_seumur_hidup_siup" aria-label="Default select example" onchange="sts_berlaku_siup()">
                                                                                 <option value="1">Tanggal</option>
                                                                                 <option value="2">Seumur Hidup</option>
                                                                             </select>
@@ -371,11 +371,11 @@
                                                                 <td class="col-sm-2 bg-light">
                                                                     <label class="form-label col-sm-12 col-form-label-sm"><b>Berlaku Sampai</b></label>
                                                                 </td>
-                                                                <td class="col-sm-5">
-                                                                    <div class="col-sm-5">
+                                                                <td class="col-sm-12">
+                                                                    <div class="col-sm-12">
                                                                         <div class="input-group mb-2">
                                                                             <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
-                                                                            <select name="sts_seumur_hidup_sbu" class="form-select text-sm sts_seumur_hidup_sbu" aria-label="Default select example" onchange="sts_berlaku_sbu()">
+                                                                            <select name="sts_seumur_hidup_sbu" class="form-control text-sm sts_seumur_hidup_sbu" aria-label="Default select example" onchange="sts_berlaku_sbu()">
                                                                                 <option value="1">Tanggal</option>
                                                                                 <option value="2">Seumur Hidup</option>
                                                                             </select>
@@ -507,11 +507,11 @@
                                                                 <td class="col-sm-2 bg-light">
                                                                     <label class="form-label col-sm-12 col-form-label-sm"><b>Berlaku Sampai</b></label>
                                                                 </td>
-                                                                <td class="col-sm-5">
-                                                                    <div class="col-sm-5">
+                                                                <td class="col-sm-12">
+                                                                    <div class="col-sm-12">
                                                                         <div class="input-group mb-2">
                                                                             <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
-                                                                            <select name="sts_seumur_hidup_siujk" class="form-select text-sm sts_seumur_hidup_siujk" aria-label="Default select example" onchange="sts_berlaku_siujk()">
+                                                                            <select name="sts_seumur_hidup_siujk" class="form-select single-select-field text-sm sts_seumur_hidup_siujk" aria-label="Default select example" onchange="sts_berlaku_siujk()">
                                                                                 <option value="1">Tanggal</option>
                                                                                 <option value="2">Seumur Hidup</option>
                                                                             </select>
@@ -648,7 +648,7 @@
                                                                     <div class="col-sm-12">
                                                                         <div class="input-group mb-2">
                                                                             <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
-                                                                            <select name="sts_seumur_hidup_skdp" class="form-select text-sm sts_seumur_hidup_skdp" aria-label="Default select example" onchange="sts_berlaku_skdp()">
+                                                                            <select name="sts_seumur_hidup_skdp" class="form-control text-sm sts_seumur_hidup_skdp" aria-label="Default select example" onchange="sts_berlaku_skdp()">
                                                                                 <option value="1">Tanggal</option>
                                                                                 <option value="2">Seumur Hidup</option>
                                                                             </select>
@@ -796,11 +796,11 @@
                                                                 <td class="col-sm-2 bg-light">
                                                                     <label class="form-label col-sm-12 col-form-label-sm"><b>Berlaku Sampai</b></label>
                                                                 </td>
-                                                                <td class="col-sm-5">
-                                                                    <div class="col-sm-5">
+                                                                <td class="col-sm-12">
+                                                                    <div class="col-sm-12">
                                                                         <div class="input-group mb-2">
                                                                             <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
-                                                                            <select name="sts_seumur_hidup_lainnya" class="form-select text-sm sts_seumur_hidup_lainnya" aria-label="Default select example" onchange="sts_berlaku_lainnya()">
+                                                                            <select name="sts_seumur_hidup_lainnya" class="form-control text-sm sts_seumur_hidup_lainnya" aria-label="Default select example" onchange="sts_berlaku_lainnya()">
                                                                                 <option value="1">Tanggal</option>
                                                                                 <option value="2">Seumur Hidup</option>
                                                                             </select>
@@ -906,7 +906,7 @@
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
-                                                    <select class="form-select form-select-sm" data-placeholder="Cari Kode Kbli..." name="id_kbli_nib">
+                                                    <select class="form-select single-select-field select2 form-select-sm" data-placeholder="Cari Kode Kbli..." name="id_kbli_nib">
                                                         <option value="">Cari Kode Kbli...</option>
                                                         <?php foreach ($data_kbli as $key => $value) { ?>
                                                             <option value="<?= $value['id_kbli'] ?>"><?= $value['kode_kbli'] ?> || <?= $value['nama_kbli'] ?></option>
@@ -923,7 +923,7 @@
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                                    <select class="form-select form-select-sm" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_nib">
+                                                    <select class="form-select single-select-field form-select-sm" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_nib">
                                                         <option value="">Cari Kualifikasi Usaha...</option>
                                                         <?php foreach ($kualifikasi as $key => $value) { ?>
                                                             <option value="<?= $value['id_kualifikasi_izin'] ?>"><?= $value['nama_kualifikasi'] ?></option>
@@ -1081,7 +1081,7 @@
                                     <div class="col-sm-12">
                                         <div class="input-group mb-2">
                                             <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
-                                            <select class="form-select form-select-sm" data-placeholder="Cari Kode Kbli..." name="id_kbli_nib">
+                                            <select class="form-select single-select-field form-select-sm" data-placeholder="Cari Kode Kbli..." name="id_kbli_nib">
                                                 <option value="">Cari Kode Kbli...</option>
                                                 <?php foreach ($data_kbli as $key => $value) { ?>
                                                     <option value="<?= $value['id_kbli'] ?>"><?= $value['kode_kbli'] ?> || <?= $value['nama_kbli'] ?></option>
@@ -1099,7 +1099,7 @@
                                     <div class="col-sm-12">
                                         <div class="input-group mb-2">
                                             <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                            <select class="form-select form-select-sm" data-placeholder="Cari Kualifikasi..." name="id_kualifikasi_izin_kbli_nib">
+                                            <select class="form-select single-select-field form-select-sm" data-placeholder="Cari Kualifikasi..." name="id_kualifikasi_izin_kbli_nib">
                                                 <option value="">Cari Kualifikasi Usaha...</option>
                                                 <?php foreach ($kualifikasi as $key => $value) { ?>
                                                     <option value="<?= $value['id_kualifikasi_izin'] ?>"><?= $value['nama_kualifikasi'] ?></option>
@@ -1176,7 +1176,7 @@
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
-                                                    <select class="form-select form-select-sm" data-placeholder="Cari Kode Kbli..." name="id_kbli_siup">
+                                                    <select class="form-select single-select-field form-select-sm" data-placeholder="Cari Kode Kbli..." name="id_kbli_siup">
                                                         <option value="">Cari Kode Kbli...</option>
                                                         <?php foreach ($data_kbli as $key => $value) { ?>
                                                             <option value="<?= $value['id_kbli'] ?>"><?= $value['kode_kbli'] ?> || <?= $value['nama_kbli'] ?></option>
@@ -1193,7 +1193,7 @@
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                                    <select class="form-select form-select-sm" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_siup">
+                                                    <select class="form-select single-select-field form-select-sm" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_siup">
                                                         <option value="">Cari Kualifikasi Usaha...</option>
                                                         <?php foreach ($kualifikasi as $key => $value) { ?>
                                                             <option value="<?= $value['id_kualifikasi_izin'] ?>"><?= $value['nama_kualifikasi'] ?></option>
@@ -1351,7 +1351,7 @@
                                     <div class="col-sm-12">
                                         <div class="input-group mb-2">
                                             <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
-                                            <select class="form-select form-select-sm" data-placeholder="Cari Kode Kbli..." name="id_kbli_siup">
+                                            <select class="form-select single-select-field form-select-sm" data-placeholder="Cari Kode Kbli..." name="id_kbli_siup">
                                                 <option value="">Cari Kode Kbli...</option>
                                                 <?php foreach ($data_kbli as $key => $value) { ?>
                                                     <option value="<?= $value['id_kbli'] ?>"><?= $value['kode_kbli'] ?> || <?= $value['nama_kbli'] ?></option>
@@ -1369,7 +1369,7 @@
                                     <div class="col-sm-12">
                                         <div class="input-group mb-2">
                                             <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                            <select class="form-select form-select-sm" data-placeholder="Cari Kualifikasi..." name="id_kualifikasi_izin_kbli_siup">
+                                            <select class="form-select single-select-field form-select-sm" data-placeholder="Cari Kualifikasi..." name="id_kualifikasi_izin_kbli_siup">
                                                 <option value="">Cari Kualifikasi Usaha...</option>
                                                 <?php foreach ($kualifikasi as $key => $value) { ?>
                                                     <option value="<?= $value['id_kualifikasi_izin'] ?>"><?= $value['nama_kualifikasi'] ?></option>
@@ -1447,8 +1447,8 @@
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
-                                                    <select class="form-select form-select-sm" data-placeholder="Cari Kode SBU..." name="id_kbli_sbu">
-                                                        <option value="">Cari Kode Kbli...</option>
+                                                    <select class="form-select single-select-field form-select-sm" data-placeholder="Cari Kode SBU..." name="id_kbli_sbu">
+                                                        <option value="">Cari Kode SBU...</option>
                                                         <?php foreach ($data_sbu as $key => $value) { ?>
                                                             <option value="<?= $value['id_sbu'] ?>"><?= $value['kode_sbu'] ?> || <?= $value['nama_sbu'] ?></option>
                                                         <?php  } ?>
@@ -1464,7 +1464,7 @@
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                                    <select class="form-select form-select-sm" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_sbu">
+                                                    <select class="form-select single-select-field form-select-sm" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_sbu">
                                                         <option value="">Cari Kualifikasi Usaha...</option>
                                                         <?php foreach ($kualifikasi_sbu as $key => $value) { ?>
                                                             <option value="<?= $value['id_kualifikasi_sbu'] ?>"><?= $value['nama_kualifikasi'] ?></option>
@@ -1623,7 +1623,7 @@
                                     <div class="col-sm-12">
                                         <div class="input-group mb-2">
                                             <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
-                                            <select class="form-select form-select-sm" data-placeholder="Cari Kode SBU..." name="id_kbli_sbu">
+                                            <select class="form-select single-select-field form-select-sm" data-placeholder="Cari Kode SBU..." name="id_kbli_sbu">
                                                 <option value="">Cari Kode SBU...</option>
                                                 <?php foreach ($data_sbu as $key => $value) { ?>
                                                     <option value="<?= $value['id_sbu'] ?>"><?= $value['kode_sbu'] ?> || <?= $value['nama_sbu'] ?></option>
@@ -1641,7 +1641,7 @@
                                     <div class="col-sm-12">
                                         <div class="input-group mb-2">
                                             <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                            <select class="form-select form-select-sm" data-placeholder="Cari Kualifikasi SBU..." name="id_kualifikasi_izin_kbli_sbu">
+                                            <select class="form-select single-select-field form-select-sm" data-placeholder="Cari Kualifikasi SBU..." name="id_kualifikasi_izin_kbli_sbu">
                                                 <option value="">Cari Kualifikasi SBU...</option>
                                                 <?php foreach ($kualifikasi_sbu as $key => $value) { ?>
                                                     <option value="<?= $value['id_kualifikasi_sbu'] ?>"><?= $value['nama_kualifikasi'] ?></option>
@@ -1719,7 +1719,7 @@
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text"></span>
-                                                    <select class="form-select form-select-sm" data-placeholder="Cari Kode Kbli..." name="id_kbli_siujk">
+                                                    <select class="form-select single-select-field form-select-sm" data-placeholder="Cari Kode Kbli..." name="id_kbli_siujk">
                                                         <option value="">Cari Kode Kbli...</option>
                                                         <?php foreach ($data_kbli as $key => $value) { ?>
                                                             <option value="<?= $value['id_kbli'] ?>"><?= $value['kode_kbli'] ?> || <?= $value['nama_kbli'] ?></option>
@@ -1736,7 +1736,7 @@
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                                    <select class="form-select form-select-sm" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_siujk">
+                                                    <select class="form-select single-select-field form-select-sm" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_siujk">
                                                         <option value="">Cari Kualifikasi Usaha...</option>
                                                         <?php foreach ($kualifikasi as $key => $value) { ?>
                                                             <option value="<?= $value['id_kualifikasi_izin'] ?>"><?= $value['nama_kualifikasi'] ?></option>
@@ -1895,7 +1895,7 @@
                                     <div class="col-sm-12">
                                         <div class="input-group mb-2">
                                             <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
-                                            <select class="form-select form-select-sm" data-placeholder="Cari Kode Kbli..." name="id_kbli_siujk">
+                                            <select class="form-select single-select-field form-select-sm" data-placeholder="Cari Kode Kbli..." name="id_kbli_siujk">
                                                 <option value="">Cari Kode Kbli...</option>
                                                 <?php foreach ($data_kbli as $key => $value) { ?>
                                                     <option value="<?= $value['id_kbli'] ?>"><?= $value['kode_kbli'] ?> || <?= $value['nama_kbli'] ?></option>
@@ -1913,7 +1913,7 @@
                                     <div class="col-sm-12">
                                         <div class="input-group mb-2">
                                             <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                            <select class="form-select form-select-sm" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_siujk">
+                                            <select class="form-select single-select-field form-select-sm" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_siujk">
                                                 <option value="">Cari Kualifikasi Usaha</option>
                                                 <?php foreach ($kualifikasi as $key => $value) { ?>
                                                     <option value="<?= $value['id_kualifikasi_izin'] ?>"><?= $value['nama_kualifikasi'] ?></option>
@@ -1989,7 +1989,7 @@
                                         <div class="col-sm-12">
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"></span>
-                                                <select class="form-select form-select-sm" data-placeholder="Cari Kode Kbli..." name="id_kbli_skdp">
+                                                <select class="form-select single-select-field form-select-sm" data-placeholder="Cari Kode Kbli..." name="id_kbli_skdp">
                                                     <option value="">Cari Kode Kbli...</option>
                                                     <?php foreach ($data_kbli as $key => $value) { ?>
                                                         <option value="<?= $value['id_kbli'] ?>"><?= $value['kode_kbli'] ?> || <?= $value['nama_kbli'] ?></option>
@@ -2006,7 +2006,7 @@
                                         <div class="col-sm-12">
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                                <select class="form-select form-select-sm" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_skdp">
+                                                <select class="form-select single-select-field form-select-sm" data-placeholder="Cari Kualifikasi Usaha..." name="id_kualifikasi_izin_kbli_skdp">
                                                     <option value="">Cari Kualifikasi Usaha...</option>
                                                     <?php foreach ($kualifikasi as $key => $value) { ?>
                                                         <option value="<?= $value['id_kualifikasi_izin'] ?>"><?= $value['nama_kualifikasi'] ?></option>

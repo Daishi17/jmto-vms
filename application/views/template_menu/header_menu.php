@@ -242,9 +242,15 @@
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="<?= base_url() ?>page_kosong/page_konstruksi">
+                            <a class="dropdown-item" href="<?= base_url() ?>tender_diikuti">
                                 <i class="fa-solid fa-inbox px-1"></i>
                                 <small>Tender Umum</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="<?= base_url() ?>tender_diikuti">
+                                <i class="fa-solid fa-inbox px-1"></i>
+                                <small>Tender Di Ikuti</small>
                             </a>
                         </li>
                         <li>

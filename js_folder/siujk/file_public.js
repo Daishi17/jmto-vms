@@ -18,6 +18,7 @@ function get_row_vendor_siujk() {
                 $('[name="jenis_izin"]').val(response['row_siujk']['jenis_izin']);
                 $('[name="no_urut_siujk"]').val(response['row_siujk']['no_urut_siujk']);
                 $('[name="nomor_surat_siujk"]').val(response['row_siujk']['nomor_surat']);
+                $('[name="sts_seumur_hidup_siujk"]').val(response['row_sbu']['sts_seumur_hidup']);
                 $('[name="kualifikasi_izin_siujk"]').val(response['row_siujk']['kualifikasi_izin']);
                 $('[name="tgl_berlaku_siujk"]').val(response['row_siujk']['tgl_berlaku']);
     
