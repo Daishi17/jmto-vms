@@ -1,7 +1,7 @@
 <script>
     $(document).ready(function() {
         var get_data_tender = $('[name="get_data_tender"]').val();
-        $('#tbl_tender').DataTable({
+        $('#tbl_tender_umum').DataTable({
             "ordering": true,
             "autoWidth": false,
             "processing": true,

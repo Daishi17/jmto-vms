@@ -236,17 +236,17 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li>
-                            <a class="dropdown-item" href="<?= base_url() ?>page_kosong/page_konstruksi">
+                            <a class="dropdown-item" href="<?= base_url() ?>tender_terundang">
                                 <i class="fa-solid fa-envelope-open-text px-1"></i>
                                 <small>Tender Terundang <span class="badge bg-success">4</span></small>
                             </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a class="dropdown-item" href="<?= base_url() ?>tender_diikuti">
                                 <i class="fa-solid fa-inbox px-1"></i>
                                 <small>Tender Umum</small>
                             </a>
-                        </li>
+                        </li> -->
                         <li>
                             <a class="dropdown-item" href="<?= base_url() ?>tender_diikuti">
                                 <i class="fa-solid fa-inbox px-1"></i>

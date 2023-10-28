@@ -57,7 +57,22 @@ class Tender_terundang extends CI_Controller
 
             $row = array();
             $row[] = ++$no;
+            $row[] = $rs->tahun_rup;
             $row[] = $rs->nama_rup;
+            $row[] = $rs->nama_departemen;
+            $row[] = $rs->nama_jenis_pengadaan;
+            $row[] = $rs->total_hps_rup;
+            if ($rs->batas_pendaftaran_tender) {
+                $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
+                </span>';
+            } else {
+                $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
+                </span>';
+            }
+            $row[] = '<button type="button" class="btn btn-info btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-detail">
+                        <i class="fa-solid fa-users-viewfinder"></i>
+                        <small>Detail</small>
+                    </button>';
             $data[] = $row;
         }
         $output = array(
