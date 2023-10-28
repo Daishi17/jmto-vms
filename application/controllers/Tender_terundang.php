@@ -61,7 +61,7 @@ class Tender_terundang extends CI_Controller
             $row[] = $rs->nama_rup;
             $row[] = $rs->nama_departemen;
             $row[] = $rs->nama_jenis_pengadaan;
-            $row[] = $rs->total_hps_rup;
+            $row[] = 'Rp. ' . number_format($rs->total_hps_rup, 2, ",", ".");;
             if ($rs->batas_pendaftaran_tender) {
                 $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
                 </span>';
