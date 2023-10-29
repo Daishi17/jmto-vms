@@ -31,10 +31,11 @@ class Tender_terundang extends CI_Controller
         $update_notif = ['notifikasi' => 0];
         $where = ['id_vendor' => $id_vendor];
 
+        $data['count_tender_umum'] =  $this->M_tender->count_all_data();
         $this->M_monitoring->update_notif($where, $update_notif);
 
         $this->load->view('template_menu/header_menu', $data);
-        $this->load->view('tender_terundang/index');
+        $this->load->view('tender_terundang/index', $data);
         $this->load->view('template_menu/new_footer');
         $this->load->view('tender_terundang/file_public');
     }
@@ -69,10 +70,7 @@ class Tender_terundang extends CI_Controller
                 $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
                 </span>';
             }
-            $row[] = '<button type="button" class="btn btn-info btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-detail">
-                        <i class="fa-solid fa-users-viewfinder"></i>
-                        <small>Detail</small>
-                    </button>';
+            $row[] = '<a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white"  onClick="by_id_rup(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa fa-info-circle" aria-hidden="true"></i> Detail</a>';
             $data[] = $row;
         }
         $output = array(
@@ -82,5 +80,41 @@ class Tender_terundang extends CI_Controller
             "data" => $data
         );
         $this->output->set_content_type('application/json')->set_output(json_encode($output));
+    }
+
+    public function detail_paket($id_rup)
+    {
+        $data_rup = $this->M_tender->get_row_rup($id_rup);
+        $jadwal = $this->M_tender->get_jadwal($id_rup);
+        $row_syarat_administrasi_rup = $this->M_tender->get_syarat_izin_usaha_tender($data_rup['id_rup']);
+        $cek_ikut =  $this->M_tender->cek_mengikuti($data_rup['id_rup']);
+        $response = [
+            'row_rup' => $data_rup,
+            'jadwal' => $jadwal,
+            'row_syarat_administrasi_rup' => $row_syarat_administrasi_rup,
+            'cek_ikut' => $cek_ikut
+        ];
+        $this->output->set_content_type('application/json')->set_output(json_encode($response));
+    }
+
+    public function ikuti_paket()
+    {
+        $id_vendor = $this->session->userdata('id_vendor');
+        $nama_usaha = $this->session->userdata('nama_usaha');
+        $id_rup = $this->input->post('id_rup');
+        $data_rup = $this->M_tender->get_rup_byid($id_rup);
+
+        if (!is_dir('file_paket/' . $data_rup['nama_rup'] . '/' . $nama_usaha)) {
+            mkdir('file_paket/' . $data_rup['nama_rup'] . '/' . $nama_usaha, 0777, TRUE);
+        }
+
+
+        $data = [
+            'id_vendor' => $id_vendor,
+            'id_rup' => $id_rup,
+            'sts_mengikuti_paket' => 1
+        ];
+        $this->M_tender->insert_mengikuti($data);
+        $this->output->set_content_type('application/json')->set_output(json_encode('success'));
     }
 }

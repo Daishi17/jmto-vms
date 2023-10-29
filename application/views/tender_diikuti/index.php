@@ -6,7 +6,7 @@
                 <h6 class="card-title">
                     <span class="text-white">
                         <i class="fa-solid fa-circle-info"></i>
-                        <small><strong>Info Tender / Pengadaan</strong></small>
+                        <small><strong>Info Pengadaan</strong></small>
                     </span>
                 </h6>
             </div>
@@ -17,7 +17,7 @@
                 <div class="flex-grow-1 bd-highlight">
                     <span class="text-dark">
                         <i class="fa-solid fa-table px-1"></i>
-                        <small><strong>Data Tabel - Info Tender / Pengadaan</strong></small>
+                        <small><strong>Data Tabel - Info Pengadaan</strong></small>
                     </span>
                 </div>
             </div>
@@ -25,9 +25,13 @@
                 <div class="card border-warning shadow-sm">
                     <div class="card-header">
                         <div class="nav nav-tabs mb-3 bg-info" id="nav-tab" role="tablist">
+                            <input type="hidden" name="get_data_tender" value="<?= base_url('tender_terundang/get_data_tender') ?>">
+                            <input type="hidden" name="url_detail_paket" value="<?= base_url('tender_terundang/detail_paket/') ?>">
+                            <input type="hidden" name="url_info_tender" value="<?= base_url('tender_diikuti/informasi_tender/') ?>">
+
                             <button class="nav-link active text-dark" id="nav-tenderumum-tab" data-bs-toggle="tab" data-bs-target="#nav-tenderumum" type="button" role="tab" aria-controls="nav-tenderumum" aria-selected="true">
                                 <i class="fa-solid fa-gift"></i>
-                                <small><b>Tender Umum &nbsp;<span class="badge bg-secondary"><?= $count_tender_umum ?></span></b></small>
+                                <small><b>Pengadaan Umum &nbsp;<span class="badge bg-secondary"><?= $count_tender_umum ?></span></b></small>
                             </button>
                             <button class="nav-link text-dark" id="nav-seleksiumum-tab" data-bs-toggle="tab" data-bs-target="#nav-seleksiumum" type="button" role="tab" aria-controls="nav-seleksiumum" aria-selected="true">
                                 <i class="fa-solid fa-gift"></i>
@@ -57,15 +61,16 @@
                                         <div class="flex-grow-1 bd-highlight">
                                             <span class="text-white">
                                                 <i class="fa-solid fa-circle-info px-1"></i>
-                                                <small><strong>Transaksi Tender Umum</strong></small>
+                                                <small><strong>Transaksi Pengadaan Umum</strong></small>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                                 <hr>
-                                <table id="example1" class="table table-bordered border-dark table-sm table-striped">
+                                <table id="tbl_tender_umum" class="table table-bordered border-dark table-sm table-striped">
                                     <thead class="bg-secondary col-12">
                                         <tr>
+                                            <th><small class="text-white">No</small></th>
                                             <th class="col-1"><small class="text-white">Tahun</small></th>
                                             <th class="col-3"><small class="text-white">Nama Paket Penyedia</small></th>
                                             <th class="col-2"><small class="text-white">Departemen</small></th>
@@ -73,27 +78,11 @@
                                             <th class="col-2"><small class="text-white">Total HPS (Rp)</small></th>
                                             <th class="col-1"><small class="text-white">Status</small></th>
                                             <th class="col-1"><small class="text-white">
-                                                    <div class="text-center">#</div>
+                                                    <div class="text-center">Aksi</div>
                                                 </small></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><small>2023</small></td>
-                                            <td><small>Pengadaan Sewa Keamanan / Securty</small></td>
-                                            <td><small>General Affair</small></td>
-                                            <td><small>Jasa Lain</small></td>
-                                            <td><small>1.300.000.000</small></td>
-                                            <td><small><span class="badge bg-info">Pengumuman Tender</span></small></td>
-                                            <td>
-                                                <div class="text-center">
-                                                    <button type="button" class="btn btn-info btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-detail">
-                                                        <i class="fa-solid fa-users-viewfinder"></i>
-                                                        <small>Detail</small>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -120,7 +109,7 @@
                                             <th class="col-2"><small class="text-white">Total HPS (Rp)</small></th>
                                             <th class="col-1"><small class="text-white">Status</small></th>
                                             <th class="col-1"><small class="text-white">
-                                                    <div class="text-center">#</div>
+                                                    <div class="text-center">Aksi</div>
                                                 </small></th>
                                         </tr>
                                     </thead>
@@ -351,7 +340,7 @@
                             <div class="flex-grow-1 bd-highlight">
                                 <span class="text-white">
                                     <i class="fa-solid fa-table px-1"></i>
-                                    <small><strong>List Data - Paket Penyedia</strong></small>
+                                    <small><strong>List Detail - Paket Penyedia</strong></small>
                                 </span>
                             </div>
                         </div>
@@ -362,14 +351,14 @@
                                     <td class="col-4 vertical-align: middle;">
                                         <small>
                                             <i class="fa-solid fa-barcode px-1"></i>
-                                            CP.101.2023.0001
+                                            <label for="" id="kode_rup"></label>
                                         </small>
                                     </td>
                                     <th class="col-2 vertical-align: middle; bg-light"><small>Tahun</small></th>
                                     <td class="col-4 vertical-align: middle;">
                                         <small>
                                             <i class="fa-solid fa-calendar-days px-1"></i>
-                                            2023
+                                            <label for="" id="tahun_rup"></label>
                                         </small>
                                     </td>
                                 </tr>
@@ -378,7 +367,7 @@
                                     <td class="col-10 vertical-align: middle;" colspan="3">
                                         <small>
                                             <i class="fa-solid fa-keyboard px-1"></i>
-                                            Pengadaan Sewa Keamanan / Securty
+                                            <label for="" id="nama_rup"></label>
                                         </small>
                                     </td>
                                 </tr>
@@ -387,7 +376,7 @@
                                     <td class="col-10 vertical-align: middle;" colspan="3">
                                         <small>
                                             <i class="fa-solid fa-map-location px-1"></i>
-                                            Jakarta Timur Jl. TMII No.11
+                                            <label for="" id="detail_lokasi_rup"></label>
                                         </small>
                                     </td>
                                 </tr>
@@ -405,14 +394,14 @@
                                     <td class="col-4 vertical-align: middle;">
                                         <small>
                                             <i class="fa-solid fa-landmark px-1"></i>
-                                            General Affair
+                                            <label for="" id="nama_departemen"></label>
                                         </small>
                                     </td>
                                     <th class="col-2 vertical-align: middle; bg-light"><small>Sections</small></th>
                                     <td class="col-4 vertical-align: middle;">
                                         <small>
                                             <i class="fa-solid fa-map px-1"></i>
-                                            Procurement
+                                            <label for="" id="nama_section"></label>
                                         </small>
                                     </td>
                                 </tr>
@@ -421,46 +410,46 @@
                                     <td class="col-4 vertical-align: middle;">
                                         <small>
                                             <i class="fa-solid fa-briefcase px-1"></i>
-                                            Jasa Lain
+                                            <label for="" id="nama_jenis_pengadaan"></label>
                                         </small>
                                     </td>
                                     <th class="col-2 vertical-align: middle; bg-light"><small>Metode Pengadaan</small></th>
                                     <td class="col-4 vertical-align: middle;">
                                         <small>
                                             <i class="fa-solid fa-business-time px-1"></i>
-                                            Tender Umum
+                                            <label for="" id="nama_metode_pengadaan"></label>
                                         </small>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="col-2 vertical-align: middle; bg-light"><small>Metode Pemilhan</small></th>
+                                    <th class="col-2 vertical-align: middle; bg-light"><small>Metode Pemilihan</small></th>
                                     <td class="col-4 vertical-align: middle;">
                                         <small>
                                             <i class="fa-regular fa-folder-open px-1"></i>
-                                            Prakualifikasi
+                                            <label for="" id="nama_metode_pemilihan"></label>
                                         </small>
                                     </td>
                                     <th class="col-2 vertical-align: middle; bg-light"><small>Dokumen Pemilihan</small></th>
                                     <td class="col-4 vertical-align: middle;">
                                         <small>
                                             <i class="fa-solid fa-folder-tree px-1"></i>
-                                            Dua File
+                                            <label for="" id="dokumen_pemilihan"></label>
                                         </small>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="col-2 vertical-align: middle; bg-light"><small>Tanggal Pengadaan</small></th>
+                                    <th class="col-2 vertical-align: middle; bg-light"><small>Batas Pendaftaraan Pengadaan</small></th>
                                     <td class="col-4 vertical-align: middle;">
                                         <small>
                                             <i class="fa-solid fa-calendar-days px-1"></i>
-                                            dd/mm/yyyy - dd/mm/yyyy
+                                            <label for="" id="batas_pendaftaran"></label>
                                         </small>
                                     </td>
                                     <th class="col-2 vertical-align: middle; bg-light"><small>Waktu Pelaksana (hari)</small></th>
                                     <td class="col-4 vertical-align: middle;">
                                         <small>
                                             <i class="fa-solid fa-clock px-1"></i>
-                                            180
+                                            <label for="" id="jangka_waktu_hari_pelaksanaan"></label>
                                         </small>
                                     </td>
                                 </tr>
@@ -469,31 +458,25 @@
                                     <td class="col-4 vertical-align: middle;">
                                         <small>
                                             <i class="fa-regular fa-clipboard px-1 fa-lg"></i>
-                                            TKDN
+                                            <label for="" id="status_pencatatan"></label>
                                         </small>
                                     </td>
                                     <th class="col-2 vertical-align: middle; bg-light"><small>Persentase</small></th>
                                     <td class="col-4 vertical-align: middle;">
                                         <small>
                                             <i class="fa-solid fa-percent px-1"></i>
-                                            75
+                                            <label for="" id="persen_pencatatan"></label>
                                         </small>
                                     </td>
+
                                 </tr>
                                 <tr>
                                     <th class="col-2 vertical-align: middle; bg-light"><small>HPS</small></th>
                                     <td class="col-4 vertical-align: middle;">
                                         <small>
                                             <i class="fa-solid fa-rupiah-sign px-1"></i>
-                                            1.250.000.000
+                                            <label for="" id="total_hps_rup"></label>
                                         </small>
-                                    </td>
-                                    <th class="col-2 vertical-align: middle; bg-light"><small>Dokumen HPS</small></th>
-                                    <td class="col-4 vertical-align: middle;">
-                                        <button type="button" class="btn btn-sm btn-primary">
-                                            <i class="fa-solid fa-file px-1"></i>
-                                            File Dokumen HPS
-                                        </button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -501,14 +484,14 @@
                                     <td class="col-4 vertical-align: middle;">
                                         <small>
                                             <i class="fa-solid fa-pen-to-square px-1"></i>
-                                            Lump Sum
+                                            <label for="" id="jenis_kontrak"></label>
                                         </small>
                                     </td>
                                     <th class="col-2 vertical-align: middle; bg-light"><small>Beban Tahun Anggaran</small></th>
                                     <td class="col-4 vertical-align: middle;">
                                         <small>
                                             <i class="fa-regular fa-calendar px-1"></i>
-                                            Tahun Tunggal
+                                            <label for="" id="beban_tahun_anggaran"></label>
                                         </small>
                                     </td>
                                 </tr>
@@ -517,31 +500,32 @@
                                     <td class="col-4 vertical-align: middle;">
                                         <small>
                                             <i class="fa-solid fa-square-poll-vertical fa-lg px-1"></i>
-                                            Kombinasi
+                                            <label for="" id="bobot_nilai"></label>
                                         </small>
                                     </td>
                                     <th class="col-2 vertical-align: middle; bg-light"><small>Teknis & Biaya</small></th>
                                     <td class="col-4 vertical-align: middle;">
                                         <small>
                                             <i class="fa-solid fa-square-poll-vertical fa-lg px-1"></i>
-                                            10 &#37; &amp; 90 &#37;
+                                            <label for="" id="Bobot"></label>
                                         </small>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="col-2 vertical-align: middle; bg-light"><small>Status Jadwal Tender</small></th>
+                                    <th class="col-2 vertical-align: middle; bg-light"><small>Status Jadwal Pengadaan</small></th>
                                     <td class="col-4 vertical-align: middle;">
                                         <small>
                                             <i class="fa-solid fa-calendar-days fa-lg px-1"></i>
                                             <span class="badge bg-success">Tender Sedang Berjalan</span>
                                         </small>
                                     </td>
-                                    <th class="col-2 vertical-align: middle; bg-light"><small>Detail Jadwal Tender</small></th>
+                                    <th class="col-2 vertical-align: middle; bg-light"><small>Detail Jadwal Pengadaan</small></th>
                                     <td class="col-4 vertical-align: middle;">
-                                        <button type="button" class="btn btn-sm btn-success">
-                                            <i class="fa-solid fa-calendar-days px-1"></i>
-                                            Jadwal Tender
-                                        </button>
+                                        <!-- <button type="button" class="btn btn-sm btn-success">
+                                        <i class="fa-solid fa-calendar-days px-1"></i>
+                                        Jadwal Pengadaan
+                                    </button> -->
+                                        <div id="detail_jadwal"></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -551,7 +535,7 @@
                                                 <div class="flex-grow-1 bd-highlight">
                                                     <span class="text-white">
                                                         <i class="fa-solid fa-file-circle-check px-1"></i>
-                                                        <small><strong>Persyaratan Tender / Pengadaan</strong></small>
+                                                        <small><strong>Persyaratan Pengadaan</strong></small>
                                                     </span>
                                                 </div>
                                             </div>
@@ -580,25 +564,63 @@
                                                                 <small>Kualifikasi Usaha</small>
                                                             </td>
                                                             <td>
-                                                                <small>Minimal Menengah</small>
+                                                                <small><label for="" id="syarat_tender_kualifikasi"></label></small>
                                                             </td>
                                                         </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <small>Nomor Induk Berusaha (NIB)</small>
-                                                            </td>
-                                                            <td>
-                                                                <small>dd/mm/yyyy</small>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <small>KBLI</small>
-                                                            </td>
-                                                            <td>
-                                                                <small>66209 || Jasa Komputer Lainnya</small>
-                                                            </td>
-                                                        </tr>
+                                                        <div id="siup_izin" style="display: none;">
+                                                            <tr>
+                                                                <td>
+                                                                    <small>Surat Izin Usaha Perdagangan (SIUP)</small>
+                                                                </td>
+                                                                <td>
+                                                                    <small><label for="" id="sts_masa_berlaku_siup"></label></small>
+                                                                </td>
+                                                            </tr>
+                                                        </div>
+
+                                                        <div id="nib_izin" style="display: none;">
+                                                            <tr>
+                                                                <td>
+                                                                    <small>Nomor Induk Berusaha (NIB/TDP)</small>
+                                                                </td>
+                                                                <td>
+                                                                    <small><label for="" id="sts_masa_berlaku_nib"></label></small>
+                                                                </td>
+                                                            </tr>
+                                                        </div>
+
+                                                        <div id="sbu_izin" style="display: none;">
+                                                            <tr>
+                                                                <td>
+                                                                    <small>Sertifikat Badan Usaha (SBU)</small>
+                                                                </td>
+                                                                <td>
+                                                                    <small><label for="" id="sts_masa_berlaku_sbu"></label></small>
+                                                                </td>
+                                                            </tr>
+                                                        </div>
+
+                                                        <div id="siujk_izin" style="display: none;">
+                                                            <tr>
+                                                                <td>
+                                                                    <small>Surat Izin Jasa Konstruksi (SIUJK)</small>
+                                                                </td>
+                                                                <td>
+                                                                    <small><label for="" id="sts_masa_berlaku_siujk"></label></small>
+                                                                </td>
+                                                            </tr>
+                                                        </div>
+
+                                                        <div id="skdp_izin" style="display: none;">
+                                                            <tr>
+                                                                <td>
+                                                                    <small>Surat Keterangan Domisili Perusahan (SKDP)</small>
+                                                                </td>
+                                                                <td>
+                                                                    <small><label for="" id="sts_masa_berlaku_skdp"></label></small>
+                                                                </td>
+                                                            </tr>
+                                                        </div>
                                                     </tbody>
                                                 </table>
                                                 <table class="table table-bordered border-dark table-sm shadow-lg">
@@ -710,10 +732,61 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-start">
-                    <a type="button" class="btn btn-default btn-warning" href="<?= base_url('tender_diikuti/informasi_tender') ?>">
-                        <i class="fa-solid fa-circle-up px-1"></i>
-                        Halaman Paket Penyedia
+                    <div id="tombol_mengikuti">
+
+                    </div>
+                    <button type="button" class="btn btn-default btn-danger" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-rectangle-xmark"></i>
+                        Keluar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" id="modal_detail_jadwal">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="navbar-brand">
+                        <img src="<?php echo base_url(); ?>/assets/brand/jm1.png" alt="" width="25" height="25" class="d-inline-block align-text-top">
+                        <b><span class="text-primary">Jasamarga Tollroad Operator</span></b>
                     </a>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card border-dark shadow-lg">
+                                <div class="card-header border-dark bg-info bd-blue-700 d-flex justify-content-between align-items-center">
+                                    <div class="flex-grow-1 bd-highlight">
+                                        <span class="text-white">
+                                            <i class="fa-regular fa-rectangle-list px-1"></i>
+                                            <small><strong>Detail Jadwal</strong></small>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-bordered table-sm shadow-lg">
+                                        <thead class="bg-secondary text-white">
+                                            <tr>
+                                                <th><small>No</small></th>
+                                                <th><small>Nama Jadwal</small></th>
+                                                <th><small>Waktu Mulai</small></th>
+                                                <th><small>Waktu Selesai</small></th>
+                                                <th><small>Status Tahap</small></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="load_jadwal">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-start">
                     <button type="button" class="btn btn-default btn-danger" data-bs-dismiss="modal">
                         <i class="fa-solid fa-rectangle-xmark"></i>
                         Keluar

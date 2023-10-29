@@ -144,13 +144,9 @@
                 }
 
                 $('#detail_jadwal').html('<a href="javascript:;" onclick="lihat_detail_jadwal(\'' + response['row_rup'].id_url_rup + '\')" class="btn btn-sm btn-primary"><i class="fa-solid fa-calendar-days px-1"></i> Detail Jadwal Pengadaan</a>')
-
-
-                if (response['cek_ikut']) {
-                    $('#tombol_mengikuti').html('<button disabled type="button" class="btn btn-default btn-primary"><i class="fa fa-spinner" aria-hidden="true"></i> Anda Sedang Mengikuti Pengadaan ini</button>')
-                } else {
-                    $('#tombol_mengikuti').html('<a type="javascript:;" onclick="pakta_integritas_question(\'' + response['row_rup'].id_rup + '\'' + ',' + '\'' + response['row_rup'].nama_rup + '\')" class="btn btn-default btn-warning"><i class="fa-solid fa-circle-up px-1"></i> Ikuti Pengadaan</a>')
-                }
+                var url_info_tender = $('[name="url_info_tender"]').val()
+                var url_target = url_info_tender + response['row_rup'].id_url_rup
+                $('#tombol_mengikuti').html('<a href=' + url_target + ' class="btn btn-default btn-primary"><i class="fa-solid fa-circle-up px-1"></i> Lihat Pengadaan</a>')
 
             }
         })

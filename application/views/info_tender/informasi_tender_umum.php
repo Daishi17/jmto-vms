@@ -1,3 +1,12 @@
+<!-- url -->
+<input type="hidden" name="url_detail_paket" value="<?= base_url('tender_terundang/detail_paket/') ?>">
+<input type="hidden" name="id_rup" value="<?= $rup['id_rup'] ?>">
+<input type="hidden" name="id_vendor" value="<?= $this->session->userdata('id_vendor') ?>">
+<input type="hidden" name="url_upload_syarat_tambahan" value="<?= base_url('tender_diikuti/upload_syarat_tambahan/') ?>">
+<input type="hidden" name="url_get_syarat_tambahan_vendor" value="<?= base_url('tender_diikuti/get_syarat_tambahan/') ?>">
+<input type="hidden" name="url_download_syarat_tambahan" value="<?= base_url('tender_diikuti/download_syarat_tambahan/') ?>">
+<input type="hidden" name="url_hapus_persyaratan_tambahan" value="<?= base_url('tender_diikuti/hapus_syarat_tambahan/') ?>">
+<!-- end url -->
 <main class="container-fluid">
     <div class="row">
         <div class="col">
@@ -11,19 +20,19 @@
                             <a class="nav-link active" style="margin-left: 5px;" href="#"><i class="fa fa-columns" aria-hidden="true"></i> Informasi Pengadaan</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('tender_diikuti/aanwijzing') ?>"><i class="fa fa-comments" aria-hidden="true"></i> Aanwijzing</a>
+                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('tender_diikuti/aanwijzing/' . $rup['id_url_rup']) ?>"><i class="fa fa-comments" aria-hidden="true"></i> Aanwijzing</a>
                         </li>
                         <!-- <li class="nav-item">
                             <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/evaluasi') ?>"><i class="fa fa-pencil-square" aria-hidden="true"></i> Evaluasi</a>
                         </li> -->
                         <li class="nav-item">
-                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('tender_diikuti/negosiasi') ?>"><i class="fa fa-tags" aria-hidden="true"></i> Negosiasi</a>
+                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('tender_diikuti/negosiasi/' . $rup['id_url_rup']) ?>"><i class="fa fa-tags" aria-hidden="true"></i> Negosiasi</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link bg-primary text-white " style="margin-left: 5px;" href="<?= base_url('tender_diikuti/sanggahan_prakualifikasi') ?>"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Sanggahan Prakualifikasi</a>
+                            <a class="nav-link bg-primary text-white " style="margin-left: 5px;" href="<?= base_url('tender_diikuti/sanggahan_prakualifikasi/'  . $rup['id_url_rup']) ?>"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Sanggahan Prakualifikasi</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('tender_diikuti/sanggahan_akhir') ?>"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Sanggahan </a>
+                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('tender_diikuti/sanggahan_akhir/'  . $rup['id_url_rup']) ?>"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Sanggahan </a>
                         </li>
                         <!-- <li class="nav-item">
                             <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="#"><i class="fa fa-suitcase" aria-hidden="true"></i> Berita Acara</a>
@@ -43,37 +52,35 @@
                 <div class="card-body">
                     <table class="table table-striped table-bordered">
                         <tr>
-                            <th style="width: 300px;">Kode Pengadaan</th>
-                            <th> B.04.003.0001.00001.JMTM.280320220002</th>
+                            <th style="width: 300px;"><small> Kode Pengadaan</small></th>
+                            <th><small> <?= $rup['kode_rup'] ?></small></th>
                         </tr>
                         <tr>
-                            <th>Nama Paket</th>
-                            <th>PAKET KEMERDEKAAN 78 RI BOGOR</th>
+                            <th><small> Nama Paket</small></th>
+                            <th><small><?= $rup['nama_rup'] ?></small></th>
                         </tr>
                         <tr>
-                            <th>TKDN/PDN/IMPORT</th>
-                            <th>TKDN (80%)</th>
+                            <th><small>TKDN/PDN/IMPORT</small></th>
+                            <th><small><?= $rup['status_pencatatan'] ?> (<?= $rup['persen_pencatatan'] ?>%)</small></th>
                         </tr>
                         <tr>
                             <th>Jadwal Pengadaan</th>
-                            <th><button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#lihat_jadwal_tender">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i> Lihat
-                                </button></th>
+                            <th><a href="javascript:;" onclick="lihat_detail_jadwal('<?= $rup['id_url_rup'] ?>')" class="btn btn-sm btn-primary"><i class="fa-solid fa-calendar-days px-1"></i> Detail Jadwal Pengadaan</a></th>
                         </tr>
                         <tr>
                             <th>Jumlah Peserta</th>
                             <th><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#lihat_peserta">
-                                    <i class="fa fa-users" aria-hidden="true"></i> 2 Peserta
+                                    <i class="fa fa-users" aria-hidden="true"></i> <?= count($peserta) ?> Peserta
                                 </button></th>
                         </tr>
                         <tr>
-                            <th>Dokumen Lelang</th>
+                            <th>Dokumen Pengadaan</th>
                             <th>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-header bg-primary text-white">
-                                                List Dokumen Lelang
+                                                Dokumen Pengadaan
                                             </div>
                                             <div class="card-body">
                                                 <table class="table table-bordered">
@@ -85,10 +92,14 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        <?php $i = 1;
+                                                        foreach ($dok_pengadaan as $key => $value) { ?>
+
+                                                        <?php } ?>
                                                         <tr>
-                                                            <td scope="row">1</td>
-                                                            <td>Dok.lelang 1</td>
-                                                            <td><a href="" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Lihat</a></td>
+                                                            <td scope="row"><?= $i++ ?></td>
+                                                            <td><?= $value['nama_dok_pengadaan'] ?></td>
+                                                            <td><a target="_blank" href="<?= $url_dok_pengadaan . $value['file_dok_pengadaan'] ?>" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Lihat</a></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -98,30 +109,26 @@
                                     <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-header bg-primary text-white">
-                                                Persyaratan Tambahan
+                                                Dokumen Prakualifikasi
                                             </div>
                                             <div class="card-body">
                                                 <table class="table table-bordered">
                                                     <thead>
                                                         <tr>
                                                             <th>No</th>
-                                                            <th>Nama Persyaratan</th>
-                                                            <th>Keterangan</th>
+                                                            <th>Nama File</th>
                                                             <th>File</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        <?php $i = 1;
+                                                        foreach ($dok_prakualifikasi as $key => $value) { ?>
+
+                                                        <?php } ?>
                                                         <tr>
-                                                            <td scope="row">1</td>
-                                                            <td>Iso 5000</td>
-                                                            <td>Keternagan </td>
-                                                            <td><a href="" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Lihat</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td scope="row">2</td>
-                                                            <td>Iso 1200</td>
-                                                            <td>Keternagan </td>
-                                                            <td><a href="" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Lihat</a></td>
+                                                            <td scope="row"><?= $i++ ?></td>
+                                                            <td><?= $value['nama_dok_prakualifikasi'] ?></td>
+                                                            <td><a target="_blank" href="<?= $url_dok_prakualifikasi . $value['file_dok_prakualifikasi'] ?>" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Lihat</a></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -146,23 +153,24 @@
                                                         <tr>
                                                             <th>No</th>
                                                             <th>Nama Persyaratan</th>
-                                                            <th>Keterangan</th>
-                                                            <th>File</th>
+                                                            <!-- <th>Keterangan</th> -->
+                                                            <th>File Contoh</th>
+                                                            <th>Aksi</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td scope="row">1</td>
-                                                            <td>Iso 5000</td>
-                                                            <td>Keternagan </td>
-                                                            <td><a href="" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Lihat</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td scope="row">2</td>
-                                                            <td>Iso 1200</td>
-                                                            <td>Keternagan </td>
-                                                            <td><a href="" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Lihat</a></td>
-                                                        </tr>
+                                                        <?php $i = 1;
+                                                        foreach ($dok_syarat_tambahan as $key => $value) { ?>
+                                                            <tr>
+                                                                <td scope="row"><?= $i++ ?></td>
+                                                                <td><?= $value['nama_syarat_tambahan'] ?></td>
+                                                                <td><a target="_blank" href="<?= $url_dok_syarat_tambahan . $value['file_syarat_tambahan'] ?>" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Download</a></td>
+                                                                <td>
+                                                                    <a href="javascript:;" class="btn btn-sm btn-danger" onclick="upload_syarat_tambahan('<?= $value['nama_syarat_tambahan'] ?>')"><i class="fa fa-upload"></i> Upload</a>
+                                                                </td>
+                                                            </tr>
+                                                        <?php   } ?>
+
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -181,30 +189,13 @@
                                                             <th>No</th>
                                                             <th>Nama Persyaratan</th>
                                                             <th>File</th>
+                                                            <th>Keterangan Validator</th>
+                                                            <th>Status Validasi</th>
                                                             <th>Aksi</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td scope="row">1</td>
-                                                            <td>Iso 5000</td>
-                                                            <td><a href="" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Lihat</a></td>
-                                                            <td>
-                                                                <a href="" class="text-danger">
-                                                                    <i class="fa fa-trash"></i>
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td scope="row">2</td>
-                                                            <td>Iso 1200</td>
-                                                            <td><a href="" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Lihat</a></td>
-                                                            <td>
-                                                                <a href="" class="text-danger">
-                                                                    <i class="fa fa-trash"></i>
-                                                                </a>
-                                                            </td>
-                                                        </tr>
+                                                    <tbody id="load_syarat_tambahan_vendor">
+
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -215,11 +206,11 @@
                         </tr>
                         <tr>
                             <th>Bobot Teknis</th>
-                            <th>50</th>
+                            <th><?= $rup['bobot_teknis'] ?></th>
                         </tr>
                         <tr>
                             <th>Bobot Biaya</th>
-                            <th>50</th>
+                            <th><?= $rup['bobot_biaya'] ?></th>
                         </tr>
                         <!-- <tr>
                             <th>Bobot Teknis</th>
@@ -595,222 +586,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="lihat_jadwal_tender" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-bullhorn" aria-hidden="true"></i> Jadwal Pengadaan Berlangsung</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="alert alert-primary d-flex align-items-center" role="alert">
-                    <div>
-                        <i class="fa fa-info-circle" aria-hidden="true"> </i> Jadwal Pengadaan Berlangsung !!! <br>
-                    </div>
-                </div>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama Tahap</th>
-                            <th>Status Tahap</th>
-                            <th>Tanggal Mulai</th>
-                            <th>Tanggal Selesai</th>
-                            <th>Diubah Oleh</th>
-                            <th>Alasan Perubahan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td scope="row">1</td>
-                            <td>Pengumuman Prakualifikasi</td>
-                            <td><span class="badge bg-success"> <i class="fas fa fa-check"></i> Tahap Sudah Selesai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td>Ferry</td>
-                            <td>Mau Ubah Ajah</td>
-                        </tr>
-                        <tr>
-                            <td scope="row">2</td>
-                            <td> Download Dokumen Kualifikasi </td>
-                            <td><span class="badge bg-secondary"> <i class="fas fa fa-clock"></i> Tahap Sedang Berlangsung</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">3</td>
-                            <td>Upload Dokumen Prakualifikasi </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">4</td>
-                            <td>Evaluasi Dokumen Kualifikasi </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">5</td>
-                            <td>Pembuktian Kualifikasi </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">6</td>
-                            <td>Penetapan Hasil Kualifikasi </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">7</td>
-                            <td>Pengumuman Hasil Prakualifikasi </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">8</td>
-                            <td>Masa Sanggah Prakualifikasi </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">9</td>
-                            <td>Download Dokumen Pengadaan </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">10</td>
-                            <td>Pemberian Penjelasan </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">11</td>
-                            <td>Upload Dokumen Penawaran </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">12</td>
-                            <td>Pembukaan dan Evaluasi Penawaran File I : Administrasi dan Teknis </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">13</td>
-                            <td>Pemberitahuan/Pengumuman Peringkat Teknis </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">14</td>
-                            <td>Pembukaan dan Evaluasi Penawaran File II : Harga </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">15</td>
-                            <td>Upload Berita Acara Hasil Pengadaan </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">16</td>
-                            <td>Penetapan Pemenang </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">17</td>
-                            <td>Pengumuman Pemenang </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">18</td>
-                            <td>Masa Sanggah Hasil Pengadaan </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">19</td>
-                            <td>Surat Penunjukkan Penyedia Barang/Jasa </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">20</td>
-                            <td>Penandatanganan Kontrak </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="modal fade" id="lihat_peserta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -834,18 +609,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td scope="row">1</td>
-                            <td>METRINDOCRB</td>
-                            <!-- <td>metrindocirebon@yahoo.co.id</td> -->
-                            <!-- <td>08978201075</td> -->
-                        </tr>
-                        <tr>
-                            <td scope="row">2</td>
-                            <td>PT Agung Solusi Trans </td>
-                            <!-- <td>bambang.triyono@agungrent.co.id</td> -->
-                            <!-- <td>08127459175</td> -->
-                        </tr>
+                        <?php $i = 1;
+                        foreach ($peserta as $key => $value) { ?>
+                            <tr>
+                                <td scope="row"><?= $i++ ?></td>
+                                <td><?= $value['nama_usaha'] ?></td>
+                            </tr>
+                        <?php } ?>
+
                     </tbody>
                 </table>
             </div>
@@ -856,80 +627,92 @@
     </div>
 </div>
 
-<div class="modal fade" id="lihat_syarat_tambahan_vendor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_syarat_tambahan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-bullhorn" aria-hidden="true"></i> Syarat Tambahan Penyedia</h5>
+                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-bullhorn" aria-hidden="true"></i> Upload Syarat Tambahan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <div class="alert alert-primary d-flex align-items-center" role="alert">
-                    <div>
-                        <i class="fa fa-info-circle" aria-hidden="true"> </i> Lakukan Validasi Syarat Tambahan Penyedia !!! <br>
+            <form action="javascript:;" id="form_perysaratan_tambahan">
+                <div class="modal-body">
+                    <div class="alert alert-primary d-flex align-items-center" role="alert">
+                        <div>
+                            <i class="fa fa-info-circle" aria-hidden="true"> </i> Silahkan Masukkan File Syarat Tambahan Yang Sesuai Dengan Yang Di Tentukan !!! <br>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="nama_persyaratan_tambahan">
+                        <input type="hidden" name="id_rup" value="<?= $rup['id_rup'] ?>">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Nama Persyaratan Tambahan</th>
+                                <td><label for="" id="nama_syarat_tambahan"></label></td>
+                            </tr>
+                            <tr>
+                                <th>Upload</th>
+                                <td><input type="file" name="file_syarat_tambahan"></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama Persyaratan</th>
-                            <th>File</th>
-                            <th>Status Evaluasi</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td scope="row">1</td>
-                            <td>Iso 5000</td>
-                            <td><a href="" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> File</a></td>
-                            <td><span class="badge bg-success"> <i class="fas fa fa-check"></i> Lulus</span></td>
-                            <td><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#evaluasi_syarat_tambahan">
-                                    <i class="fa fa-edit" aria-hidden="true"></i> Evaluasi
-                                </button></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">2</td>
-                            <td>Iso 1200</td>
-                            <td><a href="" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> File</a></td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tidak Lulus</span></td>
-                            <td><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#evaluasi_syarat_tambahan">
-                                    <i class="fa fa-edit" aria-hidden="true"></i> Evaluasi
-                                </button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Batal</button>
+                    <button type="submit" class="btn btn-success btn-syarat-tambahan"><i class="fas fa fa-upload"></i> Upload</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="evaluasi_syarat_tambahan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+
+<div class="modal fade" tabindex="-1" id="modal_detail_jadwal">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl">
         <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-bullhorn" aria-hidden="true"></i> Evaluasi Hasil Syarat Tambahan</h5>
+            <div class="modal-header">
+                <a class="navbar-brand">
+                    <img src="<?php echo base_url(); ?>/assets/brand/jm1.png" alt="" width="25" height="25" class="d-inline-block align-text-top">
+                    <b><span class="text-primary">Jasamarga Tollroad Operator</span></b>
+                </a>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="alert alert-primary d-flex align-items-center" role="alert">
-                    <div>
-                        <i class="fa fa-info-circle" aria-hidden="true"> </i> Berikan Evaluasi Dan Validasi Syarat Tambahan Penyedia !!! <br>
+                <div class="row">
+                    <div class="col">
+                        <div class="card border-dark shadow-lg">
+                            <div class="card-header border-dark bg-info bd-blue-700 d-flex justify-content-between align-items-center">
+                                <div class="flex-grow-1 bd-highlight">
+                                    <span class="text-white">
+                                        <i class="fa-regular fa-rectangle-list px-1"></i>
+                                        <small><strong>Detail Jadwal</strong></small>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered table-sm shadow-lg">
+                                    <thead class="bg-secondary text-white">
+                                        <tr>
+                                            <th><small>No</small></th>
+                                            <th><small>Nama Jadwal</small></th>
+                                            <th><small>Waktu Mulai</small></th>
+                                            <th><small>Waktu Selesai</small></th>
+                                            <th><small>Status Tahap</small></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="load_jadwal">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="">Keterngan Evaluasi Syarat Tambahan</label>
-                    <textarea type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId"> </textarea>
-                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Close</button>
-                <button type="button" class="btn btn-success"> <i class="fas fa fa-check"></i>Lulus Evaluasi</button>
-                <button type="button" class="btn btn-danger"> <i class="fas fa fa-times"></i> Tidak Lulus Evaluasi</button>
+            <div class="modal-footer d-flex justify-content-start">
+                <button type="button" class="btn btn-default btn-danger" data-bs-dismiss="modal">
+                    <i class="fa-solid fa-rectangle-xmark"></i>
+                    Keluar
+                </button>
             </div>
         </div>
     </div>
