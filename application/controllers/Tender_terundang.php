@@ -88,10 +88,15 @@ class Tender_terundang extends CI_Controller
         $jadwal = $this->M_tender->get_jadwal($id_rup);
         $row_syarat_administrasi_rup = $this->M_tender->get_syarat_izin_usaha_tender($data_rup['id_rup']);
         $cek_ikut =  $this->M_tender->cek_mengikuti($data_rup['id_rup']);
+		$syarat_tambahan = $this->M_tender->result_syarat_tambahan($data_rup['id_rup']);
+		$row_syarat_administrasi_rup = $this->M_tender->get_syarat_izin_usaha_tender($data_rup['id_rup']);
+		$row_syarat_teknis_rup = $this->M_tender->get_syarat_izin_teknis_tender($data_rup['id_rup']);
         $response = [
             'row_rup' => $data_rup,
             'jadwal' => $jadwal,
             'row_syarat_administrasi_rup' => $row_syarat_administrasi_rup,
+            'row_syarat_teknis_rup' => $row_syarat_teknis_rup,
+            'syarat_tambahan' => $syarat_tambahan,
             'cek_ikut' => $cek_ikut
         ];
         $this->output->set_content_type('application/json')->set_output(json_encode($response));

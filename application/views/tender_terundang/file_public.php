@@ -144,7 +144,33 @@
                 }
 
                 $('#detail_jadwal').html('<a href="javascript:;" onclick="lihat_detail_jadwal(\'' + response['row_rup'].id_url_rup + '\')" class="btn btn-sm btn-primary"><i class="fa-solid fa-calendar-days px-1"></i> Detail Jadwal Pengadaan</a>')
+                
+                // keuangan
+                if (response['row_syarat_teknis_rup'].sts_checked_laporan_keuangan == 1) {
+                    $('#keuangan_izin').css('display', 'block')
+                    $('#tahun_keuangan').text(response['row_syarat_teknis_rup'].sts_audit_laporan_keuangan + ' ' + 'Tahun Awal ' + response['row_syarat_teknis_rup'].tahun_awal_laporan_keuangan + ' ' + 'Tahun Akhir ' + response['row_syarat_teknis_rup'].tahun_akhir_laporan_keuangan)
+                } else {
+                    $('#keuangan_izin').css('display', 'none')
+                    $('#tahun_keuangan').text('Tidak Diperlukan')
+                }
 
+                // neraca
+                if (response['row_syarat_teknis_rup'].sts_checked_neraca_keuangan == 1) {
+                    $('#neraca_izin').css('display', 'block')
+                    $('#tahun_neraca').text('Tahun Awal ' + response['row_syarat_teknis_rup'].tahun_awal_neraca_keuangan + ' ' + 'Tahun Akhir ' + response['row_syarat_teknis_rup'].tahun_akhir_neraca_keuangan)
+                } else {
+                    $('#neraca_izin').css('display', 'none')
+                    $('#tahun_neraca').text('Tidak Diperlukan')
+                }
+
+                var html_syarat_tambahan = '';
+                var i;
+                for (i = 0; i < response['syarat_tambahan'].length; i++) {
+                    html_syarat_tambahan += '<tr>' +
+                        '<td>' + response['syarat_tambahan'][i].nama_syarat_tambahan + '</td>' +
+                        '<td><a href="javascript:;" onclick="download_file_syarat_tambahan(' + response['syarat_tambahan'][i].id_syarat_tambahan + ')" class="btn btn-sm btn-warning"><i class="fas fa fa-donwload"></i> Download File</a></td>' +
+                        '</tr>'
+                }
 
                 if (response['cek_ikut']) {
                     $('#tombol_mengikuti').html('<button disabled type="button" class="btn btn-default btn-primary"><i class="fa fa-spinner" aria-hidden="true"></i> Anda Sedang Mengikuti Pengadaan ini</button>')
@@ -256,6 +282,9 @@
                         '</tr>';
                 }
                 $('#load_jadwal').html(html);
+
+
+
             }
         })
     }
