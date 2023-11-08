@@ -288,4 +288,15 @@
             return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
         }
     });
+
+    $(document).on('keyup', '.number_only', function(e) {
+
+        var regex = /[^\d.]|\.(?=.*\.)/g;
+        var subst = "";
+
+        var str = $(this).val();
+        var result = str.replace(regex, subst);
+        $(this).val(result);
+
+    });
 </script>

@@ -55,11 +55,9 @@
                     </div>
                     <br>
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="pills-dokumen_pengadaan" data-bs-toggle="pill" data-bs-target="#pills-file_pengadaan" type="button" role="tab" aria-controls="pills-dokumen_pengadaan" aria-selected="true">Dokumen Pengadaan</button>
-                        </li>
+
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-file1" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Dokumen Pengadaan File I</button>
+                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-file1" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Dokumen Pengadaan File I</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-file2" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Dokumen Penawaran File II</button>
@@ -79,30 +77,8 @@
                 </div>
                 <div class="card-body">
                     <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-file_pengadaan" role="tabpanel" aria-labelledby="pills-dokumen_pengadaan-tab">
-                            <div class="card">
-                                <div class="card-header bg-danger text-white">
-                                    Dokumen Pengadaan
-                                </div>
-                                <div class="card-body">
-                                    <table id="table_dok_pengadaan" class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Nama File</th>
-                                                <th>File</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
 
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane fade show" id="pills-file1" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <div class="tab-pane fade show active" id="pills-file1" role="tabpanel" aria-labelledby="pills-home-tab">
                             <div class="card">
                                 <div class="card-header bg-primary text-white">
                                     Dokumen Pengadaan File I
@@ -162,17 +138,17 @@
         </div>
 </main>
 <!-- Modal -->
-<div class="modal fade" id="upload_dok_file_1"  role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+<div class="modal fade" id="upload_dok_file_1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-        <form id="form_upload_dok_penawaran_1" action="javascript:;" enctype="multipart/form-data">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Upload Dokumen Pengadaan File I</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Upload Dokumen Pengadaan File I</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="form_upload_dok_penawaran_1" action="javascript:;" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <input type="text" name="id_dokumen_pengadaan_vendor">
-                    <input type="text" name="type_post" value="tambah">
+                    <input type="hidden" name="id_dokumen_pengadaan_vendor">
+                    <input type="hidden" name="type_post" value="tambah">
                     <input type="hidden" name="id_rup" value="<?= $rup['id_rup'] ?>">
                     <input type="hidden" name="id_url_rup" value="<?= $rup['id_url_rup'] ?>">
                     <input type="hidden" name="id_vendor" value="<?= $this->session->userdata('id_vendor') ?>">
@@ -193,7 +169,7 @@
                     <br>
                     <div class="form-group">
                         <label for=""> Persentase TKDN/PDN/IMPOR</label>
-                        <input type="text" name="persentase_tkdn_dokumen_pengadaan" class="form-control" placeholder="Persentase TKDN/PDN/IMPOR" aria-describedby="helpId">
+                        <input type="text" name="persentase_tkdn_dokumen_pengadaan" class="form-control number_only" placeholder="Persentase TKDN/PDN/IMPOR" aria-describedby="helpId">
                     </div>
                     <br>
                     <label for="">File Dokumen</label>
@@ -205,18 +181,19 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary btn-upload">Upload</button>
                 </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 
-<div class="modal fade" id="upload_dok_file_2" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+<div class="modal fade" id="upload_dok_file_2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-        <form id="form_upload_dok_penawaran_2" action="javascript:;" enctype="multipart/form-data">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Upload Dokumen Penawaran File II</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Upload Dokumen Penawaran File II</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="form_upload_dok_penawaran_2" action="javascript:;" enctype="multipart/form-data">
                 <div class="modal-body">
                     <input type="hidden" name="id_rup" value="<?= $rup['id_rup'] ?>">
                     <input type="hidden" name="id_url_rup" value="<?= $rup['id_url_rup'] ?>">
@@ -229,9 +206,9 @@
                     <br>
                     <div class="form-group">
                         <label for=""> Nilai Penawaran</label>
-                        <input type="text" name="nilai_penawaran_vendor" class="form-control nilai_penawaran_vendor" placeholder="Nilai Penawaran" aria-describedby="helpId">
+                        <input type="text" name="nilai_penawaran_vendor" class="form-control nilai_penawaran_vendor number_only" placeholder="Nilai Penawaran" aria-describedby="helpId">
                         <div style="float: right;">
-                            <input type="text" style="width: 200px;" id="rupiah_nilai_penawaran_vendor" readonly class="form-control" aria-describedby="helpId">
+                            <input type="text" style="width: 200px;" id="rupiah_nilai_penawaran_vendor" readonly class="form-control " aria-describedby="helpId">
                         </div>
                     </div>
                 </div>
@@ -239,7 +216,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary btn-upload">Upload</button>
                 </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 </div>

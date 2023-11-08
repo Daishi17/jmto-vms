@@ -342,7 +342,7 @@
                                 <input type="text" class="form-control" readonly value="radxH8GTvQwcdX8sSLoAtfFJu63uCykCUjyn6x7PXeexHrMJbfE45lnRPJDC1aggY2nP7j9BUWF6DvhYbqpIOBtOsphTW0m2omFB04wb9h5stGKEzS9TLOXeNYR71KV3" aria-describedby="basic-addon1">
                             </div>
                             <br>
-                            <a target="_blank" href="<?= base_url('panitia/info_tender/informasi_tender/buka_penawaran') ?>" class="btn btn-warning" style="width: 300px;"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Akses Halaman Upload Dokumen Penawaran</a>
+                            <a target="_blank" href="<?= base_url('tender_diikuti/buka_penawaran/' . $rup['id_url_rup']) ?>" class="btn btn-warning" style="width: 300px;"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Akses Halaman Upload Dokumen Penawaran</a>
                         </center>
                     </div>
                     <div class="col-md-2">

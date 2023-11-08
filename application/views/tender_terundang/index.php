@@ -31,6 +31,7 @@
                         </div>
                         <input type="hidden" name="url_mengikuti" value="<?= base_url('tender_terundang/ikuti_paket') ?>">
                         <div class="card-body">
+
                             <div class="card border-danger shadow-lg">
                                 <div class="card-header">
                                     <div class="nav nav-tabs mb-3 bg-info" id="nav-tab" role="tablist">
@@ -112,6 +113,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
