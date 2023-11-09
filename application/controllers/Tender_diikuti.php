@@ -123,8 +123,8 @@ class Tender_diikuti extends CI_Controller
 
         $data['url_dok_pengumuman_pra'] = 'http://localhost/jmto-eproc/file_paket/' . $nama_rup . '/' . 'HASIL_PRAKUALIFIKASI/';
         $data['url_dok_undangan_pembuktian'] = 'http://localhost/jmto-eproc/file_paket/' . $nama_rup . '/' . 'HASIL_PRAKUALIFIKASI/';
-
         $data['url_dok_ba_tender'] = 'http://localhost/jmto-eproc/file_paket/' . $nama_rup . '/' . 'BERITA_ACARA_PENGADAAN/';
+        $data['url_dok_penunjukan_pemenang'] = 'http://localhost/jmto-eproc/file_paket/' . $nama_rup . '/' . 'SURAT_PENUNJUKAN_PEMENANG/';
 
         $this->load->view('template_menu/header_menu', $data);
         $this->load->view('info_tender/informasi_tender_umum', $data);

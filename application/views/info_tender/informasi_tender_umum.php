@@ -280,17 +280,17 @@
                                     <i class="fa fa-bullhorn" aria-hidden="true"></i> Pengumuman Pemenang
                                 </button></th>
                         </tr> -->
-                        <?php if (condition) { ?>
+                        <?php if ($rup['id_vendor_pemenang'] == $this->session->userdata('id_vendor')) { ?>
+                            <tr>
+                                <th>Surat Penunjukan Pemenang Pengadaan</th>
+                                <th><button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#surat_penunjukan">
+                                        <i class="fa fa-download" aria-hidden="true"></i> Download Surat Penunjukan
+                                    </button></th>
+                            </tr>
 
                         <?php } else { ?>
 
                         <?php } ?>
-                        <tr>
-                            <th>Surat Penunjukan Pemenang Pengadaan</th>
-                            <th><button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#surat_penunjukan">
-                                    <i class="fa fa-download" aria-hidden="true"></i> Download Surat Penunjukan
-                                </button></th>
-                        </tr>
 
                     </table>
                 </div>
@@ -466,17 +466,21 @@
                         <tr>
                             <td scope="row">1</td>
                             <td>Surat Penunjukan</td>
-                            <td><label for="" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Lihat</label></td>
+                            <?php if ($rup['file_surat_penunjukan_pemenang']) { ?>
+                                <td><a target="_blank" href="<?= $url_dok_penunjukan_pemenang . $rup['file_surat_penunjukan_pemenang'] ?>" class="btn btn-sm btn-warning"> Lihat</a></td>
+                            <?php } else { ?>
+                                <td><label for="" class="btn btn-sm btn-danger"> Belum Upload Undangan</label></td>
+                            <?php } ?>
                         </tr>
                     </tbody>
                 </table>
-                <br>
-                <hr>
-                <center>
+                <!-- <br>
+                <hr> -->
+                <!-- <center>
                     Vendor Pemenang
                 </center>
-                <hr>
-                <table class="table table-bordered">
+                <hr> -->
+                <!-- <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -493,7 +497,7 @@
                             <td><i class="fas fa fa-star text-warning"></i></td>
                         </tr>
                     </tbody>
-                </table>
+                </table> -->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
