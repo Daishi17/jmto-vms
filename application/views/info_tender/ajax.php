@@ -70,22 +70,27 @@
                 var no = 1;
                 var html = '';
                 for (i = 0; i < response['syarat_tambahan'].length; i++) {
-                    if (response['syarat_tambahan'][i].nama_validator) {
-                        var nama_validator = response['syarat_tambahan'][i].nama_validator
+                    if (response['syarat_tambahan'][i].keterangan) {
+                        var keterangan = response['syarat_tambahan'][i].keterangan
                     } else {
-                        var nama_validator = '-'
+                        var keterangan = '-'
                     }
 
-                    if (response['syarat_tambahan'][i].status) {
-                        var status_dicek = response['syarat_tambahan'][i].status
-                    } else {
+                    if (!response['syarat_tambahan'][i].status) {
+
                         var status_dicek = '<span class="badge bg-secondary">Belum Di Cek</span>'
+                    } else {
+                        if (response['syarat_tambahan'][i].status == 1) {
+                            var status_dicek = '<span class="badge bg-success">Sudah Valid</span>'
+                        } else {
+                            var status_dicek = '<span class="badge bg-danger">Tidak Valid</span>'
+                        }
                     }
                     html += '<tr>' +
                         '<td><small>' + no++ + '</small></td>' +
                         '<td><small>' + response['syarat_tambahan'][i].nama_syarat_tambahan + '</small></td>' +
                         '<td><a href="" target="_blank" onclick="download_file_syarat_tambahan(' + response['syarat_tambahan'][i].id_vendor_syarat_tambahan + ')" class="btn btn-sm btn-warning"><i class="fas fa fa-file"></i> Download File </a></td>' +
-                        '<td><small>' + nama_validator + '</small></td>' +
+                        '<td><small>' + keterangan + '</small></td>' +
                         '<td><small>' + status_dicek + '</small></td>' +
                         '<td><a href="javascript:;"  onclick="delete_syarat_tambahan(\'' + response['syarat_tambahan'][i].id_vendor_syarat_tambahan + '\'' + ',' + '\'' + response['syarat_tambahan'][i].nama_syarat_tambahan + '\')" class="btn btn-sm btn-danger"><i class="fas fa fa-trash"></i> Hapus </a></td>' +
                         '</tr>';
@@ -180,6 +185,7 @@
                             clearInterval(timerInterval)
                             Swal.fire('Data Berhasil Di Simpan!', '', 'success')
                             $('#modal_syarat_tambahan').modal('hide')
+                            form_perysaratan_tambahan[0].reset()
                             load_syarat_tambahan()
                             $('.btn-syarat-tambahan').attr("disabled", false);
                         }
@@ -193,4 +199,299 @@
             })
         }
     })
+
+    // upload sanggahan prakualifikasi
+    var form_sanggahan_prakualifikasi = $('#form_sanggahan_prakualifikasi')
+    form_sanggahan_prakualifikasi.on('submit', function(e) {
+        var url_upload_sanggahan_pra = $('[name="url_upload_sanggahan_pra"]').val();
+        var file_sanggah_pra = $('[name="file_sanggah_pra"]').val();
+        if (file_sanggah_pra == '') {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Dokumen Wajib Di Isi!',
+            })
+        } else {
+            e.preventDefault();
+            $.ajax({
+                url: url_upload_sanggahan_pra,
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function() {
+                    $('.btn-sanggah').attr("disabled", true);
+                },
+                success: function(response) {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Menyimpan Data!',
+                        html: 'Membuat Data <b></b>',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Data Berhasil Di Simpan!', '', 'success')
+                            $('#modal_sanggahan_prakualifikasi').modal('hide')
+                            form_sanggahan_prakualifikasi[0].reset()
+                            load_dok_sanggahan_pra()
+                            $('.btn-sanggah').attr("disabled", false);
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+                }
+            })
+        }
+    })
+    load_dok_sanggahan_pra()
+
+    function load_dok_sanggahan_pra() {
+        var id_rup = $('[name="id_rup"]').val()
+        var id_vendor = $('[name="id_vendor"]').val()
+        var url_get_sanggahan_pra = $('[name="url_get_sanggahan_pra"]').val()
+        var url_open_sanggahan_pra = $('[name="url_open_sanggahan_pra"]').val()
+        $.ajax({
+            type: "POST",
+            url: url_get_sanggahan_pra,
+            data: {
+                id_rup: id_rup,
+                id_vendor: id_vendor
+            },
+            dataType: "JSON",
+            success: function(response) {
+                var html = '';
+                if (response['row_sanggahan_pra'].ket_sanggah_pra) {
+                    var ket_sanggah_pra = response['row_sanggahan_pra'].ket_sanggah_pra
+                } else {
+                    var ket_sanggah_pra = '-'
+                }
+
+                if (response['row_sanggahan_pra'].file_sanggah_pra) {
+                    var file_sanggah_pra = '<a target="_blank" href="' + url_open_sanggahan_pra + response['row_sanggahan_pra'].file_sanggah_pra + '"><img src="<?= base_url('assets/img/pdf.png') ?>" alt="File Sanggah" width="30px"></a>'
+                } else {
+                    var file_sanggah_pra = '<span class="badge bg-secondary">Tidak Ada File</span>'
+                }
+
+                if (response['row_sanggahan_pra'].ket_sanggah_pra_panitia) {
+                    var ket_sanggah_pra_panitia = response['row_sanggahan_pra'].ket_sanggah_pra_panitia
+                } else {
+                    var ket_sanggah_pra_panitia = '-'
+                }
+
+                if (response['row_sanggahan_pra'].file_sanggah_pra_panitia) {
+                    var file_sanggah_pra_panitia = '<a target="_blank" href="' + url_open_sanggahan_pra + response['row_sanggahan_pra'].file_sanggah_pra_panitia + '"><img src="<?= base_url('assets/img/pdf.png') ?>" alt="File Sanggah" width="30px"></a>'
+                } else {
+                    var file_sanggah_pra_panitia = '<span class="badge bg-secondary">Tidak Ada File</span>'
+                }
+
+                html += '<tr>' +
+                    '<td><small>' + response['row_sanggahan_pra'].nama_usaha + '</small></td>' +
+                    '<td><small>' + ket_sanggah_pra + '</small></td>' +
+                    '<td><small>' + file_sanggah_pra + '</small></td>' +
+                    '<td><small>' + ket_sanggah_pra_panitia + '</small></td>' +
+                    '<td><small>' + file_sanggah_pra_panitia + '</small></td>' +
+                    '<td><a href="javascript:;"  onclick="delete_sanggah_pra(\'' + response['row_sanggahan_pra'].id_vendor_mengikuti_paket + '\')" class="btn btn-sm btn-danger"><i class="fas fa fa-trash"></i> Hapus </a></td>' +
+                    '</tr>';
+                '</tr>';
+                $('#tbl_sanggah_pra').html(html);
+            }
+        })
+    }
+
+    function delete_sanggah_pra(id_vendor_mengikuti_paket) {
+        var url_hapus_sanggahan_pra = $('[name="url_hapus_sanggahan_pra"]').val()
+        Swal.fire({
+            title: 'Apakah Anda Yakin Ingin Batalkan Sanggahan Prakualifikasi?',
+            text: 'Peringatan! Data Yang Sudah Di Hapus Tidak Dapat Di Kembalikan Lagi! ',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Yakin!',
+            cancelButtonText: 'Batal!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_hapus_sanggahan_pra,
+                    data: {
+                        id_vendor_mengikuti_paket: id_vendor_mengikuti_paket,
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response == 'success') {
+                            Swal.fire(
+                                'Berhasil!',
+                                'Sanggahan Prakualifikasi Berhasil Di Batalkan!',
+                                'success'
+                            )
+                            load_dok_sanggahan_pra()
+                        }
+                    }
+                })
+
+            }
+        })
+    }
+
+    // upload sanggahan akhir
+    var form_sanggahan_akhir = $('#form_sanggahan_akhir')
+    form_sanggahan_akhir.on('submit', function(e) {
+        var url_upload_sanggahan_akhir = $('[name="url_upload_sanggahan_akhir"]').val();
+        var file_sanggah_akhir = $('[name="file_sanggah_akhir"]').val();
+        if (file_sanggah_akhir == '') {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Dokumen Wajib Di Isi!',
+            })
+        } else {
+            e.preventDefault();
+            $.ajax({
+                url: url_upload_sanggahan_akhir,
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function() {
+                    $('.btn-sanggah-akhir').attr("disabled", true);
+                },
+                success: function(response) {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Menyimpan Data!',
+                        html: 'Membuat Data <b></b>',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Data Berhasil Di Simpan!', '', 'success')
+                            $('#modal_sanggahan_akhir').modal('hide')
+                            form_sanggahan_akhir[0].reset()
+                            load_dok_sanggahan_akhir()
+                            $('.btn-sanggah-akhir').attr("disabled", false);
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+                }
+            })
+        }
+    })
+
+    load_dok_sanggahan_akhir()
+
+    function load_dok_sanggahan_akhir() {
+        var id_rup = $('[name="id_rup"]').val()
+        var id_vendor = $('[name="id_vendor"]').val()
+        var url_get_sanggahan_akhir = $('[name="url_get_sanggahan_akhir"]').val()
+        var url_open_sanggahan_akhir = $('[name="url_open_sanggahan_akhir"]').val()
+        $.ajax({
+            type: "POST",
+            url: url_get_sanggahan_akhir,
+            data: {
+                id_rup: id_rup,
+                id_vendor: id_vendor
+            },
+            dataType: "JSON",
+            success: function(response) {
+                var html = '';
+                if (response['row_sanggahan_akhir'].ket_sanggah_akhir) {
+                    var ket_sanggah_akhir = response['row_sanggahan_akhir'].ket_sanggah_akhir
+                } else {
+                    var ket_sanggah_akhir = '-'
+                }
+
+                if (response['row_sanggahan_akhir'].file_sanggah_akhir) {
+                    var file_sanggah_akhir = '<a target="_blank" href="' + url_open_sanggahan_akhir + response['row_sanggahan_akhir'].file_sanggah_akhir + '"><img src="<?= base_url('assets/img/pdf.png') ?>" alt="File Sanggah" width="30px"></a>'
+                } else {
+                    var file_sanggah_akhir = '<span class="badge bg-secondary">Tidak Ada File</span>'
+                }
+
+                if (response['row_sanggahan_akhir'].ket_sanggah_akhir_panitia) {
+                    var ket_sanggah_akhir_panitia = response['row_sanggahan_akhir'].ket_sanggah_akhir_panitia
+                } else {
+                    var ket_sanggah_akhir_panitia = '-'
+                }
+
+                if (response['row_sanggahan_akhir'].file_sanggah_akhir_panitia) {
+                    var file_sanggah_akhir_panitia = '<a target="_blank" href="' + url_open_sanggahan_akhir + response['row_sanggahan_akhir'].file_sanggah_akhir_panitia + '"><img src="<?= base_url('assets/img/pdf.png') ?>" alt="File Sanggah" width="30px"></a>'
+                } else {
+                    var file_sanggah_akhir_panitia = '<span class="badge bg-secondary">Tidak Ada File</span>'
+                }
+
+                html += '<tr>' +
+                    '<td><small>' + response['row_sanggahan_akhir'].nama_usaha + '</small></td>' +
+                    '<td><small>' + ket_sanggah_akhir + '</small></td>' +
+                    '<td><small>' + file_sanggah_akhir + '</small></td>' +
+                    '<td><small>' + ket_sanggah_akhir_panitia + '</small></td>' +
+                    '<td><small>' + file_sanggah_akhir_panitia + '</small></td>' +
+                    '<td><a href="javascript:;"  onclick="delete_sanggah_akhir(\'' + response['row_sanggahan_akhir'].id_vendor_mengikuti_paket + '\')" class="btn btn-sm btn-danger"><i class="fas fa fa-trash"></i> Hapus </a></td>' +
+                    '</tr>';
+                '</tr>';
+                $('#tbl_sanggah_akhir').html(html);
+            }
+        })
+    }
+
+    function delete_sanggah_akhir(id_vendor_mengikuti_paket) {
+        var url_hapus_sanggahan_akhir = $('[name="url_hapus_sanggahan_akhir"]').val()
+        Swal.fire({
+            title: 'Apakah Anda Yakin Ingin Batalkan Sanggahan akhir?',
+            text: 'Peringatan! Data Yang Sudah Di Hapus Tidak Dapat Di Kembalikan Lagi! ',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Yakin!',
+            cancelButtonText: 'Batal!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_hapus_sanggahan_akhir,
+                    data: {
+                        id_vendor_mengikuti_paket: id_vendor_mengikuti_paket,
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response == 'success') {
+                            Swal.fire(
+                                'Berhasil!',
+                                'Sanggahan akhir Berhasil Di Batalkan!',
+                                'success'
+                            )
+                            load_dok_sanggahan_akhir()
+                        }
+                    }
+                })
+
+            }
+        })
+    }
 </script>

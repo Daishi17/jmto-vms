@@ -7,7 +7,7 @@
 <input type="hidden" name="url_download_syarat_tambahan" value="<?= base_url('tender_diikuti/download_syarat_tambahan/') ?>">
 <input type="hidden" name="url_hapus_persyaratan_tambahan" value="<?= base_url('tender_diikuti/hapus_syarat_tambahan/') ?>">
 <!-- end url -->
-<main class="container-fluid">
+<main class="container">
     <div class="row">
         <div class="col">
             <div class="card border-dark mt-3">
@@ -256,36 +256,15 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td scope="row">1</td>
-                                                            <td>Peringkat Teknis</td>
-                                                            <td><a href="" class="btn btn-sm btn-warning"><i class="fas fa fa-file"></i> </a></td>
+                                                        <?php $i = 1;
+                                                        foreach ($ba_tender as $key => $value) { ?>
+                                                            <tr>
+                                                                <td scope="row"><?= $i++ ?></td>
+                                                                <td><?= $value['nama_file']  ?></td>
+                                                                <td><a target="_blank" href="<?= $url_dok_ba_tender . $value['file_ba'] ?>" class="btn btn-sm btn-warning"> Lihat</a></td>
+                                                            </tr>
+                                                        <?php } ?>
 
-                                                        </tr>
-                                                        <tr>
-                                                            <td scope="row">2</td>
-                                                            <td>Peringkat Penawaran Harga</td>
-                                                            <td><a href="" class="btn btn-sm btn-warning"><i class="fas fa fa-file"></i> </a></td>
-
-                                                        </tr>
-                                                        <tr>
-                                                            <td scope="row">3</td>
-                                                            <td>Pengumuman Pemenang</td>
-                                                            <td><a href="" class="btn btn-sm btn-warning"><i class="fas fa fa-file"></i> </a></td>
-
-                                                        </tr>
-                                                        <tr>
-                                                            <td scope="row">4</td>
-                                                            <td>Undangan Presentasi</td>
-                                                            <td><a href="" class="btn btn-sm btn-warning"><i class="fas fa fa-file"></i> </a></td>
-
-                                                        </tr>
-                                                        <tr>
-                                                            <td scope="row">5</td>
-                                                            <td>Addendum Dokumen Pengadaan</td>
-                                                            <td><a href="" class="btn btn-sm btn-warning"><i class="fas fa fa-file"></i> </a></td>
-
-                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -295,12 +274,17 @@
                                 </div>
                             </th>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <th>Pengumuman Pemenang</th>
                             <th> <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#pengumuman_pemenang">
                                     <i class="fa fa-bullhorn" aria-hidden="true"></i> Pengumuman Pemenang
                                 </button></th>
-                        </tr>
+                        </tr> -->
+                        <?php if (condition) { ?>
+
+                        <?php } else { ?>
+
+                        <?php } ?>
                         <tr>
                             <th>Surat Penunjukan Pemenang Pengadaan</th>
                             <th><button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#surat_penunjukan">
@@ -357,84 +341,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="upload_berita_acara_tender" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bg-secondary text-white">
-                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-upload" aria-hidden="true"></i> Berita Acara Pengadaan</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="alert alert-primary d-flex align-items-center" role="alert">
-                    <div>
-                        <i class="fa fa-info-circle" aria-hidden="true"> </i> Dokumen Umum Untuk Di Upload !!! <br>
-                        <label>1. Peringkat Teknis</label>
-                        <label>2. Peringkat Penawaran Harga</label>
-                        <label>3. Pengumuman Pemenang</label>
-                        <label>4. Undangan Presentasi</label>
-                        <label>5. Addendum Dokumen Pengadaan</label>
-                    </div>
-                </div>
-                <br>
-                <form id="form_upload_berita_acara_tender" action="javascript:;" enctype="multipart/form-data">
-                    <div class="input-group">
-                        <input type="file" class="form-control" accept=".xlsx, .xls, .pdf" name="file_hps">
-                        <button class="btn btn-outline-secondary file_hps_btn" type="submit">Upload</button>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="pengumuman_pemenang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bg-warning text-white">
-                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-bullhorn" aria-hidden="true"></i> Pengumuman Pemenang</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="alert alert-primary d-flex align-items-center" role="alert">
-                    <div>
-                        <i class="fa fa-info-circle" aria-hidden="true"> </i> Kirim Pengumuman Pemenang Pengadaan !!! <br>
-                    </div>
-                </div>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama Peserta</th>
-                            <th>Email</th>
-                            <th>Pemenang</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td scope="row">1</td>
-                            <td>METRINDOCRB</td>
-                            <td>metrindocirebon@yahoo.co.id</td>
-                            <td><i class="fas fa fa-star text-warning"></i></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">2</td>
-                            <td>PT Agung Solusi Trans </td>
-                            <td>bambang.triyono@agungrent.co.id</td>
-                            <td><i class="fas fa fa-times text-danger"></i></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-paper-plane" aria-hidden="true"></i> Kirim Pengumuman</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="modal fade" id="undangan_pembuktian" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -462,7 +368,12 @@
                         <tr>
                             <td scope="row">1</td>
                             <td>Undangan Pembuktian</td>
-                            <td><label for="" class="btn btn-sm btn-danger"> Belum Upload Undangan</label></td>
+                            <?php if ($rup['file_undangan_pembuktian']) { ?>
+                                <td><a target="_blank" href="<?= $url_dok_undangan_pembuktian . $rup['file_undangan_pembuktian'] ?>" class="btn btn-sm btn-warning"> Lihat</a></td>
+                            <?php } else { ?>
+                                <td><label for="" class="btn btn-sm btn-danger"> Belum Upload Undangan</label></td>
+                            <?php } ?>
+
                         </tr>
                     </tbody>
                 </table>
@@ -506,7 +417,12 @@
                         <tr>
                             <td scope="row">1</td>
                             <td>Pengumuman Hasil Prakualifikasi</td>
-                            <td><label for="" class="btn btn-sm btn-danger"> Lihat</label></td>
+                            <?php if ($rup['file_pengumuman_prakualifikasi']) { ?>
+                                <td><a target="_blank" href="<?= $url_dok_pengumuman_pra . $rup['file_pengumuman_prakualifikasi'] ?>" class="btn btn-sm btn-warning"> Lihat</a></td>
+                            <?php } else { ?>
+                                <td><label for="" class="btn btn-sm btn-danger"> Belum Upload Undangan</label></td>
+                            <?php } ?>
+
                         </tr>
                     </tbody>
                 </table>

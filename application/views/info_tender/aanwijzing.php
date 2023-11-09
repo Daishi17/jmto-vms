@@ -1,4 +1,4 @@
-<main class="container-fluid">
+<main class="container">
     <style>
         .btn-grad5 {
             width: 100%;

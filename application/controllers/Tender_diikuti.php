@@ -114,17 +114,24 @@ class Tender_diikuti extends CI_Controller
         $data['dok_prakualifikasi'] = $this->M_tender->dok_prakualifikasi($id_rup);
         $data['dok_pengadaan'] = $this->M_tender->dok_pengadaan($id_rup);
         $data['dok_syarat_tambahan'] = $this->M_tender->get_syarat_tambahan($id_rup);
+        $data['ba_tender'] = $this->M_tender->get_ba_tender($id_rup);
 
         // panggil private url
         $data['url_dok_pengadaan'] = 'http://localhost/jmto-eproc/file_paket/' . $nama_rup . '/' . 'DOKUMEN_PENGADAAN/';
         $data['url_dok_prakualifikasi'] = 'http://localhost/jmto-eproc/file_paket/' . $nama_rup . '/' . 'DOKUMEN_PRAKUALIFIKASI/';
         $data['url_dok_syarat_tambahan'] = 'http://localhost/jmto-eproc/file_paket/' . $nama_rup . '/' . 'SYARAT_TAMBAHAN/';
 
+        $data['url_dok_pengumuman_pra'] = 'http://localhost/jmto-eproc/file_paket/' . $nama_rup . '/' . 'HASIL_PRAKUALIFIKASI/';
+        $data['url_dok_undangan_pembuktian'] = 'http://localhost/jmto-eproc/file_paket/' . $nama_rup . '/' . 'HASIL_PRAKUALIFIKASI/';
+
+        $data['url_dok_ba_tender'] = 'http://localhost/jmto-eproc/file_paket/' . $nama_rup . '/' . 'BERITA_ACARA_PENGADAAN/';
+
         $this->load->view('template_menu/header_menu', $data);
         $this->load->view('info_tender/informasi_tender_umum', $data);
         $this->load->view('template_menu/new_footer');
         $this->load->view('info_tender/ajax');
     }
+
 
     public function upload_syarat_tambahan()
     {
@@ -268,6 +275,7 @@ class Tender_diikuti extends CI_Controller
     }
 
 
+    // sanggahan prakualifikasi
     public function sanggahan_prakualifikasi($id_url_rup)
     {
         $id_vendor = $this->session->userdata('id_vendor');
@@ -276,12 +284,83 @@ class Tender_diikuti extends CI_Controller
         $data['count_tender_umum'] =  $this->M_tender->count_all_data();
         $data['rup'] = $this->M_tender->get_row_rup($id_url_rup);
         $this->load->view('template_menu/header_menu', $data);
-        $this->load->view('info_tender/sanggahan_prakualifikasi');
+        $this->load->view('info_tender/sanggahan_prakualifikasi', $data);
         $this->load->view('template_menu/new_footer');
         $this->load->view('info_tender/ajax');
     }
 
+    public function get_sanggahan_pra()
+    {
+        $id_rup = $this->input->post('id_rup');
+        $id_vendor = $this->input->post('id_vendor');
+        $row_sanggahan_pra = $this->M_tender->get_row_vendor_sanggahan($id_rup, $id_vendor);
+        $output = [
+            'row_sanggahan_pra' => $row_sanggahan_pra,
+        ];
+        $this->output->set_content_type('application/json')->set_output(json_encode($output));
+    }
 
+    public function upload_sanggahan_pra()
+    {
+        // post
+        $id_rup = $this->input->post('id_rup');
+        $ket_sanggah_pra = $this->input->post('ket_sanggah_pra');
+
+        // get value vendor dan paket untuk genrate file
+        $nama_rup = $this->M_tender->get_rup_byid($id_rup);
+        $nama_usaha = $this->session->userdata('nama_usaha');
+        $id_vendor = $this->session->userdata('id_vendor');
+
+        if (!is_dir('file_paket/' . $nama_rup['nama_rup'] . '/' .  $nama_usaha . '/' . 'SANGGAHAN_PRAKUALIFIKASI')) {
+            mkdir('file_paket/' . $nama_rup['nama_rup'] . '/' .  $nama_usaha . '/' . 'SANGGAHAN_PRAKUALIFIKASI', 0777, TRUE);
+        }
+        $config['upload_path'] = './file_paket/' . $nama_rup['nama_rup'] . '/' .  $nama_usaha . '/' . 'SANGGAHAN_PRAKUALIFIKASI';
+        $config['allowed_types'] = 'pdf|xlsx|xls';
+        $config['max_size'] = 0;
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('file_sanggah_pra')) {
+            $fileData = $this->upload->data();
+            $upload = [
+                'ket_sanggah_pra' => $ket_sanggah_pra,
+                'file_sanggah_pra' => $fileData['file_name']
+            ];
+
+            $where = [
+                'id_rup' => $id_rup,
+                'id_vendor' => $id_vendor,
+            ];
+            $this->M_tender->update_mengikuti($upload, $where);
+            $this->output->set_content_type('application/json')->set_output(json_encode('success'));
+        } else {
+            $this->output->set_content_type('application/json')->set_output(json_encode('gagal'));
+        }
+    }
+
+    public function hapus_sanggahan_pra()
+    {
+        // post
+        $id_vendor_mengikuti_paket = $this->input->post('id_vendor_mengikuti_paket');
+
+        // get value vendor dan paket untuk genrate file
+        $nama_usaha = $this->session->userdata('nama_usaha');
+        $id_vendor = $this->session->userdata('id_vendor');
+
+        $upload = [
+            'ket_sanggah_pra' => '',
+            'file_sanggah_pra' => ''
+        ];
+
+        $where = [
+            'id_vendor_mengikuti_paket' => $id_vendor_mengikuti_paket,
+        ];
+        $this->M_tender->update_mengikuti($upload, $where);
+        $this->output->set_content_type('application/json')->set_output(json_encode('success'));
+    }
+    // end sanggahan prakualifikasi
+
+
+    // sanggahan akhir
     public function sanggahan_akhir($id_url_rup)
     {
         $id_vendor = $this->session->userdata('id_vendor');
@@ -296,6 +375,76 @@ class Tender_diikuti extends CI_Controller
         $this->load->view('template_menu/new_footer');
         $this->load->view('info_tender/ajax');
     }
+
+    public function get_sanggahan_akhir()
+    {
+        $id_rup = $this->input->post('id_rup');
+        $id_vendor = $this->input->post('id_vendor');
+        $row_sanggahan_akhir = $this->M_tender->get_row_vendor_sanggahan($id_rup, $id_vendor);
+        $output = [
+            'row_sanggahan_akhir' => $row_sanggahan_akhir,
+        ];
+        $this->output->set_content_type('application/json')->set_output(json_encode($output));
+    }
+
+    public function upload_sanggahan_akhir()
+    {
+        // post
+        $id_rup = $this->input->post('id_rup');
+        $ket_sanggah_akhir = $this->input->post('ket_sanggah_akhir');
+
+        // get value vendor dan paket untuk genrate file
+        $nama_rup = $this->M_tender->get_rup_byid($id_rup);
+        $nama_usaha = $this->session->userdata('nama_usaha');
+        $id_vendor = $this->session->userdata('id_vendor');
+
+        if (!is_dir('file_paket/' . $nama_rup['nama_rup'] . '/' . $nama_usaha . '/' . 'SANGGAHAN_AKHIR')) {
+            mkdir('file_paket/' . $nama_rup['nama_rup'] . '/' . $nama_usaha . '/' . 'SANGGAHAN_AKHIR', 0777, TRUE);
+        }
+        $config['upload_path'] = './file_paket/' . $nama_rup['nama_rup'] . '/' . $nama_usaha . '/' . 'SANGGAHAN_AKHIR';
+        $config['allowed_types'] = 'pdf|xlsx|xls';
+        $config['max_size'] = 0;
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('file_sanggah_akhir')) {
+            $fileData = $this->upload->data();
+            $upload = [
+                'ket_sanggah_akhir' => $ket_sanggah_akhir,
+                'file_sanggah_akhir' => $fileData['file_name']
+            ];
+
+            $where = [
+                'id_rup' => $id_rup,
+                'id_vendor' => $id_vendor,
+            ];
+            $this->M_tender->update_mengikuti($upload, $where);
+            $this->output->set_content_type('application/json')->set_output(json_encode('success'));
+        } else {
+            $this->output->set_content_type('application/json')->set_output(json_encode('gagal'));
+        }
+    }
+
+    public function hapus_sanggahan_akhir()
+    {
+        // post
+        $id_vendor_mengikuti_paket = $this->input->post('id_vendor_mengikuti_paket');
+
+        // get value vendor dan paket untuk genrate file
+        $nama_usaha = $this->session->userdata('nama_usaha');
+        $id_vendor = $this->session->userdata('id_vendor');
+
+        $upload = [
+            'ket_sanggah_akhir' => '',
+            'file_sanggah_akhir' => ''
+        ];
+
+        $where = [
+            'id_vendor_mengikuti_paket' => $id_vendor_mengikuti_paket,
+        ];
+        $this->M_tender->update_mengikuti($upload, $where);
+        $this->output->set_content_type('application/json')->set_output(json_encode('success'));
+    }
+    // end sanggahan akhir
 
     public function negosiasi($id_url_rup)
     {
