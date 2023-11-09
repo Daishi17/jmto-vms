@@ -40,8 +40,6 @@ class M_tender extends CI_Model
         $neraca = $this->get_neraca_vendor($id_vendor);
         $neraca_mulai = $this->get_neraca_vendor_mulai($id_vendor);
         $neraca_selesai = $this->get_neraca_vendor_selesai($id_vendor);
-
-
         $now = date('Y-m-d');
         $this->db->select('*');
         $this->db->from('tbl_rup');
@@ -115,20 +113,23 @@ class M_tender extends CI_Model
 
 
         if ($spt_vendor) {
-            $this->db->where('tbl_izin_teknis_rup.tahun_lapor_spt >=', $spt_vendor['tahun_lapor']);
-        } else { }
+            $this->db->where('tbl_izin_teknis_rup.tahun_lapor_spt <=', $spt_vendor['tahun_lapor']);
+        } else {
+        }
 
         if ($keuangan) {
             $this->db->where('tbl_izin_teknis_rup.tahun_awal_laporan_keuangan <=', $keuangan['tahun_lapor']);
             $this->db->where('tbl_izin_teknis_rup.tahun_akhir_laporan_keuangan >=', $keuangan['tahun_lapor']);
 
             $this->db->where_in('tbl_izin_teknis_rup.sts_audit_laporan_keuangan',  $keuangan_audit);
-        } else { }
+        } else {
+        }
 
         if ($neraca) {
             $this->db->where('tbl_izin_teknis_rup.tahun_awal_neraca_keuangan <=', $neraca_selesai['sls']);
             $this->db->where('tbl_izin_teknis_rup.tahun_akhir_neraca_keuangan >=', $neraca_mulai['mulai']);
-        } else { }
+        } else {
+        }
         $this->db->group_by('tbl_rup.id_rup');
         $i = 0;
         foreach ($this->order as $item) // looping awal
@@ -674,6 +675,18 @@ class M_tender extends CI_Model
         return $query->result_array();
     }
 
+
+    public function count_peserta($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_rup');
+        $this->db->join('tbl_vendor_mengikuti_paket', 'tbl_rup.id_rup = tbl_vendor_mengikuti_paket.id_rup', 'left');
+        $this->db->join('tbl_vendor', 'tbl_vendor_mengikuti_paket.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor_mengikuti_paket.id_rup', $id_rup);
+        $this->db->get();
+        return $this->db->count_all_results();
+    }
+
     public function dok_pengadaan($id_rup)
     {
         $this->db->select('*');
@@ -978,5 +991,4 @@ class M_tender extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
-    
 }
