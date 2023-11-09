@@ -497,3 +497,126 @@
         })
     }
 </script>
+
+<script>
+    function buka_penawaran(id_url_rup) {
+        var token_syalala = $('[name="token_syalala"]').val()
+        var url_buka_penawaran = $('[name="url_buka_penawaran"]').val()
+        var url_buka_penawaran_token = $('[name="url_buka_penawaran_token"]').val()
+        if (token_syalala == '') {
+            Swal.fire('Harap Isi Token Anda!', '', 'warning')
+        } else {
+            $.ajax({
+                type: "POST",
+                url: url_buka_penawaran,
+                data: {
+                    id_url_rup: id_url_rup,
+                    token_syalala: token_syalala,
+                },
+                dataType: "JSON",
+                beforeSend: function() {
+                    $('.btn_buka_penawaran').attr("disabled", true);
+                },
+                success: function(response) {
+                    if (response == 'success') {
+                        Swal.fire('Token Valid!', '', 'success')
+                        setTimeout(() => {
+                            $('.btn_buka_penawaran').attr("disabled", false);
+                            window.open(url_buka_penawaran_token + id_url_rup, '_blank');
+                        }, 2000);
+                    } else {
+                        Swal.fire('Token Anda Tidak Valid!', '', 'warning')
+                        $('.btn_buka_penawaran').attr("disabled", false);
+                    }
+                }
+            })
+        }
+    }
+
+    function Kirim_pengumuman(id_url_rup) {
+        var token_syalala = $('[name="token_syalala"]').val()
+        var url_kirim_pengumuman = $('[name="url_kirim_pengumuman"]').val()
+        $.ajax({
+            type: "POST",
+            url: url_kirim_pengumuman,
+            data: {
+                id_url_rup: id_url_rup,
+            },
+            dataType: "JSON",
+            beforeSend: function() {
+                $('.btn_kirim_pengumuman').attr("disabled", true);
+            },
+            success: function(response) {
+                if (response == 'success') {
+                    Swal.fire({
+                        title: 'Sedang Proses Menyimpan Data!',
+                        html: 'Proses Data <b></b>',
+                        timer: 1000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            Swal.fire('Token Valid!', '', 'success')
+                            setTimeout(() => {
+                                $('.btn_kirim_pengumuman').attr("disabled", false);
+                            }, 2000);
+
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+                } else {
+                    Swal.fire('Token Anda Tidak Valid!', '', 'warning')
+                    $('.btn_kirim_pengumuman').attr("disabled", false);
+                }
+            }
+        })
+    }
+
+    load_negosiasi()
+
+    function load_negosiasi() {
+        var id_rup = $('[name="id_rup"]').val()
+        var id_vendor = $('[name="id_vendor"]').val()
+        var url_get_sanggahan_akhir = $('[name="url_get_sanggahan_akhir"]').val()
+        $.ajax({
+            type: "POST",
+            url: url_get_sanggahan_akhir,
+            data: {
+                id_rup: id_rup,
+                id_vendor: id_vendor
+            },
+            dataType: "JSON",
+            success: function(response) {
+                var html = '';
+                if (response['row_sanggahan_akhir'].tanggal_negosiasi == null) {
+                    var tanggal_negosiasi = response['row_sanggahan_akhir'].tanggal_negosiasi
+                } else {
+                    var tanggal_negosiasi = '<span class="badge bg-secondary">Belum Ada Tanggal Meet Negosiasi</span>'
+                }
+
+                if (response['row_sanggahan_akhir'].link_negosiasi == null) {
+                    var link_negosiasi = response['row_sanggahan_akhir'].link_negosiasi
+                } else {
+                    var link_negosiasi = '<span class="badge bg-secondary">Belum Ada Link Meet Negosiasi</span>'
+                }
+                html += '<tr>' +
+                    '<td><small>1</small></td>' +
+                    '<td><small>' + response['row_sanggahan_akhir'].nama_usaha + '</small></td>' +
+                    '<td>' + tanggal_negosiasi + '</td>' +
+                    '<td>' + link_negosiasi + '</td>' +
+                    '</tr>';
+                '</tr>';
+                $('#tbl_negosiasi').html(html);
+            }
+        })
+    }
+</script>

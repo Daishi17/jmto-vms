@@ -450,11 +450,9 @@ class Tender_diikuti extends CI_Controller
     {
         $id_vendor = $this->session->userdata('id_vendor');
         $data['notifikasi'] = $this->M_dashboard->count_notifikasi($id_vendor);
-
         // query tendering
         $data['count_tender_umum'] =  $this->M_tender->count_all_data();
         $data['rup'] = $this->M_tender->get_row_rup($id_url_rup);
-
         $this->load->view('template_menu/header_menu', $data);
         $this->load->view('info_tender/negosiasi');
         $this->load->view('template_menu/new_footer');
@@ -476,12 +474,26 @@ class Tender_diikuti extends CI_Controller
         $this->load->view('info_tender/ajax_buka_penawaran', $data);
     }
 
+    function acces_penawaran()
+	{
+		$id_url_rup = $this->input->post('id_url_rup');
+		$token_syalala = $this->input->post('token_syalala');
+		$row_rup = $this->M_tender->get_row_rup($id_url_rup);
+		if ($row_rup['token_vendor'] == $token_syalala) {
+			$userdata = [
+				'token_vendor' => $token_syalala,
+			];
+			$this->session->set_userdata($userdata);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		} else {
+			$this->output->set_content_type('application/json')->set_output(json_encode('token_salah'));
+		}
+	}
+
     public function upload_penawaran_1()
     {
         $id_vendor = $this->input->post('id_vendor');
         $nama_dokumen_pengadaan_vendor = $this->input->post('nama_dokumen_pengadaan_vendor');
-        $tkdn_dokumen_pengadaan = $this->input->post('tkdn_dokumen_pengadaan');
-        $persentase_tkdn_dokumen_pengadaan = $this->input->post('persentase_tkdn_dokumen_pengadaan');
         $id_url_rup = $this->input->post('id_url_rup');
         $id_rup = $this->input->post('id_rup');
         $nama_rup = $this->M_tender->get_rup_byid($id_rup);
@@ -503,8 +515,6 @@ class Tender_diikuti extends CI_Controller
                     'id_url_rup' => $id_url_rup,
                     'id_vendor' => $id_vendor,
                     'nama_dokumen_pengadaan_vendor' => $nama_dokumen_pengadaan_vendor,
-                    'tkdn_dokumen_pengadaan' => $tkdn_dokumen_pengadaan,
-                    'persentase_tkdn_dokumen_pengadaan' => $persentase_tkdn_dokumen_pengadaan,
                     'file_dokumen_pengadaan_vendor' => $fileData['file_name']
                 ];
 
@@ -532,8 +542,6 @@ class Tender_diikuti extends CI_Controller
                     'id_url_rup' => $id_url_rup,
                     'id_vendor' => $id_vendor,
                     'nama_dokumen_pengadaan_vendor' => $nama_dokumen_pengadaan_vendor,
-                    'tkdn_dokumen_pengadaan' => $tkdn_dokumen_pengadaan,
-                    'persentase_tkdn_dokumen_pengadaan' => $persentase_tkdn_dokumen_pengadaan,
                     'file_dokumen_pengadaan_vendor' => $fileData['file_name']
                 ];
 
@@ -548,6 +556,8 @@ class Tender_diikuti extends CI_Controller
     {
         $id_vendor = $this->input->post('id_vendor');
         $nilai_penawaran_vendor = $this->input->post('nilai_penawaran_vendor');
+        $tkdn_dokumen_penawaran_vendor = $this->input->post('tkdn_dokumen_penawaran_vendor');
+        $persentase_tkdn_dokumen_penawaran_vendor = $this->input->post('persentase_tkdn_dokumen_penawaran_vendor');
         $id_rup = $this->input->post('id_rup');
         $nama_rup = $this->M_tender->get_rup_byid($id_rup);
         $nama_usaha = $this->session->userdata('nama_usaha');
@@ -565,6 +575,8 @@ class Tender_diikuti extends CI_Controller
                 'id_vendor' => $id_vendor
             ];
             $upload = [
+                'persentase_tkdn_dokumen_penawaran_vendor' => $persentase_tkdn_dokumen_penawaran_vendor,
+                'tkdn_dokumen_penawaran_vendor' => $tkdn_dokumen_penawaran_vendor,
                 'nilai_penawaran_vendor' => $nilai_penawaran_vendor,
                 'dok_penawaran_harga' => $fileData['file_name']
             ];
@@ -585,8 +597,6 @@ class Tender_diikuti extends CI_Controller
             $row = array();
             $row[] = ++$no;
             $row[] = $rs->nama_dokumen_pengadaan_vendor;
-            $row[] = $rs->tkdn_dokumen_pengadaan;
-            $row[] = $rs->persentase_tkdn_dokumen_pengadaan;
             $row[] =  '<a target="_blank" href="' . base_url('tender_diikuti/download_dokumen_pengadaan_vendor/') . $rs->id_dokumen_pengadaan_vendor . '" class="btn btn-info btn-sm shadow-lg text-white" <i class="fa fa-download" aria-hidden="true"></i> Download File</a>';
             $row[] = '<a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white"  onClick="by_id_dok_penawran_file_I(' . "'" . $rs->id_dokumen_pengadaan_vendor  . "','edit'" . ')"><i class="fa fa-info-circle" aria-hidden="true"></i> Edit</a><a href="javascript:;" class="btn btn-danger btn-sm shadow-lg text-white"  onClick="by_id_dok_penawran_file_I(' . "'" . $rs->id_dokumen_pengadaan_vendor  . "','hapus'" . ')"><i class="fa fa-trash" aria-hidden="true"></i> hapus</a>';
             $data[] = $row;
@@ -612,6 +622,8 @@ class Tender_diikuti extends CI_Controller
             $row = array();
             $row[] = ++$no;
             $row[] = "Rp " . number_format($rs->nilai_penawaran_vendor, 2, ',', '.');
+            $row[] = $rs->tkdn_dokumen_penawaran_vendor;
+            $row[] = $rs->persentase_tkdn_dokumen_penawaran_vendor;
             $row[] = '<a target="_blank" href="' . base_url('tender_diikuti/download_dokumen_penawaran_vendor/') . $rs->id_vendor_mengikuti_paket . '" class="btn btn-info btn-sm shadow-lg text-white" <i class="fa fa-download" aria-hidden="true"></i> Download File</a>';
             $data[] = $row;
         }

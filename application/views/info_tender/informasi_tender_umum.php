@@ -6,6 +6,10 @@
 <input type="hidden" name="url_get_syarat_tambahan_vendor" value="<?= base_url('tender_diikuti/get_syarat_tambahan/') ?>">
 <input type="hidden" name="url_download_syarat_tambahan" value="<?= base_url('tender_diikuti/download_syarat_tambahan/') ?>">
 <input type="hidden" name="url_hapus_persyaratan_tambahan" value="<?= base_url('tender_diikuti/hapus_syarat_tambahan/') ?>">
+<!-- buka_penawaran -->
+<input type="hidden" name="url_buka_penawaran" value="<?= base_url('tender_diikuti/acces_penawaran') ?>">
+<input type="hidden" name="url_buka_penawaran_token" value="<?= base_url('tender_diikuti/buka_penawaran/') ?>">
+
 <!-- end url -->
 <main class="container">
     <div class="row">
@@ -212,10 +216,6 @@
                             <th>Bobot Biaya</th>
                             <th><?= $rup['bobot_biaya'] ?></th>
                         </tr>
-                        <!-- <tr>
-                            <th>Bobot Teknis</th>
-                            <th>60</th>
-                        </tr> -->
                         <tr>
                             <th>Undangan Pembuktian</th>
                             <th><button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#undangan_pembuktian">
@@ -274,12 +274,6 @@
                                 </div>
                             </th>
                         </tr>
-                        <!-- <tr>
-                            <th>Pengumuman Pemenang</th>
-                            <th> <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#pengumuman_pemenang">
-                                    <i class="fa fa-bullhorn" aria-hidden="true"></i> Pengumuman Pemenang
-                                </button></th>
-                        </tr> -->
                         <?php if ($rup['id_vendor_pemenang'] == $this->session->userdata('id_vendor')) { ?>
                             <tr>
                                 <th>Surat Penunjukan Pemenang Pengadaan</th>
@@ -298,19 +292,18 @@
         </div>
 </main>
 
-
 <div class="modal fade" id="buka_dokumen_penawaran" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-folder-open" aria-hidden="true"></i> Upload Dokumen Penawaran</h5>
+                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-folder-open" aria-hidden="true"></i> Buka Dokumen Penawaran</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="alert alert-primary d-flex align-items-center" role="alert">
                         <div>
-                            <i class="fa fa-info-circle" aria-hidden="true"></i> Silakan Masukan Username Panitia Anda Untuk Dapat Mengakses Pembukan Dokumen Penawaran !!!
+                            <i class="fa fa-info-circle" aria-hidden="true"></i> Silakan Masukan Token Paket Yang Dikirim Ke Whatsaap Anda
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -318,15 +311,11 @@
                     <div class="col-md-8">
                         <center>
                             <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1"> <i class="fas fa fa-user"></i></span>
-                                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"> <i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" readonly value="radxH8GTvQwcdX8sSLoAtfFJu63uCykCUjyn6x7PXeexHrMJbfE45lnRPJDC1aggY2nP7j9BUWF6DvhYbqpIOBtOsphTW0m2omFB04wb9h5stGKEzS9TLOXeNYR71KV3" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control" name="token_syalala" placeholder="Masukan Token..." aria-describedby="basic-addon1">
                             </div>
                             <br>
-                            <a target="_blank" href="<?= base_url('tender_diikuti/buka_penawaran/' . $rup['id_url_rup']) ?>" class="btn btn-warning" style="width: 300px;"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Akses Halaman Upload Dokumen Penawaran</a>
+                            <a target="_blank" onclick="buka_penawaran('<?= $rup['id_url_rup'] ?>')" class="btn btn-warning btn_buka_penawaran" style="width: 300px;"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Akses Dokumen</a>
                         </center>
                     </div>
                     <div class="col-md-2">
@@ -340,7 +329,6 @@
         </div>
     </div>
 </div>
-
 
 <div class="modal fade" id="undangan_pembuktian" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">

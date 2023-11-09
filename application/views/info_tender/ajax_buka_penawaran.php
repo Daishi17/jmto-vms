@@ -210,6 +210,8 @@
     var form_upload_dok_penawaran_2 = $('#form_upload_dok_penawaran_2')
     form_upload_dok_penawaran_2.on('submit', function(e) {
         var dok_penawaran_harga = $('[name="dok_penawaran_harga"]').val();
+        var tkdn_dokumen_penawaran_vendor = $('[name="tkdn_dokumen_penawaran_vendor"]').val();
+        var persentase_tkdn_dokumen_penawaran_vendor = $('[name="persentase_tkdn_dokumen_penawaran_vendor"]').val();
         var nilai_penawaran_vendor = $('[name="nilai_penawaran_vendor"]').val();
         var upload_dok_file_2 = $('#upload_dok_file_2');
         if (dok_penawaran_harga == '') {
@@ -225,6 +227,20 @@
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Nilai Penawaran Wajib Di Isi!',
+            })
+        } else if (tkdn_dokumen_penawaran_vendor == '') {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'TKDN/PDN/IMPORT Wajib Di Isi!',
+            })
+        } else if (persentase_tkdn_dokumen_penawaran_vendor == '') {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Nilai Persentase TKDN/PDN/IMPORT Wajib Di Isi!',
             })
         } else {
             e.preventDefault();
