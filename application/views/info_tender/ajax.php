@@ -597,13 +597,13 @@
             dataType: "JSON",
             success: function(response) {
                 var html = '';
-                if (response['row_sanggahan_akhir'].tanggal_negosiasi == null) {
+                if (response['row_sanggahan_akhir'].tanggal_negosiasi) {
                     var tanggal_negosiasi = response['row_sanggahan_akhir'].tanggal_negosiasi
                 } else {
                     var tanggal_negosiasi = '<span class="badge bg-secondary">Belum Ada Tanggal Meet Negosiasi</span>'
                 }
 
-                if (response['row_sanggahan_akhir'].link_negosiasi == null) {
+                if (response['row_sanggahan_akhir'].link_negosiasi) {
                     var link_negosiasi = response['row_sanggahan_akhir'].link_negosiasi
                 } else {
                     var link_negosiasi = '<span class="badge bg-secondary">Belum Ada Link Meet Negosiasi</span>'
