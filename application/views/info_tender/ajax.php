@@ -263,6 +263,7 @@
         var id_vendor = $('[name="id_vendor"]').val()
         var url_get_sanggahan_pra = $('[name="url_get_sanggahan_pra"]').val()
         var url_open_sanggahan_pra = $('[name="url_open_sanggahan_pra"]').val()
+        var url_open_sanggahan_pra_panitia = $('[name="url_open_sanggahan_pra_panitia"]').val()
         $.ajax({
             type: "POST",
             url: url_get_sanggahan_pra,
@@ -292,7 +293,7 @@
                 }
 
                 if (response['row_sanggahan_pra'].file_sanggah_pra_panitia) {
-                    var file_sanggah_pra_panitia = '<a target="_blank" href="' + url_open_sanggahan_pra + response['row_sanggahan_pra'].file_sanggah_pra_panitia + '"><img src="<?= base_url('assets/img/pdf.png') ?>" alt="File Sanggah" width="30px"></a>'
+                    var file_sanggah_pra_panitia = '<a target="_blank" href="' + url_open_sanggahan_pra_panitia + 'SANGGAHAN_PRAKUALIFIKASI/' + response['row_sanggahan_pra'].file_sanggah_pra_panitia + '"><img src="<?= base_url('assets/img/pdf.png') ?>" alt="File Sanggah" width="30px"></a>'
                 } else {
                     var file_sanggah_pra_panitia = '<span class="badge bg-secondary">Tidak Ada File</span>'
                 }
@@ -411,6 +412,7 @@
         var id_vendor = $('[name="id_vendor"]').val()
         var url_get_sanggahan_akhir = $('[name="url_get_sanggahan_akhir"]').val()
         var url_open_sanggahan_akhir = $('[name="url_open_sanggahan_akhir"]').val()
+        var url_open_sanggahan_akhir_panitia = $('[name="url_open_sanggahan_akhir_panitia"]').val()
         $.ajax({
             type: "POST",
             url: url_get_sanggahan_akhir,
@@ -440,7 +442,7 @@
                 }
 
                 if (response['row_sanggahan_akhir'].file_sanggah_akhir_panitia) {
-                    var file_sanggah_akhir_panitia = '<a target="_blank" href="' + url_open_sanggahan_akhir + response['row_sanggahan_akhir'].file_sanggah_akhir_panitia + '"><img src="<?= base_url('assets/img/pdf.png') ?>" alt="File Sanggah" width="30px"></a>'
+                    var file_sanggah_akhir_panitia = '<a target="_blank" href="' + url_open_sanggahan_akhir_panitia + 'SANGGAHAN_AKHIR/' + response['row_sanggahan_akhir'].file_sanggah_akhir_panitia + '"><img src="<?= base_url('assets/img/pdf.png') ?>" alt="File Sanggah" width="30px"></a>'
                 } else {
                     var file_sanggah_akhir_panitia = '<span class="badge bg-secondary">Tidak Ada File</span>'
                 }

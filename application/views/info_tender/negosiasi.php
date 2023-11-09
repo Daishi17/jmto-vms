@@ -37,19 +37,21 @@
                     <div class="card-body">
                         <table class="table table-bordered">
                             <tr>
-                                <th>Nama Paket</th>
-                                <td>PAKET KEMERDEKAAN 78 RI BOGOR</td>
+                                <th style="width: 400px;">Nama Paket</th>
+                                <td><?= $rup['nama_rup'] ?></td>
+                            </tr>
+                            <tr>
+                                <th>Kode Tender</th>
+                                <td><?= $rup['kode_rup'] ?></td>
                             </tr>
                             <tr>
                                 <th>Nama Jenis Pengadaan</th>
-                                <td>JASA KONSTRUKSI</td>
-
+                                <td>Pengadaan <?= $rup['nama_jenis_pengadaan'] ?></td>
                             </tr>
                             <tr>
                                 <th>Nama Metode Pemilihan </th>
-                                <td>Prakualifikasi 2 file</td>
+                                <td><?= $rup['nama_metode_pengadaan'] ?> <?= $rup['metode_kualifikasi'] ?> (<?= $rup['metode_dokumen'] ?>)</td>
                             </tr>
-
                         </table>
                     </div>
                 </div>
