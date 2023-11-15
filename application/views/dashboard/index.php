@@ -59,10 +59,16 @@
                                                 <small>Status Dokumen</small>
                                             </th>
                                             <?php
-                                            if ($count_validate == 18) { ?>
-                                                <td class="text-end">
-                                                    <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#rincian_dokumen"><small><span class="badge bg-success">Sudah Valid</span></small></a>
-                                                </td>
+                                            if ($count_validate == 16) { ?>
+                                                <?php if ($count_tdk_validate > 0) { ?>
+                                                    <td class="text-end">
+                                                        <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#rincian_dokumen"><small><span class="badge bg-danger">Belum Lengkap</span></small></a>
+                                                    </td>
+                                                <?php } else { ?>
+                                                    <td class="text-end">
+                                                        <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#rincian_dokumen"><small><span class="badge bg-success">Sudah Valid</span></small></a>
+                                                    </td>
+                                                <?php  } ?>
 
                                             <?php } else { ?>
                                                 <td class="text-end">
@@ -207,19 +213,35 @@
                                     <div class="col-lg-3 col-6">
                                         <div class="card shadow-lg" style="width: 18rem;">
 
-                                            <?php if ($count_validate == 18) { ?>
-                                                <div class="card-body bg-success">
-                                                    <div class="text-start">
-                                                        <i class="fa-solid fa-envelope fa-beat fa-2xl"></i>
+                                            <?php if ($count_validate >= 16) { ?>
+                                                <?php if ($count_tdk_validate > 0) { ?>
+                                                    <div class="card-body bg-danger">
+                                                        <div class="text-start">
+                                                            <i class="fa-solid fa-envelope fa-beat fa-2xl"></i>
+                                                        </div>
+                                                        <div class="text-end">
+                                                            <h5>
+                                                                <input type="hidden" name="count_validate" value="<?= base_url('dashboard/count_validate') ?>">
+                                                                <small class="text-white"><b id="count_validate"><?= $count_validate - $count_tdk_validate ?>/16</b></small>
+                                                            </h5>
+                                                            <small class="text-white"><b>Dokumen Yang Tervalidasi</b></small>
+                                                        </div>
                                                     </div>
-                                                    <div class="text-end">
-                                                        <h5>
-                                                            <input type="hidden" name="count_validate" value="<?= base_url('dashboard/count_validate') ?>">
-                                                            <small class="text-white"><b id="count_validate"><?= $count_validate ?>/18</b></small>
-                                                        </h5>
-                                                        <small class="text-white"><b>Dokumen Yang Tervalidasi</b></small>
+                                                <?php } else { ?>
+                                                    <div class="card-body bg-success">
+                                                        <div class="text-start">
+                                                            <i class="fa-solid fa-envelope fa-beat fa-2xl"></i>
+                                                        </div>
+                                                        <div class="text-end">
+                                                            <h5>
+                                                                <input type="hidden" name="count_validate" value="<?= base_url('dashboard/count_validate') ?>">
+                                                                <small class="text-white"><b id="count_validate"><?= $count_validate ?>/16</b></small>
+                                                            </h5>
+                                                            <small class="text-white"><b>Dokumen Yang Tervalidasi</b></small>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                <?php } ?>
+
                                             <?php } else { ?>
                                                 <div class="card-body bg-danger">
                                                     <div class="text-start">
@@ -228,7 +250,7 @@
                                                     <div class="text-end">
                                                         <h5>
                                                             <input type="hidden" name="count_validate" value="<?= base_url('dashboard/count_validate') ?>">
-                                                            <small class="text-white"><b id="count_validate"><?= $count_validate ?>/18</b></small>
+                                                            <small class="text-white"><b id="count_validate"><?= $count_validate ?>/16</b></small>
                                                         </h5>
                                                         <small class="text-white"><b>Dokumen Yang Tervalidasi</b></small>
                                                     </div>

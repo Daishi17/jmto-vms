@@ -232,7 +232,7 @@ class M_Dashboard extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_siup');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -243,7 +243,7 @@ class M_Dashboard extends CI_Model
     {
         $this->db->select('sts_kbli_siup');
         $this->db->from('tbl_vendor_kbli_siup');
-        $this->db->where('sts_kbli_siup', 2);
+        $this->db->where_in('sts_kbli_siup', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -254,7 +254,7 @@ class M_Dashboard extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_nib');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -265,7 +265,7 @@ class M_Dashboard extends CI_Model
     {
         $this->db->select('sts_kbli_nib');
         $this->db->from('tbl_vendor_kbli_nib');
-        $this->db->where('sts_kbli_nib', 2);
+        $this->db->where_in('sts_kbli_nib', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -276,7 +276,7 @@ class M_Dashboard extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_sbu');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -287,7 +287,7 @@ class M_Dashboard extends CI_Model
     {
         $this->db->select('sts_kbli_sbu');
         $this->db->from('tbl_vendor_kbli_sbu');
-        $this->db->where('sts_kbli_sbu', 2);
+        $this->db->where_in('sts_kbli_sbu', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -299,7 +299,7 @@ class M_Dashboard extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_siujk');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -310,7 +310,7 @@ class M_Dashboard extends CI_Model
     {
         $this->db->select('sts_kbli_siujk');
         $this->db->from('tbl_vendor_kbli_siujk');
-        $this->db->where('sts_kbli_siujk', 2);
+        $this->db->where_in('sts_kbli_siujk', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -321,7 +321,7 @@ class M_Dashboard extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_akta_pendirian');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -332,7 +332,7 @@ class M_Dashboard extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_akta_perubahan');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -343,7 +343,7 @@ class M_Dashboard extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_pemilik');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -354,7 +354,7 @@ class M_Dashboard extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_pengurus');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -365,7 +365,7 @@ class M_Dashboard extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_pengalaman');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -377,7 +377,7 @@ class M_Dashboard extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_sppkp');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -388,7 +388,7 @@ class M_Dashboard extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_npwp');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -399,7 +399,7 @@ class M_Dashboard extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_spt');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -410,7 +410,7 @@ class M_Dashboard extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_neraca_keuangan');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -421,7 +421,7 @@ class M_Dashboard extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_keuangan');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
