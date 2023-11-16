@@ -58,7 +58,7 @@ class M_tender extends CI_Model
                     $this->db->where('tbl_izin_rup.sts_masa_berlaku_nib', 2);
                     $this->db->where('tbl_izin_rup.tgl_berlaku_nib <=', date('Y-m-d', strtotime('+50 year', strtotime($now))));
                 } else {
-                    $this->db->where('tbl_izin_rup.tgl_berlaku_nib >=', $nib_vendor['tgl_berlaku']);
+                    $this->db->where('tbl_izin_rup.tgl_berlaku_nib <=', $nib_vendor['tgl_berlaku']);
                 }
             }
         }
@@ -70,7 +70,7 @@ class M_tender extends CI_Model
                     $this->db->where('tbl_izin_rup.sts_masa_berlaku_siup', 2);
                     $this->db->where('tbl_izin_rup.tgl_berlaku_nib <=', date('Y-m-d', strtotime('+50 year', strtotime($now))));
                 } else {
-                    $this->db->where('tbl_izin_rup.tgl_berlaku_siup >=', $siup_vendor['tgl_berlaku']);
+                    $this->db->where('tbl_izin_rup.tgl_berlaku_siup <=', $siup_vendor['tgl_berlaku']);
                 }
             }
         }
@@ -82,7 +82,7 @@ class M_tender extends CI_Model
                     $this->db->where('tbl_izin_rup.sts_masa_berlaku_siujk', 2);
                     $this->db->where('tbl_izin_rup.tgl_berlaku_nib <=', date('Y-m-d', strtotime('+50 year', strtotime($now))));
                 } else {
-                    $this->db->where('tbl_izin_rup.tgl_berlaku_siujk >=', $siujk_vendor['tgl_berlaku']);
+                    $this->db->where('tbl_izin_rup.tgl_berlaku_siujk <=', $siujk_vendor['tgl_berlaku']);
                 }
             }
         }
@@ -94,7 +94,7 @@ class M_tender extends CI_Model
                     $this->db->where('tbl_izin_rup.sts_masa_berlaku_skdp', 2);
                     $this->db->where('tbl_izin_rup.tgl_berlaku_nib <=', date('Y-m-d', strtotime('+50 year', strtotime($now))));
                 } else {
-                    $this->db->where('tbl_izin_rup.tgl_berlaku_skdp >=', $skdp_vendor['tgl_berlaku']);
+                    $this->db->where('tbl_izin_rup.tgl_berlaku_skdp <=', $skdp_vendor['tgl_berlaku']);
                 }
             }
         }
