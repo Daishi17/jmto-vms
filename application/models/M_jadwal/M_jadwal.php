@@ -24,8 +24,17 @@ class M_jadwal extends CI_Model
         return $query->row_array();
     }
 
-
     public function jadwal_pra_umum_3($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Aanwijzing (Tanya Jawab Dokumen PQ)');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_pra_umum_4($id_rup)
     {
         $this->db->select('*');
         $this->db->from('tbl_jadwal_rup');
@@ -35,7 +44,7 @@ class M_jadwal extends CI_Model
         return $query->row_array();
     }
 
-    public function jadwal_pra_umum_4($id_rup)
+    public function jadwal_pra_umum_5($id_rup)
     {
         $this->db->select('*');
         $this->db->from('tbl_jadwal_rup');
@@ -46,7 +55,7 @@ class M_jadwal extends CI_Model
     }
 
 
-    public function jadwal_pra_umum_5($id_rup)
+    public function jadwal_pra_umum_6($id_rup)
     {
         $this->db->select('*');
         $this->db->from('tbl_jadwal_rup');
@@ -56,7 +65,7 @@ class M_jadwal extends CI_Model
         return $query->row_array();
     }
 
-    public function jadwal_pra_umum_6($id_rup)
+    public function jadwal_pra_umum_7($id_rup)
     {
         $this->db->select('*');
         $this->db->from('tbl_jadwal_rup');
@@ -66,7 +75,7 @@ class M_jadwal extends CI_Model
         return $query->row_array();
     }
 
-    public function jadwal_pra_umum_7($id_rup)
+    public function jadwal_pra_umum_8($id_rup)
     {
         $this->db->select('*');
         $this->db->from('tbl_jadwal_rup');
@@ -76,7 +85,7 @@ class M_jadwal extends CI_Model
         return $query->row_array();
     }
 
-    public function jadwal_pra_umum_8($id_rup)
+    public function jadwal_pra_umum_9($id_rup)
     {
         $this->db->select('*');
         $this->db->from('tbl_jadwal_rup');
@@ -86,7 +95,7 @@ class M_jadwal extends CI_Model
         return $query->row_array();
     }
 
-    public function jadwal_pra_umum_9($id_rup)
+    public function jadwal_pra_umum_10($id_rup)
     {
         $this->db->select('*');
         $this->db->from('tbl_jadwal_rup');
@@ -96,22 +105,12 @@ class M_jadwal extends CI_Model
         return $query->row_array();
     }
 
-    public function jadwal_pra_umum_10($id_rup)
-    {
-        $this->db->select('*');
-        $this->db->from('tbl_jadwal_rup');
-        $this->db->where('id_rup', $id_rup);
-        $this->db->where('nama_jadwal_rup', 'Aanwijzing (Tanya Jawab)');
-        $query = $this->db->get();
-        return $query->row_array();
-    }
-
     public function jadwal_pra_umum_11($id_rup)
     {
         $this->db->select('*');
         $this->db->from('tbl_jadwal_rup');
         $this->db->where('id_rup', $id_rup);
-        $this->db->where('nama_jadwal_rup', 'Upload Dokumen Penawaran');
+        $this->db->where('nama_jadwal_rup', 'Aanwijzing (Tanya Jawab Dokumen Pengadaan)');
         $query = $this->db->get();
         return $query->row_array();
     }
@@ -121,7 +120,7 @@ class M_jadwal extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_jadwal_rup');
         $this->db->where('id_rup', $id_rup);
-        $this->db->where('nama_jadwal_rup', 'Pembukaan dan Evaluasi Penawaran File I : Administrasi dan Teknis');
+        $this->db->where('nama_jadwal_rup', 'Upload Dokumen Penawaran');
         $query = $this->db->get();
         return $query->row_array();
     }
@@ -131,7 +130,7 @@ class M_jadwal extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_jadwal_rup');
         $this->db->where('id_rup', $id_rup);
-        $this->db->where('nama_jadwal_rup', 'Presentasi Dan Evaluasi Dokumen Teknis');
+        $this->db->where('nama_jadwal_rup', 'Pembukaan dan Evaluasi Penawaran File I : Administrasi dan Teknis');
         $query = $this->db->get();
         return $query->row_array();
     }
@@ -141,7 +140,7 @@ class M_jadwal extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_jadwal_rup');
         $this->db->where('id_rup', $id_rup);
-        $this->db->where('nama_jadwal_rup', 'Pemberitahuan/Pengumuman Peringkat Teknis');
+        $this->db->where('nama_jadwal_rup', 'Presentasi Dan Evaluasi Dokumen Teknis');
         $query = $this->db->get();
         return $query->row_array();
     }
@@ -151,7 +150,7 @@ class M_jadwal extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_jadwal_rup');
         $this->db->where('id_rup', $id_rup);
-        $this->db->where('nama_jadwal_rup', 'Pembukaan dan Evaluasi Penawaran File II : Harga');
+        $this->db->where('nama_jadwal_rup', 'Pemberitahuan/Pengumuman Peringkat Teknis');
         $query = $this->db->get();
         return $query->row_array();
     }
@@ -161,7 +160,7 @@ class M_jadwal extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_jadwal_rup');
         $this->db->where('id_rup', $id_rup);
-        $this->db->where('nama_jadwal_rup', 'Upload Berita Acara Hasil Pengadaan');
+        $this->db->where('nama_jadwal_rup', 'Pembukaan dan Evaluasi Penawaran File II : Harga');
         $query = $this->db->get();
         return $query->row_array();
     }
@@ -171,7 +170,7 @@ class M_jadwal extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_jadwal_rup');
         $this->db->where('id_rup', $id_rup);
-        $this->db->where('nama_jadwal_rup', 'Penetapan Pemenang');
+        $this->db->where('nama_jadwal_rup', 'Upload Berita Acara Hasil Pengadaan');
         $query = $this->db->get();
         return $query->row_array();
     }
@@ -181,7 +180,7 @@ class M_jadwal extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_jadwal_rup');
         $this->db->where('id_rup', $id_rup);
-        $this->db->where('nama_jadwal_rup', 'Pengumuman Pemenang');
+        $this->db->where('nama_jadwal_rup', 'Penetapan Pemenang');
         $query = $this->db->get();
         return $query->row_array();
     }
@@ -191,7 +190,7 @@ class M_jadwal extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_jadwal_rup');
         $this->db->where('id_rup', $id_rup);
-        $this->db->where('nama_jadwal_rup', 'Masa Sanggah Hasil Pengadaan');
+        $this->db->where('nama_jadwal_rup', 'Pengumuman Pemenang');
         $query = $this->db->get();
         return $query->row_array();
     }
@@ -201,12 +200,22 @@ class M_jadwal extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_jadwal_rup');
         $this->db->where('id_rup', $id_rup);
-        $this->db->where('nama_jadwal_rup', 'Surat Penunjukkan Penyedia Barang/Jasa');
+        $this->db->where('nama_jadwal_rup', 'Masa Sanggah Hasil Pengadaan');
         $query = $this->db->get();
         return $query->row_array();
     }
 
     public function jadwal_pra_umum_21($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Surat Penunjukkan Penyedia Barang/Jasa');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_pra_umum_22($id_rup)
     {
         $this->db->select('*');
         $this->db->from('tbl_jadwal_rup');

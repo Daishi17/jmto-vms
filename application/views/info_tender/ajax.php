@@ -87,9 +87,9 @@
                         }
                     }
                     <?php if (date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
-                        <?php $date2 = $jadwal_upload_dokumen_prakualifikasi['waktu_selesai'];
-                        if (date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_mulai'])) >= date('Y-m-d H:i')) { ?>
-                        <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_mulai']))  == date('Y-m-d H:i')) { ?>
+                        <?php $date2 = $jadwal_upload_dokumen_prakualifikasi['waktu_selesai']; ?>
+                    <?php if (date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_mulai'])) >= date('Y-m-d H:i')) { ?>
+                        <?php  } else if (date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_mulai']))  == date('Y-m-d H:i')) { ?>
                             html += '<tr>' +
                                 '<td><small>' + no++ + '</small></td>' +
                                 '<td><small>' + response['syarat_tambahan'][i].nama_syarat_tambahan + '</small></td>' +
@@ -98,7 +98,7 @@
                                 '<td><small>' + status_dicek + '</small></td>' +
                                 '<td><a href="javascript:;"  onclick="delete_syarat_tambahan(\'' + response['syarat_tambahan'][i].id_vendor_syarat_tambahan + '\'' + ',' + '\'' + response['syarat_tambahan'][i].nama_syarat_tambahan + '\')" class="btn btn-sm btn-danger"><i class="fas fa fa-trash"></i> Hapus </a></td>' +
                                 '</tr>';
-                        <?php    } else { ?>
+                        <?php } else { ?>
                             html += '<tr>' +
                                 '<td><small>' + no++ + '</small></td>' +
                                 '<td><small>' + response['syarat_tambahan'][i].nama_syarat_tambahan + '</small></td>' +
@@ -107,12 +107,10 @@
                                 '<td><small>' + status_dicek + '</small></td>' +
                                 '<td><a href="javascript:;" class="btn btn-sm btn-danger"><i class="fas fa fa-secondary"></i> Waktu Telah Berakhir </a></td>' +
                                 '</tr>';
-                        <?php    } ?>
+                        <?php  } ?>
                     <?php } else { ?>
-                        <?php
-                        if (date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
-
-                        <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                        <?php if (date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
+                        <?php  } else if (date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
                             html += '<tr>' +
                                 '<td><small>' + no++ + '</small></td>' +
                                 '<td><small>' + response['syarat_tambahan'][i].nama_syarat_tambahan + '</small></td>' +
@@ -121,7 +119,7 @@
                                 '<td><small>' + status_dicek + '</small></td>' +
                                 '<td><a href="javascript:;"  onclick="delete_syarat_tambahan(\'' + response['syarat_tambahan'][i].id_vendor_syarat_tambahan + '\'' + ',' + '\'' + response['syarat_tambahan'][i].nama_syarat_tambahan + '\')" class="btn btn-sm btn-danger"><i class="fas fa fa-trash"></i> Hapus </a></td>' +
                                 '</tr>';
-                        <?php    } else { ?> 
+                        <?php  } else { ?> 
                                 html += '<tr>' +
                                 '<td><small>' + no++ + '</small></td>' +
                                 '<td><small>' + response['syarat_tambahan'][i].nama_syarat_tambahan + '</small></td>' +
@@ -130,7 +128,7 @@
                                 '<td><small>' + status_dicek + '</small></td>' +
                                 '<td><a href="javascript:;" class="btn btn-sm btn-danger"><i class="fas fa fa-secondary"></i> Waktu Telah Berakhir </a></td>' +
                                 '</tr>';
-                        <?php    } ?>
+                        <?php  } ?>
                     <?php } ?>
                 }
                 $('#load_syarat_tambahan_vendor').html(html);
@@ -538,7 +536,7 @@
 
 <script>
     function buka_penawaran(id_url_rup) {
-        var token_syalala = $('[name="token_syalala"]').val()
+        var token_syalala = $('[name="token_"]').val()
         var url_buka_penawaran = $('[name="url_buka_penawaran"]').val()
         var url_buka_penawaran_token = $('[name="url_buka_penawaran_token"]').val()
         if (token_syalala == '') {
@@ -656,5 +654,40 @@
                 $('#tbl_negosiasi').html(html);
             }
         })
+    }
+
+    function kirim_token_ke_wa(id_url_rup) {
+        var url_dapatkan_token_penawaran = $('[name="url_dapatkan_token_penawaran"]').val()
+        $.ajax({
+            type: "POST",
+            url: url_dapatkan_token_penawaran,
+            dataType: "JSON",
+            data: {
+                id_url_rup: id_url_rup
+            },
+            beforeSend: function() {
+                $('.btn_dapatkan_token').attr("disabled", true);
+            },
+            success: function(response) {
+                if (response == 'success') {
+                    Swal.fire('Token Berhasil Dikirim Ke Whatsapp Anda!', '', 'success')
+                    $('.btn_dapatkan_token').attr("disabled", false);
+                } else {
+                    Swal.fire('Token Gagal Dikirim Ke Whatsapp Anda!', '', 'warning')
+                    $('.btn_dapatkan_token').attr("disabled", false);
+                }
+            }
+        })
+    }
+
+    function Cek_token() {
+        var token_ = $('[name="token_"]').val()
+        if (token_ == '') {
+            $('.btn_buka_penawaran').css('display', 'none');
+            $('.btn_dapatkan_token').css('display', 'block');
+        } else {
+            $('.btn_buka_penawaran').css('display', 'block');
+            $('.btn_dapatkan_token').css('display', 'none');
+        }
     }
 </script>

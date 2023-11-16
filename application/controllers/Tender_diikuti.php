@@ -130,28 +130,30 @@ class Tender_diikuti extends CI_Controller
         $data['url_dok_ba_tender'] = 'http://localhost/jmto-eproc/file_paket/' . $nama_rup . '/' . 'BERITA_ACARA_PENGADAAN/';
         $data['url_dok_penunjukan_pemenang'] = 'http://localhost/jmto-eproc/file_paket/' . $nama_rup . '/' . 'SURAT_PENUNJUKAN_PEMENANG/';
 
-        // start tahap
+
+        // get tahap
         $data['jadwal_pengumuman_pengadaan'] =  $this->M_jadwal->jadwal_pra_umum_1($data['rup']['id_rup']);
         $data['jadwal_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_2($data['rup']['id_rup']);
-        $data['jadwal_upload_dokumen_prakualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_3($data['rup']['id_rup']);
-        $data['jadwal_pembuktian_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_4($data['rup']['id_rup']);
-        $data['jadwal_evaluasi_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_5($data['rup']['id_rup']);
-        $data['jadwal_penetapan_hasil_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_6($data['rup']['id_rup']);
-        $data['jadwal_pengumuman_hasil_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_7($data['rup']['id_rup']);
-        $data['jadwal_masa_sanggah_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_8($data['rup']['id_rup']);
-        $data['jadwal_download_dokumen_pengadaan'] =  $this->M_jadwal->jadwal_pra_umum_9($data['rup']['id_rup']);
-        $data['jadwal_aanwijzing'] =  $this->M_jadwal->jadwal_pra_umum_10($data['rup']['id_rup']);
-        $data['jadwal_upload_dokumen_penawaran'] =  $this->M_jadwal->jadwal_pra_umum_11($data['rup']['id_rup']);
-        $data['jadwal_pembukaan_file1'] =  $this->M_jadwal->jadwal_pra_umum_12($data['rup']['id_rup']);
-        $data['jadwal_presentasi_evaluasi'] =  $this->M_jadwal->jadwal_pra_umum_13($data['rup']['id_rup']);
-        $data['jadwal_pengumuman_peringkat'] =  $this->M_jadwal->jadwal_pra_umum_14($data['rup']['id_rup']);
-        $data['jadwal_pembukaan_file2'] =  $this->M_jadwal->jadwal_pra_umum_15($data['rup']['id_rup']);
-        $data['jadwal_upload_ba'] =  $this->M_jadwal->jadwal_pra_umum_16($data['rup']['id_rup']);
-        $data['jadwal_penetapan_pemenang'] =  $this->M_jadwal->jadwal_pra_umum_17($data['rup']['id_rup']);
-        $data['jadwal_pengumuman_pemenang'] =  $this->M_jadwal->jadwal_pra_umum_18($data['rup']['id_rup']);
-        $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_pra_umum_19($data['rup']['id_rup']);
-        $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra_umum_20($data['rup']['id_rup']);
-        // end tahap
+        $data['jadwal_aanwijzing_pq'] =  $this->M_jadwal->jadwal_pra_umum_3($data['rup']['id_rup']);
+        $data['jadwal_upload_dokumen_prakualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_4($data['rup']['id_rup']);
+        $data['jadwal_pembuktian_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_5($data['rup']['id_rup']);
+        $data['jadwal_evaluasi_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_6($data['rup']['id_rup']);
+        $data['jadwal_penetapan_hasil_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_7($data['rup']['id_rup']);
+        $data['jadwal_pengumuman_hasil_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_8($data['rup']['id_rup']);
+        $data['jadwal_masa_sanggah_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_9($data['rup']['id_rup']);
+        $data['jadwal_download_dokumen_pengadaan'] =  $this->M_jadwal->jadwal_pra_umum_10($data['rup']['id_rup']);
+        $data['jadwal_aanwijzing'] =  $this->M_jadwal->jadwal_pra_umum_11($data['rup']['id_rup']);
+        $data['jadwal_upload_dokumen_penawaran'] =  $this->M_jadwal->jadwal_pra_umum_12($data['rup']['id_rup']);
+        $data['jadwal_pembukaan_file1'] =  $this->M_jadwal->jadwal_pra_umum_13($data['rup']['id_rup']);
+        $data['jadwal_presentasi_evaluasi'] =  $this->M_jadwal->jadwal_pra_umum_14($data['rup']['id_rup']);
+        $data['jadwal_pengumuman_peringkat'] =  $this->M_jadwal->jadwal_pra_umum_15($data['rup']['id_rup']);
+        $data['jadwal_pembukaan_file2'] =  $this->M_jadwal->jadwal_pra_umum_16($data['rup']['id_rup']);
+        $data['jadwal_upload_ba'] =  $this->M_jadwal->jadwal_pra_umum_17($data['rup']['id_rup']);
+        $data['jadwal_penetapan_pemenang'] =  $this->M_jadwal->jadwal_pra_umum_18($data['rup']['id_rup']);
+        $data['jadwal_pengumuman_pemenang'] =  $this->M_jadwal->jadwal_pra_umum_19($data['rup']['id_rup']);
+        $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_pra_umum_20($data['rup']['id_rup']);
+        $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra_umum_21($data['rup']['id_rup']);
+        // end get tahap
         $this->load->view('template_menu/header_menu', $data);
         $this->load->view('info_tender/informasi_tender_umum', $data);
         $this->load->view('template_menu/new_footer');
@@ -262,7 +264,7 @@ class Tender_diikuti extends CI_Controller
         $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_pra_umum_19($data['rup']['id_rup']);
         $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra_umum_20($data['rup']['id_rup']);
 
-        $data['jadwal_aanwizing'] =  $this->M_jadwal->jadwal_pra_umum_10($data['rup']['id_rup']);
+        $data['jadwal_aanwizing'] =  $this->M_jadwal->jadwal_pra_umum_3($data['rup']['id_rup']);
         $data['data2'] = $this->M_tender->getDataById($data['rup']['id_rup']);
         $this->load->view('template_menu/header_menu', $data);
         $this->load->view('info_tender/aanwijzing');
@@ -590,24 +592,25 @@ class Tender_diikuti extends CI_Controller
         // start tahap
         $data['jadwal_pengumuman_pengadaan'] =  $this->M_jadwal->jadwal_pra_umum_1($data['rup']['id_rup']);
         $data['jadwal_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_2($data['rup']['id_rup']);
-        $data['jadwal_upload_dokumen_prakualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_3($data['rup']['id_rup']);
-        $data['jadwal_pembuktian_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_4($data['rup']['id_rup']);
-        $data['jadwal_evaluasi_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_5($data['rup']['id_rup']);
-        $data['jadwal_penetapan_hasil_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_6($data['rup']['id_rup']);
-        $data['jadwal_pengumuman_hasil_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_7($data['rup']['id_rup']);
-        $data['jadwal_masa_sanggah_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_8($data['rup']['id_rup']);
-        $data['jadwal_download_dokumen_pengadaan'] =  $this->M_jadwal->jadwal_pra_umum_9($data['rup']['id_rup']);
-        $data['jadwal_aanwijzing'] =  $this->M_jadwal->jadwal_pra_umum_10($data['rup']['id_rup']);
-        $data['jadwal_upload_dokumen_penawaran'] =  $this->M_jadwal->jadwal_pra_umum_11($data['rup']['id_rup']);
-        $data['jadwal_pembukaan_file1'] =  $this->M_jadwal->jadwal_pra_umum_12($data['rup']['id_rup']);
-        $data['jadwal_presentasi_evaluasi'] =  $this->M_jadwal->jadwal_pra_umum_13($data['rup']['id_rup']);
-        $data['jadwal_pengumuman_peringkat'] =  $this->M_jadwal->jadwal_pra_umum_14($data['rup']['id_rup']);
-        $data['jadwal_pembukaan_file2'] =  $this->M_jadwal->jadwal_pra_umum_15($data['rup']['id_rup']);
-        $data['jadwal_upload_ba'] =  $this->M_jadwal->jadwal_pra_umum_16($data['rup']['id_rup']);
-        $data['jadwal_penetapan_pemenang'] =  $this->M_jadwal->jadwal_pra_umum_17($data['rup']['id_rup']);
-        $data['jadwal_pengumuman_pemenang'] =  $this->M_jadwal->jadwal_pra_umum_18($data['rup']['id_rup']);
-        $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_pra_umum_19($data['rup']['id_rup']);
-        $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra_umum_20($data['rup']['id_rup']);
+        $data['jadwal_aanwijzing_pq'] =  $this->M_jadwal->jadwal_pra_umum_3($data['rup']['id_rup']);
+        $data['jadwal_upload_dokumen_prakualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_4($data['rup']['id_rup']);
+        $data['jadwal_pembuktian_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_5($data['rup']['id_rup']);
+        $data['jadwal_evaluasi_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_6($data['rup']['id_rup']);
+        $data['jadwal_penetapan_hasil_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_7($data['rup']['id_rup']);
+        $data['jadwal_pengumuman_hasil_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_8($data['rup']['id_rup']);
+        $data['jadwal_masa_sanggah_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_9($data['rup']['id_rup']);
+        $data['jadwal_download_dokumen_pengadaan'] =  $this->M_jadwal->jadwal_pra_umum_10($data['rup']['id_rup']);
+        $data['jadwal_aanwijzing'] =  $this->M_jadwal->jadwal_pra_umum_11($data['rup']['id_rup']);
+        $data['jadwal_upload_dokumen_penawaran'] =  $this->M_jadwal->jadwal_pra_umum_12($data['rup']['id_rup']);
+        $data['jadwal_pembukaan_file1'] =  $this->M_jadwal->jadwal_pra_umum_13($data['rup']['id_rup']);
+        $data['jadwal_presentasi_evaluasi'] =  $this->M_jadwal->jadwal_pra_umum_14($data['rup']['id_rup']);
+        $data['jadwal_pengumuman_peringkat'] =  $this->M_jadwal->jadwal_pra_umum_15($data['rup']['id_rup']);
+        $data['jadwal_pembukaan_file2'] =  $this->M_jadwal->jadwal_pra_umum_16($data['rup']['id_rup']);
+        $data['jadwal_upload_ba'] =  $this->M_jadwal->jadwal_pra_umum_17($data['rup']['id_rup']);
+        $data['jadwal_penetapan_pemenang'] =  $this->M_jadwal->jadwal_pra_umum_18($data['rup']['id_rup']);
+        $data['jadwal_pengumuman_pemenang'] =  $this->M_jadwal->jadwal_pra_umum_19($data['rup']['id_rup']);
+        $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_pra_umum_20($data['rup']['id_rup']);
+        $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra_umum_21($data['rup']['id_rup']);
 
         $data['jadwal_aanwizing'] =  $this->M_jadwal->jadwal_pra_umum_10($data['rup']['id_rup']);
         $data['data2'] = $this->M_tender->getDataById($data['rup']['id_rup']);
@@ -624,12 +627,22 @@ class Tender_diikuti extends CI_Controller
         // query tendering
         $data['count_tender_umum'] =  $this->M_tender->count_all_data();
         $data['rup'] = $this->M_tender->get_row_rup($id_url_rup);
+        $data['jadwal_upload_dokumen_penawaran'] =  $this->M_jadwal->jadwal_pra_umum_12($data['rup']['id_rup']);
         $data['jadwal_aanwizing'] = $this->M_tender->jadwal_aanwizing($data['rup']['id_rup']);
         $data['data2'] = $this->M_tender->getDataById($data['rup']['id_rup']);
         $this->load->view('template_menu/header_menu', $data);
-        $this->load->view('info_tender/buka_penawaran');
+        $this->load->view('info_tender/buka_penawaran', $data);
         $this->load->view('template_menu/new_footer');
         $this->load->view('info_tender/ajax_buka_penawaran', $data);
+    }
+
+    function kirim_token_penawaran()
+    {
+        $id_url_rup = $this->input->post('id_url_rup');
+        $row_rup = $this->M_tender->get_row_rup($id_url_rup);
+        $message = 'Token : ' . $row_rup['token_vendor'] . ' , Dengan Nama Pengadaan : ' . $row_rup['nama_rup'] . '';
+        $this->kirim_wa->kirim_wa_vendor_terdaftar($this->session->userdata('no_telpon'), $message);
+        $this->output->set_content_type('application/json')->set_output(json_encode('success'));
     }
 
     function acces_penawaran()
@@ -779,10 +792,13 @@ class Tender_diikuti extends CI_Controller
         foreach ($resultss as $rs) {
             $row = array();
             $row[] = ++$no;
-            $row[] = "Rp " . number_format($rs->nilai_penawaran_vendor, 2, ',', '.');
-            $row[] = $rs->tkdn_dokumen_penawaran_vendor;
-            $row[] = $rs->persentase_tkdn_dokumen_penawaran_vendor;
-            $row[] = '<a target="_blank" href="' . base_url('tender_diikuti/download_dokumen_penawaran_vendor/') . $rs->id_vendor_mengikuti_paket . '" class="btn btn-info btn-sm shadow-lg text-white" <i class="fa fa-download" aria-hidden="true"></i> Download File</a>';
+            if ($rs->dok_penawaran_harga) {
+                $row[] = '<a target="_blank" href="' . base_url('tender_diikuti/download_dokumen_penawaran_vendor/') . $rs->id_vendor_mengikuti_paket . '" class="btn btn-info btn-sm shadow-lg text-white" <i class="fa fa-download" aria-hidden="true"></i> Download File</a>';
+            } else {
+                $row[] = '<span class="badge bg-danger">Belum Upload</span>';
+            }
+
+
             $data[] = $row;
         }
         $output = array(

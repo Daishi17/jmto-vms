@@ -9,6 +9,7 @@
 <!-- buka_penawaran -->
 <input type="hidden" name="url_buka_penawaran" value="<?= base_url('tender_diikuti/acces_penawaran') ?>">
 <input type="hidden" name="url_buka_penawaran_token" value="<?= base_url('tender_diikuti/buka_penawaran/') ?>">
+<input type="hidden" name="url_dapatkan_token_penawaran" value="<?= base_url('tender_diikuti/kirim_token_penawaran') ?>">
 
 <!-- end url -->
 <main class="container">
@@ -23,10 +24,10 @@
                         <li class="nav-item">
                             <a class="nav-link active" style="margin-left: 5px;" href="#"><i class="fa fa-columns" aria-hidden="true"></i> Informasi Pengadaan</a>
                         </li>
-                        <?php if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
-                            <?php $date2 = $jadwal_aanwijzing['waktu_selesai'];
-                            if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai'])) >= date('Y-m-d H:i')) { ?>
-                            <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai']))  == date('Y-m-d H:i')) { ?>
+                        <?php if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                            <?php $date2 = $jadwal_aanwijzing_pq['waktu_selesai'];
+                            if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_mulai'])) >= date('Y-m-d H:i')) { ?>
+                            <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_mulai']))  == date('Y-m-d H:i')) { ?>
                                 <li class="nav-item">
                                     <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('tender_diikuti/aanwijzing/' . $rup['id_url_rup']) ?>"><i class="fa fa-comments" aria-hidden="true"></i> Aanwijzing</a>
                                 </li>
@@ -35,9 +36,9 @@
                             <?php    } ?>
                         <?php } else { ?>
                             <?php
-                            if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
+                            if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
 
-                            <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                            <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
                                 <li class="nav-item">
                                     <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('tender_diikuti/aanwijzing/' . $rup['id_url_rup']) ?>"><i class="fa fa-comments" aria-hidden="true"></i> Aanwijzing</a>
                                 </li>
@@ -160,7 +161,7 @@
                                 </button></th>
                         </tr>
                         <tr>
-                            <th>Dokumen Pengadaan</th>
+                            <th>Dokumen Pengadaan Dan Dokumen Prakualifikasi</th>
                             <th>
                                 <div class="row">
                                     <?php if (date('Y-m-d H:i', strtotime($jadwal_download_dokumen_pengadaan['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_download_dokumen_pengadaan['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
@@ -199,72 +200,33 @@
                                         <?php    } else { ?>
                                             <!-- waktu Telah Selesai -->
                                         <?php    } ?>
+
                                     <?php } else { ?>
-                                        <?php
-                                        if (date('Y-m-d H:i', strtotime($jadwal_download_dokumen_pengadaan['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
-
-                                        <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_download_dokumen_pengadaan['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_download_dokumen_pengadaan['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-header bg-primary text-white">
-                                                        Dokumen Pengadaan
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <table class="table table-bordered">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>No</th>
-                                                                    <th>Nama File</th>
-                                                                    <th>File</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <?php $i = 1;
-                                                                foreach ($dok_pengadaan as $key => $value) { ?>
-
-                                                                <?php } ?>
-                                                                <tr>
-                                                                    <td scope="row"><?= $i++ ?></td>
-                                                                    <td><?= $value['nama_dok_pengadaan'] ?></td>
-                                                                    <td><a target="_blank" href="<?= $url_dok_pengadaan . $value['file_dok_pengadaan'] ?>" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Lihat</a></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <div class="card-header bg-primary text-white">
+                                                    Dokumen Pengadaan
+                                                </div>
+                                                <div class="card-body">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Nama File</th>
+                                                                <th>File</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td colspan="3"><span class="badge bg-danger"> Tahap Sudah Selesai!</span></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
-                                        <?php    } else { ?>
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-header bg-primary text-white">
-                                                        Dokumen Pengadaan
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <table class="table table-bordered">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>No</th>
-                                                                    <th>Nama File</th>
-                                                                    <th>File</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <?php $i = 1;
-                                                                foreach ($dok_pengadaan as $key => $value) { ?>
-
-                                                                <?php } ?>
-                                                                <tr>
-                                                                    <td scope="row"><?= $i++ ?></td>
-                                                                    <td><?= $value['nama_dok_pengadaan'] ?></td>
-                                                                    <td><a target="_blank" href="<?= $url_dok_pengadaan . $value['file_dok_pengadaan'] ?>" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Lihat</a></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <?php    } ?>
+                                        </div>
                                     <?php } ?>
+
                                     <?php if (date('Y-m-d H:i', strtotime($jadwal_dokumen_kualifikasi['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_dokumen_kualifikasi['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
                                         <?php $date2 = $jadwal_dokumen_kualifikasi['waktu_selesai'];
                                         if (date('Y-m-d H:i', strtotime($jadwal_dokumen_kualifikasi['waktu_mulai'])) >= date('Y-m-d H:i')) { ?>
@@ -302,70 +264,29 @@
                                             <!-- waktu Telah Selesai -->
                                         <?php    } ?>
                                     <?php } else { ?>
-                                        <?php
-                                        if (date('Y-m-d H:i', strtotime($jadwal_dokumen_kualifikasi['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
-
-                                        <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_dokumen_kualifikasi['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_dokumen_kualifikasi['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-header bg-primary text-white">
-                                                        Dokumen Prakualifikasi
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <table class="table table-bordered">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>No</th>
-                                                                    <th>Nama File</th>
-                                                                    <th>File</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <?php $i = 1;
-                                                                foreach ($dok_prakualifikasi as $key => $value) { ?>
-
-                                                                <?php } ?>
-                                                                <tr>
-                                                                    <td scope="row"><?= $i++ ?></td>
-                                                                    <td><?= $value['nama_dok_prakualifikasi'] ?></td>
-                                                                    <td><a target="_blank" href="<?= $url_dok_prakualifikasi . $value['file_dok_prakualifikasi'] ?>" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Lihat</a></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <div class="card-header bg-primary text-white">
+                                                    Dokumen Prakualifikasi
+                                                </div>
+                                                <div class="card-body">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Nama File</th>
+                                                                <th>File</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td colspan="3"><span class="badge bg-danger"> Tahap Sudah Selesai!</span></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
-                                        <?php    } else { ?>
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-header bg-primary text-white">
-                                                        Dokumen Prakualifikasi
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <table class="table table-bordered">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>No</th>
-                                                                    <th>Nama File</th>
-                                                                    <th>File</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <?php $i = 1;
-                                                                foreach ($dok_prakualifikasi as $key => $value) { ?>
-
-                                                                <?php } ?>
-                                                                <tr>
-                                                                    <td scope="row"><?= $i++ ?></td>
-                                                                    <td><?= $value['nama_dok_prakualifikasi'] ?></td>
-                                                                    <td><a target="_blank" href="<?= $url_dok_prakualifikasi . $value['file_dok_prakualifikasi'] ?>" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Lihat</a></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <?php    } ?>
+                                        </div>
                                     <?php } ?>
                                 </div>
                             </th>
@@ -453,14 +374,7 @@
                                 </div>
                             </th>
                         </tr>
-                        <tr>
-                            <th>Bobot Teknis</th>
-                            <th><?= $rup['bobot_teknis'] ?></th>
-                        </tr>
-                        <tr>
-                            <th>Bobot Biaya</th>
-                            <th><?= $rup['bobot_biaya'] ?></th>
-                        </tr>
+
                         <?php if (date('Y-m-d H:i', strtotime($jadwal_pembuktian_kualifikasi['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_pembuktian_kualifikasi['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
                             <?php $date2 = $jadwal_pembuktian_kualifikasi['waktu_selesai'];
                             if (date('Y-m-d H:i', strtotime($jadwal_pembuktian_kualifikasi['waktu_mulai'])) >= date('Y-m-d H:i')) { ?>
@@ -782,10 +696,11 @@
                         <center>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"> <i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" name="token_syalala" placeholder="Masukan Token..." aria-describedby="basic-addon1">
+                                <input type="text" class="form-control" name="token_" placeholder="Masukan Token..." aria-describedby="basic-addon1" onkeyup="Cek_token()">
                             </div>
                             <br>
-                            <a target="_blank" onclick="buka_penawaran('<?= $rup['id_url_rup'] ?>')" class="btn btn-warning btn_buka_penawaran" style="width: 300px;"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Akses Dokumen</a>
+                            <a onclick="kirim_token_ke_wa('<?= $rup['id_url_rup'] ?>')" class="btn btn-warning btn_dapatkan_token" style="width: 300px;"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Kirim Token ke WhatsApp</a>
+                            <a target="_blank" onclick="buka_penawaran('<?= $rup['id_url_rup'] ?>')" style="display:none" class="btn btn-success btn_buka_penawaran"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Akses Halaman</a>
                         </center>
                     </div>
                     <div class="col-md-2">

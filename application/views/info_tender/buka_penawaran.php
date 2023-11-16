@@ -24,18 +24,55 @@
                                         <th>Nama Metode Pemilihan </th>
                                         <td><?= $rup['nama_metode_pengadaan'] ?></td>
                                     </tr>
+                                    <tr>
+                                        <th>Bobot Teknis </th>
+                                        <td><?= $rup['bobot_teknis'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Bobot Biaya </th>
+                                        <td><?= $rup['bobot_biaya'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>HPS</th>
+                                        <td>Rp. <?= number_format($rup['total_hps_rup'], 2, ',', '.'); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Persentase TKDN</th>
+                                        <td><?= $rup['persen_pencatatan'] ?> %</td>
+                                    </tr>
                                 </table>
                             </div>
                         </div>
                         <br>
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <?php if (date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_penawaran['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
+                                <div class="tab-pane fade show active" id="pills-file1" role="tabpanel" aria-labelledby="pills-home-tab">
+                                    <div class="card">
+                                        <div class="card-header bg-danger text-white">
+                                            Belum Memasuki Tahap Ini
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-file1" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Dokumen Pengadaan File I</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-file2" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Dokumen Penawaran File II</button>
-                            </li>
+                            <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_penawaran['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_penawaran['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-file1" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Dokumen Pengadaan File I</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-file2" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Dokumen Penawaran File II</button>
+                                </li>
+
+                            <?php    } else { ?>
+                                <div class="tab-pane fade show active" id="pills-file1" role="tabpanel" aria-labelledby="pills-home-tab">
+                                    <div class="card">
+                                        <div class="card-header bg-danger text-white">
+                                            Tahap Upload Dokumen Penawaran Sudah Selesai!
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php    } ?>
+
+
                         </ul>
 
                     </div>
@@ -50,63 +87,81 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="tab-content" id="pills-tabContent">
-
+                        <?php if (date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_penawaran['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
                             <div class="tab-pane fade show active" id="pills-file1" role="tabpanel" aria-labelledby="pills-home-tab">
                                 <div class="card">
-                                    <div class="card-header bg-primary text-white">
-                                        Dokumen Pengadaan File I
-                                        <div style="float: right;">
-                                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#upload_dok_file_1">
-                                                + Upload Dokumen Pengadaan File I
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <table id="table_dok_penawaran_file_I" class="table table-stripped table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Nama File</th>
-                                                    <th>File</th>
-                                                    <th>Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
+                                    <div class="card-header bg-danger text-white">
+                                        Belum Memasuki Tahap Ini
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="pills-file2" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+                        <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_penawaran['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_penawaran['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                            <div class="tab-content" id="pills-tabContent">
+
+                                <div class="tab-pane fade show active" id="pills-file1" role="tabpanel" aria-labelledby="pills-home-tab">
+                                    <div class="card">
+                                        <div class="card-header bg-primary text-white">
+                                            Dokumen Pengadaan File I
+                                            <div style="float: right;">
+                                                <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#upload_dok_file_1">
+                                                    + Upload Dokumen Pengadaan File I
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <table id="table_dok_penawaran_file_I" class="table table-stripped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Nama File</th>
+                                                        <th>File</th>
+                                                        <th>Aksi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="pills-file2" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                    <div class="card">
+                                        <div class="card-header bg-danger text-white">
+                                            Dokumen Penawaran File II
+                                            <div style="float: right;">
+                                                <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#upload_dok_file_2">
+                                                    + Upload Dokumen Penawaran File II
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <table id="table_dok_penawaran_file_II" class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>File Penawaran</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <?php    } else { ?>
+                            <div class="tab-pane fade show active" id="pills-file1" role="tabpanel" aria-labelledby="pills-home-tab">
                                 <div class="card">
                                     <div class="card-header bg-danger text-white">
-                                        Dokumen Penawaran File II
-                                        <div style="float: right;">
-                                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#upload_dok_file_2">
-                                                + Upload Dokumen Penawaran File II
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <table id="table_dok_penawaran_file_II" class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Nilai Penawaran</th>
-                                                    <th>TKDN/PDN/IMPOR</th>
-                                                    <th>Persentase TKDN/PDN/IMPOR</th>
-                                                    <th>File Penawaran</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                            </tbody>
-                                        </table>
+                                        Tahap Upload Dokumen Penawaran Sudah Selesai!
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        <?php    } ?>
+
                     </div>
                 </div>
             </div>
@@ -163,27 +218,27 @@
                             <input type="file" class="form-control" accept=".xlsx, .xls, .pdf" name="dok_penawaran_harga">
                         </div>
                         <br>
-                        <div class="form-group">
-                            <label for=""> Nilai Penawaran</label>
-                            <input type="text" name="nilai_penawaran_vendor" class="form-control nilai_penawaran_vendor number_only" placeholder="Nilai Penawaran" aria-describedby="helpId">
-                            <div style="float: right;">
-                                <input type="text" style="width: 200px;" id="rupiah_nilai_penawaran_vendor" readonly class="form-control " aria-describedby="helpId">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for=""> TKDN/PDN/IMPOR</label>
-                            <select name="tkdn_dokumen_penawaran_vendor" class="form-control" id="">
-                                <option value="">-- Pilih TKDN/PDN/IMPOR --</option>
-                                <option value="TKDN">TKDN</option>
-                                <option value="PDN">PDN</option>
-                                <option value="IMPORT">IMPORT</option>
-                            </select>
-                        </div>
+                        <!-- <div class="form-group">
+                                                                                                        <label for=""> Nilai Penawaran</label>
+                                                                                                        <input type="text" name="nilai_penawaran_vendor" class="form-control nilai_penawaran_vendor number_only" placeholder="Nilai Penawaran" aria-describedby="helpId">
+                                                                                                        <div style="float: right;">
+                                                                                                            <input type="text" style="width: 200px;" id="rupiah_nilai_penawaran_vendor" readonly class="form-control " aria-describedby="helpId">
+                                                                                                        </div>
+                                                                                                    </div> -->
+                        <!-- <div class="form-group">
+                                                                                                        <label for=""> TKDN/PDN/IMPOR</label>
+                                                                                                        <select name="tkdn_dokumen_penawaran_vendor" class="form-control" id="">
+                                                                                                            <option value="">-- Pilih TKDN/PDN/IMPOR --</option>
+                                                                                                            <option value="TKDN">TKDN</option>
+                                                                                                            <option value="PDN">PDN</option>
+                                                                                                            <option value="IMPORT">IMPORT</option>
+                                                                                                        </select>
+                                                                                                    </div> -->
                         <br>
-                        <div class="form-group">
-                            <label for=""> Persentase TKDN/PDN/IMPOR</label>
-                            <input type="text" name="persentase_tkdn_dokumen_penawaran_vendor" class="form-control number_only" placeholder="Persentase TKDN/PDN/IMPOR" aria-describedby="helpId">
-                        </div>
+                        <!-- <div class="form-group">
+                                                                                                        <label for=""> Persentase TKDN/PDN/IMPOR</label>
+                                                                                                        <input type="text" name="persentase_tkdn_dokumen_penawaran_vendor" class="form-control number_only" placeholder="Persentase TKDN/PDN/IMPOR" aria-describedby="helpId">
+                                                                                                    </div> -->
                         <br>
                     </div>
                     <div class="modal-footer">
