@@ -483,7 +483,7 @@
                                     <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('tender_diikuti/sanggahan_akhir/'  . $rup['id_url_rup']) ?>"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Sanggahan </a>
                                 </li>
                             <?php    } else { ?>
-                                <!-- waktu Telah Selesai -->
+                                <!-- waktu Telah Selesai asdasd-->
                             <?php    } ?>
                         <?php } else { ?>
                             <?php
