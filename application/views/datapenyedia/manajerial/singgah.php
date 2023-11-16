@@ -292,7 +292,7 @@
                                             <div class="col-sm-6">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text">%</span>
-                                                    <input name="saham" type="number" onkeyup="validasi_saham()" class="form-control">
+                                                    <input name="saham" type="text" class="form-control number_only">
                                                 </div>
                                                 <!-- saham -->
                                                 <small class="saham_error text-danger"></small>

@@ -28,7 +28,7 @@
                             <div class="flex-grow-1 bd-highlight">
                                 <span class="text-white">
                                     <i class="fa-solid fa-chalkboard-user"></i>
-                                    <small><strong>Form Dokumen - Pengalaman Usaha</strong></small>
+                                    <small><strong>Form Dokumen - Pengalaman Pekerjaan Perusahaan</strong></small>
                                 </span>
                             </div>
                             <div class="bd-highlight">
@@ -95,7 +95,7 @@
                             <div class="flex-grow-1 bd-highlight">
                                 <span class="text-white">
                                     <i class="fa-solid fa-align-justify px-1"></i>
-                                    <small><strong>Form Data - Pengalaman Perusahaan</strong></small>
+                                    <small><strong>Form Data - Pengalaman Pekerjaan Perusahaan</strong></small>
                                 </span>
                             </div>
                         </div>
@@ -223,7 +223,7 @@
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-2">
                                                     <span class="input-group-text">%</span>
-                                                    <input name="progres" type="number" max="100" min="0" class="form-control" onkeyup="nilai_badan_sharing()">
+                                                    <input name="progres" type="text" id="progresku" class="form-control number_only" onkeyup="nilai_badan_sharing()">
                                                 </div>
                                                 <!-- instansi_pemberi -->
                                                 <small class="progres_error text-danger"></small>
@@ -259,7 +259,6 @@
                                             <input type="number" class="form-control" min="0" name="jangka_waktu" readonly>
                                         </td>
                                     </tr>
-
                                     <tr>
                                         <td class="col-sm-12" colspan="4">
                                             <button type="button" class="btn btn-danger btn-sm shadow-lg" data-bs-dismiss="modal">
@@ -287,7 +286,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Import Data Pengalaman Perusahaan</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Import Data Pengalaman Pekerjaan Perusahaan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -295,7 +294,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header bg-primary text-white">
-                                <h4 class="text-white">Import Data Pengalaman Perusahaan</h4>
+                                <h4 class="text-white">Import Data Pengalaman Pekerjaan Perusahaan</h4>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -349,35 +348,22 @@
                                         <table id="data_excel_pengalaman_manajerial" style="width: 100%;font-size:12px" class="table table-bordered">
                                             <thead class="bg-secondary" style="text-align: center;">
                                                 <tr>
-                                                    <th class="text-white">
-                                                        No
-                                                    </th>
-                                                    <th>
-                                                        <small class="text-white">No. Kontrak</small>
-                                                    </th>
-                                                    <th>
-                                                        <small class="text-white">Tgl. Kontrak</small>
-                                                    </th>
-                                                    <th>
-                                                        <small class="text-white">Nama Pekerjaan</small>
-                                                    </th>
-                                                    <th><small class="text-white">Nilai (Rp.)</small></th>
-                                                    <th>
-                                                        <small class="text-white">Jenis Tender</small>
-                                                    </th>
-                                                    <th>
+                                                    <th class="text-white">No</th>
+                                                    <th style="width:8%;"><small class="text-white">Nama Pekerjaan</small></th>
+                                                    <th style="width:8%;"><small class="text-white">Pemberi Kerja / Tugas</small></th>
+                                                    <th style="width:23%;"><small class="text-white">Nomor Kontrak & Tanggal Mulai Awal Kontrak Tgl/Bln/Tahun</small></th>
+                                                    <th style="width:9%;"><small class="text-white">Tanggal Akhir Kontrak Tgl/Bln/Tahun</small></th>
+                                                    <th style="width:9%;"><small class="text-white">Nilai Kontrak</small></th>
+                                                    <th style="width:10%;"><small class="text-white">Progres</small></th>
+                                                    <th style="width:10%;"><small class="text-white">Jangka Waktu Pelaksanaan</small></th>
+                                                    <th style="width:8%;">
                                                         <small class="text-white">
-                                                            <div class="text-center">Instansi Pemberi Kerja</div>
+                                                            <div class="text-center">Lokasi Pekerjaan</div>
                                                         </small>
                                                     </th>
-                                                    <th>
+                                                    <th style="width:15%;">
                                                         <small class="text-white">
-                                                            <div class="text-center">Lokasi</div>
-                                                        </small>
-                                                    </th>
-                                                    <th>
-                                                        <small class="text-white">
-                                                            <div class="text-center"> Aksi </div>
+                                                            <div class="text-center">More Options</div>
                                                         </small>
                                                     </th>
                                                 </tr>
@@ -417,7 +403,7 @@
                         <div class="flex-grow-1 bd-highlight">
                             <span class="text-white">
                                 <i class="fa-solid fa-align-justify px-1"></i>
-                                <small><strong>Form Edit Excel Pengalaman Manajerial</strong></small>
+                                <small><strong>Form Edit Excel Pengalaman Pekerjaan Perusahaan</strong></small>
                             </span>
                         </div>
                     </div>
@@ -435,9 +421,8 @@
                                         <div class="col-sm-12">
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
-                                                <input name="no_kontrak" type="text" class="form-control">
+                                                <input name="no_kontrak_edit" type="text" class="form-control">
                                             </div>
-                                            <!-- no_kontrak -->
                                             <small class="no_kontrak_error text-danger"></small>
                                         </div>
                                     </td>
@@ -449,13 +434,13 @@
                                         <div class="col-sm-8">
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
-                                                <input name="tanggal_kontrak" type="date" id="date" class="form-control">
+                                                <input name="tanggal_kontrak_edit" type="date" id="date11" class="form-control">
                                             </div>
+
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
-                                                <input name="tanggal_kontrak_akhir" type="date" id="date" class="form-control">
+                                                <input name="tanggal_kontrak_akhir_edit" onchange="jumlah_waktu2()" type="date" id="date22" class="form-control">
                                             </div>
-                                            <!-- tanggal_kontrak -->
                                             <small class="tanggal_kontrak_error text-danger"></small>
                                         </div>
                                     </td>
@@ -468,10 +453,9 @@
                                         <div class="col-sm-12">
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-user-pen"></i></span>
-                                                <textarea name="nama_pekerjaan" type="text" class="form-control" rows="2"></textarea>
+                                                <textarea name="nama_pekerjaan_edit" type="text" class="form-control" rows="2"></textarea>
                                             </div>
-                                            <!-- nama_pekerjaan -->
-                                            <small class="nama_pekerjaan_error text-danger"></small>
+                                            <small class="tanggal_kontrak_error text-danger"></small>
                                         </div>
                                     </td>
                                 </tr>
@@ -483,7 +467,7 @@
                                         <div class="col-sm-12">
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                                <select name="id_jenis_usaha" class="form-select" aria-label="Default select example">
+                                                <select name="id_jenis_usaha_edit" class="form-select" aria-label="Default select example">
                                                     <option value="Jasa Lainnya">Jasa Lainnya</option>
                                                     <option value="Jasa Konstruksi">Jasa Konstruksi</option>
                                                     <option value="Jasa Pengadaan Barang">Jasa Pengadaan Barang</option>
@@ -502,7 +486,12 @@
                                         <div class="col-sm-10">
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text">Rp.</span>
-                                                <input name="nilai_kontrak" type="text" id="tanpa-rupiah" class="form-control">
+                                                <input name="nilai_kontrak_edit" type="text" class="form-control" onkeyup="nilai_badan_sharing2()" id="nilai_kontrak_edit">
+
+                                            </div>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text">Rp.</span>
+                                                <input type="text" id="nilai_kontrak-rp_edit" class="form-control" disabled>
                                             </div>
                                             <!-- nilai_kontrak -->
                                             <small class="nilai_kontrak_error text-danger"></small>
@@ -517,7 +506,7 @@
                                         <div class="col-sm-12">
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-business-time"></i></span>
-                                                <input name="instansi_pemberi" type="text" class="form-control">
+                                                <input name="instansi_pemberi_edit" type="text" class="form-control">
                                             </div>
                                             <!-- instansi_pemberi -->
                                             <small class="instansi_pemberi_error text-danger"></small>
@@ -530,7 +519,7 @@
                                         <div class="col-sm-12">
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-road"></i></span>
-                                                <input name="lokasi_pekerjaan" type="text" class="form-control">
+                                                <input name="lokasi_pekerjaan_edit" type="text" class="form-control">
                                             </div>
                                             <!-- lokasi_pekerjaan -->
                                             <small class="lokasi_pekerjaan_error text-danger"></small>
@@ -539,16 +528,16 @@
                                 </tr>
                                 <tr>
                                     <td class="col-sm-2 bg-light">
-                                        <label class="form-label col-form-label-sm"><b>Progres Pekerjaan</b></label>
+                                        <label class="form-label col-form-label-sm"><b>Persentase Sharing atau KSO (Kerja Sama Operasi)</b></label>
                                     </td>
                                     <td class="col-sm-3">
                                         <div class="col-sm-12">
                                             <div class="input-group mb-2">
-                                                <span class="input-group-text"><i class="fa-solid fa-business-time"></i></span>
-                                                <input name="progres" type="text" class="form-control">
+                                                <span class="input-group-text">%</span>
+                                                <input name="progres_edit" type="text" max="100" min="0" id="progresku_edit" class="form-control" onkeyup="nilai_badan_sharing2()">
                                             </div>
                                             <!-- instansi_pemberi -->
-                                            <small class="instansi_pemberi_error text-danger"></small>
+                                            <small class="progres_error text-danger"></small>
                                         </div>
                                     </td>
                                     <td class="col-sm-2 bg-light">
@@ -558,7 +547,8 @@
                                         <div class="col-sm-12">
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text">Rp.</span>
-                                                <input name="nilai_sharing" type="text" class="form-control">
+                                                <input type="text" id="nilai_sharing_rp_edit" name="nilai_sharing_rp_edit" class="form-control" readonly>
+                                                <input name="nilai_sharing_edit" type="hidden" class="form-control" readonly>
                                             </div>
                                             <!-- lokasi_pekerjaan -->
                                             <small class="lokasi_pekerjaan_error text-danger"></small>
@@ -570,17 +560,17 @@
                                         <label class="form-label col-form-label-sm"><b>Upload File Kontrak</b></label>
                                     </td>
                                     <td class="col-sm-3">
-                                        <input type="hidden" name="file_dokumen_manipulasi_pengalaman">
-                                        <input type="file" class="file_valid_pengalaman" name="file_kontrak_pengalaman" id="file" accept=".pdf">
+                                        <input type="hidden" name="file_dokumen_manipulasi_pengalaman_edit">
+                                        <input type="file" class="file_valid_pengalaman_edit" name="file_kontrak_pengalaman_edit" id="file" accept=".pdf">
                                     </td>
                                     <td class="col-sm-2 bg-light">
                                         <label class="form-label col-form-label-sm"><b>Jangka Waktu Pekerjaan (Bulan)</b></label>
                                     </td>
                                     <td class="col-sm-3">
-                                        <input type="number" class="form-control" min="0" name="jangka_waktu">
+                                        <input type="number" class="form-control" min="0" name="jangka_waktu_edit" readonly>
                                     </td>
-
                                 </tr>
+
                                 <tr>
                                     <td class="col-sm-3">
                                         <label class="form-label col-form-label-sm"><b>File Dokumen</b></label>
