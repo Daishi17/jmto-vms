@@ -75,41 +75,41 @@ class M_tender extends CI_Model
             }
         }
 
-        if ($siujk_vendor) {
-            if ($siujk_vendor_kbli) {
-                $this->db->where_in('tbl_syratat_kbli_tender.id_kbli',  $siujk_vendor_kbli);
-                if ($siujk_vendor['sts_seumur_hidup'] == 2) {
-                    $this->db->where('tbl_izin_rup.sts_masa_berlaku_siujk', 2);
-                    $this->db->where('tbl_izin_rup.tgl_berlaku_nib <=', date('Y-m-d', strtotime('+50 year', strtotime($now))));
-                } else {
-                    $this->db->where('tbl_izin_rup.tgl_berlaku_siujk <=', $siujk_vendor['tgl_berlaku']);
-                }
-            }
-        }
+        // if ($siujk_vendor) {
+        //     if ($siujk_vendor_kbli) {
+        //         $this->db->where_in('tbl_syratat_kbli_tender.id_kbli',  $siujk_vendor_kbli);
+        //         if ($siujk_vendor['sts_seumur_hidup'] == 2) {
+        //             $this->db->where('tbl_izin_rup.sts_masa_berlaku_siujk', 2);
+        //             $this->db->where('tbl_izin_rup.tgl_berlaku_nib <=', date('Y-m-d', strtotime('+50 year', strtotime($now))));
+        //         } else {
+        //             $this->db->where('tbl_izin_rup.tgl_berlaku_siujk <=', $siujk_vendor['tgl_berlaku']);
+        //         }
+        //     }
+        // }
 
-        if ($skdp_vendor) {
-            if ($skdp_vendor_kbli) {
-                $this->db->where_in('tbl_syratat_kbli_tender.id_kbli',  $skdp_vendor_kbli);
-                if ($skdp_vendor['sts_seumur_hidup'] == 2) {
-                    $this->db->where('tbl_izin_rup.sts_masa_berlaku_skdp', 2);
-                    $this->db->where('tbl_izin_rup.tgl_berlaku_nib <=', date('Y-m-d', strtotime('+50 year', strtotime($now))));
-                } else {
-                    $this->db->where('tbl_izin_rup.tgl_berlaku_skdp <=', $skdp_vendor['tgl_berlaku']);
-                }
-            }
-        }
+        // if ($skdp_vendor) {
+        //     if ($skdp_vendor_kbli) {
+        //         $this->db->where_in('tbl_syratat_kbli_tender.id_kbli',  $skdp_vendor_kbli);
+        //         if ($skdp_vendor['sts_seumur_hidup'] == 2) {
+        //             $this->db->where('tbl_izin_rup.sts_masa_berlaku_skdp', 2);
+        //             $this->db->where('tbl_izin_rup.tgl_berlaku_nib <=', date('Y-m-d', strtotime('+50 year', strtotime($now))));
+        //         } else {
+        //             $this->db->where('tbl_izin_rup.tgl_berlaku_skdp <=', $skdp_vendor['tgl_berlaku']);
+        //         }
+        //     }
+        // }
 
-        if ($sbu_vendor) {
-            if ($sbu_vendor_kode) {
-                $this->db->where_in('tbl_syratat_sbu_tender.id_sbu',  $sbu_vendor_kode);
-                if ($sbu_vendor['sts_seumur_hidup'] == 2) {
-                    $this->db->where('tbl_izin_rup.sts_masa_berlaku_sbu', 2);
-                    $this->db->where('tbl_izin_rup.tgl_berlaku_sbu <=', date('Y-m-d', strtotime('+50 year', strtotime($now))));
-                } else {
-                    $this->db->where('tbl_izin_rup.tgl_berlaku_sbu <=', $sbu_vendor['tgl_berlaku']);
-                }
-            }
-        }
+        // if ($sbu_vendor) {
+        //     if ($sbu_vendor_kode) {
+        //         $this->db->where_in('tbl_syratat_sbu_tender.id_sbu',  $sbu_vendor_kode);
+        //         if ($sbu_vendor['sts_seumur_hidup'] == 2) {
+        //             $this->db->where('tbl_izin_rup.sts_masa_berlaku_sbu', 2);
+        //             $this->db->where('tbl_izin_rup.tgl_berlaku_sbu <=', date('Y-m-d', strtotime('+50 year', strtotime($now))));
+        //         } else {
+        //             $this->db->where('tbl_izin_rup.tgl_berlaku_sbu <=', $sbu_vendor['tgl_berlaku']);
+        //         }
+        //     }
+        // }
 
 
         if ($spt_vendor) {
