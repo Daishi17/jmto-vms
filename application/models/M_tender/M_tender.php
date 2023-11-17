@@ -757,6 +757,17 @@ class M_tender extends CI_Model
         return $r->result();
     }
 
+
+    public function getPesan_penawaran($id_rup)
+    {
+        $this->db->from('tbl_pesan_penawaran');
+        $this->db->join('tbl_vendor', 'tbl_pesan_penawaran.id_pengirim = tbl_vendor.id_vendor', 'left');
+        $this->db->join('tbl_pegawai', 'tbl_pesan_penawaran.id_pengirim = tbl_pegawai.id_pegawai', 'left');
+        $this->db->where('tbl_pesan_penawaran.id_rup', $id_rup);
+        $r = $this->db->get();
+        return $r->result();
+    }
+
     public function getDataById($id_rup)
     {
         $this->db->select('*');
@@ -772,6 +783,12 @@ class M_tender extends CI_Model
     {
         $this->db->insert('tbl_pesan', $in);
     }
+
+    public function tambah_chat_penawaran($in)
+    {
+        $this->db->insert('tbl_pesan_penawaran', $in);
+    }
+
 
     // ini untuk Anwizing (tanya jawab)
     public function jadwal_aanwizing($id_rup)
