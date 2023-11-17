@@ -68,12 +68,13 @@ class M_tender extends CI_Model
                 $this->db->where_in('tbl_syratat_kbli_tender.id_kbli',  $siup_vendor_kbli);
                 if ($siup_vendor['sts_seumur_hidup'] == 2) {
                     $this->db->where('tbl_izin_rup.sts_masa_berlaku_siup', 2);
-                    $this->db->where('tbl_izin_rup.tgl_berlaku_nib <=', date('Y-m-d', strtotime('+50 year', strtotime($now))));
+                    $this->db->where('tbl_izin_rup.tgl_berlaku_siup <=', date('Y-m-d', strtotime('+50 year', strtotime($now))));
                 } else {
                     $this->db->where('tbl_izin_rup.tgl_berlaku_siup <=', $siup_vendor['tgl_berlaku']);
                 }
             }
         }
+
 
         // if ($siujk_vendor) {
         //     if ($siujk_vendor_kbli) {
@@ -92,7 +93,7 @@ class M_tender extends CI_Model
         //         $this->db->where_in('tbl_syratat_kbli_tender.id_kbli',  $skdp_vendor_kbli);
         //         if ($skdp_vendor['sts_seumur_hidup'] == 2) {
         //             $this->db->where('tbl_izin_rup.sts_masa_berlaku_skdp', 2);
-        //             $this->db->where('tbl_izin_rup.tgl_berlaku_nib <=', date('Y-m-d', strtotime('+50 year', strtotime($now))));
+        //             $this->db->where('tbl_izin_rup.tgl_berlaku_skdp <=', date('Y-m-d', strtotime('+50 year', strtotime($now))));
         //         } else {
         //             $this->db->where('tbl_izin_rup.tgl_berlaku_skdp <=', $skdp_vendor['tgl_berlaku']);
         //         }
@@ -778,6 +779,21 @@ class M_tender extends CI_Model
         $query = $this->db->query("SELECT * FROM tbl_jadwal_rup WHERE id_rup = $id_rup AND nama_jadwal_rup = 'Anwizing (tanya jawab)'");
         return $query->row_array();
     }
+
+    public function getPesan_penawaran($id_rup)
+    {
+        $this->db->from('tbl_pesan_penawaran');
+        $this->db->join('tbl_vendor', 'tbl_pesan_penawaran.id_pengirim = tbl_vendor.id_vendor', 'left');
+        $this->db->join('tbl_pegawai', 'tbl_pesan_penawaran.id_pengirim = tbl_pegawai.id_pegawai', 'left');
+        $this->db->where('tbl_pesan_penawaran.id_rup', $id_rup);
+        $r = $this->db->get();
+        return $r->result();
+    }
+    public function tambah_chat_penawaran($in)
+    {
+        $this->db->insert('tbl_pesan_penawaran', $in);
+    }
+
 
 
     // INI UNTUK DOKUMEN PENGADAAN FILE I
