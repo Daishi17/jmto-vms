@@ -121,7 +121,7 @@ class Tender_terundang extends CI_Controller
     public function detail_paket($id_rup)
     {
 
-        $data_rup = $this->M_tender->get_row_rup($id_rup);
+        $data_rup = $this->M_tender->get_row_rup_byid($id_rup);
 
         $jadwal = $this->M_tender->get_jadwal($id_rup);
         $row_syarat_administrasi_rup = $this->M_tender->get_syarat_izin_usaha_tender($data_rup['id_rup']);
@@ -129,13 +129,19 @@ class Tender_terundang extends CI_Controller
         $syarat_tambahan = $this->M_tender->result_syarat_tambahan($data_rup['id_rup']);
         $row_syarat_administrasi_rup = $this->M_tender->get_syarat_izin_usaha_tender($data_rup['id_rup']);
         $row_syarat_teknis_rup = $this->M_tender->get_syarat_izin_teknis_tender($data_rup['id_rup']);
+
+        $get_kbli = $this->M_tender->get_persyaratan_kbli($data_rup['id_rup']);
+        $get_sbu =  $this->M_tender->get_persyaratan_sbu($data_rup['id_rup']);
+
         $response = [
             'row_rup' => $data_rup,
             'jadwal' => $jadwal,
             'row_syarat_administrasi_rup' => $row_syarat_administrasi_rup,
             'row_syarat_teknis_rup' => $row_syarat_teknis_rup,
             'syarat_tambahan' => $syarat_tambahan,
-            'cek_ikut' => $cek_ikut
+            'cek_ikut' => $cek_ikut,
+            'result_kbli' => $get_kbli,
+            'result_sbu' => $get_sbu
         ];
         $this->output->set_content_type('application/json')->set_output(json_encode($response));
     }
@@ -165,6 +171,7 @@ class Tender_terundang extends CI_Controller
         $id_vendor = $this->session->userdata('id_vendor');
         $nama_usaha = $this->session->userdata('nama_usaha');
         $data_rup = $this->M_tender->get_rup_byid($id_rup);
+
 
         if (!is_dir('file_paket/' . $data_rup['nama_rup'] . '/' . $nama_usaha)) {
             mkdir('file_paket/' . $data_rup['nama_rup'] . '/' . $nama_usaha, 0777, TRUE);

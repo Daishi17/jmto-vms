@@ -42,6 +42,17 @@
             url: url_detail_paket + id_url_rup,
             dataType: "JSON",
             success: function(response) {
+                console.log(response['result_kbli'], response['result_sbu']);
+                if (response['cek_ikut']) {
+                    $('#tombol_mengikuti').html('<button disabled type="button" class="btn btn-default btn-primary"><i class="fa fa-spinner" aria-hidden="true"></i> Anda Sedang Mengikuti Pengadaan ini</button>')
+                } else {
+                    if (response['row_rup'].id_metode_pengadaan == 4) {
+                        $('#tombol_mengikuti').html('<a type="javascript:;" onclick="pakta_integritas_question_terbatas(\'' + response['row_rup'].id_rup + '\'' + ',' + '\'' + response['row_rup'].nama_rup + '\')" class="btn btn-default btn-warning"><i class="fa-solid fa-circle-up px-1"></i> Ikuti Pengadaan Terbatas</a>')
+                    } else {
+                        $('#tombol_mengikuti').html('<a type="javascript:;" onclick="pakta_integritas_question(\'' + response['row_rup'].id_rup + '\'' + ',' + '\'' + response['row_rup'].nama_rup + '\')" class="btn btn-default btn-warning"><i class="fa-solid fa-circle-up px-1"></i> Ikuti Pengadaan</a>')
+                    }
+
+                }
                 $('#modal-xl-detail').modal('show')
                 $('#kode_rup').text(response['row_rup'].kode_rup)
                 $('#tahun_rup').text(response['row_rup'].tahun_rup)
@@ -59,6 +70,35 @@
                 $('#persen_pencatatan').text(response['row_rup'].persen_pencatatan)
                 $('#total_hps_rup').text(currency(response['row_rup'].total_hps_rup))
                 $('#jenis_kontrak').text(jenis_kontrak(response['row_rup'].jenis_kontrak))
+
+                if (response['result_kbli']) {
+                    var res_kbli = ''
+                    var i_kbli = 0;
+                    for (i_kbli = 0; i_kbli < response['result_kbli'].length; i_kbli++) {
+
+                        res_kbli += '<tr>' +
+                            '<td>' + response['result_kbli'][i_kbli].kode_kbli + ' | ' + response['result_kbli'][i_kbli].nama_kbli + '</td>' +
+                            '</tr>'
+                    }
+                    $('#load_kbli').html(res_kbli)
+                } else {
+
+                }
+
+                if (response['result_sbu']) {
+                    var res_sbu = ''
+                    var i_sbu = 0;
+                    for (i_sbu = 0; i_sbu < response['result_sbu'].length; i_sbu++) {
+
+                        res_sbu += '<tr>' +
+                            '<td>' + response['result_sbu'][i_sbu].kode_sbu + ' | ' + response['result_sbu'][i_sbu].nama_sbu + '</td>' +
+                            '</tr>'
+                    }
+                    $('#load_sbu').html(res_sbu)
+                } else {
+
+                }
+
                 if (response['row_rup'].beban_tahun_anggaran == 1) {
                     $('#beban_tahun_anggaran').text('Tahun Tunggal')
                 } else {
@@ -172,17 +212,6 @@
                         '</tr>'
                 }
 
-                if (response['cek_ikut']) {
-                    $('#tombol_mengikuti').html('<button disabled type="button" class="btn btn-default btn-primary"><i class="fa fa-spinner" aria-hidden="true"></i> Anda Sedang Mengikuti Pengadaan ini</button>')
-                } else {
-                    if (response['row_rup'].id_metode_pengadaan == 4) {
-                        $('#tombol_mengikuti').html('<a type="javascript:;" onclick="pakta_integritas_question_terbatas(\'' + response['row_rup'].id_rup + '\'' + ',' + '\'' + response['row_rup'].nama_rup + '\')" class="btn btn-default btn-warning"><i class="fa-solid fa-circle-up px-1"></i> Ikuti Pengadaan Terbatas</a>')
-                    } else {
-                        $('#tombol_mengikuti').html('<a type="javascript:;" onclick="pakta_integritas_question(\'' + response['row_rup'].id_rup + '\'' + ',' + '\'' + response['row_rup'].nama_rup + '\')" class="btn btn-default btn-warning"><i class="fa-solid fa-circle-up px-1"></i> Ikuti Pengadaan</a>')
-                    }
-
-                }
-
 
             }
         })
@@ -227,6 +256,7 @@
     }
 
     function pakta_integritas_question_terbatas(id, nama_paket) {
+
         var url_mengikuti_terbatas = $('[name="url_mengikuti_terbatas"]').val()
         Swal.fire({
             title: 'Nama Paket : ' + nama_paket,

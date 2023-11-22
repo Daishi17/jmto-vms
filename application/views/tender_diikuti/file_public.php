@@ -77,6 +77,12 @@
             url: url_detail_paket + id_url_rup,
             dataType: "JSON",
             success: function(response) {
+                var url_info_tender = $('[name="url_info_tender"]').val()
+                var url_target = url_info_tender + response['row_rup'].id_url_rup
+                $('#tombol_mengikuti').html('<a href=' + url_target + ' class="btn btn-default btn-primary"><i class="fa-solid fa-circle-up px-1"></i> Lihat Pengadaan</a>')
+
+                $('#detail_jadwal').html('<a href="javascript:;" onclick="lihat_detail_jadwal(\'' + response['row_rup'].id_url_rup + '\')" class="btn btn-sm btn-primary"><i class="fa-solid fa-calendar-days px-1"></i> Detail Jadwal Pengadaan</a>')
+
                 $('#modal-xl-detail').modal('show')
                 $('#kode_rup').text(response['row_rup'].kode_rup)
                 $('#tahun_rup').text(response['row_rup'].tahun_rup)
@@ -94,6 +100,35 @@
                 $('#persen_pencatatan').text(response['row_rup'].persen_pencatatan)
                 $('#total_hps_rup').text(currency(response['row_rup'].total_hps_rup))
                 $('#jenis_kontrak').text(jenis_kontrak(response['row_rup'].jenis_kontrak))
+
+                if (response['result_kbli']) {
+                    var res_kbli = ''
+                    var i_kbli = 0;
+                    for (i_kbli = 0; i_kbli < response['result_kbli'].length; i_kbli++) {
+
+                        res_kbli += '<tr>' +
+                            '<td>' + response['result_kbli'][i_kbli].kode_kbli + ' | ' + response['result_kbli'][i_kbli].nama_kbli + '</td>' +
+                            '</tr>'
+                    }
+                    $('#load_kbli').html(res_kbli)
+                } else {
+
+                }
+
+                if (response['result_sbu']) {
+                    var res_sbu = ''
+                    var i_sbu = 0;
+                    for (i_sbu = 0; i_sbu < response['result_sbu'].length; i_sbu++) {
+
+                        res_sbu += '<tr>' +
+                            '<td>' + response['result_sbu'][i_sbu].kode_sbu + ' | ' + response['result_sbu'][i_sbu].nama_sbu + '</td>' +
+                            '</tr>'
+                    }
+                    $('#load_sbu').html(res_sbu)
+                } else {
+
+                }
+
                 if (response['row_rup'].beban_tahun_anggaran == 1) {
                     $('#beban_tahun_anggaran').text('Tahun Tunggal')
                 } else {
@@ -102,7 +137,7 @@
 
                 if (response['row_rup'].bobot_nilai == 1) {
                     $('#bobot_nilai').text('Kombinasi')
-                    $('#Bobot').text(response['row_rup'].bobot_teknis + '% ' + '& ' + response['row_rup'].bobot_teknis + '% ')
+                    $('#Bobot').text(response['row_rup'].bobot_teknis + '% ' + '& ' + response['row_rup'].bobot_biaya + '% ')
                 } else if (response['row_rup'].bobot_nilai == 2) {
                     $('#bobot_nilai').text('Bobot Teknis')
                 } else if (response['row_rup'].bobot_nilai == 3) {
@@ -178,10 +213,33 @@
                     $('#sts_masa_berlaku_skdp').text('Tidak Diperlukan')
                 }
 
-                $('#detail_jadwal').html('<a href="javascript:;" onclick="lihat_detail_jadwal(\'' + response['row_rup'].id_url_rup + '\')" class="btn btn-sm btn-primary"><i class="fa-solid fa-calendar-days px-1"></i> Detail Jadwal Pengadaan</a>')
-                var url_info_tender = $('[name="url_info_tender"]').val()
-                var url_target = url_info_tender + response['row_rup'].id_url_rup
-                $('#tombol_mengikuti').html('<a href=' + url_target + ' class="btn btn-default btn-primary"><i class="fa-solid fa-circle-up px-1"></i> Lihat Pengadaan</a>')
+
+                // keuangan
+                if (response['row_syarat_teknis_rup'].sts_checked_laporan_keuangan == 1) {
+                    $('#keuangan_izin').css('display', 'block')
+                    $('#tahun_keuangan').text(response['row_syarat_teknis_rup'].sts_audit_laporan_keuangan + ' ' + 'Tahun Awal ' + response['row_syarat_teknis_rup'].tahun_awal_laporan_keuangan + ' ' + 'Tahun Akhir ' + response['row_syarat_teknis_rup'].tahun_akhir_laporan_keuangan)
+                } else {
+                    $('#keuangan_izin').css('display', 'none')
+                    $('#tahun_keuangan').text('Tidak Diperlukan')
+                }
+
+                // neraca
+                if (response['row_syarat_teknis_rup'].sts_checked_neraca_keuangan == 1) {
+                    $('#neraca_izin').css('display', 'block')
+                    $('#tahun_neraca').text('Tahun Awal ' + response['row_syarat_teknis_rup'].tahun_awal_neraca_keuangan + ' ' + 'Tahun Akhir ' + response['row_syarat_teknis_rup'].tahun_akhir_neraca_keuangan)
+                } else {
+                    $('#neraca_izin').css('display', 'none')
+                    $('#tahun_neraca').text('Tidak Diperlukan')
+                }
+
+                var html_syarat_tambahan = '';
+                var i;
+                for (i = 0; i < response['syarat_tambahan'].length; i++) {
+                    html_syarat_tambahan += '<tr>' +
+                        '<td>' + response['syarat_tambahan'][i].nama_syarat_tambahan + '</td>' +
+                        '<td><a href="javascript:;" onclick="download_file_syarat_tambahan(' + response['syarat_tambahan'][i].id_syarat_tambahan + ')" class="btn btn-sm btn-warning"><i class="fas fa fa-donwload"></i> Download File</a></td>' +
+                        '</tr>'
+                }
 
             }
         })

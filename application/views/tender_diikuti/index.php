@@ -556,6 +556,37 @@
                                                         </div>
                                                     </tbody>
                                                 </table>
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <table class="table table-bordered border-dark table-sm shadow-lg">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="text-white bg-danger" style="text-align:center; vertical-align:middle;" colspan="2">
+                                                                        <small>Persyaratan KBLI </small>
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="load_kbli">
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <table class="table table-bordered border-dark table-sm shadow-lg">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="text-white bg-danger" style="text-align:center; vertical-align:middle;" colspan="2">
+                                                                        <small>Persyaratan SBU</small>
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="load_sbu">
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
                                                 <table class="table table-bordered border-dark table-sm shadow-lg">
                                                     <thead>
                                                         <tr>

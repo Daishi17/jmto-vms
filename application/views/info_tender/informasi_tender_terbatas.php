@@ -171,7 +171,7 @@
                                                                 <tr>
                                                                     <td scope="row"><?= $i++ ?></td>
                                                                     <td><?= $value['nama_dok_pengadaan'] ?></td>
-                                                                    <td><a href="<?= $url_dok_pengadaan . $value['id_dokumen_pengadaan'] ?>" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Lihat</a></td>
+                                                                    <td><a href="<?= $url_dok_pengadaan . $value['id_dokumen_pengadaan'] ?>" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Download</a></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -233,7 +233,7 @@
                                                                 <tr>
                                                                     <td scope="row"><?= $i++ ?></td>
                                                                     <td><?= $value['nama_dok_prakualifikasi'] ?></td>
-                                                                    <td><a href="<?= $url_dok_prakualifikasi . $value['id_dokumen_prakualifikasi'] ?>" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Lihat</a></td>
+                                                                    <td><a href="<?= $url_dok_prakualifikasi . $value['id_dokumen_prakualifikasi'] ?>" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Download</a></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>

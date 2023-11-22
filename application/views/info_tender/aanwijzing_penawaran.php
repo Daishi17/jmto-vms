@@ -411,8 +411,8 @@
                             if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai'])) >= date('Y-m-d H:i')) { ?>
                             <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai']))  == date('Y-m-d H:i')) { ?>
                                 <!-- <li class="nav-item">
-                                                                                    <a class="nav-link active" style="margin-left: 5px;" href="<?= base_url('tender_diikuti/aanwijzing/' . $rup['id_url_rup']) ?>"><i class="fa fa-comments" aria-hidden="true"></i> Aanwijzing (PQ)</a>
-                                                                                </li> -->
+                                                                                                                                                    <a class="nav-link active" style="margin-left: 5px;" href="<?= base_url('tender_diikuti/aanwijzing/' . $rup['id_url_rup']) ?>"><i class="fa fa-comments" aria-hidden="true"></i> Aanwijzing (PQ)</a>
+                                                                                                                                                </li> -->
                             <?php    } else { ?>
 
                             <?php    } ?>
@@ -535,7 +535,7 @@
             <!-- test -->
             <br>
             <div class="card card_chat" style="background-image: linear-gradient(180deg, #b2eaff 0, #5389f2 50%, #003265 100%);">
-                <div class="card-header card-chat" style="background-image: radial-gradient(circle at 50% -20.71%, #cfa8ff 0, #9d8bff 25%, #6c6cd8 50%, #3f4ea4 75%, #153375 100%);">
+                <div class="card-header card-chat" style="background-image: linear-gradient(90deg, hsla(206, 98%, 48%, 1) 3%, hsla(60, 100%, 50%, 1) 70%);">
                     <div class="d-flex bd-highlight">
                         <div class="img_cont">
                             <img src="<?= base_url('assets/chat_logo.png') ?>" class="rounded-circle user_img">
@@ -546,7 +546,7 @@
                             <p>Kode Tender : <?= $rup['kode_rup'] ?></p>
                         </div>
                     </div>
-                    <span id="action_menu_btn"><img src="<?= base_url('assets/jmto_logo.jfif') ?>" width="250px" alt=""><img src="<?= base_url('assets/img/jmtm2.png') ?>" width="250px" alt=""></span>
+                    <span id="action_menu_btn"><img src="<?= base_url('assets/img/logo_asli.png') ?>" width="250px" alt=""></span>
                 </div>
                 <div class="card-body msg_card_body" id="letakpesan">
 
@@ -565,15 +565,65 @@
                         <div class="input-group">
                             <input type="hidden" name="id_pengirim" id="id_pengirim" value="<?= $this->session->userdata('id_vendor'); ?>">
                             <input type="hidden" name="id_rup" value="<?= $rup['id_rup'] ?>">
-                            <div class="input-group-append">
-                                <div class="input-group-text attach_btn">
-                                    <button class="btn btn-danger btn-md btn-block" type="button" id="loadFileXml" value="loadXml" onclick="document.getElementById('file').click();"><i class="fas fa-paperclip"></i></button>
-                                    <br>
-                                    <button class="btn btn-primary btn-md btn-block" type="button" id="loadFileXml" value="loadXml" onclick="document.getElementById('file_img').click();"><i class="fas fa-camera-retro"></i></button>
-                                </div>
-                                <input type="file" style="display:none;" id="file" name="dokumen_chat" />
-                                <input type="file" style="display:none;" id="file_img" name="img_chat" />
-                            </div>
+
+                            <?php if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+
+                                <?php $date2 = $jadwal_aanwijzing['waktu_selesai'];
+                                $date20 = new DateTime($date2);
+                                $date_plus20 = $date20->modify("+3 hours");
+                                if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai'])) >= date('Y-m-d H:i')) { ?>
+
+                                <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai']))  == date('Y-m-d H:i')) { ?>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text attach_btn">
+                                            <button class="btn btn-danger btn-md btn-block" type="button" id="loadFileXml" value="loadXml" onclick="document.getElementById('file').click();"><i class="fas fa-paperclip"></i></button>
+                                            <br>
+                                            <button class="btn btn-primary btn-md btn-block" type="button" id="loadFileXml" value="loadXml" onclick="document.getElementById('file_img').click();"><i class="fas fa-camera-retro"></i></button>
+                                        </div>
+                                        <input type="file" style="display:none;" id="file" name="dokumen_chat" />
+                                        <input type="file" style="display:none;" id="file_img" name="img_chat" />
+                                    </div>
+                                <?php    } else { ?>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text attach_btn">
+                                            <button disabled class="btn btn-danger btn-md btn-block" type="button" id="loadFileXml" value="loadXml" onclick="document.getElementById('file').click();"><i class="fas fa-paperclip"></i></button>
+                                            <br>
+                                            <button disabled class="btn btn-primary btn-md btn-block" type="button" id="loadFileXml" value="loadXml" onclick="document.getElementById('file_img').click();"><i class="fas fa-camera-retro"></i></button>
+                                        </div>
+                                        <input type="file" style="display:none;" id="file" name="dokumen_chat" />
+                                        <input type="file" style="display:none;" id="file_img" name="img_chat" />
+                                    </div>
+                                <?php    } ?>
+                            <?php } else { ?>
+                                <?php $date1 = $jadwal_aanwijzing['waktu_selesai'];
+                                $date = new DateTime($date1);
+                                $date_plus = $date->modify("+3 hours");
+                                if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
+
+                                <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text attach_btn">
+                                            <button class="btn btn-danger btn-md btn-block" type="button" id="loadFileXml" value="loadXml" onclick="document.getElementById('file').click();"><i class="fas fa-paperclip"></i></button>
+                                            <br>
+                                            <button class="btn btn-primary btn-md btn-block" type="button" id="loadFileXml" value="loadXml" onclick="document.getElementById('file_img').click();"><i class="fas fa-camera-retro"></i></button>
+                                        </div>
+                                        <input type="file" style="display:none;" id="file" name="dokumen_chat" />
+                                        <input type="file" style="display:none;" id="file_img" name="img_chat" />
+                                    </div>
+                                <?php    } else { ?>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text attach_btn">
+                                            <button disabled class="btn btn-danger btn-md btn-block" type="button" id="loadFileXml" value="loadXml" onclick="document.getElementById('file').click();"><i class="fas fa-paperclip"></i></button>
+                                            <br>
+                                            <button disabled class="btn btn-primary btn-md btn-block" type="button" id="loadFileXml" value="loadXml" onclick="document.getElementById('file_img').click();"><i class="fas fa-camera-retro"></i></button>
+                                        </div>
+                                        <input type="file" style="display:none;" id="file" name="dokumen_chat" />
+                                        <input type="file" style="display:none;" id="file_img" name="img_chat" />
+                                    </div>
+                                <?php    } ?>
+                            <?php } ?>
+
+
                             <?php if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
 
                                 <?php $date2 = $jadwal_aanwijzing['waktu_selesai'];
