@@ -400,7 +400,6 @@
                         <li class="nav-item">
                             <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('tender_diikuti/informasi_tender/' . $rup['id_url_rup']) ?>"><i class="fa fa-columns" aria-hidden="true"></i> Informasi Pengadaan</a>
                         </li>
-<<<<<<< HEAD
                         <li class="nav-item">
                             <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('tender_diikuti/aanwijzing/' . $rup['id_url_rup']) ?>"><i class="fa fa-comments" aria-hidden="true"></i> Aanwijzing (PQ)</a>
                         </li>
@@ -412,40 +411,18 @@
                             if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai'])) >= date('Y-m-d H:i')) { ?>
                             <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai']))  == date('Y-m-d H:i')) { ?>
                                 <!-- <li class="nav-item">
-                                                                            <a class="nav-link active" style="margin-left: 5px;" href="<?= base_url('tender_diikuti/aanwijzing/' . $rup['id_url_rup']) ?>"><i class="fa fa-comments" aria-hidden="true"></i> Aanwijzing (PQ)</a>
-                                                                        </li> -->
-=======
-                        <?php if (date('Y-m-d H:i', strtotime($jadwal_aanwizing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwizing['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
-                            <?php $date2 = $jadwal_aanwizing['waktu_selesai'];
-                            if (date('Y-m-d H:i', strtotime($jadwal_aanwizing['waktu_mulai'])) >= date('Y-m-d H:i')) { ?>
-                            <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwizing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwizing['waktu_mulai']))  == date('Y-m-d H:i')) { ?>
-                                <li class="nav-item">
-                                    <a class="nav-link active" style="margin-left: 5px;" href="<?= base_url('tender_diikuti/aanwijzing/' . $rup['id_url_rup']) ?>"><i class="fa fa-comments" aria-hidden="true"></i> Aanwijzing Penawaran</a>
-                                </li>
->>>>>>> f616f29fc19923efdcaf57768137fa780fe2d975
+                                                                                    <a class="nav-link active" style="margin-left: 5px;" href="<?= base_url('tender_diikuti/aanwijzing/' . $rup['id_url_rup']) ?>"><i class="fa fa-comments" aria-hidden="true"></i> Aanwijzing (PQ)</a>
+                                                                                </li> -->
                             <?php    } else { ?>
 
                             <?php    } ?>
                         <?php } else { ?>
                             <?php
-<<<<<<< HEAD
                             if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
 
                             <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
 
                             <?php    } else { ?>
-=======
-                            if (date('Y-m-d H:i', strtotime($jadwal_aanwizing['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
-
-                            <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwizing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwizing['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
-                                <li class="nav-item">
-                                    <a class="nav-link active" style="margin-left: 5px;" href="<?= base_url('tender_diikuti/aanwijzing/' . $rup['id_url_rup']) ?>"><i class="fa fa-comments" aria-hidden="true"></i> Aanwijzing Penawaran</a>
-                                </li>
-                            <?php    } else { ?>
-                                <li class="nav-item">
-                                    <a class="nav-link active" style="margin-left: 5px;" href="<?= base_url('tender_diikuti/aanwijzing/' . $rup['id_url_rup']) ?>"><i class="fa fa-comments" aria-hidden="true"></i> Aanwijzing Penawaran</a>
-                                </li>
->>>>>>> f616f29fc19923efdcaf57768137fa780fe2d975
                             <?php    } ?>
                         <?php } ?>
 
@@ -507,11 +484,7 @@
                                     <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('tender_diikuti/sanggahan_akhir/'  . $rup['id_url_rup']) ?>"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Sanggahan </a>
                                 </li>
                             <?php    } else { ?>
-<<<<<<< HEAD
                                 <!-- waktu Telah Selesai -->
-=======
-                                <!-- waktu Telah Selesai asdasd-->
->>>>>>> f616f29fc19923efdcaf57768137fa780fe2d975
                             <?php    } ?>
                         <?php } else { ?>
                             <?php
@@ -525,12 +498,9 @@
                                 <!-- Waktu Telah Berakhir -->
                             <?php    } ?>
                         <?php } ?>
-<<<<<<< HEAD
                         <!-- <li class="nav-item">
                             <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="#"><i class="fa fa-suitcase" aria-hidden="true"></i> Berita Acara</a>
                         </li> -->
-=======
->>>>>>> f616f29fc19923efdcaf57768137fa780fe2d975
                     </ul>
                 </div>
             </div>
@@ -604,7 +574,6 @@
                                 <input type="file" style="display:none;" id="file" name="dokumen_chat" />
                                 <input type="file" style="display:none;" id="file_img" name="img_chat" />
                             </div>
-<<<<<<< HEAD
                             <?php if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
 
                                 <?php $date2 = $jadwal_aanwijzing['waktu_selesai'];
@@ -613,16 +582,6 @@
                                 if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai'])) >= date('Y-m-d H:i')) { ?>
 
                                 <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai']))  == date('Y-m-d H:i')) { ?>
-=======
-                            <?php if (date('Y-m-d H:i', strtotime($jadwal_aanwizing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwizing['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
-
-                                <?php $date2 = $jadwal_aanwizing['waktu_selesai'];
-                                $date20 = new DateTime($date2);
-                                $date_plus20 = $date20->modify("+3 hours");
-                                if (date('Y-m-d H:i', strtotime($jadwal_aanwizing['waktu_mulai'])) >= date('Y-m-d H:i')) { ?>
-
-                                <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwizing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwizing['waktu_mulai']))  == date('Y-m-d H:i')) { ?>
->>>>>>> f616f29fc19923efdcaf57768137fa780fe2d975
                                     <textarea name="isi" class="form-control type_msg" placeholder="Type your message..."></textarea>
                                     <div class="input-group-append">
                                         <button type="submit" id="upload" name="upload" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>
@@ -633,21 +592,12 @@
                                     </div>
                                 <?php    } ?>
                             <?php } else { ?>
-<<<<<<< HEAD
                                 <?php $date1 = $jadwal_aanwijzing['waktu_selesai'];
                                 $date = new DateTime($date1);
                                 $date_plus = $date->modify("+3 hours");
                                 if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
 
                                 <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
-=======
-                                <?php $date1 = $jadwal_aanwizing['waktu_selesai'];
-                                $date = new DateTime($date1);
-                                $date_plus = $date->modify("+3 hours");
-                                if (date('Y-m-d H:i', strtotime($jadwal_aanwizing['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
-
-                                <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwizing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwizing['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
->>>>>>> f616f29fc19923efdcaf57768137fa780fe2d975
                                     <textarea name="isi" class="form-control type_msg" placeholder="Type your message..."></textarea>
                                     <div class="input-group-append">
                                         <button type="submit" id="upload" name="upload" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>

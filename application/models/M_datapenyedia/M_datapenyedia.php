@@ -1000,8 +1000,7 @@ class M_datapenyedia extends CI_Model
             foreach ($cek_table as $key => $value) {
                 $this->db->where('nik !=', '' . $value['nik'] . '');
             }
-        } else {
-        }
+        } else { }
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -1015,8 +1014,7 @@ class M_datapenyedia extends CI_Model
             foreach ($cek_table2 as $key => $valu2) {
                 $this->db->or_where('nik', '' . $valu2['nik'] . '');
             }
-        } else {
-        }
+        } else { }
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -1324,8 +1322,7 @@ class M_datapenyedia extends CI_Model
             foreach ($cek_table as $key => $value) {
                 $this->db->where('nik !=', '' . $value['nik'] . '');
             }
-        } else {
-        }
+        } else { }
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -1339,8 +1336,7 @@ class M_datapenyedia extends CI_Model
             foreach ($cek_table2 as $key => $valu2) {
                 $this->db->or_where('nik', '' . $valu2['nik'] . '');
             }
-        } else {
-        }
+        } else { }
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -1617,8 +1613,7 @@ class M_datapenyedia extends CI_Model
             foreach ($cek_table as $key => $value) {
                 $this->db->where('no_kontrak !=', '' . $value['no_kontrak'] . '');
             }
-        } else {
-        }
+        } else { }
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -1632,8 +1627,7 @@ class M_datapenyedia extends CI_Model
             foreach ($cek_table2 as $key => $valu2) {
                 $this->db->or_where('no_kontrak', '' . $valu2['no_kontrak'] . '');
             }
-        } else {
-        }
+        } else { }
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -2265,5 +2259,105 @@ class M_datapenyedia extends CI_Model
             $query_akhir = $this->db->get();
             return $query_akhir->result_array();
         }
+    }
+
+
+    public function get_result_kbli_nib($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_nib');
+        $this->db->where('tbl_vendor_kbli_nib.id_vendor', $id_vendor);
+        $this->db->where_in('tbl_vendor_kbli_nib.sts_kbli_nib', [0, 2]);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_result_cek_kbli_nib($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_nib');
+        $this->db->where('tbl_vendor_kbli_nib.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    // siup
+    public function get_result_kbli_siup($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_siup');
+        $this->db->where('tbl_vendor_kbli_siup.id_vendor', $id_vendor);
+        $this->db->where_in('tbl_vendor_kbli_siup.sts_kbli_siup', [0, 2]);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_result_cek_kbli_siup($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_siup');
+        $this->db->where('tbl_vendor_kbli_siup.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    // sbu
+    public function get_result_kbli_sbu($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_sbu');
+        $this->db->where('tbl_vendor_kbli_sbu.id_vendor', $id_vendor);
+        $this->db->where_in('tbl_vendor_kbli_sbu.sts_kbli_sbu', [0, 2]);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_result_cek_kbli_sbu($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_sbu');
+        $this->db->where('tbl_vendor_kbli_sbu.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    // siujk
+    public function get_result_kbli_siujk($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_siujk');
+        $this->db->where('tbl_vendor_kbli_siujk.id_vendor', $id_vendor);
+        $this->db->where_in('tbl_vendor_kbli_siujk.sts_kbli_siujk', [0, 2]);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_result_cek_kbli_siujk($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_siujk');
+        $this->db->where('tbl_vendor_kbli_siujk.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    // skdp
+    public function get_result_kbli_skdp($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_skdp');
+        $this->db->where('tbl_vendor_kbli_skdp.id_vendor', $id_vendor);
+        $this->db->where_in('tbl_vendor_kbli_skdp.sts_kbli_skdp', [0, 2]);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_result_cek_kbli_skdp($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_skdp');
+        $this->db->where('tbl_vendor_kbli_skdp.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
     }
 }

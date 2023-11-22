@@ -32,6 +32,12 @@
                         var check = '<i class="fa fa-check text-success" aria-hidden="true"></i>';
                         var status_waktu = '<small><span class="badge bg-success"><i class="fa fa-clock" aria-hidden="true"></i> Tahap Sudah Selesai </span></small>';
                     }
+                    
+                    if (response['jadwal'][i].alasan) {
+                        var alasan = response['jadwal'][i].alasan
+                    } else {
+                        var alasan = ''
+                    }
 
                     html += '<tr>' +
                         '<td><small>' + no++ + '</small></td>' +
@@ -39,6 +45,7 @@
                         '<td><small>' + response['jadwal'][i].waktu_mulai + '</small></td>' +
                         '<td><small>' + response['jadwal'][i].waktu_selesai + '</small></td>' +
                         '<td>' + status_waktu + '</td>' +
+                        '<td><small>' + alasan + '</small></td>' +
                         '</tr>';
                 }
                 $('#load_jadwal').html(html);

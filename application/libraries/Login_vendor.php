@@ -40,7 +40,8 @@ class Login_vendor
                         'bentuk_usaha' => $cek->bentuk_usaha,
                         'npwp' => $cek->npwp,
                         'kualifikasi_usaha' => $cek->kualifikasi_usaha,
-                        'id_jenis_usaha' => $cek->id_jenis_usaha
+                        'id_jenis_usaha' => $cek->id_jenis_usaha,
+                        'no_telpon' => $cek->no_telpon,
                     ];
 
                     // buat session

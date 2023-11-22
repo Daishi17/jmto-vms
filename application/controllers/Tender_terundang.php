@@ -12,6 +12,7 @@ class Tender_terundang extends CI_Controller
         $this->load->model('M_dashboard/M_dashboard');
         $this->load->model('M_monitoring/M_monitoring');
         $this->load->model('M_tender/M_tender');
+        $this->load->model('M_tender/M_count');
         $this->load->helper('download');
         $id_vendor = $this->session->userdata('id_vendor');
         if (!$id_vendor) {
@@ -31,7 +32,8 @@ class Tender_terundang extends CI_Controller
         $update_notif = ['notifikasi' => 0];
         $where = ['id_vendor' => $id_vendor];
 
-        $data['count_tender_umum'] =  $this->M_tender->count_all_data();
+        $data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
+        $data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
         $this->M_monitoring->update_notif($where, $update_notif);
 
         $this->load->view('template_menu/header_menu', $data);
@@ -82,9 +84,45 @@ class Tender_terundang extends CI_Controller
         $this->output->set_content_type('application/json')->set_output(json_encode($output));
     }
 
+    public function get_data_tender_terbatas()
+    {
+        $session = $this->session->userdata('id_vendor');
+        $resultss = $this->M_tender->gettable_terbatas($session);
+        $data = [];
+        $no = $_POST['start'];
+        foreach ($resultss as $rs) {
+
+            $row = array();
+            $row[] = ++$no;
+            $row[] = $rs->tahun_rup;
+            $row[] = $rs->nama_rup;
+            $row[] = $rs->nama_departemen;
+            $row[] = $rs->nama_jenis_pengadaan;
+            $row[] = 'Rp. ' . number_format($rs->total_hps_rup, 2, ",", ".");;
+            if ($rs->batas_pendaftaran_tender) {
+                $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
+                </span>';
+            } else {
+                $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
+                </span>';
+            }
+            $row[] = '<a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white"  onClick="by_id_rup(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa fa-info-circle" aria-hidden="true"></i> Detail</a>';
+            $data[] = $row;
+        }
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->M_tender->count_all_data_terbatas($session),
+            "recordsFiltered" => $this->M_tender->count_filtered_data_terbatas($session),
+            "data" => $data
+        );
+        $this->output->set_content_type('application/json')->set_output(json_encode($output));
+    }
+
     public function detail_paket($id_rup)
     {
+
         $data_rup = $this->M_tender->get_row_rup($id_rup);
+
         $jadwal = $this->M_tender->get_jadwal($id_rup);
         $row_syarat_administrasi_rup = $this->M_tender->get_syarat_izin_usaha_tender($data_rup['id_rup']);
         $cek_ikut =  $this->M_tender->cek_mengikuti($data_rup['id_rup']);
@@ -113,13 +151,33 @@ class Tender_terundang extends CI_Controller
             mkdir('file_paket/' . $data_rup['nama_rup'] . '/' . $nama_usaha, 0777, TRUE);
         }
 
-
         $data = [
             'id_vendor' => $id_vendor,
             'id_rup' => $id_rup,
             'sts_mengikuti_paket' => 1
         ];
         $this->M_tender->insert_mengikuti($data);
+        $this->output->set_content_type('application/json')->set_output(json_encode('success'));
+    }
+
+    public function ikuti_paket_terbatas($id_rup)
+    {
+        $id_vendor = $this->session->userdata('id_vendor');
+        $nama_usaha = $this->session->userdata('nama_usaha');
+        $data_rup = $this->M_tender->get_rup_byid($id_rup);
+
+        if (!is_dir('file_paket/' . $data_rup['nama_rup'] . '/' . $nama_usaha)) {
+            mkdir('file_paket/' . $data_rup['nama_rup'] . '/' . $nama_usaha, 0777, TRUE);
+        }
+
+        $data = [
+            'sts_mengikuti_paket' => 1
+        ];
+        $where = [
+            'id_vendor' => $id_vendor,
+            'id_rup' => $id_rup,
+        ];
+        $this->M_tender->update_mengikuti($data, $where);
         $this->output->set_content_type('application/json')->set_output(json_encode('success'));
     }
 }

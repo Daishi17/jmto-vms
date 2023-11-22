@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 date_default_timezone_set("Asia/Jakarta");
-
+error_reporting(0);
 require_once APPPATH . 'third_party/Spout/Autoloader/autoload.php';
 require 'vendor/autoload.php'; // Include the PhpSpreadsheet autoloader
 
@@ -62,6 +62,7 @@ class Datapenyedia extends CI_Controller
 		$kelurahan = $this->input->post('kelurahan');
 		$kode_pos = $this->input->post('kode_pos');
 		$no_telpon = $this->input->post('no_telpon');
+		$no_telpon_kantor = $this->input->post('no_telpon_kantor');
 		$sts_kantor_cabang = $this->input->post('sts_kantor_cabang');
 		$alamat_kantor_cabang = $this->input->post('alamat_kantor_cabang');
 		$alasan_perubahan = $this->input->post('alasan_perubahan');
@@ -81,6 +82,7 @@ class Datapenyedia extends CI_Controller
 				'kelurahan' => $kelurahan,
 				'kode_pos' => $kode_pos,
 				'no_telpon' => $no_telpon,
+				'no_telpon_kantor' => $no_telpon_kantor,
 				'sts_kantor_cabang' => $sts_kantor_cabang,
 				'alasan_perubahan' => $alasan_perubahan,
 				'alamat_kantor_cabang' => $alamat_kantor_cabang,
@@ -99,6 +101,7 @@ class Datapenyedia extends CI_Controller
 				'kelurahan' => $kelurahan,
 				'kode_pos' => $kode_pos,
 				'no_telpon' => $no_telpon,
+				'no_telpon_kantor' => $no_telpon_kantor,
 				'sts_kantor_cabang' => $sts_kantor_cabang,
 				'alasan_perubahan' => $alasan_perubahan,
 				'alamat_kantor_cabang' => $alamat_kantor_cabang,
@@ -144,6 +147,82 @@ class Datapenyedia extends CI_Controller
 		$row_lainnya = $this->M_datapenyedia->get_row_lainnya($id_vendor);
 		$row_akta_pendirian = $this->M_datapenyedia->get_row_akta_pendirian($id_vendor);
 		$row_akta_perubahan = $this->M_datapenyedia->get_row_akta_perubahan($id_vendor);
+
+		// validasi KBLI
+		// NIB
+		$result_kbli_nib = $this->M_datapenyedia->get_result_kbli_nib($id_vendor);
+		$result_cek_kbli_nib = $this->M_datapenyedia->get_result_cek_kbli_nib($id_vendor);
+		if ($result_cek_kbli_nib) {
+			$logika_validasi_kbli_nib_jika_ada = 'ada';
+		} else {
+			$logika_validasi_kbli_nib_jika_ada = 'tidak_ada';
+		}
+		if ($result_kbli_nib) {
+			$logika_validasi_kbli_nib = 'belum_tervalidasi';
+		} else {
+			$logika_validasi_kbli_nib = 'sudah_tervalidasi';
+		}
+
+		// validasi KBLI
+		// siup
+		$result_kbli_siup = $this->M_datapenyedia->get_result_kbli_siup($id_vendor);
+		$result_cek_kbli_siup = $this->M_datapenyedia->get_result_cek_kbli_siup($id_vendor);
+		if ($result_cek_kbli_siup) {
+			$logika_validasi_kbli_siup_jika_ada = 'ada';
+		} else {
+			$logika_validasi_kbli_siup_jika_ada = 'tidak_ada';
+		}
+		if ($result_kbli_siup) {
+			$logika_validasi_kbli_siup = 'belum_tervalidasi';
+		} else {
+			$logika_validasi_kbli_siup = 'sudah_tervalidasi';
+		}
+
+
+		// sbu
+		$result_kbli_sbu = $this->M_datapenyedia->get_result_kbli_sbu($id_vendor);
+		$result_cek_kbli_sbu = $this->M_datapenyedia->get_result_cek_kbli_sbu($id_vendor);
+		if ($result_cek_kbli_sbu) {
+			$logika_validasi_kbli_sbu_jika_ada = 'ada';
+		} else {
+			$logika_validasi_kbli_sbu_jika_ada = 'tidak_ada';
+		}
+		if ($result_kbli_sbu) {
+			$logika_validasi_kbli_sbu = 'belum_tervalidasi';
+		} else {
+			$logika_validasi_kbli_sbu = 'sudah_tervalidasi';
+		}
+
+		// siujk
+		$result_kbli_siujk = $this->M_datapenyedia->get_result_kbli_siujk($id_vendor);
+		$result_cek_kbli_siujk = $this->M_datapenyedia->get_result_cek_kbli_siujk($id_vendor);
+		if ($result_cek_kbli_siujk) {
+			$logika_validasi_kbli_siujk_jika_ada = 'ada';
+		} else {
+			$logika_validasi_kbli_siujk_jika_ada = 'tidak_ada';
+		}
+		if ($result_kbli_siujk) {
+			$logika_validasi_kbli_siujk = 'belum_tervalidasi';
+		} else {
+			$logika_validasi_kbli_siujk = 'sudah_tervalidasi';
+		}
+
+
+		// skdp
+		$result_kbli_skdp = $this->M_datapenyedia->get_result_kbli_skdp($id_vendor);
+		$result_cek_kbli_skdp = $this->M_datapenyedia->get_result_cek_kbli_skdp($id_vendor);
+		if ($result_cek_kbli_skdp) {
+			$logika_validasi_kbli_skdp_jika_ada = 'ada';
+		} else {
+			$logika_validasi_kbli_skdp_jika_ada = 'tidak_ada';
+		}
+		if ($result_kbli_skdp) {
+			$logika_validasi_kbli_skdp = 'belum_tervalidasi';
+		} else {
+			$logika_validasi_kbli_skdp = 'sudah_tervalidasi';
+		}
+
+		// 
 		if ($token == $row_vendor['token_scure_vendor']) {
 			$response = [
 				'row_vendor' => $row_vendor,
@@ -155,6 +234,22 @@ class Datapenyedia extends CI_Controller
 				'row_lainnya' => $row_lainnya,
 				'row_akta_pendirian' => $row_akta_pendirian,
 				'row_akta_perubahan' => $row_akta_perubahan,
+				// ini untuk validasi 
+				// nib
+				'validasi_result_nib' => $logika_validasi_kbli_nib_jika_ada,
+				'validasi_nib' => $logika_validasi_kbli_nib,
+				// siup
+				'validasi_result_siup' => $logika_validasi_kbli_siup_jika_ada,
+				'validasi_siup' => $logika_validasi_kbli_siup,
+				// sbu
+				'validasi_result_sbu' => $logika_validasi_kbli_sbu_jika_ada,
+				'validasi_sbu' => $logika_validasi_kbli_sbu,
+				// siujk
+				'validasi_result_siujk' => $logika_validasi_kbli_siujk_jika_ada,
+				'validasi_siujk' => $logika_validasi_kbli_siujk,
+				// skdp
+				'validasi_result_skdp' => $logika_validasi_kbli_skdp_jika_ada,
+				'validasi_skdp' => $logika_validasi_kbli_skdp,
 			];
 			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 		} else {
@@ -181,7 +276,12 @@ class Datapenyedia extends CI_Controller
 		if ($sts_seumur_hidup == 2) {
 			$tgl_berlaku = NULL;
 		} else {
-			$tgl_berlaku = $this->input->post('tgl_berlaku_nib');
+			$tgl_berlaku_kondisi = $this->input->post('tgl_berlaku_nib');
+			if ($tgl_berlaku_kondisi == NULL) {
+				$tgl_berlaku = date('Y-m-d');
+			} else {
+				$tgl_berlaku = $this->input->post('tgl_berlaku_nib');
+			}
 		}
 
 		$this->form_validation->set_rules('nomor_surat_nib', 'Nomor Surat', 'required|trim', ['required' => 'Nomor Surat Wajib Diisi!']);
@@ -406,10 +506,12 @@ class Datapenyedia extends CI_Controller
 			$row[] = ++$no;
 			$row[] = $rs->kode_kbli . ' || ' . $rs->nama_kbli;
 			$row[] = $rs->nama_kualifikasi;
-			if ($rs->sts_kbli_nib == 1) {
+			if ($rs->sts_kbli_nib == 0) {
+				$row[] = '<span class="badge bg-secondary">Belum Di Periksa</span>';
+			} else if ($rs->sts_kbli_nib == 1) {
 				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
 			} else {
-				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
+				$row[] = '<span class="badge bg-danger">Tidak Valid</span>';
 			}
 			$row[] = '<a  href="javascript:;" class="btn btn-warning btn-sm button_edit" onClick="byid_kbli_nib(' . "'" . $rs->id_url_kbli_nib . "','edit'" . ')"><i class="fa fa-edit"></i> Edit</a>
 			<a  href="javascript:;" class="btn btn-danger btn-sm button_hapus" onClick="byid_kbli_nib(' . "'" . $rs->id_url_kbli_nib . "','hapus'" . ')"><i class="fas fa fa-trash"></i> Hapus</a>';
@@ -578,7 +680,12 @@ class Datapenyedia extends CI_Controller
 		if ($sts_seumur_hidup == 2) {
 			$tgl_berlaku = NULL;
 		} else {
-			$tgl_berlaku = $this->input->post('tgl_berlaku_siup');
+			$tgl_berlaku_kondisi = $this->input->post('tgl_berlaku_siup');
+			if ($tgl_berlaku_kondisi == NULL) {
+				$tgl_berlaku = date('Y-m-d');
+			} else {
+				$tgl_berlaku = $this->input->post('tgl_berlaku_siup');
+			}
 		}
 		$password_dokumen = '1234';
 		$this->form_validation->set_rules('nomor_surat_siup', 'Nomor Surat', 'required|trim', ['required' => 'Nomor Surat Wajib Diisi!']);
@@ -805,10 +912,12 @@ class Datapenyedia extends CI_Controller
 			$row[] = ++$no;
 			$row[] = $rs->kode_kbli . ' || ' . $rs->nama_kbli;
 			$row[] = $rs->nama_kualifikasi;
-			if ($rs->sts_kbli_siup == 1) {
+			if ($rs->sts_kbli_siup == 0) {
+				$row[] = '<span class="badge bg-secondary">Belum Di Periksa</span>';
+			} else if ($rs->sts_kbli_siup == 1) {
 				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
 			} else {
-				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
+				$row[] = '<span class="badge bg-danger">Tidak Valid</span>';
 			}
 			$row[] = '<a  href="javascript:;" class="btn btn-warning btn-sm button_edit" onClick="byid_kbli_siup(' . "'" . $rs->id_url_kbli_siup . "','edit'" . ')"><i class="fa fa-edit"></i> Edit</a>
         <a  href="javascript:;" class="btn btn-danger btn-sm button_hapus" onClick="byid_kbli_siup(' . "'" . $rs->id_url_kbli_siup . "','hapus'" . ')"><i class="fas fa fa-trash"></i> Hapus</a>';
@@ -974,7 +1083,12 @@ class Datapenyedia extends CI_Controller
 		if ($sts_seumur_hidup == 2) {
 			$tgl_berlaku = NULL;
 		} else {
-			$tgl_berlaku = $this->input->post('tgl_berlaku_siujk');
+			$tgl_berlaku_kondisi = $this->input->post('tgl_berlaku_siujk');
+			if ($tgl_berlaku_kondisi == NULL) {
+				$tgl_berlaku = date('Y-m-d');
+			} else {
+				$tgl_berlaku = $this->input->post('tgl_berlaku_siujk');
+			}
 		}
 		$password_dokumen = '1234';
 		$this->form_validation->set_rules('nomor_surat_siujk', 'Nomor Surat', 'required|trim', ['required' => 'Nomor Surat Wajib Diisi!']);
@@ -1196,10 +1310,12 @@ class Datapenyedia extends CI_Controller
 			$row[] = ++$no;
 			$row[] = $rs->kode_kbli . ' || ' . $rs->nama_kbli;
 			$row[] = $rs->nama_kualifikasi;
-			if ($rs->sts_kbli_siujk == 1) {
+			if ($rs->sts_kbli_siujk == 0) {
+				$row[] = '<span class="badge bg-secondary">Belum Di Periksa</span>';
+			} else if ($rs->sts_kbli_siujk == 1) {
 				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
 			} else {
-				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
+				$row[] = '<span class="badge bg-danger">Tidak Valid</span>';
 			}
 			$row[] = '<a  href="javascript:;" class="btn btn-warning btn-sm button_edit" onClick="byid_kbli_siujk(' . "'" . $rs->id_url_kbli_siujk . "','edit'" . ')"><i 		class="fa fa-edit"></i> Edit</a>
    					 <a  href="javascript:;" class="btn btn-danger btn-sm button_hapus" onClick="byid_kbli_siujk(' . "'" . $rs->id_url_kbli_siujk . "','hapus'" . ')"><i class="fas fa fa-trash"></i> Hapus</a>';
@@ -1364,7 +1480,12 @@ class Datapenyedia extends CI_Controller
 		if ($sts_seumur_hidup == 2) {
 			$tgl_berlaku = NULL;
 		} else {
-			$tgl_berlaku = $this->input->post('tgl_berlaku_sbu');
+			$tgl_berlaku_kondisi = $this->input->post('tgl_berlaku_sbu');
+			if ($tgl_berlaku_kondisi == NULL) {
+				$tgl_berlaku = date('Y-m-d');
+			} else {
+				$tgl_berlaku = $this->input->post('tgl_berlaku_sbu');
+			}
 		}
 		$password_dokumen = '1234';
 		$this->form_validation->set_rules('nomor_surat_sbu', 'Nomor Surat', 'required|trim', ['required' => 'Nomor Surat Wajib Diisi!']);
@@ -1585,10 +1706,12 @@ class Datapenyedia extends CI_Controller
 			$row[] = ++$no;
 			$row[] = $rs->kode_sbu . ' || ' . $rs->nama_sbu;
 			$row[] = $rs->nama_kualifikasi;
-			if ($rs->sts_kbli_sbu == 1) {
+			if ($rs->sts_kbli_sbu == 0) {
+				$row[] = '<span class="badge bg-secondary">Belum Di Periksa</span>';
+			} else if ($rs->sts_kbli_sbu == 1) {
 				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
 			} else {
-				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
+				$row[] = '<span class="badge bg-danger">Tidak Valid</span>';
 			}
 			$row[] = '<a  href="javascript:;" class="btn btn-warning btn-sm button_edit" onClick="byid_kbli_sbu(' . "'" . $rs->id_url_kbli_sbu . "','edit'" . ')"><i class="fa fa-edit"></i> Edit</a>
     		<a  href="javascript:;" class="btn btn-danger btn-sm button_hapus" onClick="byid_kbli_sbu(' . "'" . $rs->id_url_kbli_sbu . "','hapus'" . ')"><i class="fas fa fa-trash"></i> Hapus</a>';
@@ -1754,7 +1877,6 @@ class Datapenyedia extends CI_Controller
 		$id_vendor = $this->session->userdata('id_vendor');
 		$nama_usaha = $this->session->userdata('nama_usaha');
 		$row_akta_pendirian = $this->M_datapenyedia->get_row_akta_pendirian($id_vendor);
-
 		$id = $this->uuid->v4();
 		$id = str_replace('-', '', $id);
 		$token = $this->token->data_token();
@@ -1803,20 +1925,24 @@ class Datapenyedia extends CI_Controller
 			$secret_token_dokumen1 = 'jmto.1' . $id;
 			$secret_token_dokumen2 = 'jmto.2' . $id;
 
-			$config['upload_path'] = './file_vms/' . $nama_usaha . '/Akta_Pendirian';
+			$config['upload_path'] = './file_vms/' . $nama_usaha . '/Akta_pendirian';
 			$config['allowed_types'] = 'pdf';
 			$config['max_size'] = 0;
 			$config['remove_spaces'] = TRUE;
 			// $config['encrypt_name'] = TRUE;
-
+			// anggas
 			$this->load->library('upload', $config);
 			if ($this->upload->do_upload('file_dokumen')) {
 				$file_data_pendirian = $this->upload->data();
 				$file_dok_pendirian = openssl_encrypt($file_data_pendirian['file_name'], $chiper, $secret_token_dokumen1);
+			} else {
+				$file_dok_pendirian = $row_akta_pendirian['file_dokumen'];
 			}
 			if ($this->upload->do_upload('file_dok_kumham_pendirian')) {
 				$file_data_kumham = $this->upload->data();
 				$file_dok_kumham = openssl_encrypt($file_data_kumham['file_name'], $chiper, $secret_token_dokumen2);
+			} else {
+				$file_dok_kumham = $row_akta_pendirian['file_dok_kumham'];
 			}
 
 			$sts_upload = [
@@ -2114,7 +2240,7 @@ class Datapenyedia extends CI_Controller
 				mkdir('file_vms/' . $nama_usaha . '/Akta_perubahan', 0777, TRUE);
 			}
 
-			$config['upload_path'] = './file_vms/' . $nama_usaha . '/Akta_Perubahan';
+			$config['upload_path'] = './file_vms/' . $nama_usaha . '/Akta_perubahan';
 			$config['allowed_types'] = 'pdf';
 			$config['max_size'] = 0;
 			$config['remove_spaces'] = TRUE;
@@ -2125,12 +2251,15 @@ class Datapenyedia extends CI_Controller
 			if ($this->upload->do_upload('file_dokumen_perubahan')) {
 				$file_data_perubahan = $this->upload->data();
 				$file_dok_perubahan = openssl_encrypt($file_data_perubahan['file_name'], $chiper, $secret_token_dokumen1);
+			} else {
+				$file_dok_perubahan = $row_akta_perubahan['file_dokumen'];
 			}
 			if ($this->upload->do_upload('file_dok_kumham')) {
 				$file_data_kumham = $this->upload->data();
 				$file_dok_kumham = openssl_encrypt($file_data_kumham['file_name'], $chiper, $secret_token_dokumen2);
+			} else {
+				$file_dok_kumham = $row_akta_perubahan['file_dok_kumham'];
 			}
-
 			$sts_upload = [
 				'sts_upload_dokumen' => 1
 			];
@@ -2345,7 +2474,7 @@ class Datapenyedia extends CI_Controller
 			$row[] = $rs->alamat_pemilik;
 			$row[] = $rs->saham;
 			if ($rs->sts_validasi == 0) {
-				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
+				$row[] = '<span class="badge bg-secondary">Belum Di Periksa</span>';
 			} else if ($rs->sts_validasi == 1) {
 				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
 			} else if ($rs->sts_validasi == 2) {
@@ -2353,7 +2482,7 @@ class Datapenyedia extends CI_Controller
 			} else if ($rs->sts_validasi == 3) {
 				$row[] = '<span class="badge bg-warning">Revisi</span>';
 			} else {
-				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
+				$row[] = '<span class="badge bg-danger">Tidak Valid</span>';
 			}
 			$row[] = '<a  href="javascript:;" class="btn btn-info btn-sm" onClick="by_id_pemilik_manajerial(' . "'" . $rs->id_pemilik . "','edit'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i> View</a>
 			<a  href="javascript:;" class="btn btn-danger btn-sm" onClick="by_id_pemilik_manajerial(' . "'" . $rs->id_pemilik . "','hapus'" . ')"><i class="fas fa fa-trash"></i> Delete</a>';
@@ -2809,7 +2938,7 @@ class Datapenyedia extends CI_Controller
 			$row[] = $rs->jabatan_mulai;
 			$row[] = $rs->jabatan_selesai;
 			if ($rs->sts_validasi == 0) {
-				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
+				$row[] = '<span class="badge bg-secondary">Belum Di Periksa</span>';
 			} else if ($rs->sts_validasi == 1) {
 				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
 			} else if ($rs->sts_validasi == 2) {
@@ -3378,6 +3507,15 @@ class Datapenyedia extends CI_Controller
 			foreach ($reader->getSheetIterator() as $sheet) {
 				$numRow = 1;
 				foreach ($sheet->getRowIterator() as $row) {
+					$progres = $row->getCellAtIndex(6)->getValue();
+					$nilai_kontrak =  $row->getCellAtIndex(3)->getValue();
+					$nilai_sharing = (int) $nilai_kontrak * ((int) $progres / 100);
+					$timeStart = strtotime($row->getCellAtIndex(7));
+					$timeEnd = strtotime($row->getCellAtIndex(8));
+					// Menambah bulan ini + semua bulan pada tahun sebelumnya
+					$numBulan = (date("Y", $timeEnd) - date("Y", $timeStart)) * 12;
+					// menghitung selisih bulan
+					$numBulan += date("m", $timeEnd) - date("m", $timeStart);
 					if ($row->getCellAtIndex(0) == '') {
 						$response = [
 							'gagal' => 'No Kontrak Wajib Di Isi',
@@ -3401,8 +3539,12 @@ class Datapenyedia extends CI_Controller
 								'nilai_kontrak' => $row->getCellAtIndex(3),
 								'instansi_pemberi' => $row->getCellAtIndex(4),
 								'lokasi_pekerjaan' => $row->getCellAtIndex(5),
-								'tanggal_kontrak' => $row->getCellAtIndex(6),
-								'sts_validasi' => 0
+								'progres' => $row->getCellAtIndex(6),
+								'tanggal_kontrak' => $row->getCellAtIndex(7),
+								'tanggal_akhir_kontrak' => $row->getCellAtIndex(8),
+								'sts_validasi' => 0,
+								'nilai_sharing' => $nilai_sharing,
+								'jangka_waktu' => $numBulan
 							);
 							$this->M_datapenyedia->insert_pengalaman($data);
 						}
@@ -3436,19 +3578,21 @@ class Datapenyedia extends CI_Controller
 			$row[] = $rs->instansi_pemberi;
 			$row[] = $rs->no_kontrak . ' & ' . date('d-m-Y', strtotime($rs->tanggal_kontrak));
 			$row[] = date('d-m-Y', strtotime($rs->tanggal_akhir_kontrak));
-
-			$row[] = $rs->nilai_kontrak;
+			$row[] = "Rp " . number_format($rs->nilai_kontrak, 2, ',', '.');
 			$row[] = $rs->progres . '%';
-
 			$row[] = $rs->jangka_waktu . ' Bulan';
-			if ($rs->sts_validasi == 0) {
-				$row[] = '<span class="badge bg-success">Belum Tervalidasi</span>';
-			} else if ($rs->sts_validasi == 1) {
-				$row[] = '<span class="badge bg-secondary">Sudah Tervalidasi</span>';
-			} else if ($rs->sts_validasi == 2) {
-				$row[] = '<span class="badge bg-danger">Tidak Valid</span>';
-			} else if ($rs->sts_validasi == 3) {
-				$row[] = '<span class="badge bg-warning">Revisi</span>';
+			if ($rs->file_kontrak_pengalaman == NULL) {
+				$row[] = '<span class="badge bg-primary">Belum Upload File Kontrak</span>';
+			} else {
+				if ($rs->sts_validasi == NULL || $rs->sts_validasi == 0) {
+					$row[] = '<span class="badge bg-secondary">Belum Di Periksa</span>';
+				} else if ($rs->sts_validasi == 1) {
+					$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
+				} else if ($rs->sts_validasi == 2) {
+					$row[] = '<span class="badge bg-danger">Tidak Valid</span>';
+				} else if ($rs->sts_validasi == 3) {
+					$row[] = '<span class="badge bg-warning">Revisi</span>';
+				}
 			}
 			$row[] = '<a  href="javascript:;" class="btn btn-info btn-sm" onClick="by_id_pengalaman_manajerial(' . "'" . $rs->id_pengalaman . "','edit'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i> View</a>
 			<a  href="javascript:;" class="btn btn-danger btn-sm" onClick="by_id_pengalaman_manajerial(' . "'" . $rs->id_pengalaman . "','hapus'" . ')"><i class="fas fa fa-trash"></i> Delete</a>';
@@ -3474,12 +3618,13 @@ class Datapenyedia extends CI_Controller
 		foreach ($resultss as $rs) {
 			$row = array();
 			$row[] = ++$no;
-			$row[] = $rs->no_kontrak;
-			$row[] = $rs->tanggal_kontrak;
 			$row[] = $rs->nama_pekerjaan;
-			$row[] = $rs->nilai_kontrak;
-			$row[] = $rs->id_jenis_usaha;
 			$row[] = $rs->instansi_pemberi;
+			$row[] = $rs->no_kontrak . ' & ' . $rs->tanggal_kontrak;
+			$row[] = $rs->tanggal_akhir_kontrak;
+			$row[] = "Rp " . number_format($rs->nilai_kontrak, 2, ',', '.');
+			$row[] = $rs->progres . '%';
+			$row[] = $rs->jangka_waktu . ' Bulan';
 			$row[] = $rs->lokasi_pekerjaan;
 			$row[] = '<a  href="javascript:;" class="btn btn-warning btn-sm d-md-block" onClick="by_id_excel_pengalaman_manajerial(' . "'" . $rs->id_pengalaman . "','edit'" . ')"><i class="fa fa-edit"></i></a>
 				<a  href="javascript:;" class="btn btn-danger btn-sm d-md-block" onClick="by_id_excel_pengalaman_manajerial(' . "'" . $rs->id_pengalaman . "','hapus'" . ')"><i class="fas fa fa-trash"></i></a>';
@@ -3513,30 +3658,34 @@ class Datapenyedia extends CI_Controller
 		} else {
 			$get_row_enkrip = $this->M_datapenyedia->get_row_pengalaman_manajerial($id_pengalaman);
 		}
-		$no_kontrak = $this->input->post('no_kontrak');
-		$nama_pekerjaan = $this->input->post('nama_pekerjaan');
-		$id_jenis_usaha = $this->input->post('id_jenis_usaha');
-		$tanggal_kontrak = $this->input->post('tanggal_kontrak');
-		$instansi_pemberi = $this->input->post('instansi_pemberi');
-		$nilai_kontrak = $this->input->post('nilai_kontrak');
-		$lokasi_pekerjaan = $this->input->post('lokasi_pekerjaan');
-		$this->form_validation->set_rules('no_kontrak', 'No Kontrak', 'required|trim', ['required' => 'No Kontrak Wajib Diisi!']);
-		$this->form_validation->set_rules('nama_pekerjaan', 'Nama Pekerjaan', 'required|trim', ['required' => 'Nama Pekerjaan Wajib Diisi!']);
-		$this->form_validation->set_rules('id_jenis_usaha', 'Jenis Pengadaan', 'required|trim', ['required' => 'Jenis Pengadaan  Wajib Diisi!']);
-		$this->form_validation->set_rules('tanggal_kontrak', 'Tanggal Kontrak', 'required|trim', ['required' => 'Tanggal Kontrak  Wajib Diisi!']);
-		$this->form_validation->set_rules('instansi_pemberi', 'Instansi Pemberi', 'required|trim', ['required' => 'Instansi Pemberi  Wajib Diisi!']);
-		$this->form_validation->set_rules('nilai_kontrak', 'Nilai Kontrak', 'required|trim', ['required' => 'Nilai Kontrak  Wajib Diisi!']);
-		$this->form_validation->set_rules('lokasi_pekerjaan', 'Lokasi Pekerjaan', 'required|trim', ['required' => 'Lokasi Pekerjaan  Wajib Diisi!']);
+		$no_kontrak = $this->input->post('no_kontrak_edit');
+		$nama_pekerjaan = $this->input->post('nama_pekerjaan_edit');
+		$id_jenis_usaha = $this->input->post('id_jenis_usaha_edit');
+		$tanggal_kontrak = $this->input->post('tanggal_kontrak_edit');
+		$tanggal_kontrak_akhir = $this->input->post('tanggal_kontrak_akhir_edit');
+		$progres = $this->input->post('progres_edit');
+		$nilai_sharing = $this->input->post('nilai_sharing_edit');
+		$instansi_pemberi = $this->input->post('instansi_pemberi_edit');
+		$nilai_kontrak = $this->input->post('nilai_kontrak_edit');
+		$lokasi_pekerjaan = $this->input->post('lokasi_pekerjaan_edit');
+		$jangka_waktu = $this->input->post('jangka_waktu_edit');
+		$this->form_validation->set_rules('no_kontrak_edit', 'No Kontrak', 'required|trim', ['required' => 'No Kontrak Wajib Diisi!']);
+		$this->form_validation->set_rules('nama_pekerjaan_edit', 'Nama Pekerjaan', 'required|trim', ['required' => 'Nama Pekerjaan Wajib Diisi!']);
+		$this->form_validation->set_rules('id_jenis_usaha_edit', 'Jenis Pengadaan', 'required|trim', ['required' => 'Jenis Pengadaan  Wajib Diisi!']);
+		$this->form_validation->set_rules('tanggal_kontrak_edit', 'Tanggal Kontrak', 'required|trim', ['required' => 'Tanggal Kontrak  Wajib Diisi!']);
+		$this->form_validation->set_rules('instansi_pemberi_edit', 'Instansi Pemberi', 'required|trim', ['required' => 'Instansi Pemberi  Wajib Diisi!']);
+		$this->form_validation->set_rules('nilai_kontrak_edit', 'Nilai Kontrak', 'required|trim', ['required' => 'Nilai Kontrak  Wajib Diisi!']);
+		$this->form_validation->set_rules('lokasi_pekerjaan_edit', 'Lokasi Pekerjaan', 'required|trim', ['required' => 'Lokasi Pekerjaan  Wajib Diisi!']);
 		if ($this->form_validation->run() == false) {
 			$response = [
 				'error' => [
-					'no_kontrak' => form_error('no_kontrak'),
-					'nama_pekerjaan' => form_error('nama_pekerjaan'),
-					'id_jenis_usaha' => form_error('id_jenis_usaha'),
-					'tanggal_kontrak' => form_error('tanggal_kontrak'),
-					'instansi_pemberi' => form_error('instansi_pemberi'),
-					'nilai_kontrak' => form_error('nilai_kontrak'),
-					'lokasi_pekerjaan' => form_error('lokasi_pekerjaan'),
+					'no_kontrak_edit' => form_error('no_kontrak_edit'),
+					'nama_pekerjaan_edit' => form_error('nama_pekerjaan_edit'),
+					'id_jenis_usaha_edit' => form_error('id_jenis_usaha_edit'),
+					'tanggal_kontrak_edit' => form_error('tanggal_kontrak_edit'),
+					'instansi_pemberi_edit' => form_error('instansi_pemberi_edit'),
+					'nilai_kontrak_edit' => form_error('nilai_kontrak_edit'),
+					'lokasi_pekerjaan_edit' => form_error('lokasi_pekerjaan_edit'),
 				],
 			];
 			$this->output->set_content_type('application/json')->set_output(json_encode($response));
@@ -3560,7 +3709,7 @@ class Datapenyedia extends CI_Controller
 			$config['allowed_types'] = 'pdf';
 			$config['max_size'] = 0;
 			$this->load->library('upload', $config);
-			if ($this->upload->do_upload('file_kontrak_pengalaman')) {
+			if ($this->upload->do_upload('file_kontrak_pengalaman_edit')) {
 				$fileDataKontrak = $this->upload->data();
 				$post_file_kontrak_pengalaman = openssl_encrypt($fileDataKontrak['file_name'], $chiper, $secret_token_dokumen1);
 			} else {
@@ -3580,8 +3729,12 @@ class Datapenyedia extends CI_Controller
 				'nilai_kontrak' => $nilai_kontrak,
 				'lokasi_pekerjaan' => $lokasi_pekerjaan,
 				'file_kontrak_pengalaman' => $post_file_kontrak_pengalaman,
+				'tanggal_akhir_kontrak' => $tanggal_kontrak_akhir,
+				'progres' => $progres,
+				'nilai_sharing' => $nilai_sharing,
+				'jangka_waktu' => $jangka_waktu,
 				'sts_token_dokumen_pengalaman' => 1,
-				'sts_validasi' => 2
+				'sts_validasi' => 0
 			];
 			if ($type_edit_pengalaman == 'edit_excel') {
 				$this->M_datapenyedia->update_excel_pengalaman_manajerial($upload, $where);
@@ -3692,6 +3845,11 @@ class Datapenyedia extends CI_Controller
 				'instansi_pemberi' => $value['instansi_pemberi'],
 				'nilai_kontrak' => $value['nilai_kontrak'],
 				'lokasi_pekerjaan' => $value['lokasi_pekerjaan'],
+				'file_kontrak_pengalaman' => $value['file_kontrak_pengalaman'],
+				'tanggal_akhir_kontrak' => $value['tanggal_akhir_kontrak'],
+				'progres' => $value['progres'],
+				'nilai_sharing' => $value['nilai_sharing'],
+				'jangka_waktu' => $value['jangka_waktu'],
 			];
 			$this->M_datapenyedia->tambah_tbl_vendor_pengalaman($data);
 		}
@@ -3979,8 +4137,8 @@ class Datapenyedia extends CI_Controller
 				$row[] = '<center>
             	<a href="javascript:;" class="btn btn-warning btn-sm shadow-lg" onClick="DekripEnkrip_neraca(' . "'" . $rs->id_url_neraca . "','dekrip'" . ')"> <i class="fa-solid fa-lock-open px-1"></i> Dekrip</a></center>';
 			}
-			if ($rs->sts_validasi == 0) {
-				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
+			if ($rs->sts_validasi == 0  || $rs->sts_validasi == null) {
+				$row[] = '<span class="badge bg-secondary">Belum Di Periksa</span>';
 			} else if ($rs->sts_validasi == 1) {
 				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
 			} else if ($rs->sts_validasi == 2) {
@@ -3988,7 +4146,7 @@ class Datapenyedia extends CI_Controller
 			} else if ($rs->sts_validasi == 3) {
 				$row[] = '<span class="badge bg-warning">Revisi</span>';
 			} else {
-				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
+				$row[] = '<span class="badge bg-secondary">Belum Di Periksa</span>';
 			}
 			$row[] = '<a  href="javascript:;" class="btn btn-info btn-sm" style="width:150px" onClick="by_id_neraca_keuangan(' . "'" . $rs->id_neraca . "','edit'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i> View</a>
 			<a  href="javascript:;" class="btn btn-danger btn-sm" style="width:150px" onClick="by_id_neraca_keuangan(' . "'" . $rs->id_neraca . "','hapus'" . ')"><i class="fas fa fa-trash"></i> Delete</a>';
@@ -4140,7 +4298,12 @@ class Datapenyedia extends CI_Controller
 		if ($sts_seumur_hidup == 2) {
 			$tgl_berlaku = NULL;
 		} else {
-			$tgl_berlaku = $this->input->post('tgl_berlaku_sppkp');
+			$tgl_berlaku_kondisi = $this->input->post('tgl_berlaku_sppkp');
+			if ($tgl_berlaku_kondisi == NULL) {
+				$tgl_berlaku = date('Y-m-d');
+			} else {
+				$tgl_berlaku = $this->input->post('tgl_berlaku_sppkp');
+			}
 		}
 		$password_dokumen = '1234';
 		$this->form_validation->set_rules('no_surat_sppkp', 'SPPKP', 'required|trim', ['required' => 'SPPKP Wajib Diisi!']);
@@ -4340,7 +4503,12 @@ class Datapenyedia extends CI_Controller
 		if ($sts_seumur_hidup == 2) {
 			$tgl_berlaku = NULL;
 		} else {
-			$tgl_berlaku = $this->input->post('tgl_berlaku_npwp');
+			$tgl_berlaku_kondisi = $this->input->post('tgl_berlaku_npwp');
+			if ($tgl_berlaku_kondisi == NULL) {
+				$tgl_berlaku = date('Y-m-d');
+			} else {
+				$tgl_berlaku = $this->input->post('tgl_berlaku_npwp');
+			}
 		}
 		$password_dokumen = '1234';
 		$this->form_validation->set_rules('no_npwp', 'NPWP', 'required|trim', ['required' => 'NPWP Wajib Diisi!']);
@@ -4562,7 +4730,7 @@ class Datapenyedia extends CI_Controller
 			}
 			// nanti main kondisi hitung dokumen dimari
 			if ($rs->sts_validasi == 0) {
-				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
+				$row[] = '<span class="badge bg-secondary">Belum Di Periksa</span>';
 			} else if ($rs->sts_validasi == 1) {
 				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
 			} else if ($rs->sts_validasi == 2) {
@@ -4570,7 +4738,7 @@ class Datapenyedia extends CI_Controller
 			} else if ($rs->sts_validasi == 3) {
 				$row[] = '<span class="badge bg-warning">Revisi</span>';
 			} else {
-				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
+				$row[] = '<span class="badge bg-secondary">Belum Di Periksa</span>';
 			}
 
 			if ($rs->sts_token_dokumen == 1) {
@@ -4914,7 +5082,7 @@ class Datapenyedia extends CI_Controller
 				$row[] = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_keuangan(\'' . $rs->id_url . '\')" class="btn btn-sm btn-warning btn-block">' . $rs->file_laporan_keuangan . '</a>';
 			}
 			if ($rs->sts_validasi == 0) {
-				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
+				$row[] = '<span class="badge bg-secondary">Belum Di Periksa</span>';
 			} else if ($rs->sts_validasi == 1) {
 				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
 			} else if ($rs->sts_validasi == 2) {
@@ -4922,7 +5090,7 @@ class Datapenyedia extends CI_Controller
 			} else if ($rs->sts_validasi == 3) {
 				$row[] = '<span class="badge bg-warning">Revisi</span>';
 			} else {
-				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
+				$row[] = '<span class="badge bg-secondary">Belum Di Periksa</span>';
 			}
 
 			if ($rs->sts_token_dokumen == 1) {
@@ -5268,7 +5436,12 @@ class Datapenyedia extends CI_Controller
 		if ($sts_seumur_hidup == 2) {
 			$tgl_berlaku = NULL;
 		} else {
-			$tgl_berlaku = $this->input->post('tgl_berlaku_skdp');
+			$tgl_berlaku_kondisi = $this->input->post('tgl_berlaku_skdp');
+			if ($tgl_berlaku_kondisi == NULL) {
+				$tgl_berlaku = date('Y-m-d');
+			} else {
+				$tgl_berlaku = $this->input->post('tgl_berlaku_skdp');
+			}
 		}
 		$password_dokumen = '1234';
 		$this->form_validation->set_rules('nomor_surat_skdp', 'Nomor Surat', 'required|trim', ['required' => 'Nomor Surat Wajib Diisi!']);
@@ -5393,10 +5566,12 @@ class Datapenyedia extends CI_Controller
 			$row[] = ++$no;
 			$row[] = $rs->kode_kbli . ' || ' . $rs->nama_kbli;
 			$row[] = $rs->nama_kualifikasi;
-			if ($rs->sts_kbli_skdp == 1) {
+			if ($rs->sts_kbli_skdp == 0) {
+				$row[] = '<span class="badge bg-secondary">Belum Di Periksa</span>';
+			} else if ($rs->sts_kbli_skdp == 1) {
 				$row[] = '<span class="badge bg-success">Sudah Tervalidasi</span>';
 			} else {
-				$row[] = '<span class="badge bg-secondary">Belum Tervalidasi</span>';
+				$row[] = '<span class="badge bg-danger">Tidak Valid</span>';
 			}
 			$row[] = '<a  href="javascript:;" class="btn btn-warning btn-sm button_edit" onClick="byid_kbli_skdp(' . "'" . $rs->id_url_kbli_skdp . "','edit'" . ')"><i 		class="fa fa-edit"></i> Edit</a>
 							<a  href="javascript:;" class="btn btn-danger btn-sm button_hapus" onClick="byid_kbli_skdp(' . "'" . $rs->id_url_kbli_skdp . "','hapus'" . ')"><i class="fas fa fa-trash"></i> Hapus</a>';
@@ -5644,7 +5819,12 @@ class Datapenyedia extends CI_Controller
 		if ($sts_seumur_hidup == 2) {
 			$tgl_berlaku = NULL;
 		} else {
-			$tgl_berlaku = $this->input->post('tgl_berlaku_lainnya');
+			$tgl_berlaku_kondisi = $this->input->post('tgl_berlaku_lainnya');
+			if ($tgl_berlaku_kondisi == NULL) {
+				$tgl_berlaku = date('Y-m-d');
+			} else {
+				$tgl_berlaku = $this->input->post('tgl_berlaku_lainnya');
+			}
 		}
 		$password_dokumen = '1234';
 		$this->form_validation->set_rules('nomor_surat_lainnya', 'Nomor Surat', 'required|trim', ['required' => 'Nomor Surat Wajib Diisi!']);

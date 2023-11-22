@@ -3,6 +3,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Tender_diikuti extends CI_Controller
 {
+
+    var $link_dok = 'http://localhost/jmto-eproc';
+    // var $link_dok = 'https://jmto-eproc.kintekindo.net';
     public function __construct()
     {
         parent::__construct();
@@ -13,11 +16,14 @@ class Tender_diikuti extends CI_Controller
         $this->load->model('M_dashboard/M_dashboard');
         $this->load->model('M_monitoring/M_monitoring');
         $this->load->model('M_tender/M_tender');
+        $this->load->model('M_tender/M_count');
         $this->load->model('M_jadwal/M_jadwal');
+        $this->load->helper('download');
         if (!$id_vendor) {
             redirect('auth');
         }
     }
+
 
     public function index()
     {
@@ -31,7 +37,10 @@ class Tender_diikuti extends CI_Controller
         $update_notif = ['notifikasi' => 0];
         $where = ['id_vendor' => $id_vendor];
         $this->M_monitoring->update_notif($where, $update_notif);
-        $data['count_tender_umum'] =  $this->M_tender->count_all_data();
+        $data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
+        $data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas_diikuti($id_vendor);
+        // var_dump($data['count_tender_umum']);
+        // die;
         $this->load->view('template_menu/header_menu', $data);
         $this->load->view('tender_diikuti/index', $data);
         $this->load->view('template_menu/new_footer');
@@ -41,7 +50,7 @@ class Tender_diikuti extends CI_Controller
     public function get_data_tender()
     {
         $id_vendor = $this->session->userdata('id_vendor');
-        $resultss = $this->M_tender->gettable_diikuti();
+        $resultss = $this->M_tender->gettable_diikuti($id_vendor);
         $data = [];
         $no = $_POST['start'];
         foreach ($resultss as $rs) {
@@ -65,8 +74,42 @@ class Tender_diikuti extends CI_Controller
         }
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->M_tender->count_all_data_diikuti(),
-            "recordsFiltered" => $this->M_tender->count_filtered_data_diikuti(),
+            "recordsTotal" => $this->M_tender->count_all_data_diikuti($id_vendor),
+            "recordsFiltered" => $this->M_tender->count_filtered_data_diikuti($id_vendor),
+            "data" => $data
+        );
+        $this->output->set_content_type('application/json')->set_output(json_encode($output));
+    }
+
+    public function get_data_tender_terbatas()
+    {
+        $session = $this->session->userdata('id_vendor');
+        $resultss = $this->M_tender->gettable_terbatas_diikuti($session);
+        $data = [];
+        $no = $_POST['start'];
+        foreach ($resultss as $rs) {
+
+            $row = array();
+            $row[] = ++$no;
+            $row[] = $rs->tahun_rup;
+            $row[] = $rs->nama_rup;
+            $row[] = $rs->nama_departemen;
+            $row[] = $rs->nama_jenis_pengadaan;
+            $row[] = 'Rp. ' . number_format($rs->total_hps_rup, 2, ",", ".");;
+            if ($rs->batas_pendaftaran_tender) {
+                $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
+                </span>';
+            } else {
+                $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
+                </span>';
+            }
+            $row[] = '<a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white"  onClick="by_id_rup(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa fa-info-circle" aria-hidden="true"></i> Detail</a>';
+            $data[] = $row;
+        }
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->M_tender->count_all_data_terbatas_diikuti($session),
+            "recordsFiltered" => $this->M_tender->count_filtered_data_terbatas_diikuti($session),
             "data" => $data
         );
         $this->output->set_content_type('application/json')->set_output(json_encode($output));
@@ -121,14 +164,23 @@ class Tender_diikuti extends CI_Controller
         $data['ba_tender'] = $this->M_tender->get_ba_tender($id_rup);
 
         // panggil private urlpan
-        $data['url_dok_pengadaan'] = 'http://localhost/jmto-eproc/file_paket/' . $nama_rup . '/' . 'DOKUMEN_PENGADAAN/';
-        $data['url_dok_prakualifikasi'] = 'http://localhost/jmto-eproc/file_paket/' . $nama_rup . '/' . 'DOKUMEN_PRAKUALIFIKASI/';
-        $data['url_dok_syarat_tambahan'] = 'http://localhost/jmto-eproc/file_paket/' . $nama_rup . '/' . 'SYARAT_TAMBAHAN/';
+        // $data['url_dok_pengadaan'] = $this->link_dok . $nama_rup . '/' . 'DOKUMEN_PENGADAAN/';
+        // $data['url_dok_prakualifikasi'] = $this->link_dok . $nama_rup . '/' . 'DOKUMEN_PRAKUALIFIKASI/';
+        // $data['url_dok_syarat_tambahan'] = $this->link_dok . $nama_rup . '/' . 'SYARAT_TAMBAHAN/';
 
-        $data['url_dok_pengumuman_pra'] = 'http://localhost/jmto-eproc/file_paket/' . $nama_rup . '/' . 'HASIL_PRAKUALIFIKASI/';
-        $data['url_dok_undangan_pembuktian'] = 'http://localhost/jmto-eproc/file_paket/' . $nama_rup . '/' . 'HASIL_PRAKUALIFIKASI/';
-        $data['url_dok_ba_tender'] = 'http://localhost/jmto-eproc/file_paket/' . $nama_rup . '/' . 'BERITA_ACARA_PENGADAAN/';
-        $data['url_dok_penunjukan_pemenang'] = 'http://localhost/jmto-eproc/file_paket/' . $nama_rup . '/' . 'SURAT_PENUNJUKAN_PEMENANG/';
+        // $data['url_dok_pengumuman_pra'] = $this->link_dok . $nama_rup . '/' . 'HASIL_PRAKUALIFIKASI/';
+        // $data['url_dok_undangan_pembuktian'] = $this->link_dok . $nama_rup . '/' . 'HASIL_PRAKUALIFIKASI/';
+        // $data['url_dok_ba_tender'] = $this->link_dok . $nama_rup . '/' . 'BERITA_ACARA_PENGADAAN/';
+        // $data['url_dok_penunjukan_pemenang'] = $this->link_dok . $nama_rup . '/' . 'SURAT_PENUNJUKAN_PEMENANG/';
+
+        $data['url_dok_pengadaan'] = $this->link_dok . '/panitia/info_tender/dokumen_tender/pengadaan/';
+        $data['url_dok_prakualifikasi'] = $this->link_dok . '/panitia/info_tender/dokumen_tender/prakualifikasi/';
+        $data['url_dok_syarat_tambahan'] = $this->link_dok . '/panitia/info_tender/dokumen_tender/syarat_tambahan/';
+
+        $data['url_dok_pengumuman_pra'] = $this->link_dok . '/panitia/info_tender/dokumen_tender/pengumuman_pra/';
+        $data['url_dok_undangan_pembuktian'] = $this->link_dok . '/panitia/info_tender/dokumen_tender/undangan_pembuktian/';
+        $data['url_dok_ba_tender'] = $this->link_dok . '/';
+        $data['url_dok_penunjukan_pemenang'] = $this->link_dok . '/';
 
 
         // get tahap
@@ -155,7 +207,11 @@ class Tender_diikuti extends CI_Controller
         $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra_umum_21($data['rup']['id_rup']);
         // end get tahap
         $this->load->view('template_menu/header_menu', $data);
-        $this->load->view('info_tender/informasi_tender_umum', $data);
+        if ($data['rup']['id_metode_pengadaan'] == 1) {
+            $this->load->view('info_tender/informasi_tender_umum', $data);
+        } else if ($data['rup']['id_metode_pengadaan'] == 4) {
+            $this->load->view('info_tender/informasi_tender_terbatas', $data);
+        }
         $this->load->view('template_menu/new_footer');
         $this->load->view('info_tender/ajax', $data);
     }
@@ -879,7 +935,7 @@ class Tender_diikuti extends CI_Controller
             $row = array();
             $row[] = ++$no;
             $row[] = $rs->nama_dokumen_pengadaan_vendor;
-            $row[] =  '<a target="_blank" href="' . base_url('tender_diikuti/download_dokumen_pengadaan_vendor/') . $rs->id_dokumen_pengadaan_vendor . '" class="btn btn-info btn-sm shadow-lg text-white" <i class="fa fa-download" aria-hidden="true"></i> Download File</a>';
+            $row[] =  '<a  href="' . base_url('tender_diikuti/download_dokumen_pengadaan_vendor/') . $rs->id_dokumen_pengadaan_vendor . '" class="btn btn-info btn-sm shadow-lg text-white" <i class="fa fa-download" aria-hidden="true"></i> Download File</a>';
             $row[] = '<a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white"  onClick="by_id_dok_penawran_file_I(' . "'" . $rs->id_dokumen_pengadaan_vendor  . "','edit'" . ')"><i class="fa fa-info-circle" aria-hidden="true"></i> Edit</a><a href="javascript:;" class="btn btn-danger btn-sm shadow-lg text-white"  onClick="by_id_dok_penawran_file_I(' . "'" . $rs->id_dokumen_pengadaan_vendor  . "','hapus'" . ')"><i class="fa fa-trash" aria-hidden="true"></i> hapus</a>';
             $data[] = $row;
         }
@@ -904,7 +960,7 @@ class Tender_diikuti extends CI_Controller
             $row = array();
             $row[] = ++$no;
             if ($rs->dok_penawaran_harga) {
-                $row[] = '<a target="_blank" href="' . base_url('tender_diikuti/download_dokumen_penawaran_vendor/') . $rs->id_vendor_mengikuti_paket . '" class="btn btn-info btn-sm shadow-lg text-white" <i class="fa fa-download" aria-hidden="true"></i> Download File</a>';
+                $row[] = '<a href="' . base_url('tender_diikuti/download_dokumen_penawaran_vendor/') . $rs->id_vendor_mengikuti_paket . '" class="btn btn-info btn-sm shadow-lg text-white" <i class="fa fa-download" aria-hidden="true"></i> Download File</a>';
             } else {
                 $row[] = '<span class="badge bg-danger">Belum Upload</span>';
             }
@@ -944,7 +1000,7 @@ class Tender_diikuti extends CI_Controller
         $nama_usaha = $this->session->userdata('nama_usaha');
         $file_url = 'file_paket/' . $root['nama_rup'] . '/' .  $nama_usaha . '/' . 'DOKUMEN_PENGADAAN_FILE_I' . '/'  . $root['file_dokumen_pengadaan_vendor'];
         $url  = $file_url;
-        redirect($url);
+        return force_download($url, NULL);
     }
 
     public function download_dokumen_penawaran_vendor($id_vendor_mengikuti_paket)
@@ -953,6 +1009,6 @@ class Tender_diikuti extends CI_Controller
         $nama_usaha = $this->session->userdata('nama_usaha');
         $file_url = 'file_paket/' . $root['nama_rup'] . '/' .  $nama_usaha . '/' . 'DOKUMEN_PENGADAAN_FILE_II' . '/'  . $root['dok_penawaran_harga'];
         $url  = $file_url;
-        redirect($url);
+        return force_download($url, NULL);
     }
 }

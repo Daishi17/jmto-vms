@@ -144,7 +144,7 @@
                 }
 
                 $('#detail_jadwal').html('<a href="javascript:;" onclick="lihat_detail_jadwal(\'' + response['row_rup'].id_url_rup + '\')" class="btn btn-sm btn-primary"><i class="fa-solid fa-calendar-days px-1"></i> Detail Jadwal Pengadaan</a>')
-                
+
                 // keuangan
                 if (response['row_syarat_teknis_rup'].sts_checked_laporan_keuangan == 1) {
                     $('#keuangan_izin').css('display', 'block')
@@ -175,8 +175,14 @@
                 if (response['cek_ikut']) {
                     $('#tombol_mengikuti').html('<button disabled type="button" class="btn btn-default btn-primary"><i class="fa fa-spinner" aria-hidden="true"></i> Anda Sedang Mengikuti Pengadaan ini</button>')
                 } else {
-                    $('#tombol_mengikuti').html('<a type="javascript:;" onclick="pakta_integritas_question(\'' + response['row_rup'].id_rup + '\'' + ',' + '\'' + response['row_rup'].nama_rup + '\')" class="btn btn-default btn-warning"><i class="fa-solid fa-circle-up px-1"></i> Ikuti Pengadaan</a>')
+                    if (response['row_rup'].id_metode_pengadaan == 4) {
+                        $('#tombol_mengikuti').html('<a type="javascript:;" onclick="pakta_integritas_question_terbatas(\'' + response['row_rup'].id_rup + '\'' + ',' + '\'' + response['row_rup'].nama_rup + '\')" class="btn btn-default btn-warning"><i class="fa-solid fa-circle-up px-1"></i> Ikuti Pengadaan Terbatas</a>')
+                    } else {
+                        $('#tombol_mengikuti').html('<a type="javascript:;" onclick="pakta_integritas_question(\'' + response['row_rup'].id_rup + '\'' + ',' + '\'' + response['row_rup'].nama_rup + '\')" class="btn btn-default btn-warning"><i class="fa-solid fa-circle-up px-1"></i> Ikuti Pengadaan</a>')
+                    }
+
                 }
+
 
             }
         })
@@ -202,6 +208,40 @@
                     data: {
                         id_rup: id,
                     },
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response == 'success') {
+                            Swal.fire(
+                                'Berhasil!',
+                                'Anda Berhasil Menjadi Peserta Pengadaan ' + nama_paket + ' Silahkan Periksa Di Menu Tender Mengikuti Untuk Melihat Informasi Pengadaan!',
+                                'success'
+                            )
+                            $('#modal-xl-detail').modal('hide')
+                            reload_table();
+                        }
+                    }
+                })
+
+            }
+        })
+    }
+
+    function pakta_integritas_question_terbatas(id, nama_paket) {
+        var url_mengikuti_terbatas = $('[name="url_mengikuti_terbatas"]').val()
+        Swal.fire({
+            title: 'Nama Paket : ' + nama_paket,
+            text: 'Apakah Anda Yakin Ingin Menjadi Peserta Pengadaan Terbatas dan Menyetujui Pakta Integritas Pada PT. Jasamarga Tollroad Operator ? ',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Yakin!',
+            cancelButtonText: 'Batal!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_mengikuti_terbatas + id,
                     dataType: "JSON",
                     success: function(response) {
                         if (response == 'success') {
@@ -287,5 +327,41 @@
 
             }
         })
+    }
+</script>
+
+<script>
+    $(document).ready(function() {
+        var get_data_tender_terbatas = $('[name="get_data_tender_terbatas"]').val();
+        $('#tbl_tender_terbatas').DataTable({
+            "ordering": true,
+            "autoWidth": false,
+            "processing": true,
+            "serverSide": true,
+            "bDestroy": true,
+            "dom": 'Bfrtip',
+            "buttons": ["excel", "pdf", "print", "colvis"],
+            "order": [],
+            "ajax": {
+                "url": get_data_tender_terbatas,
+                "type": "POST",
+            },
+            "columnDefs": [{
+                "target": [-1],
+                "orderable": false
+            }],
+            "oLanguage": {
+                "sSearch": "Pencarian : ",
+                "sEmptyTable": "Data Tidak Tersedia",
+                "sLoadingRecords": "Silahkan Tunggu - loading...",
+                "sLengthMenu": "Menampilkan &nbsp;  _MENU_  &nbsp;   Data",
+                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                "sProcessing": "Memuat Data...."
+            }
+        }).buttons().container().appendTo('#data_pengalaman_manajerial .col-md-6:eq(0)');
+    });
+
+    function reload_table() {
+        $('#tbl_tender_umum').DataTable().ajax.reload();
     }
 </script>

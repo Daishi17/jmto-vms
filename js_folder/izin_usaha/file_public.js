@@ -436,7 +436,6 @@ function get_row_vendor() {
                     $('[name="jenis_izin_siup"]').val(response['row_siup']['jenis_izin']);
                     $('[name="no_urut_siup"]').val(response['row_siup']['no_urut']);
                     $('[name="nomor_surat_siup"]').val(response['row_siup']['nomor_surat']);
-                    $('[name="sts_seumur_hidup_siup"]').val(response['row_siup']['sts_seumur_hidup']);
                     $('[name="kualifikasi_izin_siup"]').val(response['row_siup']['kualifikasi_izin']);
                     // console.log(response['row_siup']['tgl_berlaku']);
                     $('[name="tgl_berlaku_siup"]').val(response['row_siup']['tgl_berlaku']);
@@ -463,7 +462,6 @@ function get_row_vendor() {
                     $('[name="jenis_izin_sbu"]').val(response['row_sbu']['jenis_izin']);
                     $('[name="no_urut_sbu"]').val(response['row_sbu']['no_urut']);
                     $('[name="nomor_surat_sbu"]').val(response['row_sbu']['nomor_surat']);
-                    $('[name="sts_seumur_hidup_sbu"]').val(response['row_sbu']['sts_seumur_hidup']);
                     $('[name="kualifikasi_izin_sbu"]').val(response['row_sbu']['kualifikasi_izin']);
                     $('[name="tgl_berlaku_sbu"]').val(response['row_sbu']['tgl_berlaku']);
                     $('.file_dokumen_sbu').text(response['row_sbu']['file_dokumen'])

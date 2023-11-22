@@ -499,44 +499,172 @@
                             <?php    } ?>
                         <?php } ?>
 
-                        <tr>
-                            <th>Berita Acara Pengadaan</th>
-                            <th>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-header bg-primary text-white">
-                                                Berita Acara Pengadaan
+                        <?php if (date('Y-m-d H:i', strtotime($jadwal_pengumuman_peringkat['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_pengumuman_peringkat['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                            <?php $date2 = $jadwal_pengumuman_peringkat['waktu_selesai'];
+                            if (date('Y-m-d H:i', strtotime($jadwal_pengumuman_peringkat['waktu_mulai'])) >= date('Y-m-d H:i')) { ?>
+                            <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_pengumuman_peringkat['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_pengumuman_peringkat['waktu_mulai']))  == date('Y-m-d H:i')) { ?>
+                                <tr>
+                                    <th>Berita Acara Pengadaan</th>
+                                    <th>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="card">
+                                                    <div class="card-header bg-primary text-white">
+                                                        Berita Acara Pengadaan
 
-                                            </div>
-                                            <div class="card-body">
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>No</th>
-                                                            <th>Nama File</th>
-                                                            <th>File</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php $i = 1;
-                                                        foreach ($ba_tender as $key => $value) { ?>
-                                                            <tr>
-                                                                <td scope="row"><?= $i++ ?></td>
-                                                                <td><?= $value['nama_file']  ?></td>
-                                                                <td><a target="_blank" href="<?= $url_dok_ba_tender . $value['file_ba'] ?>" class="btn btn-sm btn-warning"> Lihat</a></td>
-                                                            </tr>
-                                                        <?php } ?>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>No</th>
+                                                                    <th>Nama File</th>
+                                                                    <th>File</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php $i = 1;
+                                                                foreach ($ba_tender as $key => $value) { ?>
+                                                                    <tr>
+                                                                        <td scope="row"><?= $i++ ?></td>
+                                                                        <td><?= $value['nama_file']  ?></td>
+                                                                        <td><a target="_blank" href="<?= $url_dok_ba_tender . $value['file_ba'] ?>" class="btn btn-sm btn-warning"> Lihat</a></td>
+                                                                    </tr>
+                                                                <?php } ?>
 
-                                                    </tbody>
-                                                </table>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
                                             </div>
+
                                         </div>
-                                    </div>
+                                    </th>
+                                </tr>
+                            <?php    } else { ?>
+                                <tr>
+                                    <th>Berita Acara Pengadaan</th>
+                                    <th>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="card">
+                                                    <div class="card-header bg-primary text-white">
+                                                        Berita Acara Pengadaan
 
-                                </div>
-                            </th>
-                        </tr>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>No</th>
+                                                                    <th>Nama File</th>
+                                                                    <th>File</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php $i = 1;
+                                                                foreach ($ba_tender as $key => $value) { ?>
+                                                                    <tr>
+                                                                        <td scope="row"><?= $i++ ?></td>
+                                                                        <td><?= $value['nama_file']  ?></td>
+                                                                        <td><a target="_blank" href="<?= $url_dok_ba_tender . $value['file_ba'] ?>" class="btn btn-sm btn-warning"> Lihat</a></td>
+                                                                    </tr>
+                                                                <?php } ?>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </th>
+                                </tr>
+                            <?php    } ?>
+                        <?php } else { ?>
+                            <?php
+                            if (date('Y-m-d H:i', strtotime($jadwal_pengumuman_peringkat['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
+
+                            <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_pengumuman_peringkat['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_pengumuman_peringkat['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                                <tr>
+                                    <th>Berita Acara Pengadaan</th>
+                                    <th>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="card">
+                                                    <div class="card-header bg-primary text-white">
+                                                        Berita Acara Pengadaan
+
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>No</th>
+                                                                    <th>Nama File</th>
+                                                                    <th>File</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php $i = 1;
+                                                                foreach ($ba_tender as $key => $value) { ?>
+                                                                    <tr>
+                                                                        <td scope="row"><?= $i++ ?></td>
+                                                                        <td><?= $value['nama_file']  ?></td>
+                                                                        <td><a target="_blank" href="<?= $url_dok_ba_tender . $value['file_ba'] ?>" class="btn btn-sm btn-warning"> Lihat</a></td>
+                                                                    </tr>
+                                                                <?php } ?>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </th>
+                                </tr>
+                            <?php    } else { ?>
+                                <tr>
+                                    <th>Berita Acara Pengadaan</th>
+                                    <th>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="card">
+                                                    <div class="card-header bg-primary text-white">
+                                                        Berita Acara Pengadaan
+
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>No</th>
+                                                                    <th>Nama File</th>
+                                                                    <th>File</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php $i = 1;
+                                                                foreach ($ba_tender as $key => $value) { ?>
+                                                                    <tr>
+                                                                        <td scope="row"><?= $i++ ?></td>
+                                                                        <td><?= $value['nama_file']  ?></td>
+                                                                        <td><a target="_blank" href="<?= $url_dok_ba_tender . $value['file_ba'] ?>" class="btn btn-sm btn-warning"> Lihat</a></td>
+                                                                    </tr>
+                                                                <?php } ?>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </th>
+                                </tr>
+                            <?php    } ?>
+                        <?php } ?>
 
                         <?php if ($rup['id_vendor_pemenang'] == $this->session->userdata('id_vendor')) { ?>
                             <tr>
@@ -870,7 +998,6 @@
                                             <th><small>Waktu Mulai</small></th>
                                             <th><small>Waktu Selesai</small></th>
                                             <th><small>Status Tahap</small></th>
-                                            <th><small>Alasan Perubahan</small></th>
                                         </tr>
                                     </thead>
                                     <tbody id="load_jadwal">

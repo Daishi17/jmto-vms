@@ -25,33 +25,35 @@
                 <div class="card border-warning shadow-sm">
                     <div class="card-header">
                         <div class="nav nav-tabs mb-3 bg-info" id="nav-tab" role="tablist">
-                            <input type="hidden" name="get_data_tender" value="<?= base_url('tender_terundang/get_data_tender') ?>">
-                            <input type="hidden" name="url_detail_paket" value="<?= base_url('tender_terundang/detail_paket/') ?>">
+                            <input type="hidden" name="get_data_tender" value="<?= base_url('tender_diikuti/get_data_tender') ?>">
+                            <input type="hidden" name="url_detail_paket" value="<?= base_url('tender_diikuti/detail_paket/') ?>">
                             <input type="hidden" name="url_info_tender" value="<?= base_url('tender_diikuti/informasi_tender/') ?>">
 
+                            <input type="hidden" name="get_data_tender_terbatas" value="<?= base_url('tender_diikuti/get_data_tender_terbatas') ?>">
                             <button class="nav-link active text-dark" id="nav-tenderumum-tab" data-bs-toggle="tab" data-bs-target="#nav-tenderumum" type="button" role="tab" aria-controls="nav-tenderumum" aria-selected="true">
                                 <i class="fa-solid fa-gift"></i>
-                                <small><b>Pengadaan Umum &nbsp;<span class="badge bg-secondary"><?= $count_tender_umum ?></span></b></small>
-                            </button>
-                            <button class="nav-link text-dark" id="nav-seleksiumum-tab" data-bs-toggle="tab" data-bs-target="#nav-seleksiumum" type="button" role="tab" aria-controls="nav-seleksiumum" aria-selected="true">
-                                <i class="fa-solid fa-gift"></i>
-                                <small><b>Seleksi Umum &nbsp;<span class="badge bg-secondary">4</span></b></small>
-                            </button>
-                            <button class="nav-link text-dark" id="nav-juksung-tab" data-bs-toggle="tab" data-bs-target="#nav-juksung" type="button" role="tab" aria-controls="nav-juksung" aria-selected="true">
-                                <i class="fa-solid fa-gift"></i>
-                                <small><b>Penunjukan Langsung &nbsp;<span class="badge bg-secondary">4</span></b></small>
+                                <small><b>Tender Umum &nbsp;<span class="badge bg-secondary"><?= count($count_tender_umum) ?></span></b></small>
                             </button>
                             <button class="nav-link text-dark" id="nav-tenderbatas-tab" data-bs-toggle="tab" data-bs-target="#nav-tenderbatas" type="button" role="tab" aria-controls="nav-tenderbatas" aria-selected="true">
                                 <i class="fa-solid fa-gift"></i>
-                                <small><b>Tender Terbatas &nbsp;<span class="badge bg-secondary">4</span></b></small>
+                                <small><b>Tender Terbatas &nbsp;<span class="badge bg-secondary"><?= count($count_tender_terbatas) ?></span></b></small>
                             </button>
+                            <button class="nav-link text-dark" id="nav-seleksiumum-tab" data-bs-toggle="tab" data-bs-target="#nav-seleksiumum" type="button" role="tab" aria-controls="nav-seleksiumum" aria-selected="true">
+                                <i class="fa-solid fa-gift"></i>
+                                <small><b>Seleksi Umum &nbsp;<span class="badge bg-secondary">0</span></b></small>
+                            </button>
+                            <button class="nav-link text-dark" id="nav-juksung-tab" data-bs-toggle="tab" data-bs-target="#nav-juksung" type="button" role="tab" aria-controls="nav-juksung" aria-selected="true">
+                                <i class="fa-solid fa-gift"></i>
+                                <small><b>Penunjukan Langsung &nbsp;<span class="badge bg-secondary">0</span></b></small>
+                            </button>
+
                             <button class="nav-link text-dark" id="nav-selekterbatas-tab" data-bs-toggle="tab" data-bs-target="#nav-selekterbatas" type="button" role="tab" aria-controls="nav-selekterbatas" aria-selected="true">
                                 <i class="fa-solid fa-gift"></i>
-                                <small><b>Seleksi Terbatas &nbsp;<span class="badge bg-secondary">4</span></b></small>
+                                <small><b>Seleksi Terbatas &nbsp;<span class="badge bg-secondary">0</span></b></small>
                             </button>
                             <button class="nav-link text-dark" id="nav-penglangsung-tab" data-bs-toggle="tab" data-bs-target="#nav-penglangsung" type="button" role="tab" aria-controls="nav-penglangsung" aria-selected="true">
                                 <i class="fa-solid fa-gift"></i>
-                                <small><b>Pengadaan Langsung &nbsp;<span class="badge bg-secondary">4</span></b></small>
+                                <small><b>Pengadaan Langsung &nbsp;<span class="badge bg-secondary">0</span></b></small>
                             </button>
                         </div>
                         <div class="tab-content p-3 border bg-light" id="nav-tabContent">
@@ -61,7 +63,7 @@
                                         <div class="flex-grow-1 bd-highlight">
                                             <span class="text-white">
                                                 <i class="fa-solid fa-circle-info px-1"></i>
-                                                <small><strong>Transaksi Pengadaan Umum</strong></small>
+                                                <small><strong>Transaksi Tender Umum</strong></small>
                                             </span>
                                         </div>
                                     </div>
@@ -83,9 +85,44 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+
                                     </tbody>
                                 </table>
                             </div>
+
+
+                            <div class="tab-pane fade" id="nav-tenderbatas" role="tabpanel" aria-labelledby="nav-tenderbatas-tab">
+                                <div class="card border-dark">
+                                    <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
+                                        <div class="flex-grow-1 bd-highlight">
+                                            <span class="text-white">
+                                                <i class="fa-solid fa-circle-info px-1"></i>
+                                                <small><strong>Transaksi Tender Terbatas</strong></small>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <table id="tbl_tender_terbatas" class="table table-bordered border-dark table-sm table-striped">
+                                    <thead class="bg-secondary col-12">
+                                        <tr>
+                                            <th><small class="text-white">No</small></th>
+                                            <th class="col-1"><small class="text-white">Tahun</small></th>
+                                            <th class="col-3"><small class="text-white">Nama Paket Penyedia</small></th>
+                                            <th class="col-2"><small class="text-white">Departemen</small></th>
+                                            <th class="col-2"><small class="text-white">Jenis Pengadaan</small></th>
+                                            <th class="col-2"><small class="text-white">Total HPS (Rp)</small></th>
+                                            <th class="col-1"><small class="text-white">Status</small></th>
+                                            <th class="col-1"><small class="text-white">
+                                                    <div class="text-center">Aksi</div>
+                                                </small></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+
                             <div class="tab-pane fade" id="nav-seleksiumum" role="tabpanel" aria-labelledby="nav-seleksiumum-tab">
                                 <div class="card border-dark">
                                     <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
@@ -114,25 +151,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><small>2023</small></td>
-                                            <td><small>Pengadaan Sewa Keamanan / Securty</small></td>
-                                            <td><small>General Affair</small></td>
-                                            <td><small>Jasa Lain</small></td>
-                                            <td><small>1.300.000.000</small></td>
-                                            <td><small><span class="badge bg-success">Tender Sedang Berlangsung</span></small></td>
-                                            <td>
-                                                <div class="text-center">
-                                                    <button type="button" class="btn btn-info btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-detail">
-                                                        <i class="fa-solid fa-users-viewfinder"></i>
-                                                        <small>Detail</small>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
+
                                     </tbody>
                                 </table>
                             </div>
+
+
                             <div class="tab-pane fade" id="nav-juksung" role="tabpanel" aria-labelledby="nav-juksung-tab">
                                 <div class="card border-dark">
                                     <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
@@ -160,71 +184,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><small>2023</small></td>
-                                            <td><small>Pengadaan Sewa Keamanan / Securty</small></td>
-                                            <td><small>General Affair</small></td>
-                                            <td><small>Jasa Lain</small></td>
-                                            <td><small>1.300.000.000</small></td>
-                                            <td><small><span class="badge bg-danger">Tender Sudah Selesai</span></small></td>
-                                            <td>
-                                                <div class="text-center">
-                                                    <button type="button" class="btn btn-info btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-detail">
-                                                        <i class="fa-solid fa-users-viewfinder"></i>
-                                                        <small>Detail</small>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
+
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="tab-pane fade" id="nav-tenderbatas" role="tabpanel" aria-labelledby="nav-tenderbatas-tab">
-                                <div class="card border-dark">
-                                    <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
-                                        <div class="flex-grow-1 bd-highlight">
-                                            <span class="text-white">
-                                                <i class="fa-solid fa-circle-info px-1"></i>
-                                                <small><strong>Transaksi Tender Terbatas</strong></small>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                                <table id="example7" class="table table-bordered border-dark table-sm table-striped">
-                                    <thead class="bg-secondary col-12">
-                                        <tr>
-                                            <th class="col-1"><small class="text-white">Tahun</small></th>
-                                            <th class="col-3"><small class="text-white">Nama Paket Penyedia</small></th>
-                                            <th class="col-2"><small class="text-white">Departemen</small></th>
-                                            <th class="col-2"><small class="text-white">Jenis Pengadaan</small></th>
-                                            <th class="col-2"><small class="text-white">Total HPS (Rp)</small></th>
-                                            <th class="col-1"><small class="text-white">Status</small></th>
-                                            <th class="col-1"><small class="text-white">
-                                                    <div class="text-center">#</div>
-                                                </small></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><small>2023</small></td>
-                                            <td><small>Pengadaan Sewa Keamanan / Securty</small></td>
-                                            <td><small>General Affair</small></td>
-                                            <td><small>Jasa Lain</small></td>
-                                            <td><small>1.300.000.000</small></td>
-                                            <td><small><span class="badge bg-danger">Tender Sudah Selesai</span></small></td>
-                                            <td>
-                                                <div class="text-center">
-                                                    <button type="button" class="btn btn-info btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-detail">
-                                                        <i class="fa-solid fa-users-viewfinder"></i>
-                                                        <small>Detail</small>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+
                             <div class="tab-pane fade" id="nav-selekterbatas" role="tabpanel" aria-labelledby="nav-selekterbatas-tab">
                                 <div class="card border-dark">
                                     <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
@@ -252,22 +216,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><small>2023</small></td>
-                                            <td><small>Pengadaan Sewa Keamanan / Securty</small></td>
-                                            <td><small>General Affair</small></td>
-                                            <td><small>Jasa Lain</small></td>
-                                            <td><small>1.300.000.000</small></td>
-                                            <td><small><span class="badge bg-danger">Tender Sudah Selesai</span></small></td>
-                                            <td>
-                                                <div class="text-center">
-                                                    <button type="button" class="btn btn-info btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-detail">
-                                                        <i class="fa-solid fa-users-viewfinder"></i>
-                                                        <small>Detail</small>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -298,22 +247,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><small>2023</small></td>
-                                            <td><small>Pengadaan Sewa Keamanan / Securty</small></td>
-                                            <td><small>General Affair</small></td>
-                                            <td><small>Jasa Lain</small></td>
-                                            <td><small>1.300.000.000</small></td>
-                                            <td><small><span class="badge bg-danger">Tender Sudah Selesai</span></small></td>
-                                            <td>
-                                                <div class="text-center">
-                                                    <button type="button" class="btn btn-info btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-detail">
-                                                        <i class="fa-solid fa-users-viewfinder"></i>
-                                                        <small>Detail</small>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -322,7 +256,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <div class="modal fade" id="modal-xl-detail">
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
@@ -642,30 +575,37 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <small>Kualifikasi Usaha</small>
-                                                            </td>
-                                                            <td>
-                                                                <small>Minimal Menengah</small>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <small>Nomor Induk Berusaha (NIB)</small>
-                                                            </td>
-                                                            <td>
-                                                                <small>dd/mm/yyyy</small>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <small>KBLI</small>
-                                                            </td>
-                                                            <td>
-                                                                <small>66209 || Jasa Komputer Lainnya</small>
-                                                            </td>
-                                                        </tr>
+                                                        <div id="spt_izin" style="display: none;">
+                                                            <tr>
+                                                                <td>
+                                                                    <small>Surat Pemberitahuan Tahunan (SPT) Badan</small>
+                                                                </td>
+                                                                <td>
+                                                                    <small><label for="" id="tahun_spt"></label></small>
+                                                                </td>
+                                                            </tr>
+                                                        </div>
+                                                        <div id="keuangan_izin" style="display: none;">
+                                                            <tr>
+                                                                <td>
+                                                                    <small>Laporan Keuangan</small>
+                                                                </td>
+                                                                <td>
+                                                                    <small><label for="" id="tahun_keuangan"></label></small>
+                                                                </td>
+                                                            </tr>
+                                                        </div>
+                                                        <!-- neraca -->
+                                                        <div id="neraca_izin" style="display: none;">
+                                                            <tr>
+                                                                <td>
+                                                                    <small>Neraca Keuangan</small>
+                                                                </td>
+                                                                <td>
+                                                                    <small><label for="" id="tahun_neraca"></label></small>
+                                                                </td>
+                                                            </tr>
+                                                        </div>
                                                     </tbody>
                                                 </table>
                                                 <table class="table table-bordered border-dark table-sm shadow-lg">
@@ -679,9 +619,6 @@
                                                     <thead>
                                                         <tr>
                                                             <th class="text-white bg-secondary" style="text-align:left; vertical-align:middle;">
-                                                                <small>Jenis Persyaratan</small>
-                                                            </th>
-                                                            <th class="text-white bg-secondary" style="text-align:left; vertical-align:middle;">
                                                                 <small>Keterangan Persyaratan</small>
                                                             </th>
                                                             <th class="text-white bg-secondary" style="text-align:left; vertical-align:middle;">
@@ -689,37 +626,7 @@
                                                             </th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <small>Kualifikasi Usaha</small>
-                                                            </td>
-                                                            <td>
-                                                                <small>Minimal Menengah</small>
-                                                            </td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-sm btn-success">
-                                                                    <i class="fa-solid fa-file px-1"></i>
-                                                                    Nama File Dokumen
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <small>Nomor Induk Berusaha (NIB)</small>
-                                                            </td>
-                                                            <td>
-                                                                <small>dd/mm/yyyy</small>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <small>KBLI</small>
-                                                            </td>
-                                                            <td>
-                                                                <small>66209 || Jasa Komputer Lainnya</small>
-                                                            </td>
-                                                        </tr>
+                                                    <tbody id="load_syarat_tambahan">
                                                     </tbody>
                                                 </table>
                                             </div>
