@@ -137,7 +137,7 @@
                         </tr>
                         <tr>
                             <th>Jumlah Peserta</th>
-                            <th><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#lihat_peserta">
+                            <th><button type="button" class="btn btn-sm btn-primary">
                                     <i class="fa fa-users" aria-hidden="true"></i> <?= count($peserta) ?> Peserta
                                 </button></th>
                         </tr>
@@ -183,34 +183,101 @@
                                         <?php    } ?>
 
                                     <?php } else { ?>
-                                        <div class="col-md-6">
-                                            <div class="card">
-                                                <div class="card-header bg-primary text-white">
-                                                    Dokumen Pengadaan
+                                        <?php if ($rup['sts_adendum'] == 1) { ?>
+                                            <?php if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                                                <?php $date2 = $jadwal_aanwijzing['waktu_selesai'];
+                                                if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai'])) >= date('Y-m-d H:i')) { ?>
+                                                <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai']))  == date('Y-m-d H:i')) { ?>
+                                                    <div class="col-md-6">
+                                                        <div class="card">
+                                                            <div class="card-header bg-primary text-white">
+                                                                Dokumen Pengadaan
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <table class="table table-bordered">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>No</th>
+                                                                            <th>Nama File</th>
+                                                                            <th>File</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <?php $i = 1;
+                                                                        foreach ($dok_pengadaan as $key => $value) { ?>
+
+                                                                        <?php } ?>
+                                                                        <tr>
+                                                                            <td scope="row"><?= $i++ ?></td>
+                                                                            <td><?= $value['nama_dok_pengadaan'] ?></td>
+                                                                            <td><a href="<?= $url_dok_pengadaan . $value['id_dokumen_pengadaan'] ?>" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Download</a></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <?php    } else { ?>
+                                                    <!-- waktu Telah Selesai -->
+                                                <?php    } ?>
+
+                                            <?php } else { ?>
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-header bg-primary text-white">
+                                                            Dokumen Pengadaan
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <table class="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>No</th>
+                                                                        <th>Nama File</th>
+                                                                        <th>File</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td colspan="3"><span class="badge bg-danger"> Tahap Sudah Selesai!</span></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="card-body">
-                                                    <table class="table table-bordered">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>No</th>
-                                                                <th>Nama File</th>
-                                                                <th>File</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td colspan="3"><span class="badge bg-danger"> Tahap Sudah Selesai!</span></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                            <?php } ?>
+                                        <?php  } else { ?>
+                                            <div class="col-md-6">
+                                                <div class="card">
+                                                    <div class="card-header bg-primary text-white">
+                                                        Dokumen Pengadaan
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>No</th>
+                                                                    <th>Nama File</th>
+                                                                    <th>File</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td colspan="3"><span class="badge bg-danger"> Tahap Sudah Selesai!</span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <?php  } ?>
+
+
                                     <?php } ?>
 
-                                    <?php if (date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_dokumen_kualifikasi['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
-                                        <?php if (date('Y-m-d H:i', strtotime($jadwal_dokumen_kualifikasi['waktu_mulai'])) >= date('Y-m-d H:i')) { ?>
-                                        <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_dokumen_kualifikasi['waktu_mulai']))  == date('Y-m-d H:i')) { ?>
+                                    <?php if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                                        <?php if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_mulai'])) >= date('Y-m-d H:i')) { ?>
+                                        <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_mulai']))  == date('Y-m-d H:i')) { ?>
                                             <div class="col-md-6">
                                                 <div class="card">
                                                     <div class="card-header bg-primary text-white">

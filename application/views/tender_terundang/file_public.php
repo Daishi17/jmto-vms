@@ -207,11 +207,21 @@
 
                 var html_syarat_tambahan = '';
                 var i;
-                for (i = 0; i < response['syarat_tambahan'].length; i++) {
-                    html_syarat_tambahan += '<tr>' +
-                        '<td>' + response['syarat_tambahan'][i].nama_syarat_tambahan + '</td>' +
-                        '<td><a href="javascript:;" onclick="download_file_syarat_tambahan(' + response['syarat_tambahan'][i].id_syarat_tambahan + ')" class="btn btn-sm btn-warning"><i class="fas fa fa-donwload"></i> Download File</a></td>' +
-                        '</tr>'
+                if (response['syarat_tambahan']) {
+                    for (i = 0; i < response['syarat_tambahan'].length; i++) {
+                        if (response['syarat_tambahan'][i].file_syarat_tambahan) {
+                            var dok = '<a href="javascript:;" onclick="download_file_syarat_tambahan(' + response['syarat_tambahan'][i].id_syarat_tambahan + ')" class="btn btn-sm btn-warning"><i class="fas fa fa-donwload"></i> Download File</a>'
+                        } else {
+                            var dok = '<span class="badge bg-danger">Tidak Ada Lampiran</span>'
+                        }
+                        html_syarat_tambahan += '<tr>' +
+                            '<td>' + response['syarat_tambahan'][i].nama_syarat_tambahan + '</td>' +
+                            '<td><i>Lampiran Ada Di Dalam Informasi Pengadaan</i></td>' +
+                            '</tr>'
+                    }
+                    $('#load_syarat_tambahan').html(html_syarat_tambahan)
+                } else {
+
                 }
 
 

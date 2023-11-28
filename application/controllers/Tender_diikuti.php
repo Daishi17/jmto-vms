@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
+date_default_timezone_set("Asia/Jakarta");
 class Tender_diikuti extends CI_Controller
 {
 
@@ -54,8 +54,10 @@ class Tender_diikuti extends CI_Controller
         $resultss = $this->M_tender->gettable_diikuti($id_vendor);
         $data = [];
         $no = $_POST['start'];
+        $now = date('Y-m-d H:i');
         foreach ($resultss as $rs) {
-
+            $rup = $this->M_tender->get_row_rup_byid($rs->id_url_rup);
+            $jadwal_terakhir = $this->M_jadwal->jadwal_pra_umum_22($rup['id_rup']);
             $row = array();
             $row[] = ++$no;
             $row[] = $rs->tahun_rup;
@@ -63,11 +65,11 @@ class Tender_diikuti extends CI_Controller
             $row[] = $rs->nama_departemen;
             $row[] = $rs->nama_jenis_pengadaan;
             $row[] = 'Rp. ' . number_format($rs->total_hps_rup, 2, ",", ".");;
-            if ($rs->batas_pendaftaran_tender) {
-                $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
+            if ($jadwal_terakhir['waktu_mulai'] < $now) {
+                $row[] = '<span class="badge bg-success text-white">Pengadaan Sudah Selesai
                 </span>';
             } else {
-                $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
+                $row[] = '<span class="badge bg-danger text-white">Sedang Berlangsung
                 </span>';
             }
             $row[] = '<a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white"  onClick="by_id_rup(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa fa-info-circle" aria-hidden="true"></i> Detail</a>';
@@ -87,9 +89,12 @@ class Tender_diikuti extends CI_Controller
         $session = $this->session->userdata('id_vendor');
         $resultss = $this->M_tender->gettable_terbatas_diikuti($session);
         $data = [];
+        $now = date('Y-m-d H:i');
         $no = $_POST['start'];
         foreach ($resultss as $rs) {
 
+            $rup = $this->M_tender->get_row_rup_byid($rs->id_url_rup);
+            $jadwal_terakhir = $this->M_jadwal->jadwal_pra_umum_22($rup['id_rup']);
             $row = array();
             $row[] = ++$no;
             $row[] = $rs->tahun_rup;
@@ -97,11 +102,11 @@ class Tender_diikuti extends CI_Controller
             $row[] = $rs->nama_departemen;
             $row[] = $rs->nama_jenis_pengadaan;
             $row[] = 'Rp. ' . number_format($rs->total_hps_rup, 2, ",", ".");;
-            if ($rs->batas_pendaftaran_tender) {
-                $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
+            if ($jadwal_terakhir['waktu_mulai'] < $now) {
+                $row[] = '<span class="badge bg-success text-white">Pengadaan Sudah Selesai
                 </span>';
             } else {
-                $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
+                $row[] = '<span class="badge bg-danger text-white">Sedang Berlangsung
                 </span>';
             }
             $row[] = '<a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white"  onClick="by_id_rup(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa fa-info-circle" aria-hidden="true"></i> Detail</a>';
@@ -151,6 +156,7 @@ class Tender_diikuti extends CI_Controller
         $data['notifikasi_manajerial'] = $this->M_dashboard->count_notifikasi_manajerial($id_vendor);
         $data['notifikasi_pengalaman'] = $this->M_dashboard->count_notifikasi_pengalaman($id_vendor);
         $data['notifikasi_pajak'] = $this->M_dashboard->count_notifikasi_pajak($id_vendor);
+
         $update_notif = ['notifikasi' => 0];
         $where = ['id_vendor' => $id_vendor];
         $this->M_monitoring->update_notif($where, $update_notif);
@@ -218,6 +224,9 @@ class Tender_diikuti extends CI_Controller
         $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_pra_umum_20($data['rup']['id_rup']);
         $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra_umum_21($data['rup']['id_rup']);
         // end get tahap
+        $data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
+        $data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
+        $data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
         $this->load->view('template_menu/header_menu', $data);
         if ($data['rup']['id_metode_pengadaan'] == 1) {
             $this->load->view('info_tender/informasi_tender_umum', $data);
@@ -310,6 +319,9 @@ class Tender_diikuti extends CI_Controller
         } else {
             $data['sts_nego'] = 'tutup_negosiasi';
         }
+        $data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
+        $data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
+        $data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
         // start tahap
         $data['jadwal_pengumuman_pengadaan'] =  $this->M_jadwal->jadwal_pra_umum_1($data['rup']['id_rup']);
         $data['jadwal_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_2($data['rup']['id_rup']);
@@ -405,6 +417,7 @@ class Tender_diikuti extends CI_Controller
     public function aanwijzing_penawaran($id_url_rup)
     {
         $id_vendor = $this->session->userdata('id_vendor');
+
         $data['notifikasi'] = $this->M_dashboard->count_notifikasi($id_vendor);
         // query tendering
         $data['count_tender_umum'] =  $this->M_tender->count_all_data();
@@ -443,6 +456,10 @@ class Tender_diikuti extends CI_Controller
         $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra_umum_21($data['rup']['id_rup']);
 
         $data['data2'] = $this->M_tender->getDataById($data['rup']['id_rup']);
+
+        $data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
+        $data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
+        $data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
         $this->load->view('template_menu/header_menu', $data);
         $this->load->view('info_tender/aanwijzing_penawaran');
         $this->load->view('template_menu/new_footer');
@@ -517,6 +534,9 @@ class Tender_diikuti extends CI_Controller
     public function sanggahan_prakualifikasi($id_url_rup)
     {
         $id_vendor = $this->session->userdata('id_vendor');
+        $data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
+        $data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
+        $data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
         $data['notifikasi'] = $this->M_dashboard->count_notifikasi($id_vendor);
         $data['count_tender_umum'] =  $this->M_tender->count_all_data();
         $data['rup'] = $this->M_tender->get_row_rup($id_url_rup);
@@ -636,6 +656,9 @@ class Tender_diikuti extends CI_Controller
     public function sanggahan_akhir($id_url_rup)
     {
         $id_vendor = $this->session->userdata('id_vendor');
+        $data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
+        $data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
+        $data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
         $data['notifikasi'] = $this->M_dashboard->count_notifikasi($id_vendor);
 
         $data['count_tender_umum'] =  $this->M_tender->count_all_data();
@@ -754,6 +777,9 @@ class Tender_diikuti extends CI_Controller
     public function negosiasi($id_url_rup)
     {
         $id_vendor = $this->session->userdata('id_vendor');
+        $data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
+        $data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
+        $data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
         $data['notifikasi'] = $this->M_dashboard->count_notifikasi($id_vendor);
         // query tendering
         $data['count_tender_umum'] =  $this->M_tender->count_all_data();
