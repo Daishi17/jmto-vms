@@ -742,10 +742,10 @@ class Datapenyedia extends CI_Controller
 						'nomor_surat' => $nomor_surat,
 						'sts_seumur_hidup' => $sts_seumur_hidup,
 						'password_dokumen' => $password_dokumen,
-						'file_dokumen' => $enckrips_string,
+						'file_dokumen' => $file_dokumen,
 						'token_dokumen' => $secret,
 						'tgl_berlaku' => $tgl_berlaku,
-						'sts_token_dokumen' => 1,
+						'sts_token_dokumen' => 2,
 						'sts_validasi' => 0,
 					];
 					$where = [
@@ -760,10 +760,10 @@ class Datapenyedia extends CI_Controller
 						'nomor_surat' => $nomor_surat,
 						'sts_seumur_hidup' => $sts_seumur_hidup,
 						'password_dokumen' => $password_dokumen,
-						'file_dokumen' => $enckrips_string,
+						'file_dokumen' => $file_dokumen,
 						'token_dokumen' => $secret,
 						'tgl_berlaku' => $tgl_berlaku,
-						'sts_token_dokumen' => 1,
+						'sts_token_dokumen' => 2,
 						'sts_validasi' => 3,
 					];
 					$where = [

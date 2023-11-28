@@ -30,7 +30,11 @@ class Login_vendor
                         'alamat_ip' => $this->ci->input->ip_address(),
                         'id_vendor' => $cek->id_vendor
                     ];
-                    $this->ci->Auth_model->insert_log($data);
+                    $time = time() + 30;
+                    $waktu_login = [
+                        'waktu_login' => $time
+                    ];
+                    $this->ci->Auth_model->update_user($cek->id_vendor, $waktu_login);
                     $userdata = [
                         'id_vendor' => $cek->id_vendor,
                         'id_url_vendor' => $cek->id_url_vendor,
@@ -42,6 +46,7 @@ class Login_vendor
                         'kualifikasi_usaha' => $cek->kualifikasi_usaha,
                         'id_jenis_usaha' => $cek->id_jenis_usaha,
                         'no_telpon' => $cek->no_telpon,
+                        'waktu_login' => $time
                     ];
 
                     // buat session
@@ -64,6 +69,6 @@ class Login_vendor
     public function logout()
     {
         $this->ci->session->sess_destroy();
-        redirect('https://eprocurement.jmto.co.id/');
+        redirect('auth');
     }
 }

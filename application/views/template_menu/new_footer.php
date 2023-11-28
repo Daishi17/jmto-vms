@@ -268,6 +268,22 @@
         return e;
     }
 </script>
+
+<script>
+    function update_time_login() {
+        $.ajax({
+            url: '<?= base_url('auth/update_time') ?>',
+            type: 'post',
+            success: () => {
+
+            }
+        })
+    }
+
+    setInterval(() => {
+        update_time_login()
+    }, 2000);
+</script>
 </body>
 
 </html>

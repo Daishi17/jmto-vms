@@ -137,7 +137,7 @@
                         </tr>
                         <tr>
                             <th>Jumlah Peserta</th>
-                            <th><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#lihat_peserta">
+                            <th><button type="button" class="btn btn-sm btn-primary">
                                     <i class="fa fa-users" aria-hidden="true"></i> <?= count($peserta) ?> Peserta
                                 </button></th>
                         </tr>
@@ -171,7 +171,7 @@
                                                                 <tr>
                                                                     <td scope="row"><?= $i++ ?></td>
                                                                     <td><?= $value['nama_dok_pengadaan'] ?></td>
-                                                                    <td><a href="<?= $url_dok_pengadaan . $value['id_dokumen_pengadaan'] ?>" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Lihat</a></td>
+                                                                    <td><a href="<?= $url_dok_pengadaan . $value['id_dokumen_pengadaan'] ?>" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Download</a></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -233,7 +233,7 @@
                                                                 <tr>
                                                                     <td scope="row"><?= $i++ ?></td>
                                                                     <td><?= $value['nama_dok_prakualifikasi'] ?></td>
-                                                                    <td><a href="<?= $url_dok_prakualifikasi . $value['id_dokumen_prakualifikasi'] ?>" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Lihat</a></td>
+                                                                    <td><a href="<?= $url_dok_prakualifikasi . $value['id_dokumen_prakualifikasi'] ?>" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Download</a></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -500,13 +500,13 @@
                         <?php } ?>
 
                         <tr>
-                            <th>Berita Acara Pengadaan</th>
+                            <th>Berita Acara dan Pengumuman Pengadaan</th>
                             <th>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-header bg-primary text-white">
-                                                Berita Acara Pengadaan
+                                                Berita Acara dan Pengumuman Pengadaan
 
                                             </div>
                                             <div class="card-body">

@@ -14,7 +14,7 @@ class Auth_model extends CI_Model
     }
 
 
-    
+
     public function update_password($data, $username)
     {
         $this->db->where('email', $username);
@@ -27,6 +27,13 @@ class Auth_model extends CI_Model
     public function insert_log($data)
     {
         $this->db->insert('tbl_vendor_log', $data);
+        return $this->db->affected_rows();
+    }
+
+    public function update_user($id_vendor, $data)
+    {
+        $this->db->where('id_vendor', $id_vendor);
+        $this->db->update('tbl_vendor', $data);
         return $this->db->affected_rows();
     }
 }

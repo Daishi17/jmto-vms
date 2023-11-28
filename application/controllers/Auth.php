@@ -103,7 +103,7 @@ class Auth extends CI_Controller
 			if (isset($response['success']) and $response['success'] === true) {
 				if ($this->form_validation->run() == false) {
 					$this->session->set_flashdata('error', 'Password Tidak Sama');
-					redirect(base_url('auth/buat_password/'. $this->session->userdata('token_lupa_password')));
+					redirect(base_url('auth/buat_password/' . $this->session->userdata('token_lupa_password')));
 				} else {
 					$username = $this->session->userdata('userName');
 					$password = $this->input->post('password');
@@ -112,14 +112,24 @@ class Auth extends CI_Controller
 					];
 					$this->Auth_model->update_password($data, $username);
 					$this->session->set_flashdata('success', 'Anda Berhasil Ubah Password Silakan Login Kembali');
-					redirect(base_url('auth/buat_password/'. $this->session->userdata('token_lupa_password')));
+					redirect(base_url('auth/buat_password/' . $this->session->userdata('token_lupa_password')));
 					$this->session->sess_destroy();
 				}
 			}
 		}
 		$data['widget'] = $this->recaptcha->getWidget();
 		$data['script'] = $this->recaptcha->getScriptTag();
-		$this->load->view('auth/ubah_password',$data);
+		$this->load->view('auth/ubah_password', $data);
+	}
+
+	public function update_time()
+	{
+
+		$id_vendor = $this->session->userdata('id_vendor');
+		$time = [
+			'waktu_login' => time() + 30
+		];
+		$this->Auth_model->update_user($id_vendor, $time);
 	}
 
 

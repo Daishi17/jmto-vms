@@ -107,11 +107,13 @@
 
                 if (response['row_rup'].bobot_nilai == 1) {
                     $('#bobot_nilai').text('Kombinasi')
-                    $('#Bobot').text(response['row_rup'].bobot_teknis + '% ' + '& ' + response['row_rup'].bobot_teknis + '% ')
+                    $('#Bobot').text(response['row_rup'].bobot_teknis + '% ' + '& ' + response['row_rup'].bobot_biaya + '% ')
                 } else if (response['row_rup'].bobot_nilai == 2) {
                     $('#bobot_nilai').text('Bobot Teknis')
+                    $('#Bobot').text(response['row_rup'].bobot_teknis + '% ' + '& ' + response['row_rup'].bobot_biaya + '% ')
                 } else if (response['row_rup'].bobot_nilai == 3) {
                     $('#bobot_nilai').text('Bobot Biaya')
+                    $('#Bobot').text(response['row_rup'].bobot_teknis + '% ' + '& ' + response['row_rup'].bobot_biaya + '% ')
                 }
                 $('#jenis_kontrak').text(jenis_kontrak(response['row_rup'].jenis_kontrak))
 
