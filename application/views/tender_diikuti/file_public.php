@@ -315,6 +315,13 @@
         return jenis_kontrak
     }
 
+    function zeros(i) {
+        if (i < 10) {
+            return "0" + i;
+        } else {
+            return i;
+        }
+    }
     function lihat_detail_jadwal(id_url_rup) {
         var url_detail_paket = $('[name="url_detail_paket"]').val();
         var modal_detail_jadwal = $('#modal_detail_jadwal')
@@ -331,6 +338,8 @@
 
                     var waktu_mulai = new Date(response['jadwal'][i].waktu_mulai);
                     var waktu_selesai = new Date(response['jadwal'][i].waktu_selesai);
+                    const months = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
+
                     var sekarang = new Date();
                     // kondisi jadwal
                     if (sekarang < waktu_mulai) {
@@ -347,12 +356,19 @@
                         var status_waktu = '<small><span class="badge bg-success"><i class="fa fa-clock" aria-hidden="true"></i> Tahap Sudah Selesai </span></small>';
                     }
 
-                    html += '<tr>' +
+                    if (response['jadwal'][i].alasan) {
+                        var alasan = response['jadwal'][i].alasan
+                    } else {
+                        var alasan = ''
+                    }
+                    
+                     html += '<tr>' +
                         '<td><small>' + no++ + '</small></td>' +
                         '<td><small>' + response['jadwal'][i].nama_jadwal_rup + ' ' + check + '</small></td>' +
-                        '<td><small>' + response['jadwal'][i].waktu_mulai + '</small></td>' +
-                        '<td><small>' + response['jadwal'][i].waktu_selesai + '</small></td>' +
+                        `<td><small>${waktu_mulai.getDate()}-${months[waktu_mulai.getMonth()]}-${waktu_mulai.getFullYear()} ${zeros(waktu_mulai.getHours())}:${zeros(waktu_mulai.getMinutes())}</small></td>` +
+                        `<td><small>${waktu_selesai.getDate()}-${months[waktu_selesai.getMonth()]}-${waktu_selesai.getFullYear()} ${zeros(waktu_selesai.getHours())}:${zeros(waktu_mulai.getMinutes())}</small></td>` +
                         '<td>' + status_waktu + '</td>' +
+                        '<td><small>' + alasan + '</small></td>' +
                         '</tr>';
                 }
                 $('#load_jadwal').html(html);
