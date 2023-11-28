@@ -42,7 +42,6 @@
             url: url_detail_paket + id_url_rup,
             dataType: "JSON",
             success: function(response) {
-                console.log(response['result_kbli'], response['result_sbu']);
                 if (response['cek_ikut']) {
                     $('#tombol_mengikuti').html('<button disabled type="button" class="btn btn-default btn-primary"><i class="fa fa-spinner" aria-hidden="true"></i> Anda Sedang Mengikuti Pengadaan ini</button>')
                 } else {
