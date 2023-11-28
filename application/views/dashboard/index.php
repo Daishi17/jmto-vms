@@ -272,7 +272,7 @@
                                                 </div>
                                                 <div class="text-end">
                                                     <h5>
-                                                        <small class="text-dark"><b>0</b></small>
+                                                        <small class="text-dark"><b><?= count($count_tender_umum) + count($count_tender_terbatas) ?></b></small>
                                                     </h5>
                                                     <small class="text-dark"><b>Tender Terundang</b></small>
                                                 </div>

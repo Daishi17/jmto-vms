@@ -298,10 +298,10 @@
                                                                 <td scope="row"><?= $i++ ?></td>
                                                                 <td><?= $value['nama_syarat_tambahan'] ?></td>
                                                                 <td>
-                                                                    <?php if (date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
-                                                                        <?php $date2 = $jadwal_upload_dokumen_prakualifikasi['waktu_selesai'];
-                                                                        if (date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_mulai'])) >= date('Y-m-d H:i')) { ?>
-                                                                        <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_mulai']))  == date('Y-m-d H:i')) { ?>
+                                                                    <?php if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                                                                        <?php $date2 = $jadwal_aanwijzing_pq['waktu_selesai'];
+                                                                        if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_mulai'])) >= date('Y-m-d H:i')) { ?>
+                                                                        <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_mulai']))  == date('Y-m-d H:i')) { ?>
                                                                             <?php if ($value['file_syarat_tambahan']) { ?>
                                                                                 <a href="<?= $url_dok_syarat_tambahan . $value['id_syarat_tambahan'] ?>" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Download</a>
                                                                             <?php } else { ?>
@@ -313,9 +313,9 @@
                                                                         <?php    } ?>
                                                                     <?php } else { ?>
                                                                         <?php
-                                                                        if (date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
+                                                                        if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
 
-                                                                        <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_upload_dokumen_prakualifikasi['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                                                                        <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
                                                                             <?php if ($value['file_syarat_tambahan']) { ?>
                                                                                 <a href="<?= $url_dok_syarat_tambahan . $value['id_syarat_tambahan'] ?>" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> Download</a>
                                                                             <?php } else { ?>
@@ -500,13 +500,13 @@
                         <?php } ?>
 
                         <tr>
-                            <th>Berita Acara Pengadaan</th>
+                            <th>Berita Acara dan Pengumuman Pengadaan</th>
                             <th>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-header bg-primary text-white">
-                                                Berita Acara Pengadaan
+                                                Berita Acara dan Pengumuman Pengadaan
 
                                             </div>
                                             <div class="card-body">

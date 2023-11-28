@@ -238,7 +238,7 @@
                         <li>
                             <a class="dropdown-item" href="<?= base_url() ?>tender_terundang">
                                 <i class="fa-solid fa-envelope-open-text px-1"></i>
-                                <small>Tender Terundang <span class="badge bg-success">4</span></small>
+                                <small>Tender Terundang <span class="badge bg-success"><?= count($count_tender_terundang) + count($count_tender_terbatas) ?></span></small>
                             </a>
                         </li>
                         <!-- <li>
@@ -250,7 +250,7 @@
                         <li>
                             <a class="dropdown-item" href="<?= base_url() ?>tender_diikuti">
                                 <i class="fa-solid fa-inbox px-1"></i>
-                                <small>Tender Di Ikuti</small>
+                                <small>Tender Di Ikuti <span class="badge bg-success"><?= count($count_tender_umum) + count($count_tender_terbatas) ?></span></small>
                             </a>
                         </li>
                         <li>

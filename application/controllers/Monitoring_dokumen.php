@@ -12,6 +12,8 @@ class Monitoring_dokumen extends CI_Controller
         $this->load->model('Wilayah/Wilayah_model');
         $this->load->model('M_dashboard/M_dashboard');
         $this->load->model('M_monitoring/M_monitoring');
+        $this->load->model('M_tender/M_count');
+        $this->load->model('M_tender/M_tender');
         $this->load->helper('download');
         $id_vendor = $this->session->userdata('id_vendor');
         if (!$id_vendor) {
@@ -32,7 +34,9 @@ class Monitoring_dokumen extends CI_Controller
         $where = ['id_vendor' => $id_vendor];
 
         $this->M_monitoring->update_notif($where, $update_notif);
-
+        $data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
+        $data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
+        $data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
         $this->load->view('template_menu/header_menu', $data);
         $this->load->view('monitoring_dokumen/index');
         $this->load->view('template_menu/new_footer');

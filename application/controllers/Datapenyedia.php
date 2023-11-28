@@ -19,6 +19,8 @@ class Datapenyedia extends CI_Controller
 		$this->load->model('M_jenis_usaha/M_jenis_usaha');
 		$this->load->model('Wilayah/Wilayah_model');
 		$this->load->model('M_dashboard/M_dashboard');
+		$this->load->model('M_tender/M_count');
+		$this->load->model('M_tender/M_tender');
 		$this->load->helper('download');
 	}
 
@@ -43,6 +45,9 @@ class Datapenyedia extends CI_Controller
 		$data['kualifikasi'] = str_split($data['row_vendor']['id_jenis_usaha']);
 		$id_vendor = $this->session->userdata('id_vendor');
 		$data['notifikasi'] = $this->M_dashboard->count_notifikasi($id_vendor);
+		$data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
+		$data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
+		$data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
 		$this->load->view('template_menu/header_menu', $data);
 		$this->load->view('datapenyedia/identitas/index', $data);
 		$this->load->view('template_menu/new_footer');
@@ -127,6 +132,9 @@ class Datapenyedia extends CI_Controller
 		$data['type']  = 'izin_usaha';
 		$id_vendor = $this->session->userdata('id_vendor');
 		$data['notifikasi'] = $this->M_dashboard->count_notifikasi($id_vendor);
+		$data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
+		$data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
+		$data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
 		$this->load->view('template_menu/header_menu', $data);
 		$this->load->view('datapenyedia/izin_usaha/singgah', $data);
 		$this->load->view('template_menu/new_footer');
@@ -1865,6 +1873,9 @@ class Datapenyedia extends CI_Controller
 		$data['notifikasi'] = $this->M_dashboard->count_notifikasi($id_vendor);
 		$data['akta_perubahan'] = $this->M_datapenyedia->get_row_akta_perubahan($id_vendor);
 		$data['akta_pendirian'] = $this->M_datapenyedia->get_row_akta_pendirian($id_vendor);
+		$data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
+		$data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
+		$data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
 		$this->load->view('template_menu/header_menu', $data);
 		$this->load->view('datapenyedia/akta_pendirian/singga', $data);
 		$this->load->view('template_menu/new_footer');
@@ -2452,6 +2463,9 @@ class Datapenyedia extends CI_Controller
 	{
 		$id_vendor = $this->session->userdata('id_vendor');
 		$data['notifikasi'] = $this->M_dashboard->count_notifikasi($id_vendor);
+		$data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
+		$data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
+		$data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
 		$this->load->view('template_menu/header_menu', $data);
 		$this->load->view('datapenyedia/manajerial/singgah');
 		$this->load->view('template_menu/new_footer');
@@ -3402,6 +3416,9 @@ class Datapenyedia extends CI_Controller
 	{
 		$id_vendor = $this->session->userdata('id_vendor');
 		$data['notifikasi'] = $this->M_dashboard->count_notifikasi($id_vendor);
+		$data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
+		$data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
+		$data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
 		$this->load->view('template_menu/header_menu', $data);
 		$this->load->view('datapenyedia/pengalaman/singgah');
 		$this->load->view('template_menu/new_footer');
@@ -3898,6 +3915,9 @@ class Datapenyedia extends CI_Controller
 		$data['row_vendor']  = $this->M_datapenyedia->get_row_vendor($id_vendor);
 		$id_vendor = $this->session->userdata('id_vendor');
 		$data['notifikasi'] = $this->M_dashboard->count_notifikasi($id_vendor);
+		$data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
+		$data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
+		$data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
 		$this->load->view('template_menu/header_menu', $data);
 		$this->load->view('datapenyedia/pajak/singgah', $data);
 		$this->load->view('template_menu/new_footer');

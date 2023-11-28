@@ -38,7 +38,8 @@ class Tender_diikuti extends CI_Controller
         $where = ['id_vendor' => $id_vendor];
         $this->M_monitoring->update_notif($where, $update_notif);
         $data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
-        $data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas_diikuti($id_vendor);
+        $data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
+        $data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
         // var_dump($data['count_tender_umum']);
         // die;
         $this->load->view('template_menu/header_menu', $data);

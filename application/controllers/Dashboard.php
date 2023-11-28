@@ -9,6 +9,8 @@ class Dashboard extends CI_Controller
         parent::__construct();
         $id_vendor = $this->session->userdata('id_vendor');
         $this->load->model('M_dashboard/M_dashboard');
+        $this->load->model('M_tender/M_count');
+        $this->load->model('M_tender/M_tender');
         if (!$id_vendor) {
             redirect('auth');
         }
@@ -20,7 +22,9 @@ class Dashboard extends CI_Controller
         $data['row_vendor'] = $this->M_dashboard->get_row_vendor($id_vendor);
         $data['kualifikasi'] = str_split($data['row_vendor']['id_jenis_usaha']);
 
-
+        $data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
+        $data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
+        $data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
         // izin usaha
         $cek_siup = $this->M_dashboard->cek_vendor_tervalidasi_siup($id_vendor);
         $cek_kbli_siup = $this->M_dashboard->cek_vendor_tervalidasi_kbli_siup($id_vendor);
