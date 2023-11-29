@@ -16,8 +16,7 @@ class Registrasi extends CI_Controller
 	public function index()
 	{
 		$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[tbl_vendor.email]', ['required' => 'Email Wajib Diisi!', 'valid_email' => 'Email Tidak Valid',  'is_unique' => 'Email Sudah Terdaftar']);
-		$this->form_validation->set_rules('npwp', 'NPWP', 'trim|required|is_unique[tbl_vendor.npwp]', ['required' => 'NPWP Wajib Diisi!', 'is_unique' => 'NPWP Sudah Terdaftar']);
-		$this->form_validation->set_rules('npwp_checker', 'NPWP', '|is_unique[tbl_vendor.npwp]', ['is_unique' => 'NPWP Sudah Terdaftar']);
+		$this->form_validation->set_rules('npwp_checker', 'NPWP', 'is_unique[tbl_vendor.npwp]', ['is_unique' => 'NPWP Sudah Terdaftar']);
 		$recaptcha = $this->input->post('g-recaptcha-response');
 		if (!empty($recaptcha)) {
 			$response = $this->recaptcha->verifyResponse($recaptcha);
@@ -25,10 +24,12 @@ class Registrasi extends CI_Controller
 				if ($this->form_validation->run() == false) {
 					$data = [
 						'email' => form_error('email'),
+						'npwp_checker' => form_error('npwp_checker'),
 					];
 					$data['widget'] = $this->recaptcha->getWidget();
 					$data['script'] = $this->recaptcha->getScriptTag();
-					$this->session->set_flashdata('email_salah', 'Email Atau Npwp Salah');
+					$this->session->set_flashdata('email_salah', $data['email']);
+					$this->session->set_flashdata('npwp_salah', $data['npwp_checker']);
 					redirect('registrasi');
 				} else {
 					$data['widget'] = $this->recaptcha->getWidget();
