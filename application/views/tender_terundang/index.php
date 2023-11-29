@@ -40,7 +40,7 @@
                                         <input type="hidden" name="url_detail_paket" value="<?= base_url('tender_terundang/detail_paket/') ?>">
                                         <button class="nav-link active text-dark" id="nav-tenderumum-tab" data-bs-toggle="tab" data-bs-target="#nav-tenderumum" type="button" role="tab" aria-controls="nav-tenderumum" aria-selected="true">
                                             <i class="fa-solid fa-gift"></i>
-                                            <small><b>Tender Umum &nbsp;<span class="badge bg-secondary"><?= count($count_tender_umum) ?></span></b></small>
+                                            <small><b>Tender Umum &nbsp;<span class="badge bg-secondary"><?= count($count_tender_terundang) ?></span></b></small>
                                         </button>
 
                                         <input type="hidden" name="get_data_tender_terbatas" value="<?= base_url('tender_terundang/get_data_tender_terbatas') ?>">
