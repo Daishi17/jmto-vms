@@ -10,7 +10,7 @@
     <input type="hidden" name="url_kecamatan" value="<?= base_url('registrasi/dataKecamatan/') ?>">
     <section class="content">
         <div class="container">
-            <!-- Default box -->
+            <!-- Default box  asdasdsad-->
             <div class="card card-outline card-primary text-sm">
                 <div class="card-header">
                     <h4 class="card-title">
