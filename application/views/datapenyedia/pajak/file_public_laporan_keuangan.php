@@ -68,112 +68,212 @@
     var form_tambah_keuangan = $('#form_tambah_keuangan')
     form_tambah_keuangan.on('submit', function(e) {
         // nanti kalau sudah migrasi ke js ambil url nya dari view
+        var jenis_audit = $('[name="jenis_audit"]').val()
         var url_post = $('[name="url_post_keuangan"]').val()
         var type_keuangan = $('[name="type_keuangan"]').val()
         var file_dokumen_manipulasi_auditor = $('[name="file_dokumen_manipulasi_auditor"]').val()
         var file_dokumen_manipulasi_keuangan = $('[name="file_dokumen_manipulasi_keuangan"]').val()
-        if (file_dokumen_manipulasi_auditor == '') {
-            e.preventDefault();
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Dokumen Wajib Di Isi!',
-            })
-        } else if (file_dokumen_manipulasi_keuangan == '') {
-            e.preventDefault();
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Dokumen Wajib Di Isi!',
-            })
-        } else {
-            if (type_keuangan == 'edit') {
+        if (jenis_audit == 'Tidak Audit') {
+            if (file_dokumen_manipulasi_keuangan == '') {
                 e.preventDefault();
-                $.ajax({
-                    url: url_post,
-                    method: "POST",
-                    data: new FormData(this),
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    beforeSend: function() {
-                        $('#btn_save_laporan').attr("disabled", true);
-                    },
-                    success: function(response) {
-                        let timerInterval
-                        Swal.fire({
-                            title: 'Sedang Proses Menyimpan Data!',
-                            html: 'Membuat Data <b></b>',
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: () => {
-                                Swal.showLoading()
-                                const b = Swal.getHtmlContainer().querySelector('b')
-                                timerInterval = setInterval(() => {
-                                    // b.textContent = Swal.getTimerRight()
-                                }, 100)
-                            },
-                            willClose: () => {
-                                clearInterval(timerInterval)
-                                Swal.fire('Data Berhasil Di Simpan!', '', 'success')
-                                get_row_vendor_keuangan();
-                                $('#modal-xl-keuangan').modal('hide')
-                                $('#form_tambah_keuangan')[0].reset();
-                                $('#btn_save_laporan').attr("disabled", false);
-                            }
-                        }).then((result) => {
-                            /* Read more about handling dismissals below */
-                            if (result.dismiss === Swal.DismissReason.timer) {
-
-                            }
-                        })
-                    }
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Dokumen Wajib Di Isi!',
                 })
             } else {
-                e.preventDefault();
-                $.ajax({
-                    url: url_post,
-                    method: "POST",
-                    data: new FormData(this),
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    beforeSend: function() {
-                        $('#btn_save_laporan').attr("disabled", true);
-                    },
-                    success: function(response) {
-                        let timerInterval
-                        Swal.fire({
-                            title: 'Sedang Proses Menyimpan Data!',
-                            html: 'Membuat Data <b></b>',
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: () => {
-                                Swal.showLoading()
-                                const b = Swal.getHtmlContainer().querySelector('b')
-                                timerInterval = setInterval(() => {
-                                    // b.textContent = Swal.getTimerRight()
-                                }, 100)
-                            },
-                            willClose: () => {
-                                clearInterval(timerInterval)
-                                Swal.fire('Data Berhasil Di Simpan!', '', 'success')
-                                get_row_vendor_keuangan();
-                                $('#modal-xl-keuangan').modal('hide')
-                                $('#form_tambah_keuangan')[0].reset();
-                                $('#btn_save_laporan').attr("disabled", false);
-                            }
-                        }).then((result) => {
-                            /* Read more about handling dismissals below */
-                            if (result.dismiss === Swal.DismissReason.timer) {
+                if (type_keuangan == 'edit') {
+                    e.preventDefault();
+                    $.ajax({
+                        url: url_post,
+                        method: "POST",
+                        data: new FormData(this),
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        beforeSend: function() {
+                            $('#btn_save_laporan').attr("disabled", true);
+                        },
+                        success: function(response) {
+                            let timerInterval
+                            Swal.fire({
+                                title: 'Sedang Proses Menyimpan Data!',
+                                html: 'Membuat Data <b></b>',
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: () => {
+                                    Swal.showLoading()
+                                    const b = Swal.getHtmlContainer().querySelector('b')
+                                    timerInterval = setInterval(() => {
+                                        // b.textContent = Swal.getTimerRight()
+                                    }, 100)
+                                },
+                                willClose: () => {
+                                    clearInterval(timerInterval)
+                                    Swal.fire('Data Berhasil Di Simpan!', '', 'success')
+                                    get_row_vendor_keuangan();
+                                    $('#modal-xl-keuangan').modal('hide')
+                                    $('#form_tambah_keuangan')[0].reset();
+                                    $('#btn_save_laporan').attr("disabled", false);
+                                }
+                            }).then((result) => {
+                                /* Read more about handling dismissals below */
+                                if (result.dismiss === Swal.DismissReason.timer) {
 
-                            }
-                        })
-                    }
-                })
+                                }
+                            })
+                        }
+                    })
+                } else {
+                    e.preventDefault();
+                    $.ajax({
+                        url: url_post,
+                        method: "POST",
+                        data: new FormData(this),
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        beforeSend: function() {
+                            $('#btn_save_laporan').attr("disabled", true);
+                        },
+                        success: function(response) {
+                            let timerInterval
+                            Swal.fire({
+                                title: 'Sedang Proses Menyimpan Data!',
+                                html: 'Membuat Data <b></b>',
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: () => {
+                                    Swal.showLoading()
+                                    const b = Swal.getHtmlContainer().querySelector('b')
+                                    timerInterval = setInterval(() => {
+                                        // b.textContent = Swal.getTimerRight()
+                                    }, 100)
+                                },
+                                willClose: () => {
+                                    clearInterval(timerInterval)
+                                    Swal.fire('Data Berhasil Di Simpan!', '', 'success')
+                                    get_row_vendor_keuangan();
+                                    $('#modal-xl-keuangan').modal('hide')
+                                    $('#form_tambah_keuangan')[0].reset();
+                                    $('#btn_save_laporan').attr("disabled", false);
+                                }
+                            }).then((result) => {
+                                /* Read more about handling dismissals below */
+                                if (result.dismiss === Swal.DismissReason.timer) {
+
+                                }
+                            })
+                        }
+                    })
+                }
+
             }
+        } else {
+            if (file_dokumen_manipulasi_auditor == '') {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Dokumen Wajib Di Isi!',
+                })
+            } else if (file_dokumen_manipulasi_keuangan == '') {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Dokumen Wajib Di Isi!',
+                })
+            } else {
+                if (type_keuangan == 'edit') {
+                    e.preventDefault();
+                    $.ajax({
+                        url: url_post,
+                        method: "POST",
+                        data: new FormData(this),
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        beforeSend: function() {
+                            $('#btn_save_laporan').attr("disabled", true);
+                        },
+                        success: function(response) {
+                            let timerInterval
+                            Swal.fire({
+                                title: 'Sedang Proses Menyimpan Data!',
+                                html: 'Membuat Data <b></b>',
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: () => {
+                                    Swal.showLoading()
+                                    const b = Swal.getHtmlContainer().querySelector('b')
+                                    timerInterval = setInterval(() => {
+                                        // b.textContent = Swal.getTimerRight()
+                                    }, 100)
+                                },
+                                willClose: () => {
+                                    clearInterval(timerInterval)
+                                    Swal.fire('Data Berhasil Di Simpan!', '', 'success')
+                                    get_row_vendor_keuangan();
+                                    $('#modal-xl-keuangan').modal('hide')
+                                    $('#form_tambah_keuangan')[0].reset();
+                                    $('#btn_save_laporan').attr("disabled", false);
+                                }
+                            }).then((result) => {
+                                /* Read more about handling dismissals below */
+                                if (result.dismiss === Swal.DismissReason.timer) {
 
+                                }
+                            })
+                        }
+                    })
+                } else {
+                    e.preventDefault();
+                    $.ajax({
+                        url: url_post,
+                        method: "POST",
+                        data: new FormData(this),
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        beforeSend: function() {
+                            $('#btn_save_laporan').attr("disabled", true);
+                        },
+                        success: function(response) {
+                            let timerInterval
+                            Swal.fire({
+                                title: 'Sedang Proses Menyimpan Data!',
+                                html: 'Membuat Data <b></b>',
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: () => {
+                                    Swal.showLoading()
+                                    const b = Swal.getHtmlContainer().querySelector('b')
+                                    timerInterval = setInterval(() => {
+                                        // b.textContent = Swal.getTimerRight()
+                                    }, 100)
+                                },
+                                willClose: () => {
+                                    clearInterval(timerInterval)
+                                    Swal.fire('Data Berhasil Di Simpan!', '', 'success')
+                                    get_row_vendor_keuangan();
+                                    $('#modal-xl-keuangan').modal('hide')
+                                    $('#form_tambah_keuangan')[0].reset();
+                                    $('#btn_save_laporan').attr("disabled", false);
+                                }
+                            }).then((result) => {
+                                /* Read more about handling dismissals below */
+                                if (result.dismiss === Swal.DismissReason.timer) {
+
+                                }
+                            })
+                        }
+                    })
+                }
+
+            }
         }
+
     })
 
     function byid_keuangan(id, type) {
@@ -427,5 +527,18 @@
                 }
             }
         })
+    }
+</script>
+
+<script>
+    function pilih_audit() {
+        var jenis_audit = $('[name="jenis_audit"]').val();
+        if (jenis_audit == 'Audit') {
+            $('#audit_1').css('display', 'block');
+            $('#audit_2').css('display', 'block');
+        } else {
+            $('#audit_1').css('display', 'none');
+            $('#audit_2').css('display', 'none');
+        }
     }
 </script>

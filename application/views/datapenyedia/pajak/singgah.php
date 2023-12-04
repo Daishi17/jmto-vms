@@ -572,7 +572,7 @@
                                                                                 <div class="text-center">More Options</div>
                                                                             </small></th>
                                                                     <?php } else { ?>
-                                                                      
+
                                                                     <?php }
                                                                     ?>
                                                                 <?php } else { ?>
@@ -1141,6 +1141,7 @@
                                     </td>
                                     <td class="col-sm-3">
                                         <select name="jenis_audit" onchange="pilih_audit()" class="form-control">
+                                            <option value="all">--- Pilih Jenis Audit ---</option>
                                             <option value="Audit">Audit</option>
                                             <option value="Tidak Audit">Tidak Audit</option>
                                         </select>
