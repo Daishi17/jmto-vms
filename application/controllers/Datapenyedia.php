@@ -5294,7 +5294,7 @@ class Datapenyedia extends CI_Controller
 
 	public function add_keuangan()
 	{
-		// id_vendor_keuangan
+		// id_vendor_keuangan kirun
 		$type_keuangan = $this->input->post('type_keuangan');
 		$jenis_audit = $this->input->post('jenis_audit');
 		if ($jenis_audit == 'Audit') {
