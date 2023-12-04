@@ -494,7 +494,7 @@
                                                                 <td class="col-sm-3">
                                                                 </td>
                                                                 <td class="col-sm-2 bg-light">
-                                                                    <label class="form-label col-form-label-sm"><b>Status Validasi KBLI</b></label>
+                                                                    <label class="form-label col-form-label-sm"><b>Status Validasi SBU</b></label>
                                                                 </td>
                                                                 <td class="col-sm-5">
                                                                     <div id="sts_validasi_sbu_kbli_0" style="display: none;">

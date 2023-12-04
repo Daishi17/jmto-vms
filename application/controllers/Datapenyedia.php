@@ -317,7 +317,8 @@ class Datapenyedia extends CI_Controller
 			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 		} else {
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -326,7 +327,8 @@ class Datapenyedia extends CI_Controller
 			$password_dokumen = '1234';
 			// SETTING PATH 
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -390,8 +392,7 @@ class Datapenyedia extends CI_Controller
 				$response = [
 					'row_nib' => $this->M_datapenyedia->get_row_nib($id_vendor),
 				];
-				if ($row_nib['id_dokumen_perubahan'] == NULL) {
-				} else {
+				if ($row_nib['id_dokumen_perubahan'] == NULL) { } else {
 					$where_pengajuan = [
 						'id_dokumen_perubahan' => $row_nib['id_dokumen_perubahan']
 					];
@@ -434,8 +435,7 @@ class Datapenyedia extends CI_Controller
 				];
 				// INI UNTUK UPDATE DOKUMEN PENGAJUAN PERUBAHAN
 				// nib
-				if ($row_nib['id_dokumen_perubahan'] == NULL) {
-				} else {
+				if ($row_nib['id_dokumen_perubahan'] == NULL) { } else {
 					$where_pengajuan = [
 						'id_dokumen_perubahan' => $row_nib['id_dokumen_perubahan']
 					];
@@ -610,7 +610,8 @@ class Datapenyedia extends CI_Controller
 			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 		} else {
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -742,7 +743,8 @@ class Datapenyedia extends CI_Controller
 			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 		} else {
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -750,7 +752,8 @@ class Datapenyedia extends CI_Controller
 			$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			// SETTING PATH 
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -818,8 +821,7 @@ class Datapenyedia extends CI_Controller
 					'row_siup' => $this->M_datapenyedia->get_row_siup($id_vendor),
 				];
 
-				if ($row_siup['id_dokumen_perubahan'] == NULL) {
-				} else {
+				if ($row_siup['id_dokumen_perubahan'] == NULL) { } else {
 					$where_pengajuan = [
 						'id_dokumen_perubahan' => $row_siup['id_dokumen_perubahan']
 					];
@@ -860,8 +862,7 @@ class Datapenyedia extends CI_Controller
 				$response = [
 					'row_siup' => $this->M_datapenyedia->get_row_siup($id_vendor),
 				];
-				if ($row_siup['id_dokumen_perubahan'] == NULL) {
-				} else {
+				if ($row_siup['id_dokumen_perubahan'] == NULL) { } else {
 					$where_pengajuan = [
 						'id_dokumen_perubahan' => $row_siup['id_dokumen_perubahan']
 					];
@@ -1166,7 +1167,8 @@ class Datapenyedia extends CI_Controller
 		} else {
 			// SETTING PATH 
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -1234,8 +1236,7 @@ class Datapenyedia extends CI_Controller
 					'row_siujk' => $this->M_datapenyedia->get_row_siujk($id_vendor),
 				];
 				// siujk
-				if ($row_siujk['id_dokumen_perubahan'] == NULL) {
-				} else {
+				if ($row_siujk['id_dokumen_perubahan'] == NULL) { } else {
 					$where_pengajuan = [
 						'id_dokumen_perubahan' => $row_siujk['id_dokumen_perubahan']
 					];
@@ -1281,8 +1282,7 @@ class Datapenyedia extends CI_Controller
 				];
 
 				// siujk
-				if ($row_siujk['id_dokumen_perubahan'] == NULL) {
-				} else {
+				if ($row_siujk['id_dokumen_perubahan'] == NULL) { } else {
 					$where_pengajuan = [
 						'id_dokumen_perubahan' => $row_siujk['id_dokumen_perubahan']
 					];
@@ -1586,7 +1586,8 @@ class Datapenyedia extends CI_Controller
 		} else {
 			// SETTING PATH 
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -1654,8 +1655,7 @@ class Datapenyedia extends CI_Controller
 					'row_sbu' => $this->M_datapenyedia->get_row_sbu($id_vendor),
 				];
 				// sbu
-				if ($row_sbu['id_dokumen_perubahan'] == NULL) {
-				} else {
+				if ($row_sbu['id_dokumen_perubahan'] == NULL) { } else {
 					$where_pengajuan = [
 						'id_dokumen_perubahan' => $row_sbu['id_dokumen_perubahan']
 					];
@@ -1701,8 +1701,7 @@ class Datapenyedia extends CI_Controller
 				];
 
 				// sbu
-				if ($row_sbu['id_dokumen_perubahan'] == NULL) {
-				} else {
+				if ($row_sbu['id_dokumen_perubahan'] == NULL) { } else {
 					$where_pengajuan = [
 						'id_dokumen_perubahan' => $row_sbu['id_dokumen_perubahan']
 					];
@@ -2028,7 +2027,8 @@ class Datapenyedia extends CI_Controller
 		} else {
 			// SETTING PATH 
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -2064,7 +2064,8 @@ class Datapenyedia extends CI_Controller
 			}
 
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -2109,8 +2110,7 @@ class Datapenyedia extends CI_Controller
 			$response = [
 				'row_akta' => $this->M_datapenyedia->get_row_akta_pendirian($id_vendor),
 			];
-			if ($row_akta_pendirian['id_dokumen_perubahan'] == NULL) {
-			} else {
+			if ($row_akta_pendirian['id_dokumen_perubahan'] == NULL) { } else {
 				$where_pengajuan = [
 					'id_dokumen_perubahan' => $row_akta_pendirian['id_dokumen_perubahan']
 				];
@@ -2304,7 +2304,8 @@ class Datapenyedia extends CI_Controller
 		} else {
 			// SETTING PATH 
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -2341,7 +2342,8 @@ class Datapenyedia extends CI_Controller
 				$file_dok_kumham = $row_akta_perubahan['file_dok_kumham'];
 			}
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -2388,8 +2390,7 @@ class Datapenyedia extends CI_Controller
 				'row_akta' => $this->M_datapenyedia->get_row_akta_perubahan($id_vendor),
 			];
 
-			if ($row_akta_perubahan['id_dokumen_perubahan'] == NULL) {
-			} else {
+			if ($row_akta_perubahan['id_dokumen_perubahan'] == NULL) { } else {
 				$where_pengajuan = [
 					'id_dokumen_perubahan' => $row_akta_perubahan['id_dokumen_perubahan']
 				];
@@ -2700,7 +2701,8 @@ class Datapenyedia extends CI_Controller
 			$secret_token_dokumen2 = 'jmto.2' . $id;
 			// SETTING PATH 
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -2786,7 +2788,8 @@ class Datapenyedia extends CI_Controller
 			$secret_token_dokumen2 = 'jmto.2' . $get_row_enkrip['id_url'];
 			// SETTING PATH 
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -3101,7 +3104,8 @@ class Datapenyedia extends CI_Controller
 			$secret_token_dokumen2 = 'jmto.2' . $id;
 			// SETTING PATH 
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -3280,7 +3284,8 @@ class Datapenyedia extends CI_Controller
 			$secret_token_dokumen2 = 'jmto.2' . $get_row_enkrip['id_url'];
 			// SETTING PATH 
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -3569,7 +3574,8 @@ class Datapenyedia extends CI_Controller
 			$secret_token_dokumen1 = 'jmto.1' . $id;
 			// SETTING PATH 
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -3812,7 +3818,8 @@ class Datapenyedia extends CI_Controller
 			$secret_token_dokumen1 = 'jmto.1' . $get_row_enkrip['id_url'];
 			// SETTING PATH 
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -4112,7 +4119,8 @@ class Datapenyedia extends CI_Controller
 		$secret_token_dokumen1 = 'jmto.1' . $id;
 		// SETTING PATH 
 		$sts_upload = [
-			'sts_upload_dokumen' => 1
+			'sts_upload_dokumen' => 1,
+			'sts_terundang' => 0
 		];
 		$where = [
 			'id_vendor' => $id_vendor
@@ -4207,7 +4215,8 @@ class Datapenyedia extends CI_Controller
 		$secret_token_dokumen1 = 'jmto.1' . $get_row_enkrip['id_url_neraca'];
 		// SETTING PATH 
 		$sts_upload = [
-			'sts_upload_dokumen' => 1
+			'sts_upload_dokumen' => 1,
+			'sts_terundang' => 0
 		];
 		$where = [
 			'id_vendor' => $id_vendor
@@ -4452,7 +4461,8 @@ class Datapenyedia extends CI_Controller
 		} else {
 			// SETTING PATH 
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -4510,8 +4520,7 @@ class Datapenyedia extends CI_Controller
 				$response = [
 					'row_sppkp' => $this->M_datapenyedia->get_row_sppkp($id_vendor),
 				];
-				if ($row_sppkp['id_dokumen_perubahan'] == NULL) {
-				} else {
+				if ($row_sppkp['id_dokumen_perubahan'] == NULL) { } else {
 					$where_pengajuan = [
 						'id_dokumen_perubahan' => $row_sppkp['id_dokumen_perubahan']
 					];
@@ -4551,8 +4560,7 @@ class Datapenyedia extends CI_Controller
 					'row_sppkp' => $this->M_datapenyedia->get_row_sppkp($id_vendor),
 				];
 
-				if ($row_sppkp['id_dokumen_perubahan'] == NULL) {
-				} else {
+				if ($row_sppkp['id_dokumen_perubahan'] == NULL) { } else {
 					$where_pengajuan = [
 						'id_dokumen_perubahan' => $row_sppkp['id_dokumen_perubahan']
 					];
@@ -4678,7 +4686,8 @@ class Datapenyedia extends CI_Controller
 		} else {
 			// SETTING PATH 
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -4746,8 +4755,7 @@ class Datapenyedia extends CI_Controller
 				$response = [
 					'row_npwp' => $this->M_datapenyedia->get_row_npwp($id_vendor),
 				];
-				if ($row_npwp['id_dokumen_perubahan'] == NULL) {
-				} else {
+				if ($row_npwp['id_dokumen_perubahan'] == NULL) { } else {
 					$where_pengajuan = [
 						'id_dokumen_perubahan' => $row_npwp['id_dokumen_perubahan']
 					];
@@ -4793,8 +4801,7 @@ class Datapenyedia extends CI_Controller
 					'row_npwp' => $this->M_datapenyedia->get_row_npwp($id_vendor),
 				];
 
-				if ($row_npwp['id_dokumen_perubahan'] == NULL) {
-				} else {
+				if ($row_npwp['id_dokumen_perubahan'] == NULL) { } else {
 					$where_pengajuan = [
 						'id_dokumen_perubahan' => $row_npwp['id_dokumen_perubahan']
 					];
@@ -4967,7 +4974,8 @@ class Datapenyedia extends CI_Controller
 		} else {
 			// SETTING PATH 
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -5064,7 +5072,8 @@ class Datapenyedia extends CI_Controller
 
 			// SETTING PATH 
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -5306,7 +5315,8 @@ class Datapenyedia extends CI_Controller
 				$password_dokumen = '1234';
 				// SETTING PATH 
 				$sts_upload = [
-					'sts_upload_dokumen' => 1
+					'sts_upload_dokumen' => 1,
+					'sts_terundang' => 0
 				];
 				$where = [
 					'id_vendor' => $id_vendor
@@ -5358,7 +5368,8 @@ class Datapenyedia extends CI_Controller
 				$password_dokumen = '1234';
 				// SETTING PATH 
 				$sts_upload = [
-					'sts_upload_dokumen' => 1
+					'sts_upload_dokumen' => 1,
+					'sts_terundang' => 0
 				];
 				$where = [
 					'id_vendor' => $id_vendor
@@ -5416,7 +5427,8 @@ class Datapenyedia extends CI_Controller
 				$password_dokumen = '1234';
 				// SETTING PATH 
 				$sts_upload = [
-					'sts_upload_dokumen' => 1
+					'sts_upload_dokumen' => 1,
+					'sts_terundang' => 0
 				];
 				$where = [
 					'id_vendor' => $id_vendor
@@ -5464,7 +5476,8 @@ class Datapenyedia extends CI_Controller
 				$password_dokumen = '1234';
 				// SETTING PATH 
 				$sts_upload = [
-					'sts_upload_dokumen' => 1
+					'sts_upload_dokumen' => 1,
+					'sts_terundang' => 0
 				];
 				$where = [
 					'id_vendor' => $id_vendor
@@ -5628,7 +5641,8 @@ class Datapenyedia extends CI_Controller
 			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 		} else {
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -5636,7 +5650,8 @@ class Datapenyedia extends CI_Controller
 			$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			// SETTING PATH 
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -5700,8 +5715,7 @@ class Datapenyedia extends CI_Controller
 				];
 
 				// skdp
-				if ($row_skdp['id_dokumen_perubahan'] == NULL) {
-				} else {
+				if ($row_skdp['id_dokumen_perubahan'] == NULL) { } else {
 					$where_pengajuan = [
 						'id_dokumen_perubahan' => $row_skdp['id_dokumen_perubahan']
 					];
@@ -5734,8 +5748,7 @@ class Datapenyedia extends CI_Controller
 				];
 
 				// skdp
-				if ($row_skdp['id_dokumen_perubahan'] == NULL) {
-				} else {
+				if ($row_skdp['id_dokumen_perubahan'] == NULL) { } else {
 					$where_pengajuan = [
 						'id_dokumen_perubahan' => $row_skdp['id_dokumen_perubahan']
 					];
@@ -6035,7 +6048,8 @@ class Datapenyedia extends CI_Controller
 			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 		} else {
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -6043,7 +6057,8 @@ class Datapenyedia extends CI_Controller
 			$this->M_datapenyedia->update_status_dokumen($sts_upload, $where);
 			// SETTING PATH 
 			$sts_upload = [
-				'sts_upload_dokumen' => 1
+				'sts_upload_dokumen' => 1,
+				'sts_terundang' => 0
 			];
 			$where = [
 				'id_vendor' => $id_vendor
@@ -6109,8 +6124,7 @@ class Datapenyedia extends CI_Controller
 					'row_lainnya' => $this->M_datapenyedia->get_row_lainnya($id_vendor),
 				];
 				// lainnya
-				if ($row_lainnya['id_dokumen_perubahan'] == NULL) {
-				} else {
+				if ($row_lainnya['id_dokumen_perubahan'] == NULL) { } else {
 					$where_pengajuan = [
 						'id_dokumen_perubahan' => $row_lainnya['id_dokumen_perubahan']
 					];
@@ -6143,8 +6157,7 @@ class Datapenyedia extends CI_Controller
 				];
 
 				// lainnya
-				if ($row_lainnya['id_dokumen_perubahan'] == NULL) {
-				} else {
+				if ($row_lainnya['id_dokumen_perubahan'] == NULL) { } else {
 					$where_pengajuan = [
 						'id_dokumen_perubahan' => $row_lainnya['id_dokumen_perubahan']
 					];
