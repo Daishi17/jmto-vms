@@ -205,7 +205,7 @@
                                     <img src="<?= base_url('assets/img/proc.png') ?>" alt="" class="rounded-circle user_img_msg">
                                     </div>
                                     <div class="msg_cotainer">
-                                    Membalas Chat :  ${d.replay_tujuan}	 <br>
+                                    Membalas Chat : 
                                     ${d.replay_isi} <br><br>
                                     ${d.isi}								
                                     <span class="msg_time">${kapan}, ${time}  	</span>
@@ -217,7 +217,7 @@
                                     </div>
                                     <div class="msg_cotainer">
                                     <a href="https://vms.jmtm.co.id/file_chat/${d.dokumen_chat}"> ${d.dokumen_chat}</a> <br>
-                                    Membalas Chat :  ${d.replay_tujuan}	 <br>
+                                    Membalas Chat : 
                                     ${d.replay_isi} <br><br>
                                     ${d.isi}								
                                     <span class="msg_time">${kapan}, ${time}  	</span>
@@ -230,7 +230,7 @@
                                         </div>
                                         <div class="msg_cotainer">
                                                 <img width="100%" src="https://vms.jmtm.co.id/file_chat/${d.img_chat}"> <br>
-                                                Membalas Chat :  ${d.replay_tujuan}	 <br>
+                                                Membalas Chat : 
                                     ${d.replay_isi} <br><br>
                                     ${d.isi}									
                                         <span class="msg_time">${kapan}, ${time}  	</span>

@@ -66,12 +66,17 @@ class Tender_terundang extends CI_Controller
             $row[] = $rs->nama_departemen;
             $row[] = $rs->nama_jenis_pengadaan;
             $row[] = 'Rp. ' . number_format($rs->total_hps_rup, 2, ",", ".");;
-            if ($rs->batas_pendaftaran_tender) {
-                $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
+            if ($rs->sts_mengikuti_paket == 1) {
+                $row[] = '<span class="badge bg-success text-white">Tender Telah Diikuti
                 </span>';
             } else {
-                $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
-                </span>';
+                if ($rs->batas_pendaftaran_tender) {
+                    $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
+                    </span>';
+                } else {
+                    $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
+                    </span>';
+                }
             }
             $row[] = '<a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white"  onClick="by_id_rup(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa fa-info-circle" aria-hidden="true"></i> Detail</a>';
             $data[] = $row;
@@ -99,13 +104,18 @@ class Tender_terundang extends CI_Controller
             $row[] = $rs->nama_rup;
             $row[] = $rs->nama_departemen;
             $row[] = $rs->nama_jenis_pengadaan;
-            $row[] = 'Rp. ' . number_format($rs->total_hps_rup, 2, ",", ".");;
-            if ($rs->batas_pendaftaran_tender) {
-                $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
+            $row[] = 'Rp. ' . number_format($rs->total_hps_rup, 2, ",", ".");
+            if ($rs->sts_mengikuti_paket == 1) {
+                $row[] = '<span class="badge bg-success text-white">Tender Telah Diikuti
                 </span>';
             } else {
-                $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
-                </span>';
+                if ($rs->batas_pendaftaran_tender) {
+                    $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
+                    </span>';
+                } else {
+                    $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
+                    </span>';
+                }
             }
             $row[] = '<a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white"  onClick="by_id_rup(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa fa-info-circle" aria-hidden="true"></i> Detail</a>';
             $data[] = $row;

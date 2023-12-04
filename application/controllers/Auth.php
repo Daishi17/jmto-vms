@@ -133,8 +133,8 @@ class Auth extends CI_Controller
 	}
 
 
-	// public function logout()
-	// {
-	// 	$this->login_vendor->logout();
-	// }
+	public function logout()
+	{
+		$this->login_vendor->logout();
+	}
 }

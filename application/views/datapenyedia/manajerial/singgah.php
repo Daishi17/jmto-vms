@@ -76,20 +76,48 @@
                                                             <small><strong>Form Dokumen - Manajerial Pemilik Usaha</strong></small>
                                                         </span>
                                                     </div>
-                                                    <div class="bd-highlight">
-                                                        <button type="button" class="btn btn-primary btn-sm shadow-lg" onclick="Buat_pemilik()">
-                                                            <i class="fa-solid fa-user-plus px-1"></i>
-                                                            Create Data
-                                                        </button>
-                                                    </div>&nbsp;
-                                                    <span>||</span>&nbsp;
-                                                    <div class="bd-highlight">
-                                                        <button type="button" class="btn btn-secondary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modalImportPemilik">
-                                                            <i class="fa-solid fa-cloud-arrow-up px-1"></i>
-                                                            Import Excel
-                                                        </button>
-                                                    </div>&nbsp;
-                                                    <span>||</span>
+
+                                                    <!-- pemilik_perusahaan -->
+                                                    <?php if ($row_vendor['sts_terundang'] == 1) { ?>
+                                                        <?php if ($cek_pengajuan_pemilik_perusahaan) { ?>
+                                                            <div class="bd-highlight">
+                                                                <button type="button" class="btn btn-primary btn-sm shadow-lg" onclick="Buat_pemilik()">
+                                                                    <i class="fa-solid fa-user-plus px-1"></i>
+                                                                    Create Data
+                                                                </button>
+                                                            </div>&nbsp;
+                                                            <span>||</span>&nbsp;
+                                                            <div class="bd-highlight">
+                                                                <button type="button" class="btn btn-secondary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modalImportPemilik">
+                                                                    <i class="fa-solid fa-cloud-arrow-up px-1"></i>
+                                                                    Import Excel
+                                                                </button>
+                                                            </div>&nbsp;
+                                                            <span>||</span>
+                                                        <?php } else { ?>
+                                                            <button disabled class="btn btn-info btn-sm shadow-lg">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Silakan Lakukan Pengajuan Dokumen Untuk Merubah Dokumen Anda
+                                                            </button>
+                                                        <?php }
+                                                        ?>
+                                                    <?php } else { ?>
+                                                        <div class="bd-highlight">
+                                                            <button type="button" class="btn btn-primary btn-sm shadow-lg" onclick="Buat_pemilik()">
+                                                                <i class="fa-solid fa-user-plus px-1"></i>
+                                                                Create Data
+                                                            </button>
+                                                        </div>&nbsp;
+                                                        <span>||</span>&nbsp;
+                                                        <div class="bd-highlight">
+                                                            <button type="button" class="btn btn-secondary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modalImportPemilik">
+                                                                <i class="fa-solid fa-cloud-arrow-up px-1"></i>
+                                                                Import Excel
+                                                            </button>
+                                                        </div>&nbsp;
+                                                        <span>||</span>
+                                                    <?php }
+                                                    ?>
                                                 </div>
                                                 <div class="card-body">
                                                     <table id="data_pemilik_manajerial" class="table table-sm table-bordered table-striped">
@@ -107,9 +135,20 @@
                                                                 <th style="width:10%;"><small class="text-white">
                                                                         <div class="text-center">Status Validasi</div>
                                                                     </small></th>
-                                                                <th style="width:18%;"><small class="text-white">
-                                                                        <div class="text-center">More Options</div>
-                                                                    </small></th>
+                                                                <?php if ($row_vendor['sts_terundang'] == 1) { ?>
+                                                                    <?php if ($cek_pengajuan_pemilik_perusahaan) { ?>
+                                                                        <th style="width:18%;"><small class="text-white">
+                                                                                <div class="text-center">More Options</div>
+                                                                            </small></th>
+                                                                    <?php } else { ?>
+                                                                    <?php }
+                                                                    ?>
+                                                                <?php } else { ?>
+                                                                    <th style="width:18%;"><small class="text-white">
+                                                                            <div class="text-center">More Options</div>
+                                                                        </small></th>
+                                                                <?php }
+                                                                ?>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -128,20 +167,48 @@
                                                             <small><strong>Form Dokumen - Manajerial Pengurus Usaha</strong></small>
                                                         </span>
                                                     </div>
-                                                    <div class="bd-highlight">
-                                                        <button type="button" class="btn btn-primary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-pengurus">
-                                                            <i class="fa-solid fa-user-plus px-1"></i>
-                                                            Create Data
-                                                        </button>
-                                                    </div>&nbsp;
-                                                    <span>||</span>&nbsp;
-                                                    <div class="bd-highlight">
-                                                        <button type="button" class="btn btn-secondary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modalImportPengurus">
-                                                            <i class="fa-solid fa-cloud-arrow-up px-1"></i>
-                                                            Import Excel
-                                                        </button>
-                                                    </div>&nbsp;
-                                                    <span>||</span>
+
+                                                    <!-- pengurus_perusahaan -->
+                                                    <?php if ($row_vendor['sts_terundang'] == 1) { ?>
+                                                        <?php if ($cek_pengajuan_pengurus_perusahaan) { ?>
+                                                            <div class="bd-highlight">
+                                                                <button type="button" class="btn btn-primary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-pengurus">
+                                                                    <i class="fa-solid fa-user-plus px-1"></i>
+                                                                    Create Data
+                                                                </button>
+                                                            </div>&nbsp;
+                                                            <span>||</span>&nbsp;
+                                                            <div class="bd-highlight">
+                                                                <button type="button" class="btn btn-secondary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modalImportPengurus">
+                                                                    <i class="fa-solid fa-cloud-arrow-up px-1"></i>
+                                                                    Import Excel
+                                                                </button>
+                                                            </div>&nbsp;
+                                                            <span>||</span>
+                                                        <?php } else { ?>
+                                                            <button disabled class="btn btn-info btn-sm shadow-lg">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Silakan Lakukan Pengajuan Dokumen Untuk Merubah Dokumen Anda
+                                                            </button>
+                                                        <?php }
+                                                        ?>
+                                                    <?php } else { ?>
+                                                        <div class="bd-highlight">
+                                                            <button type="button" class="btn btn-primary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-pengurus">
+                                                                <i class="fa-solid fa-user-plus px-1"></i>
+                                                                Create Data
+                                                            </button>
+                                                        </div>&nbsp;
+                                                        <span>||</span>&nbsp;
+                                                        <div class="bd-highlight">
+                                                            <button type="button" class="btn btn-secondary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modalImportPengurus">
+                                                                <i class="fa-solid fa-cloud-arrow-up px-1"></i>
+                                                                Import Excel
+                                                            </button>
+                                                        </div>&nbsp;
+                                                        <span>||</span>
+                                                    <?php }
+                                                    ?>
                                                 </div>
                                                 <div class="card-body">
                                                     <table id="data_pengurus_manajerial" class="table table-sm table-bordered table-striped">
@@ -164,9 +231,20 @@
                                                                 <th style="width:10%;"><small class="text-white">
                                                                         <div class="text-center">Status Validasi</div>
                                                                     </small></th>
-                                                                <th style="width:18%;"><small class="text-white">
-                                                                        <div class="text-center">More Options</div>
-                                                                    </small></th>
+                                                                <?php if ($row_vendor['sts_terundang'] == 1) { ?>
+                                                                    <?php if ($cek_pengajuan_pengurus_perusahaan) { ?>
+                                                                        <th style="width:18%;"><small class="text-white">
+                                                                                <div class="text-center">More Options</div>
+                                                                            </small></th>
+                                                                    <?php } else { ?>
+                                                                    <?php }
+                                                                    ?>
+                                                                <?php } else { ?>
+                                                                    <th style="width:18%;"><small class="text-white">
+                                                                            <div class="text-center">More Options</div>
+                                                                        </small></th>
+                                                                <?php }
+                                                                ?>
                                                             </tr>
                                                         </thead>
                                                         <tbody>

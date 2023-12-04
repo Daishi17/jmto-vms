@@ -136,7 +136,7 @@
                                                         <th class="col-2"><small class="text-white">Departemen</small></th>
                                                         <th class="col-2"><small class="text-white">Jenis Pengadaan</small></th>
                                                         <th class="col-2"><small class="text-white">Total HPS (Rp)</small></th>
-                                                        <th class="col-1"><small class="text-white">Status</small></th>
+                                                        <th class="col-1"><small class="text-white">Status Tender</small></th>
                                                         <th class="col-1"><small class="text-white">
                                                                 <div class="text-center">Aksi</div>
                                                             </small></th>

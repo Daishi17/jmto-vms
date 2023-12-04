@@ -177,4 +177,91 @@ class Dashboard extends CI_Controller
         ];
         $this->output->set_content_type('application/json')->set_output(json_encode($response));
     }
+    function get_datatable_pengajuan_perubahan_dokumen()
+    {
+        $result = $this->M_dashboard->getdatatable_pengajuan_dokumen();
+        $data = [];
+        $no = $_POST['start'];
+        foreach ($result as $res) {
+            $row = array();
+            $row[] = ++$no;
+            $row[] = $res->jenis_dokumen_perubahan;
+            $row[] = $res->waktu_pengajuan;
+            if ($res->status_perubahan_dokumen == 1) {
+                $row[] = '<small><span class="badge bg-warning">Dalam Prosess</span></small>';
+            } else if ($res->status_perubahan_dokumen == 2) {
+                $row[] = '<small><span class="badge bg-success">Berhasil Di Setujui</span></small>';
+            } else {
+                $row[] = '<small><span class="badge bg-danger">Pengajuan Ditolak</span></small>';
+            }
+            if ($res->sts_upload_dokumen_perubahan == 1) {
+                $row[] = '<small><span class="badge bg-danger">Belum Upload Perubahan Dokumen</span></small>';
+            } else {
+                $row[] = '<small><span class="badge bg-success">Sudah Upload</span></small>';
+            }
+            $row[] = '<a href="javascript:;" onclick="Hapus_pengajuan(' . $res->id_dokumen_perubahan . ')" class="btn btn-danger btn-sm"><i class="fas fa fa-trash"></i></a>';
+            $data[] = $row;
+        }
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->M_dashboard->count_all_pengajuan_dokumen(),
+            "recordsFiltered" => $this->M_dashboard->count_filtered_pengajuan_dokumen(),
+            "data" => $data
+        );
+        $this->output->set_content_type('application/json')->set_output(json_encode($output));
+    }
+
+    function add_pengajuan()
+    {
+
+        $id_vendor = $this->session->userdata('id_vendor');
+        $jenis_dokumen_perubahan = $this->input->post('jenis_dokumen_perubahan');
+        $cek_dokumen_pengajuan = $this->M_dashboard->cek_jika_sudah_ada_pengajuan($jenis_dokumen_perubahan);
+        if ($cek_dokumen_pengajuan) {
+            $response = [
+                'validasi' => 'Jenis Dokumen ' . $jenis_dokumen_perubahan . ' Sudah Di Ajukan & Dalam Prosess',
+            ];
+        } else {
+            $data = [
+                'id_vendor' => $id_vendor,
+                'jenis_dokumen_perubahan' => $jenis_dokumen_perubahan,
+                'waktu_pengajuan' => date('Y-m-d H:i'),
+                'status_perubahan_dokumen' => 1,
+                'sts_upload_dokumen_perubahan' => 1,
+            ];
+            $response = [
+                'success' => 'Berhasil Membuat Pengajuan Dokumen',
+            ];
+            $this->M_dashboard->tambah_dokumen_pengajuan($data);
+            $row_trakhir_pengajuan = $this->M_dashboard->cek_row_pengajuan_terakhir($jenis_dokumen_perubahan);
+            if ($jenis_dokumen_perubahan == 'pemilik_perusahaan' || $jenis_dokumen_perubahan == 'pengurus_perusahaan' || $jenis_dokumen_perubahan == 'pengalaman_perusahaan' || $jenis_dokumen_perubahan == 'spt' || $jenis_dokumen_perubahan == 'laporan_keuangan' || $jenis_dokumen_perubahan == 'neraca_keuangan') {
+                $where = [
+                    'id_vendor' => $id_vendor
+                ];
+                $data_update = [
+                    'id_dokumen_perubahan_' . $jenis_dokumen_perubahan . '' => $row_trakhir_pengajuan['id_dokumen_perubahan'],
+                ];
+                $this->M_datapenyedia->update_id_pengajun_result_by_vendor($data_update, $where);
+            } else {
+                $where = [
+                    'id_vendor' => $id_vendor
+                ];
+                $data_update = [
+                    'id_dokumen_perubahan' => $row_trakhir_pengajuan['id_dokumen_perubahan'],
+                ];
+                $global_update_dokumen = 'update_' . $jenis_dokumen_perubahan . '';
+                $this->M_datapenyedia->$global_update_dokumen($data_update, $where);
+            }
+        }
+        $this->output->set_content_type('application/json')->set_output(json_encode($response));
+    }
+
+    public function hapus_dokumen_pengajuan()
+    {
+        $where = [
+            'id_dokumen_perubahan' => $this->input->post('id_dokumen_perubahan')
+        ];
+        $this->M_dashboard->delete_dokumen_pengajuan($where);
+        $this->output->set_content_type('application/json')->set_output(json_encode('success'));
+    }
 }

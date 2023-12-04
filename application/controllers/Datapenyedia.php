@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 date_default_timezone_set("Asia/Jakarta");
-error_reporting(0);
+// error_reporting(0);
 require_once APPPATH . 'third_party/Spout/Autoloader/autoload.php';
 require 'vendor/autoload.php'; // Include the PhpSpreadsheet autoloader
 
@@ -122,6 +122,19 @@ class Datapenyedia extends CI_Controller
 
 	public function izin_usaha()
 	{
+		// ini untuk cek pengajuan dokumen baru
+		// nib
+		$data['cek_pengajuan_nib']  = $this->M_datapenyedia->cek_pengajuan_nib();
+		// siup
+		$data['cek_pengajuan_siup']  = $this->M_datapenyedia->cek_pengajuan_siup();
+		// sbu
+		$data['cek_pengajuan_sbu']  = $this->M_datapenyedia->cek_pengajuan_sbu();
+		// siujk
+		$data['cek_pengajuan_siujk']  = $this->M_datapenyedia->cek_pengajuan_siujk();
+		// skdp
+		$data['cek_pengajuan_skdp']  = $this->M_datapenyedia->cek_pengajuan_skdp();
+		// izin_lainya
+		$data['cek_pengajuan_izin_lainya']  = $this->M_datapenyedia->cek_pengajuan_izin_lainya();
 		$id_vendor = $this->session->userdata('id_vendor');
 		$data['row_vendor']  = $this->M_datapenyedia->get_row_vendor($id_vendor);
 		$data['get_row_nib']  = $this->M_datapenyedia->get_row_nib($id_vendor);
@@ -377,9 +390,18 @@ class Datapenyedia extends CI_Controller
 				$response = [
 					'row_nib' => $this->M_datapenyedia->get_row_nib($id_vendor),
 				];
+				if ($row_nib['id_dokumen_perubahan'] == NULL) {
+				} else {
+					$where_pengajuan = [
+						'id_dokumen_perubahan' => $row_nib['id_dokumen_perubahan']
+					];
+					$update_pengajuan = [
+						'sts_upload_dokumen_perubahan' => 2
+					];
+					$this->M_datapenyedia->update_dokumen_pengajuan($update_pengajuan, $where_pengajuan);
+				}
 				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 			} else {
-
 				if (!$row_nib) {
 					$upload = [
 						'id_url' => $id,
@@ -410,6 +432,18 @@ class Datapenyedia extends CI_Controller
 				$response = [
 					'row_nib' => $this->M_datapenyedia->get_row_nib($id_vendor),
 				];
+				// INI UNTUK UPDATE DOKUMEN PENGAJUAN PERUBAHAN
+				// nib
+				if ($row_nib['id_dokumen_perubahan'] == NULL) {
+				} else {
+					$where_pengajuan = [
+						'id_dokumen_perubahan' => $row_nib['id_dokumen_perubahan']
+					];
+					$update_pengajuan = [
+						'sts_upload_dokumen_perubahan' => 2
+					];
+					$this->M_datapenyedia->update_dokumen_pengajuan($update_pengajuan, $where_pengajuan);
+				}
 				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 				// redirect(base_url('upload'));
 			}
@@ -783,9 +817,19 @@ class Datapenyedia extends CI_Controller
 				$response = [
 					'row_siup' => $this->M_datapenyedia->get_row_siup($id_vendor),
 				];
+
+				if ($row_siup['id_dokumen_perubahan'] == NULL) {
+				} else {
+					$where_pengajuan = [
+						'id_dokumen_perubahan' => $row_siup['id_dokumen_perubahan']
+					];
+					$update_pengajuan = [
+						'sts_upload_dokumen_perubahan' => 2
+					];
+					$this->M_datapenyedia->update_dokumen_pengajuan($update_pengajuan, $where_pengajuan);
+				}
 				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 			} else {
-
 				if (!$row_siup) {
 					$upload = [
 						'id_url' => $id,
@@ -816,6 +860,16 @@ class Datapenyedia extends CI_Controller
 				$response = [
 					'row_siup' => $this->M_datapenyedia->get_row_siup($id_vendor),
 				];
+				if ($row_siup['id_dokumen_perubahan'] == NULL) {
+				} else {
+					$where_pengajuan = [
+						'id_dokumen_perubahan' => $row_siup['id_dokumen_perubahan']
+					];
+					$update_pengajuan = [
+						'sts_upload_dokumen_perubahan' => 2
+					];
+					$this->M_datapenyedia->update_dokumen_pengajuan($update_pengajuan, $where_pengajuan);
+				}
 				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 				// redirect(base_url('upload'));
 			}
@@ -1179,6 +1233,17 @@ class Datapenyedia extends CI_Controller
 				$response = [
 					'row_siujk' => $this->M_datapenyedia->get_row_siujk($id_vendor),
 				];
+				// siujk
+				if ($row_siujk['id_dokumen_perubahan'] == NULL) {
+				} else {
+					$where_pengajuan = [
+						'id_dokumen_perubahan' => $row_siujk['id_dokumen_perubahan']
+					];
+					$update_pengajuan = [
+						'sts_upload_dokumen_perubahan' => 2
+					];
+					$this->M_datapenyedia->update_dokumen_pengajuan($update_pengajuan, $where_pengajuan);
+				}
 				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 			} else {
 
@@ -1214,6 +1279,18 @@ class Datapenyedia extends CI_Controller
 				$response = [
 					'row_siujk' => $this->M_datapenyedia->get_row_siujk($id_vendor),
 				];
+
+				// siujk
+				if ($row_siujk['id_dokumen_perubahan'] == NULL) {
+				} else {
+					$where_pengajuan = [
+						'id_dokumen_perubahan' => $row_siujk['id_dokumen_perubahan']
+					];
+					$update_pengajuan = [
+						'sts_upload_dokumen_perubahan' => 2
+					];
+					$this->M_datapenyedia->update_dokumen_pengajuan($update_pengajuan, $where_pengajuan);
+				}
 				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 				// redirect(base_url('upload'));
 			}
@@ -1576,6 +1653,17 @@ class Datapenyedia extends CI_Controller
 				$response = [
 					'row_sbu' => $this->M_datapenyedia->get_row_sbu($id_vendor),
 				];
+				// sbu
+				if ($row_sbu['id_dokumen_perubahan'] == NULL) {
+				} else {
+					$where_pengajuan = [
+						'id_dokumen_perubahan' => $row_sbu['id_dokumen_perubahan']
+					];
+					$update_pengajuan = [
+						'sts_upload_dokumen_perubahan' => 2
+					];
+					$this->M_datapenyedia->update_dokumen_pengajuan($update_pengajuan, $where_pengajuan);
+				}
 				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 			} else {
 
@@ -1611,6 +1699,19 @@ class Datapenyedia extends CI_Controller
 				$response = [
 					'row_sbu' => $this->M_datapenyedia->get_row_sbu($id_vendor),
 				];
+
+				// sbu
+				if ($row_sbu['id_dokumen_perubahan'] == NULL) {
+				} else {
+					$where_pengajuan = [
+						'id_dokumen_perubahan' => $row_sbu['id_dokumen_perubahan']
+					];
+					$update_pengajuan = [
+						'sts_upload_dokumen_perubahan' => 2
+					];
+					$this->M_datapenyedia->update_dokumen_pengajuan($update_pengajuan, $where_pengajuan);
+				}
+
 				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 			}
 		}
@@ -1876,6 +1977,12 @@ class Datapenyedia extends CI_Controller
 		$data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
 		$data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
 		$data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
+
+		// akta_pendirian
+		$data['cek_pengajuan_akta_pendirian']  = $this->M_datapenyedia->cek_pengajuan_akta_pendirian();
+		// akta_perubahan
+		$data['cek_pengajuan_akta_perubahan']  = $this->M_datapenyedia->cek_pengajuan_akta_perubahan();
+
 		$this->load->view('template_menu/header_menu', $data);
 		$this->load->view('datapenyedia/akta_pendirian/singga', $data);
 		$this->load->view('template_menu/new_footer');
@@ -2002,55 +2109,17 @@ class Datapenyedia extends CI_Controller
 			$response = [
 				'row_akta' => $this->M_datapenyedia->get_row_akta_pendirian($id_vendor),
 			];
+			if ($row_akta_pendirian['id_dokumen_perubahan'] == NULL) {
+			} else {
+				$where_pengajuan = [
+					'id_dokumen_perubahan' => $row_akta_pendirian['id_dokumen_perubahan']
+				];
+				$update_pengajuan = [
+					'sts_upload_dokumen_perubahan' => 2
+				];
+				$this->M_datapenyedia->update_dokumen_pengajuan($update_pengajuan, $where_pengajuan);
+			}
 			$this->output->set_content_type('application/json')->set_output(json_encode($response));
-
-			// if ($this->upload->do_upload('file_dokumen')) {
-			// 	$fileData = $this->upload->data();
-			// 	$file_dokumen = $fileData['file_name'];
-			// 	$chiper = "AES-128-ECB";
-			// 	$secret = $token;
-			// 	$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret);
-
-			// } else {
-			// 	if (!$row_akta_pendirian) {
-			// 		$upload = [
-			// 			'id_url' => $id,
-			// 			'id_vendor' => $id_vendor,
-			// 			'no_surat' => $nomor_surat,
-			// 			'kualifikasi_usaha' => $kualifikasi_usaha,
-			// 			'sts_seumur_hidup' => $sts_seumur_hidup,
-			// 			'password_dokumen' => $password_dokumen,
-			// 			'tgl_berlaku_akta' => $tgl_berlaku_akta,
-			// 			'jumlah_setor_modal' => $jumlah_setor_modal,
-			// 			'sts_token_dokumen' => 1,
-			// 			'sts_validasi' => 0,
-			// 		];
-			// 		$this->M_datapenyedia->tambah_akta_pendirian($upload);
-			// 	} else {
-			// 		$upload = [
-			// 			'id_url' => $id,
-			// 			'id_vendor' => $id_vendor,
-			// 			'no_surat' => $nomor_surat,
-			// 			'kualifikasi_usaha' => $kualifikasi_usaha,
-			// 			'sts_seumur_hidup' => $sts_seumur_hidup,
-			// 			'password_dokumen' => $password_dokumen,
-			// 			'tgl_berlaku_akta' => $tgl_berlaku_akta,
-			// 			'jumlah_setor_modal' => $jumlah_setor_modal,
-			// 			'sts_token_dokumen' => 1,
-			// 			'sts_validasi' => 3,
-			// 		];
-			// 		$where = [
-			// 			'id_vendor' => $id_vendor
-			// 		];
-			// 		$this->M_datapenyedia->update_akta_pendirian($upload, $where);
-			// 	}
-
-			// 	$response = [
-			// 		'row_akta' => $this->M_datapenyedia->get_row_akta_pendirian($id_vendor),
-			// 	];
-			// 	$this->output->set_content_type('application/json')->set_output(json_encode($response));
-			// 	// redirect(base_url('upload'));
-			// }
 		}
 	}
 
@@ -2318,6 +2387,18 @@ class Datapenyedia extends CI_Controller
 			$response = [
 				'row_akta' => $this->M_datapenyedia->get_row_akta_perubahan($id_vendor),
 			];
+
+			if ($row_akta_perubahan['id_dokumen_perubahan'] == NULL) {
+			} else {
+				$where_pengajuan = [
+					'id_dokumen_perubahan' => $row_akta_perubahan['id_dokumen_perubahan']
+				];
+				$update_pengajuan = [
+					'sts_upload_dokumen_perubahan' => 2
+				];
+				$this->M_datapenyedia->update_dokumen_pengajuan($update_pengajuan, $where_pengajuan);
+			}
+
 			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 
@@ -2462,10 +2543,15 @@ class Datapenyedia extends CI_Controller
 	public function manajerial()
 	{
 		$id_vendor = $this->session->userdata('id_vendor');
+		$data['row_vendor'] = $this->vendor->get_vendor_url();
 		$data['notifikasi'] = $this->M_dashboard->count_notifikasi($id_vendor);
 		$data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
 		$data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
 		$data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
+		// pemilik_perusahaan
+		$data['cek_pengajuan_pemilik_perusahaan']  = $this->M_datapenyedia->cek_pengajuan_pemilik_perusahaan();
+		// pengurus_perusahaan
+		$data['cek_pengajuan_pengurus_perusahaan']  = $this->M_datapenyedia->cek_pengajuan_pengurus_perusahaan();
 		$this->load->view('template_menu/header_menu', $data);
 		$this->load->view('datapenyedia/manajerial/singgah');
 		$this->load->view('template_menu/new_footer');
@@ -3419,6 +3505,20 @@ class Datapenyedia extends CI_Controller
 		$data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
 		$data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
 		$data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
+		$data['row_vendor']  = $this->M_datapenyedia->get_row_vendor($id_vendor);
+		// pengalaman_perusahaan
+		$data['cek_pengajuan_pengalaman_perusahaan']  = $this->M_datapenyedia->cek_pengajuan_pengalaman_perusahaan();
+		// sppkp
+		$data['cek_pengajuan_sppkp']  = $this->M_datapenyedia->cek_pengajuan_sppkp();
+		// npwp
+		$data['cek_pengajuan_npwp']  = $this->M_datapenyedia->cek_pengajuan_npwp();
+		// spt
+		$data['cek_pengajuan_spt']  = $this->M_datapenyedia->cek_pengajuan_spt();
+		// laporan_keuangan
+		$data['cek_pengajuan_laporan_keuangan']  = $this->M_datapenyedia->cek_pengajuan_laporan_keuangan();
+		// neraca_keuangan
+		$data['cek_pengajuan_neraca_keuangan']  = $this->M_datapenyedia->cek_pengajuan_neraca_keuangan();
+		// end cek dokumen pengajuan
 		$this->load->view('template_menu/header_menu', $data);
 		$this->load->view('datapenyedia/pengalaman/singgah');
 		$this->load->view('template_menu/new_footer');
@@ -3918,6 +4018,17 @@ class Datapenyedia extends CI_Controller
 		$data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
 		$data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
 		$data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
+		// sppkp
+		$data['cek_pengajuan_sppkp']  = $this->M_datapenyedia->cek_pengajuan_sppkp();
+		// npwp
+		$data['cek_pengajuan_npwp']  = $this->M_datapenyedia->cek_pengajuan_npwp();
+		// spt
+		$data['cek_pengajuan_spt']  = $this->M_datapenyedia->cek_pengajuan_spt();
+		// laporan_keuangan
+		$data['cek_pengajuan_laporan_keuangan']  = $this->M_datapenyedia->cek_pengajuan_laporan_keuangan();
+		// neraca_keuangan
+		$data['cek_pengajuan_neraca_keuangan']  = $this->M_datapenyedia->cek_pengajuan_neraca_keuangan();
+		// end cek dokumen pengajuan
 		$this->load->view('template_menu/header_menu', $data);
 		$this->load->view('datapenyedia/pajak/singgah', $data);
 		$this->load->view('template_menu/new_footer');
@@ -4399,6 +4510,16 @@ class Datapenyedia extends CI_Controller
 				$response = [
 					'row_sppkp' => $this->M_datapenyedia->get_row_sppkp($id_vendor),
 				];
+				if ($row_sppkp['id_dokumen_perubahan'] == NULL) {
+				} else {
+					$where_pengajuan = [
+						'id_dokumen_perubahan' => $row_sppkp['id_dokumen_perubahan']
+					];
+					$update_pengajuan = [
+						'sts_upload_dokumen_perubahan' => 2
+					];
+					$this->M_datapenyedia->update_dokumen_pengajuan($update_pengajuan, $where_pengajuan);
+				}
 				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 			} else {
 				if (!$row_sppkp) {
@@ -4429,6 +4550,17 @@ class Datapenyedia extends CI_Controller
 				$response = [
 					'row_sppkp' => $this->M_datapenyedia->get_row_sppkp($id_vendor),
 				];
+
+				if ($row_sppkp['id_dokumen_perubahan'] == NULL) {
+				} else {
+					$where_pengajuan = [
+						'id_dokumen_perubahan' => $row_sppkp['id_dokumen_perubahan']
+					];
+					$update_pengajuan = [
+						'sts_upload_dokumen_perubahan' => 2
+					];
+					$this->M_datapenyedia->update_dokumen_pengajuan($update_pengajuan, $where_pengajuan);
+				}
 				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 				// redirect(base_url('upload'));
 			}
@@ -4614,6 +4746,16 @@ class Datapenyedia extends CI_Controller
 				$response = [
 					'row_npwp' => $this->M_datapenyedia->get_row_npwp($id_vendor),
 				];
+				if ($row_npwp['id_dokumen_perubahan'] == NULL) {
+				} else {
+					$where_pengajuan = [
+						'id_dokumen_perubahan' => $row_npwp['id_dokumen_perubahan']
+					];
+					$update_pengajuan = [
+						'sts_upload_dokumen_perubahan' => 2
+					];
+					$this->M_datapenyedia->update_dokumen_pengajuan($update_pengajuan, $where_pengajuan);
+				}
 				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 			} else {
 				$upload = [
@@ -4650,6 +4792,17 @@ class Datapenyedia extends CI_Controller
 				$response = [
 					'row_npwp' => $this->M_datapenyedia->get_row_npwp($id_vendor),
 				];
+
+				if ($row_npwp['id_dokumen_perubahan'] == NULL) {
+				} else {
+					$where_pengajuan = [
+						'id_dokumen_perubahan' => $row_npwp['id_dokumen_perubahan']
+					];
+					$update_pengajuan = [
+						'sts_upload_dokumen_perubahan' => 2
+					];
+					$this->M_datapenyedia->update_dokumen_pengajuan($update_pengajuan, $where_pengajuan);
+				}
 				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 				// redirect(base_url('upload'));
 			}
@@ -5546,6 +5699,18 @@ class Datapenyedia extends CI_Controller
 				$response = [
 					'row_skdp' => $this->M_datapenyedia->get_row_skdp($id_vendor),
 				];
+
+				// skdp
+				if ($row_skdp['id_dokumen_perubahan'] == NULL) {
+				} else {
+					$where_pengajuan = [
+						'id_dokumen_perubahan' => $row_skdp['id_dokumen_perubahan']
+					];
+					$update_pengajuan = [
+						'sts_upload_dokumen_perubahan' => 2
+					];
+					$this->M_datapenyedia->update_dokumen_pengajuan($update_pengajuan, $where_pengajuan);
+				}
 				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 			} else {
 				$upload = [
@@ -5568,6 +5733,18 @@ class Datapenyedia extends CI_Controller
 				$response = [
 					'row_skdp' => $this->M_datapenyedia->get_row_skdp($id_vendor),
 				];
+
+				// skdp
+				if ($row_skdp['id_dokumen_perubahan'] == NULL) {
+				} else {
+					$where_pengajuan = [
+						'id_dokumen_perubahan' => $row_skdp['id_dokumen_perubahan']
+					];
+					$update_pengajuan = [
+						'sts_upload_dokumen_perubahan' => 2
+					];
+					$this->M_datapenyedia->update_dokumen_pengajuan($update_pengajuan, $where_pengajuan);
+				}
 				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 				// redirect(base_url('upload'));
 			}
@@ -5883,8 +6060,6 @@ class Datapenyedia extends CI_Controller
 			$config['max_size'] = 0;
 			$config['remove_spaces'] = TRUE;
 			// $config['encrypt_name'] = TRUE;
-
-
 			$this->load->library('upload', $config);
 			if ($this->upload->do_upload('file_dokumen_lainnya')) {
 				$fileData = $this->upload->data();
@@ -5934,6 +6109,17 @@ class Datapenyedia extends CI_Controller
 				$response = [
 					'row_lainnya' => $this->M_datapenyedia->get_row_lainnya($id_vendor),
 				];
+				// lainnya
+				if ($row_lainnya['id_dokumen_perubahan'] == NULL) {
+				} else {
+					$where_pengajuan = [
+						'id_dokumen_perubahan' => $row_lainnya['id_dokumen_perubahan']
+					];
+					$update_pengajuan = [
+						'sts_upload_dokumen_perubahan' => 2
+					];
+					$this->M_datapenyedia->update_dokumen_pengajuan($update_pengajuan, $where_pengajuan);
+				}
 				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 			} else {
 				$upload = [
@@ -5956,6 +6142,18 @@ class Datapenyedia extends CI_Controller
 				$response = [
 					'row_lainnya' => $this->M_datapenyedia->get_row_lainnya($id_vendor),
 				];
+
+				// lainnya
+				if ($row_lainnya['id_dokumen_perubahan'] == NULL) {
+				} else {
+					$where_pengajuan = [
+						'id_dokumen_perubahan' => $row_lainnya['id_dokumen_perubahan']
+					];
+					$update_pengajuan = [
+						'sts_upload_dokumen_perubahan' => 2
+					];
+					$this->M_datapenyedia->update_dokumen_pengajuan($update_pengajuan, $where_pengajuan);
+				}
 				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 				// redirect(base_url('upload'));
 			}

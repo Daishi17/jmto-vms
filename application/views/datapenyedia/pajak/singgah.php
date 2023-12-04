@@ -112,12 +112,31 @@
                                                             <small><strong>Form - Surat Pengukuhan Pengusaha Kena Pajak (SPPKP)</strong></small>
                                                         </span>
                                                     </div>
-                                                    <div class="bd-highlight">
-                                                        <button type="button" class="btn btn-secondary btn-sm shadow-lg" id="btn_edit_sppkp" data-bs-toggle="modal" data-bs-target="#modaledit_perubahan">
-                                                            <i class="fa-solid fa-pen-to-square px-1"></i>
-                                                            Edit Changes
-                                                        </button>
-                                                    </div>
+                                                    <!-- sppkp -->
+                                                    <?php if ($row_vendor['sts_terundang'] == 1) { ?>
+                                                        <?php if ($cek_pengajuan_sppkp) { ?>
+                                                            <div class="bd-highlight">
+                                                                <button type="button" class="btn btn-secondary btn-sm shadow-lg" id="btn_edit_sppkp" data-bs-toggle="modal" data-bs-target="#modaledit_perubahan">
+                                                                    <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                    Edit Changes
+                                                                </button>
+                                                            </div>
+                                                        <?php } else { ?>
+                                                            <button disabled class="btn btn-info btn-sm shadow-lg">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Silakan Lakukan Pengajuan Dokumen Untuk Merubah Dokumen Anda
+                                                            </button>
+                                                        <?php }
+                                                        ?>
+                                                    <?php } else { ?>
+                                                        <div class="bd-highlight">
+                                                            <button type="button" class="btn btn-secondary btn-sm shadow-lg" id="btn_edit_sppkp" data-bs-toggle="modal" data-bs-target="#modaledit_perubahan">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Edit Changes
+                                                            </button>
+                                                        </div>
+                                                    <?php }
+                                                    ?>
                                                 </div>
                                                 <div class="card-body">
                                                     <form id="form_tambah_sppkp" enctype="multipart/form-data">
@@ -216,12 +235,31 @@
                                                             <small><strong>Form - Nomor Pokok Wajib Pajak (NPWP)</strong></small>
                                                         </span>
                                                     </div>
-                                                    <div class="bd-highlight">
-                                                        <button type="button" class="btn btn-secondary btn-sm shadow-lg" id="btn_edit_npwp" data-bs-toggle="modal" data-bs-target="#modaledit_perubahan_npwp">
-                                                            <i class="fa-solid fa-pen-to-square px-1"></i>
-                                                            Edit Changes
-                                                        </button>
-                                                    </div>
+                                                    <!-- npwp -->
+                                                    <?php if ($row_vendor['sts_terundang'] == 1) { ?>
+                                                        <?php if ($cek_pengajuan_npwp) { ?>
+                                                            <div class="bd-highlight">
+                                                                <button type="button" class="btn btn-secondary btn-sm shadow-lg" id="btn_edit_npwp" data-bs-toggle="modal" data-bs-target="#modaledit_perubahan_npwp">
+                                                                    <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                    Edit Changes
+                                                                </button>
+                                                            </div>
+                                                        <?php } else { ?>
+                                                            <button disabled class="btn btn-info btn-sm shadow-lg">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Silakan Lakukan Pengajuan Dokumen Untuk Merubah Dokumen Anda
+                                                            </button>
+                                                        <?php }
+                                                        ?>
+                                                    <?php } else { ?>
+                                                        <div class="bd-highlight">
+                                                            <button type="button" class="btn btn-secondary btn-sm shadow-lg" id="btn_edit_npwp" data-bs-toggle="modal" data-bs-target="#modaledit_perubahan_npwp">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Edit Changes
+                                                            </button>
+                                                        </div>
+                                                    <?php }
+                                                    ?>
                                                 </div>
                                                 <div class="card-body">
                                                     <form id="form_tambah_npwp" enctype="multipart/form-data">
@@ -320,12 +358,31 @@
                                                             <small><strong>Form - Surat Pemberitahuan Tahunan (SPT)</strong></small>
                                                         </span>
                                                     </div>
-                                                    <div class="bd-highlight">
-                                                        <button type="button" class="btn btn-primary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-spt">
-                                                            <i class="fa-solid fa-user-plus px-1"></i>
-                                                            Create Data
-                                                        </button>
-                                                    </div>
+                                                    <!-- spt -->
+                                                    <?php if ($row_vendor['sts_terundang'] == 1) { ?>
+                                                        <?php if ($cek_pengajuan_spt) { ?>
+                                                            <div class="bd-highlight">
+                                                                <button type="button" class="btn btn-primary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-spt">
+                                                                    <i class="fa-solid fa-user-plus px-1"></i>
+                                                                    Create Data
+                                                                </button>
+                                                            </div>
+                                                        <?php } else { ?>
+                                                            <button disabled class="btn btn-info btn-sm shadow-lg">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Silakan Lakukan Pengajuan Dokumen Untuk Merubah Dokumen Anda
+                                                            </button>
+                                                        <?php }
+                                                        ?>
+                                                    <?php } else { ?>
+                                                        <div class="bd-highlight">
+                                                            <button type="button" class="btn btn-primary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-spt">
+                                                                <i class="fa-solid fa-user-plus px-1"></i>
+                                                                Create Data
+                                                            </button>
+                                                        </div>
+                                                    <?php }
+                                                    ?>
                                                 </div>
                                                 <div class="card-body">
                                                     <input type="hidden" name="get_spt" value="<?= base_url('datapenyedia/get_spt/') ?>">
@@ -344,10 +401,25 @@
                                                                 <th style="width:10%;"><small class="text-white">
                                                                         <div class="text-center">Status Validasi</div>
                                                                     </small></th>
-                                                                <th style="width:20%;"><small class="text-white">
-                                                                        <div class="text-center">More Options</div>
-                                                                    </small>
-                                                                </th>
+                                                                <!-- spt -->
+                                                                <?php if ($row_vendor['sts_terundang'] == 1) { ?>
+                                                                    <?php if ($cek_pengajuan_spt) { ?>
+                                                                        <th style="width:20%;"><small class="text-white">
+                                                                                <div class="text-center">More Options</div>
+                                                                            </small>
+                                                                        </th>
+                                                                    <?php } else { ?>
+
+                                                                    <?php }
+                                                                    ?>
+                                                                <?php } else { ?>
+                                                                    <th style="width:20%;"><small class="text-white">
+                                                                            <div class="text-center">More Options</div>
+                                                                        </small>
+                                                                    </th>
+                                                                <?php }
+                                                                ?>
+
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -366,12 +438,31 @@
                                                             <small><strong>Form - Laporan Keuangan</strong></small>
                                                         </span>
                                                     </div>
-                                                    <div class="bd-highlight">
-                                                        <button type="button" class="btn btn-primary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-keuangan">
-                                                            <i class="fa-solid fa-user-plus px-1"></i>
-                                                            Create Data
-                                                        </button>
-                                                    </div>
+                                                    <!-- laporan_keuangan -->
+                                                    <?php if ($row_vendor['sts_terundang'] == 1) { ?>
+                                                        <?php if ($cek_pengajuan_laporan_keuangan) { ?>
+                                                            <div class="bd-highlight">
+                                                                <button type="button" class="btn btn-primary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-keuangan">
+                                                                    <i class="fa-solid fa-user-plus px-1"></i>
+                                                                    Create Data
+                                                                </button>
+                                                            </div>
+                                                        <?php } else { ?>
+                                                            <button disabled class="btn btn-info btn-sm shadow-lg">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Silakan Lakukan Pengajuan Dokumen Untuk Merubah Dokumen Anda
+                                                            </button>
+                                                        <?php }
+                                                        ?>
+                                                    <?php } else { ?>
+                                                        <div class="bd-highlight">
+                                                            <button type="button" class="btn btn-primary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-keuangan">
+                                                                <i class="fa-solid fa-user-plus px-1"></i>
+                                                                Create Data
+                                                            </button>
+                                                        </div>
+                                                    <?php }
+                                                    ?>
                                                 </div>
                                                 <div class="card-body">
                                                     <input type="hidden" name="get_keuangan" value="<?= base_url('datapenyedia/get_keuangan/') ?>">
@@ -395,10 +486,24 @@
                                                                             <div class="text-center">Status Validasi</div>
                                                                         </small>
                                                                     </th>
-                                                                    <th style="width:20%;"><small class="text-white">
-                                                                            <div class="text-center">More Options</div>
-                                                                        </small>
-                                                                    </th>
+                                                                    <!-- laporan_keuangan -->
+                                                                    <?php if ($row_vendor['sts_terundang'] == 1) { ?>
+                                                                        <?php if ($cek_pengajuan_laporan_keuangan) { ?>
+                                                                            <th style="width:20%;"><small class="text-white">
+                                                                                    <div class="text-center">More Options</div>
+                                                                                </small>
+                                                                            </th>
+                                                                        <?php } else { ?>
+
+                                                                        <?php }
+                                                                        ?>
+                                                                    <?php } else { ?>
+                                                                        <th style="width:20%;"><small class="text-white">
+                                                                                <div class="text-center">More Options</div>
+                                                                            </small>
+                                                                        </th>
+                                                                    <?php }
+                                                                    ?>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -417,12 +522,31 @@
                                                             <small><strong>Form - Neraca Keuangan</strong></small>
                                                         </span>
                                                     </div>
-                                                    <div class="bd-highlight">
-                                                        <button type="button" class="btn btn-primary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-neraca">
-                                                            <i class="fa-solid fa-user-plus px-1"></i>
-                                                            Create Data
-                                                        </button>
-                                                    </div>
+                                                    <!-- neraca_keuangan -->
+                                                    <?php if ($row_vendor['sts_terundang'] == 1) { ?>
+                                                        <?php if ($cek_pengajuan_neraca_keuangan) { ?>
+                                                            <div class="bd-highlight">
+                                                                <button type="button" class="btn btn-primary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-neraca">
+                                                                    <i class="fa-solid fa-user-plus px-1"></i>
+                                                                    Create Data
+                                                                </button>
+                                                            </div>
+                                                        <?php } else { ?>
+                                                            <button disabled class="btn btn-info btn-sm shadow-lg">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Silakan Lakukan Pengajuan Dokumen Untuk Merubah Dokumen Anda
+                                                            </button>
+                                                        <?php }
+                                                        ?>
+                                                    <?php } else { ?>
+                                                        <div class="bd-highlight">
+                                                            <button type="button" class="btn btn-primary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-neraca">
+                                                                <i class="fa-solid fa-user-plus px-1"></i>
+                                                                Create Data
+                                                            </button>
+                                                        </div>
+                                                    <?php }
+                                                    ?>
                                                 </div>
                                                 <div class="card-body">
                                                     <table id="table_nerca_keuangan" class="table table-sm table-bordered table-striped">
@@ -441,9 +565,22 @@
                                                                 <th style="width:10%;"><small class="text-white">
                                                                         <div class="text-center">Status Validasi</div>
                                                                     </small></th>
-                                                                <th><small class="text-white">
-                                                                        <div class="text-center">More Options</div>
-                                                                    </small></th>
+                                                                <!-- neraca_keuangan -->
+                                                                <?php if ($row_vendor['sts_terundang'] == 1) { ?>
+                                                                    <?php if ($cek_pengajuan_neraca_keuangan) { ?>
+                                                                        <th><small class="text-white">
+                                                                                <div class="text-center">More Options</div>
+                                                                            </small></th>
+                                                                    <?php } else { ?>
+                                                                      
+                                                                    <?php }
+                                                                    ?>
+                                                                <?php } else { ?>
+                                                                    <th><small class="text-white">
+                                                                            <div class="text-center">More Options</div>
+                                                                        </small></th>
+                                                                <?php }
+                                                                ?>
                                                             </tr>
                                                         </thead>
                                                         <tbody style="text-align: center;">

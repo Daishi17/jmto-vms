@@ -4,8 +4,8 @@ date_default_timezone_set("Asia/Jakarta");
 class Tender_diikuti extends CI_Controller
 {
 
-    var $link_dok = 'http://localhost/jmto-eproc';
-    // var $link_dok = 'https://jmto-eproc.kintekindo.net';
+    // var $link_dok = 'http://localhost/jmto-eproc';
+    var $link_dok = 'https://jmto-eproc.kintekindo.net';
     public function __construct()
     {
         parent::__construct();
@@ -72,7 +72,7 @@ class Tender_diikuti extends CI_Controller
                 $row[] = '<span class="badge bg-danger text-white">Sedang Berlangsung
                 </span>';
             }
-            $row[] = '<a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white"  onClick="by_id_rup(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa fa-info-circle" aria-hidden="true"></i> Detail</a>';
+            $row[] = '<a href="' . base_url('tender_diikuti/informasi_tender/' . $rs->id_url_rup) . '" class="btn btn-info btn-sm shadow-lg text-white"><i class="fa fa-info-circle" aria-hidden="true"></i> Lihat Pengadaan</a>';
             $data[] = $row;
         }
         $output = array(

@@ -68,7 +68,7 @@ class Login_vendor
     }
     public function logout()
     {
-        // $this->ci->session->sess_destroy();
-        // redirect('auth');
+        $this->ci->session->sess_destroy();
+        redirect('auth');
     }
 }

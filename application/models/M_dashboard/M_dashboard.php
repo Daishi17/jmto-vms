@@ -738,4 +738,111 @@ class M_Dashboard extends CI_Model
         $query = $this->db->get();
         return $query->row_array();
     }
+
+
+    var $order =  array('id_dokumen_perubahan', 'id_vendor', 'jenis_dokumen_perubahan', 'status_perubahan_dokumen', 'waktu_pengajuan', 'id_dokumen_perubahan');
+
+    // get nib
+    private function _get_data_query_pengajuan_dokumen()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_pengajuan_perubahan_dokumen');
+        $this->db->join('tbl_vendor', 'tbl_pengajuan_perubahan_dokumen.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor.id_vendor', $this->session->userdata('id_vendor'));
+        $i = 0;
+        foreach ($this->order as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
+            {
+
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
+
+                if (count($this->order) - 1 == $i)
+                    $this->db->group_end();
+            }
+            $i++;
+        }
+        if (isset($_POST['order'])) {
+            $this->db->order_by($this->order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        } else {
+            $this->db->order_by('tbl_pengajuan_perubahan_dokumen.id_dokumen_perubahan', 'DESC');
+        }
+    }
+
+    public function getdatatable_pengajuan_dokumen() //nam[ilin data pake ini
+    {
+        $this->_get_data_query_pengajuan_dokumen(); //ambil data dari get yg di atas
+        if ($_POST['length'] != -1) {
+            $this->db->limit($_POST['length'], $_POST['start']);
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function count_filtered_pengajuan_dokumen()
+    {
+        $this->_get_data_query_pengajuan_dokumen(); //ambil data dari get yg di atas
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    public function count_all_pengajuan_dokumen()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_pengajuan_perubahan_dokumen');
+        $this->db->join('tbl_vendor', 'tbl_pengajuan_perubahan_dokumen.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor.id_vendor', $this->session->userdata('id_vendor'));
+        return $this->db->count_all_results();
+    }
+
+    public function tambah_dokumen_pengajuan($data)
+    {
+        $this->db->insert('tbl_pengajuan_perubahan_dokumen', $data);
+        return $this->db->affected_rows();
+    }
+
+    public function cek_jika_sudah_ada_pengajuan($jenis_dokumen_perubahan)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_pengajuan_perubahan_dokumen');
+        $this->db->join('tbl_vendor', 'tbl_pengajuan_perubahan_dokumen.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor.id_vendor', $this->session->userdata('id_vendor'));
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.jenis_dokumen_perubahan', $jenis_dokumen_perubahan);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.sts_upload_dokumen_perubahan', 1);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.status_perubahan_dokumen', 1);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function cek_row_pengajuan_terakhir($jenis_dokumen_perubahan)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_pengajuan_perubahan_dokumen');
+        $this->db->join('tbl_vendor', 'tbl_pengajuan_perubahan_dokumen.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor.id_vendor', $this->session->userdata('id_vendor'));
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.jenis_dokumen_perubahan', $jenis_dokumen_perubahan);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.sts_upload_dokumen_perubahan', 1);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.status_perubahan_dokumen', 1);
+        $this->db->order_by('tbl_pengajuan_perubahan_dokumen.id_dokumen_perubahan', 'DESC');
+        $query = $this->db->get();
+        $this->db->limit(1);
+        return $query->row_array();
+    }
+
+
+
+    function delete_dokumen_pengajuan($id_dokumen_pengajuan)
+    {
+        $this->db->delete('tbl_pengajuan_perubahan_dokumen', $id_dokumen_pengajuan);
+        return $this->db->affected_rows();
+    }
 }

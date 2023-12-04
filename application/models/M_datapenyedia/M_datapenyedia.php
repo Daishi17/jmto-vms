@@ -1000,7 +1000,8 @@ class M_datapenyedia extends CI_Model
             foreach ($cek_table as $key => $value) {
                 $this->db->where('nik !=', '' . $value['nik'] . '');
             }
-        } else { }
+        } else {
+        }
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -1014,7 +1015,8 @@ class M_datapenyedia extends CI_Model
             foreach ($cek_table2 as $key => $valu2) {
                 $this->db->or_where('nik', '' . $valu2['nik'] . '');
             }
-        } else { }
+        } else {
+        }
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -1322,7 +1324,8 @@ class M_datapenyedia extends CI_Model
             foreach ($cek_table as $key => $value) {
                 $this->db->where('nik !=', '' . $value['nik'] . '');
             }
-        } else { }
+        } else {
+        }
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -1336,7 +1339,8 @@ class M_datapenyedia extends CI_Model
             foreach ($cek_table2 as $key => $valu2) {
                 $this->db->or_where('nik', '' . $valu2['nik'] . '');
             }
-        } else { }
+        } else {
+        }
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -1613,7 +1617,8 @@ class M_datapenyedia extends CI_Model
             foreach ($cek_table as $key => $value) {
                 $this->db->where('no_kontrak !=', '' . $value['no_kontrak'] . '');
             }
-        } else { }
+        } else {
+        }
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -1627,7 +1632,8 @@ class M_datapenyedia extends CI_Model
             foreach ($cek_table2 as $key => $valu2) {
                 $this->db->or_where('no_kontrak', '' . $valu2['no_kontrak'] . '');
             }
-        } else { }
+        } else {
+        }
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -2147,6 +2153,12 @@ class M_datapenyedia extends CI_Model
     }
 
 
+    public function update_izin_lainya($data, $where)
+    {
+        $this->db->update('tbl_vendor_izin_lain', $data, $where);
+        return $this->db->affected_rows();
+    }
+
 
     public function update_enkrip_lainnya($where, $data)
     {
@@ -2360,4 +2372,246 @@ class M_datapenyedia extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    // nib
+    public function cek_pengajuan_nib()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_pengajuan_perubahan_dokumen');
+        $this->db->join('tbl_vendor', 'tbl_pengajuan_perubahan_dokumen.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor.id_vendor', $this->session->userdata('id_vendor'));
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.status_perubahan_dokumen', 2);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.sts_upload_dokumen_perubahan', 1);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.jenis_dokumen_perubahan', 'nib');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+
+    // siup
+    public function cek_pengajuan_siup()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_pengajuan_perubahan_dokumen');
+        $this->db->join('tbl_vendor', 'tbl_pengajuan_perubahan_dokumen.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor.id_vendor', $this->session->userdata('id_vendor'));
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.status_perubahan_dokumen', 2);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.sts_upload_dokumen_perubahan', 1);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.jenis_dokumen_perubahan', 'siup');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    // sbu
+    public function cek_pengajuan_sbu()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_pengajuan_perubahan_dokumen');
+        $this->db->join('tbl_vendor', 'tbl_pengajuan_perubahan_dokumen.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor.id_vendor', $this->session->userdata('id_vendor'));
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.status_perubahan_dokumen', 2);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.sts_upload_dokumen_perubahan', 1);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.jenis_dokumen_perubahan', 'sbu');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    // siujk
+    public function cek_pengajuan_siujk()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_pengajuan_perubahan_dokumen');
+        $this->db->join('tbl_vendor', 'tbl_pengajuan_perubahan_dokumen.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor.id_vendor', $this->session->userdata('id_vendor'));
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.status_perubahan_dokumen', 2);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.sts_upload_dokumen_perubahan', 1);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.jenis_dokumen_perubahan', 'siujk');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+
+    // skdp
+    public function cek_pengajuan_skdp()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_pengajuan_perubahan_dokumen');
+        $this->db->join('tbl_vendor', 'tbl_pengajuan_perubahan_dokumen.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor.id_vendor', $this->session->userdata('id_vendor'));
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.status_perubahan_dokumen', 2);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.sts_upload_dokumen_perubahan', 1);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.jenis_dokumen_perubahan', 'skdp');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+
+    // izin_lainya
+    public function cek_pengajuan_izin_lainya()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_pengajuan_perubahan_dokumen');
+        $this->db->join('tbl_vendor', 'tbl_pengajuan_perubahan_dokumen.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor.id_vendor', $this->session->userdata('id_vendor'));
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.status_perubahan_dokumen', 2);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.sts_upload_dokumen_perubahan', 1);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.jenis_dokumen_perubahan', 'izin_lainya');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    // akta_pendirian
+    public function cek_pengajuan_akta_pendirian()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_pengajuan_perubahan_dokumen');
+        $this->db->join('tbl_vendor', 'tbl_pengajuan_perubahan_dokumen.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor.id_vendor', $this->session->userdata('id_vendor'));
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.status_perubahan_dokumen', 2);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.sts_upload_dokumen_perubahan', 1);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.jenis_dokumen_perubahan', 'akta_pendirian');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    // akta_perubahan
+    public function cek_pengajuan_akta_perubahan()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_pengajuan_perubahan_dokumen');
+        $this->db->join('tbl_vendor', 'tbl_pengajuan_perubahan_dokumen.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor.id_vendor', $this->session->userdata('id_vendor'));
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.status_perubahan_dokumen', 2);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.sts_upload_dokumen_perubahan', 1);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.jenis_dokumen_perubahan', 'akta_perubahan');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    // pemilik_perusahaan
+    public function cek_pengajuan_pemilik_perusahaan()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_pengajuan_perubahan_dokumen');
+        $this->db->join('tbl_vendor', 'tbl_pengajuan_perubahan_dokumen.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor.id_vendor', $this->session->userdata('id_vendor'));
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.status_perubahan_dokumen', 2);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.sts_upload_dokumen_perubahan', 1);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.jenis_dokumen_perubahan', 'pemilik_perusahaan');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    // pengurus_perusahaan
+    public function cek_pengajuan_pengurus_perusahaan()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_pengajuan_perubahan_dokumen');
+        $this->db->join('tbl_vendor', 'tbl_pengajuan_perubahan_dokumen.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor.id_vendor', $this->session->userdata('id_vendor'));
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.status_perubahan_dokumen', 2);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.sts_upload_dokumen_perubahan', 1);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.jenis_dokumen_perubahan', 'pengurus_perusahaan');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    // pengalaman_perusahaan
+    public function cek_pengajuan_pengalaman_perusahaan()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_pengajuan_perubahan_dokumen');
+        $this->db->join('tbl_vendor', 'tbl_pengajuan_perubahan_dokumen.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor.id_vendor', $this->session->userdata('id_vendor'));
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.status_perubahan_dokumen', 2);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.sts_upload_dokumen_perubahan', 1);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.jenis_dokumen_perubahan', 'pengalaman_perusahaan');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    // sppkp
+    public function cek_pengajuan_sppkp()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_pengajuan_perubahan_dokumen');
+        $this->db->join('tbl_vendor', 'tbl_pengajuan_perubahan_dokumen.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor.id_vendor', $this->session->userdata('id_vendor'));
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.status_perubahan_dokumen', 2);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.sts_upload_dokumen_perubahan', 1);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.jenis_dokumen_perubahan', 'sppkp');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+
+    // npwp
+    public function cek_pengajuan_npwp()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_pengajuan_perubahan_dokumen');
+        $this->db->join('tbl_vendor', 'tbl_pengajuan_perubahan_dokumen.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor.id_vendor', $this->session->userdata('id_vendor'));
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.status_perubahan_dokumen', 2);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.sts_upload_dokumen_perubahan', 1);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.jenis_dokumen_perubahan', 'npwp');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    // spt
+    public function cek_pengajuan_spt()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_pengajuan_perubahan_dokumen');
+        $this->db->join('tbl_vendor', 'tbl_pengajuan_perubahan_dokumen.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor.id_vendor', $this->session->userdata('id_vendor'));
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.status_perubahan_dokumen', 2);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.sts_upload_dokumen_perubahan', 1);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.jenis_dokumen_perubahan', 'spt');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    // laporan_keuangan
+    public function cek_pengajuan_laporan_keuangan()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_pengajuan_perubahan_dokumen');
+        $this->db->join('tbl_vendor', 'tbl_pengajuan_perubahan_dokumen.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor.id_vendor', $this->session->userdata('id_vendor'));
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.status_perubahan_dokumen', 2);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.sts_upload_dokumen_perubahan', 1);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.jenis_dokumen_perubahan', 'laporan_keuangan');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    // neraca_keuangan
+    public function cek_pengajuan_neraca_keuangan()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_pengajuan_perubahan_dokumen');
+        $this->db->join('tbl_vendor', 'tbl_pengajuan_perubahan_dokumen.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor.id_vendor', $this->session->userdata('id_vendor'));
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.status_perubahan_dokumen', 2);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.sts_upload_dokumen_perubahan', 1);
+        $this->db->where('tbl_pengajuan_perubahan_dokumen.jenis_dokumen_perubahan', 'neraca_keuangan');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+
+    function update_dokumen_pengajuan($data, $where)
+    {
+        $this->db->update('tbl_pengajuan_perubahan_dokumen', $data, $where);
+        return $this->db->affected_rows();
+    }
+
+    public function update_id_pengajun_result_by_vendor($data, $where)
+    {
+        $this->db->update('tbl_vendor', $data, $where);
+        return $this->db->affected_rows();
+    }
+
 }

@@ -76,10 +76,27 @@
                                                             <small><strong>Form Dokumen - Nomor Induk Berusaha (NIB)</strong></small>
                                                         </span>
                                                     </div>
-                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#apply_edit_nib" class="btn btn-secondary btn-sm shadow-lg">
-                                                        <i class="fa-solid fa-pen-to-square px-1"></i>
-                                                        Edit Changes
-                                                    </button>
+                                                    <!-- nib -->
+                                                    <?php if ($row_vendor['sts_terundang'] == 1) { ?>
+                                                        <?php if ($cek_pengajuan_nib) { ?>
+                                                            <button type="button" data-bs-toggle="modal" data-bs-target="#apply_edit_nib" class="btn btn-secondary btn-sm shadow-lg">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Edit Changes
+                                                            </button>
+                                                        <?php } else { ?>
+                                                            <button disabled class="btn btn-info btn-sm shadow-lg">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Silakan Lakukan Pengajuan Dokumen Untuk Merubah Dokumen Anda
+                                                            </button>
+                                                        <?php }
+                                                        ?>
+                                                    <?php } else { ?>
+                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#apply_edit_nib" class="btn btn-secondary btn-sm shadow-lg">
+                                                            <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                            Edit Changes
+                                                        </button>
+                                                    <?php }
+                                                    ?>
                                                 </div>
                                                 <div class="card-body">
                                                     <form id="form_nib" enctype="multipart/form-data">
@@ -211,10 +228,29 @@
                                                             <small><strong>Form Dokumen - SIUP</strong></small>
                                                         </span>
                                                     </div>
-                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#apply_edit_siup" class="btn btn-secondary btn-sm shadow-lg">
-                                                        <i class="fa-solid fa-pen-to-square px-1"></i>
-                                                        Edit Changes
-                                                    </button>
+                                                    <!-- siup -->
+                                                    <?php if ($row_vendor['sts_terundang'] == 1) { ?>
+                                                        <?php if ($cek_pengajuan_siup) { ?>
+                                                            <button type="button" data-bs-toggle="modal" data-bs-target="#apply_edit_siup" class="btn btn-secondary btn-sm shadow-lg">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Edit Changes
+                                                            </button>
+                                                        <?php } else { ?>
+                                                            <button disabled class="btn btn-info btn-sm shadow-lg">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Silakan Lakukan Pengajuan Dokumen Untuk Merubah Dokumen Anda
+                                                            </button>
+                                                        <?php }
+                                                        ?>
+                                                    <?php } else { ?>
+                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#apply_edit_siup" class="btn btn-secondary btn-sm shadow-lg">
+                                                            <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                            Edit Changes
+                                                        </button>
+                                                    <?php }
+                                                    ?>
+
+
                                                 </div>
                                                 <div class="card-body">
                                                     <form id="form_siup" enctype="multipart/form-data">
@@ -347,10 +383,27 @@
                                                             <small><strong>Form Dokumen - Sertifikat Badan Usaha SBU</strong></small>
                                                         </span>
                                                     </div>
-                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#apply_edit_sbu" class="btn btn-secondary btn-sm shadow-lg">
-                                                        <i class="fa-solid fa-pen-to-square px-1"></i>
-                                                        Edit Changes
-                                                    </button>
+                                                    <!-- sbu -->
+                                                    <?php if ($row_vendor['sts_terundang'] == 1) { ?>
+                                                        <?php if ($cek_pengajuan_sbu) { ?>
+                                                            <button type="button" data-bs-toggle="modal" data-bs-target="#apply_edit_sbu" class="btn btn-secondary btn-sm shadow-lg">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Edit Changes
+                                                            </button>
+                                                        <?php } else { ?>
+                                                            <button disabled class="btn btn-info btn-sm shadow-lg">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Silakan Lakukan Pengajuan Dokumen Untuk Merubah Dokumen Anda
+                                                            </button>
+                                                        <?php }
+                                                        ?>
+                                                    <?php } else { ?>
+                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#apply_edit_sbu" class="btn btn-secondary btn-sm shadow-lg">
+                                                            <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                            Edit Changes
+                                                        </button>
+                                                    <?php }
+                                                    ?>
                                                 </div>
                                                 <div class="card-body">
                                                     <form id="form_sbu" enctype="multipart/form-data">
@@ -483,10 +536,27 @@
                                                             <small><strong>Form Dokumen - SIUJK</strong></small>
                                                         </span>
                                                     </div>
-                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#apply_edit_siujk" class="btn btn-secondary btn-sm shadow-lg">
-                                                        <i class="fa-solid fa-pen-to-square px-1"></i>
-                                                        Edit Changes
-                                                    </button>
+                                                    <!-- siujk -->
+                                                    <?php if ($row_vendor['sts_terundang'] == 1) { ?>
+                                                        <?php if ($cek_pengajuan_siujk) { ?>
+                                                            <button type="button" data-bs-toggle="modal" data-bs-target="#apply_edit_siujk" class="btn btn-secondary btn-sm shadow-lg">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Edit Changes
+                                                            </button>
+                                                        <?php } else { ?>
+                                                            <button disabled class="btn btn-info btn-sm shadow-lg">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Silakan Lakukan Pengajuan Dokumen Untuk Merubah Dokumen Anda
+                                                            </button>
+                                                        <?php }
+                                                        ?>
+                                                    <?php } else { ?>
+                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#apply_edit_siujk" class="btn btn-secondary btn-sm shadow-lg">
+                                                            <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                            Edit Changes
+                                                        </button>
+                                                    <?php }
+                                                    ?>
                                                 </div>
                                                 <div class="card-body">
                                                     <form id="form_siujk" enctype="multipart/form-data">
@@ -620,10 +690,28 @@
                                                             <small><strong>Form Dokumen - SKDP/Izin Lokasi</strong></small>
                                                         </span>
                                                     </div>
-                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#apply_edit_skdp" class="btn btn-secondary btn-sm shadow-lg">
-                                                        <i class="fa-solid fa-pen-to-square px-1"></i>
-                                                        Edit Changes
-                                                    </button>
+                                                    <!-- skdp -->
+                                                    <?php if ($row_vendor['sts_terundang'] == 1) { ?>
+                                                        <?php if ($cek_pengajuan_skdp) { ?>
+                                                            <button type="button" data-bs-toggle="modal" data-bs-target="#apply_edit_skdp" class="btn btn-secondary btn-sm shadow-lg">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Edit Changes
+                                                            </button>
+                                                        <?php } else { ?>
+                                                            <button disabled class="btn btn-info btn-sm shadow-lg">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Silakan Lakukan Pengajuan Dokumen Untuk Merubah Dokumen Anda
+                                                            </button>
+                                                        <?php }
+                                                        ?>
+                                                    <?php } else { ?>
+                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#apply_edit_skdp" class="btn btn-secondary btn-sm shadow-lg">
+                                                            <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                            Edit Changes
+                                                        </button>
+                                                    <?php }
+                                                    ?>
+
                                                 </div>
                                                 <div class="card-body">
                                                     <form id="form_skdp" enctype="multipart/form-data">
@@ -756,10 +844,28 @@
                                                             <small><strong>Form Dokumen - Izin Lainnya</strong></small>
                                                         </span>
                                                     </div>
-                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#apply_edit_lainnya" class="btn btn-secondary btn-sm shadow-lg">
-                                                        <i class="fa-solid fa-pen-to-square px-1"></i>
-                                                        Edit Changes
-                                                    </button>
+
+                                                    <!-- izin_lainya -->
+                                                    <?php if ($row_vendor['sts_terundang'] == 1) { ?>
+                                                        <?php if ($cek_pengajuan_izin_lainya) { ?>
+                                                            <button type="button" data-bs-toggle="modal" data-bs-target="#apply_edit_lainnya" class="btn btn-secondary btn-sm shadow-lg">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Edit Changes
+                                                            </button>
+                                                        <?php } else { ?>
+                                                            <button disabled class="btn btn-info btn-sm shadow-lg">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Silakan Lakukan Pengajuan Dokumen Untuk Merubah Dokumen Anda
+                                                            </button>
+                                                        <?php }
+                                                        ?>
+                                                    <?php } else { ?>
+                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#apply_edit_lainnya" class="btn btn-secondary btn-sm shadow-lg">
+                                                            <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                            Edit Changes
+                                                        </button>
+                                                    <?php }
+                                                    ?>
                                                 </div>
                                                 <div class="card-body">
                                                     <form id="form_lainnya" enctype="multipart/form-data">

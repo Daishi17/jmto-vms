@@ -602,3 +602,97 @@
         })
     }
 </script>
+
+<script>
+    function pengajuan_dokumen() {
+        var modal_pengajuan_dokumen = $('#modal_pengajuan_dokumen');
+        modal_pengajuan_dokumen.modal('show');
+    }
+    $(document).ready(function() {
+        $('#datatable_pengajuan_dokumen').DataTable({
+            "responsive": false,
+            "ordering": true,
+            "processing": true,
+            "serverSide": true,
+            "autoWidth": false,
+            "bDestroy": true,
+            // "buttons": ["excel", "pdf", "print", "colvis"],
+            initComplete: function() {
+                this.api().buttons().container().appendTo($('.col-md-6:eq(0)', this.api().table().container()));
+            },
+            "order": [],
+            "ajax": {
+                "url": '<?= base_url('dashboard/get_datatable_pengajuan_perubahan_dokumen') ?>',
+                "type": "POST",
+            },
+            "columnDefs": [{
+                "target": [-1],
+                "orderable": false
+            }],
+            "oLanguage": {
+                "sSearch": "Pencarian : ",
+                "sEmptyTable": "Tidak Ada Pengajuan Dokume Baru",
+                "sLoadingRecords": "Silahkan Tunggu - loading...",
+                "sLengthMenu": "Menampilkan &nbsp;  _MENU_  &nbsp;   Data",
+                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                "sProcessing": "Memuat Data...."
+            }
+        }).buttons().container().appendTo('#tbl_rup .col-md-6:eq(0)');
+    });
+
+    function reload_tbl_pengajuan_dokumen() {
+        $('#datatable_pengajuan_dokumen').DataTable().ajax.reload();
+    }
+
+    function pilih_jenis_dokumen_perubahan() {
+        var jenis_dokumen_perubahan = $('[name="jenis_dokumen_perubahan"]').val()
+        if (jenis_dokumen_perubahan == '') {
+            Swal.fire('Anda Belum Memilih Jenis Dokumen Yang Ingin Anda Ubah', 'warning')
+        } else {
+            $.ajax({
+                type: "POST",
+                url: '<?= base_url('dashboard/add_pengajuan') ?>',
+                dataType: "JSON",
+                data: {
+                    jenis_dokumen_perubahan: jenis_dokumen_perubahan,
+                },
+                success: function(response) {
+                    if (response['validasi']) {
+                        reload_tbl_pengajuan_dokumen()
+                        Swal.fire(response['validasi'], '', 'warning')
+                    } else {
+                        reload_tbl_pengajuan_dokumen()
+                        Swal.fire('Dokumen Berhasil Di Pilih', '', 'success')
+                    }
+                }
+            })
+        }
+    }
+
+
+
+    function Hapus_pengajuan(id_dokumen_perubahan) {
+        Swal.fire({
+            title: "Yakin Mau Hapus",
+            text: 'Data Ini Mau Di hapus?',
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    type: "POST",
+                    url: '<?= base_url('dashboard/hapus_dokumen_pengajuan') ?>',
+                    data: {
+                        id_dokumen_perubahan: id_dokumen_perubahan
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        Swal.fire('Good job!', 'Data Beharhasil Dihapus!', 'success');
+                        reload_tbl_pengajuan_dokumen()
+                    }
+                })
+            }
+        });
+    }
+</script>

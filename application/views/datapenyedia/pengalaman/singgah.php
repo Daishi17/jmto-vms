@@ -31,19 +31,45 @@
                                     <small><strong>Form Dokumen - Pengalaman Pekerjaan Perusahaan</strong></small>
                                 </span>
                             </div>
-                            <div class="bd-highlight">
-                                <button type="button" class="btn btn-primary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-pengalaman">
-                                    <i class="fa-solid fa-user-plus px-1"></i>
-                                    Create Data
-                                </button>
-                            </div>&nbsp;
-                            <span class="text-white">||</span>&nbsp;
-                            <div class="bd-highlight">
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalImportPengalaman" class="btn btn-secondary btn-sm shadow-lg">
-                                    <i class="fa-solid fa-cloud-arrow-up px-1"></i>
-                                    Import Excel
-                                </button>
-                            </div>&nbsp;<span class="text-white">||</span>
+                            <!-- pemilik_perusahaan -->
+                            <?php if ($row_vendor['sts_terundang'] == 1) { ?>
+                                <?php if ($cek_pengajuan_pengalaman_perusahaan) { ?>
+                                    <div class="bd-highlight">
+                                        <button type="button" class="btn btn-primary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-pengalaman">
+                                            <i class="fa-solid fa-user-plus px-1"></i>
+                                            Create Data
+                                        </button>
+                                    </div>&nbsp;
+                                    <span class="text-white">||</span>&nbsp;
+                                    <div class="bd-highlight">
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#modalImportPengalaman" class="btn btn-secondary btn-sm shadow-lg">
+                                            <i class="fa-solid fa-cloud-arrow-up px-1"></i>
+                                            Import Excel
+                                        </button>
+                                    </div>&nbsp;<span class="text-white">||</span>
+                                <?php } else { ?>
+                                    <button disabled class="btn btn-info btn-sm shadow-lg">
+                                        <i class="fa-solid fa-pen-to-square px-1"></i>
+                                        Silakan Lakukan Pengajuan Dokumen Untuk Merubah Dokumen Anda
+                                    </button>
+                                <?php }
+                                ?>
+                            <?php } else { ?>
+                                <div class="bd-highlight">
+                                    <button type="button" class="btn btn-primary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-pengalaman">
+                                        <i class="fa-solid fa-user-plus px-1"></i>
+                                        Create Data
+                                    </button>
+                                </div>&nbsp;
+                                <span class="text-white">||</span>&nbsp;
+                                <div class="bd-highlight">
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalImportPengalaman" class="btn btn-secondary btn-sm shadow-lg">
+                                        <i class="fa-solid fa-cloud-arrow-up px-1"></i>
+                                        Import Excel
+                                    </button>
+                                </div>&nbsp;<span class="text-white">||</span>
+                            <?php }
+                            ?>
                         </div>
                         <div class="card-body">
                             <table style="font-size: 13px;text-align:center" id="data_pengalaman_manajerial" class="table table-sm table-bordered table-striped">
@@ -62,11 +88,24 @@
                                                 <div class="text-center">Status Validasi</div>
                                             </small>
                                         </th>
-                                        <th style="width:15%;">
-                                            <small class="text-white">
-                                                <div class="text-center">More Options</div>
-                                            </small>
-                                        </th>
+                                        <?php if ($row_vendor['sts_terundang'] == 1) { ?>
+                                            <?php if ($cek_pengajuan_pengalaman_perusahaan) { ?>
+                                                <th style="width:15%;">
+                                                    <small class="text-white">
+                                                        <div class="text-center">More Options</div>
+                                                    </small>
+                                                </th>
+                                            <?php } else { ?>
+                                            <?php }
+                                            ?>
+                                        <?php } else { ?>
+                                            <th style="width:15%;">
+                                                <small class="text-white">
+                                                    <div class="text-center">More Options</div>
+                                                </small>
+                                            </th>
+                                        <?php }
+                                        ?>
                                     </tr>
                                 </thead>
                                 <tbody>

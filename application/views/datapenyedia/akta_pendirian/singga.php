@@ -70,10 +70,28 @@
                                                             <small><strong>Form Dokumen - Akta Pendirian</strong></small>
                                                         </span>
                                                     </div>
-                                                    <button data-bs-toggle="modal" data-bs-target="#modaledit_pendirian" type="button" class="btn btn-secondary btn-sm shadow-lg" id="button_edit_modal">
-                                                        <i class="fa-solid fa-pen-to-square px-1"></i>
-                                                        Edit Changes
-                                                    </button>
+
+                                                    <!-- akta_pendirian -->
+                                                    <?php if ($row_vendor['sts_terundang'] == 1) { ?>
+                                                        <?php if ($cek_pengajuan_akta_pendirian) { ?>
+                                                            <button data-bs-toggle="modal" data-bs-target="#modaledit_pendirian" type="button" class="btn btn-secondary btn-sm shadow-lg" id="button_edit_modal">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Edit Changes
+                                                            </button>
+                                                        <?php } else { ?>
+                                                            <button disabled class="btn btn-info btn-sm shadow-lg">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Silakan Lakukan Pengajuan Dokumen Untuk Merubah Dokumen Anda
+                                                            </button>
+                                                        <?php }
+                                                        ?>
+                                                    <?php } else { ?>
+                                                        <button data-bs-toggle="modal" data-bs-target="#modaledit_pendirian" type="button" class="btn btn-secondary btn-sm shadow-lg" id="button_edit_modal">
+                                                            <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                            Edit Changes
+                                                        </button>
+                                                    <?php }
+                                                    ?>
                                                 </div>
                                                 <div class="card-body">
                                                     <form id="form_akta_pendirian" enctype="multipart/form-data">
@@ -234,10 +252,27 @@
                                                             Tidak Ada
                                                         </a> -->
                                                     </div>
-                                                    <button data-bs-toggle="modal" data-bs-target="#modaledit_perubahan" id="button_edit_perubahan" type="button" class="btn btn-secondary btn-sm shadow-lg">
-                                                        <i class="fa-solid fa-pen-to-square px-1"></i>
-                                                        Edit Changes
-                                                    </button>
+                                                    <!-- akta_perubahan -->
+                                                    <?php if ($row_vendor['sts_terundang'] == 1) { ?>
+                                                        <?php if ($cek_pengajuan_akta_perubahan) { ?>
+                                                            <button data-bs-toggle="modal" data-bs-target="#modaledit_perubahan" id="button_edit_perubahan" type="button" class="btn btn-secondary btn-sm shadow-lg">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Edit Changes
+                                                            </button>
+                                                        <?php } else { ?>
+                                                            <button disabled class="btn btn-info btn-sm shadow-lg">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Silakan Lakukan Pengajuan Dokumen Untuk Merubah Dokumen Anda
+                                                            </button>
+                                                        <?php }
+                                                        ?>
+                                                    <?php } else { ?>
+                                                        <button data-bs-toggle="modal" data-bs-target="#modaledit_perubahan" id="button_edit_perubahan" type="button" class="btn btn-secondary btn-sm shadow-lg">
+                                                            <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                            Edit Changes
+                                                        </button>
+                                                    <?php }
+                                                    ?>
                                                 </div>
                                                 <div class="card-body">
                                                     <form id="form_akta_perubahan" enctype="multipart/form-data">

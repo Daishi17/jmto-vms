@@ -186,6 +186,15 @@
 
                 $('#detail_jadwal').html('<a href="javascript:;" onclick="lihat_detail_jadwal(\'' + response['row_rup'].id_url_rup + '\')" class="btn btn-sm btn-primary"><i class="fa-solid fa-calendar-days px-1"></i> Detail Jadwal Pengadaan</a>')
 
+                // spt
+                if (response['row_syarat_teknis_rup'].sts_checked_spt == 1) {
+                    $('#spt_izin').css('display', 'block')
+                    $('#tahun_spt').text('Tahun ' + response['row_syarat_teknis_rup'].tahun_lapor_spt)
+                } else {
+                    $('#spt_izin').css('display', 'none')
+                    $('#tahun_spt').text('Tidak Diperlukan')
+                }
+
                 // keuangan
                 if (response['row_syarat_teknis_rup'].sts_checked_laporan_keuangan == 1) {
                     $('#keuangan_izin').css('display', 'block')
@@ -363,7 +372,7 @@
                         var status_waktu = '<small><span class="badge bg-success"><i class="fa fa-clock" aria-hidden="true"></i> Tahap Sudah Selesai </span></small>';
                     }
 
-                   
+
                     if (response['jadwal'][i].alasan) {
                         var alasan = response['jadwal'][i].alasan
                     } else {
