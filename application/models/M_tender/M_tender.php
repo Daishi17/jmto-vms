@@ -100,37 +100,37 @@ class M_tender extends CI_Model
         //     }
         // }
 
-        if ($sbu_vendor) {
-            if ($sbu_vendor_kode) {
-                $this->db->where_in('tbl_syratat_sbu_tender.id_sbu',  $sbu_vendor_kode);
-                if ($sbu_vendor['sts_seumur_hidup'] == 2) {
-                    $this->db->where('tbl_izin_rup.sts_masa_berlaku_sbu', 2);
-                    $this->db->where('tbl_izin_rup.tgl_berlaku_sbu <=', date('Y-m-d', strtotime('+50 year', strtotime($now))));
-                } else {
-                    $this->db->where('tbl_izin_rup.tgl_berlaku_sbu <=', $sbu_vendor['tgl_berlaku']);
-                }
-            }
-        }
+        // if ($sbu_vendor) {
+        //     if ($sbu_vendor_kode) {
+        //         $this->db->where_in('tbl_syratat_sbu_tender.id_sbu',  $sbu_vendor_kode);
+        //         if ($sbu_vendor['sts_seumur_hidup'] == 2) {
+        //             $this->db->where('tbl_izin_rup.sts_masa_berlaku_sbu', 2);
+        //             $this->db->where('tbl_izin_rup.tgl_berlaku_sbu <=', date('Y-m-d', strtotime('+50 year', strtotime($now))));
+        //         } else {
+        //             $this->db->where('tbl_izin_rup.tgl_berlaku_sbu <=', $sbu_vendor['tgl_berlaku']);
+        //         }
+        //     }
+        // }
 
 
-        if ($spt_vendor) {
-            $this->db->where('tbl_izin_teknis_rup.tahun_lapor_spt <=', $spt_vendor['tahun_lapor']);
-        } else {
-        }
+        // if ($spt_vendor) {
+        //     $this->db->where('tbl_izin_teknis_rup.tahun_lapor_spt <=', $spt_vendor['tahun_lapor']);
+        // } else {
+        // }
 
-        if ($keuangan) {
-            $this->db->where('tbl_izin_teknis_rup.tahun_awal_laporan_keuangan <=', $keuangan['tahun_lapor']);
-            $this->db->where('tbl_izin_teknis_rup.tahun_akhir_laporan_keuangan >=', $keuangan['tahun_lapor']);
+        // if ($keuangan) {
+        //     $this->db->where('tbl_izin_teknis_rup.tahun_awal_laporan_keuangan <=', $keuangan['tahun_lapor']);
+        //     $this->db->where('tbl_izin_teknis_rup.tahun_akhir_laporan_keuangan >=', $keuangan['tahun_lapor']);
 
-            $this->db->where_in('tbl_izin_teknis_rup.sts_audit_laporan_keuangan',  $keuangan_audit);
-        } else {
-        }
+        //     $this->db->where_in('tbl_izin_teknis_rup.sts_audit_laporan_keuangan',  $keuangan_audit);
+        // } else {
+        // }
 
-        if ($neraca) {
-            $this->db->where('tbl_izin_teknis_rup.tahun_awal_neraca_keuangan <=', $neraca_selesai['sls']);
-            $this->db->where('tbl_izin_teknis_rup.tahun_akhir_neraca_keuangan >=', $neraca_mulai['mulai']);
-        } else {
-        }
+        // if ($neraca) {
+        //     $this->db->where('tbl_izin_teknis_rup.tahun_awal_neraca_keuangan <=', $neraca_selesai['sls']);
+        //     $this->db->where('tbl_izin_teknis_rup.tahun_akhir_neraca_keuangan >=', $neraca_mulai['mulai']);
+        // } else {
+        // }
         $this->db->group_by('tbl_rup.id_rup');
         $query = $this->db->get();
         return $query->result_array();
@@ -240,24 +240,23 @@ class M_tender extends CI_Model
         }
 
 
-        if ($spt_vendor) {
-            $this->db->where('tbl_izin_teknis_rup.tahun_lapor_spt <=', $spt_vendor['tahun_lapor']);
-        } else {
-        }
+        // if ($spt_vendor) {
+        //     $this->db->where('tbl_izin_teknis_rup.tahun_lapor_spt <=', $spt_vendor['tahun_lapor']);
+        // } else {
+        // }
 
-        if ($keuangan) {
-            $this->db->where('tbl_izin_teknis_rup.tahun_awal_laporan_keuangan <=', $keuangan['tahun_lapor']);
-            $this->db->where('tbl_izin_teknis_rup.tahun_akhir_laporan_keuangan >=', $keuangan['tahun_lapor']);
+        // if ($keuangan) {
+        //     $this->db->where('tbl_izin_teknis_rup.tahun_awal_laporan_keuangan <=', $keuangan['tahun_lapor']);
+        //     $this->db->where('tbl_izin_teknis_rup.tahun_akhir_laporan_keuangan >=', $keuangan['tahun_lapor']);
+        //     $this->db->where_in('tbl_izin_teknis_rup.sts_audit_laporan_keuangan',  $keuangan_audit);
+        // } else {
+        // }
 
-            $this->db->where_in('tbl_izin_teknis_rup.sts_audit_laporan_keuangan',  $keuangan_audit);
-        } else {
-        }
-
-        if ($neraca) {
-            $this->db->where('tbl_izin_teknis_rup.tahun_awal_neraca_keuangan <=', $neraca_selesai['sls']);
-            $this->db->where('tbl_izin_teknis_rup.tahun_akhir_neraca_keuangan >=', $neraca_mulai['mulai']);
-        } else {
-        }
+        // if ($neraca) {
+        //     $this->db->where('tbl_izin_teknis_rup.tahun_awal_neraca_keuangan <=', $neraca_selesai['sls']);
+        //     $this->db->where('tbl_izin_teknis_rup.tahun_akhir_neraca_keuangan >=', $neraca_mulai['mulai']);
+        // } else {
+        // }
         $this->db->group_by('tbl_rup.id_rup');
         $i = 0;
         foreach ($this->order as $item) // looping awal

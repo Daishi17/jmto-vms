@@ -528,6 +528,11 @@
             }
         })
     }
+
+    function DownloadFile_keuangan (id_url) {
+        var url_download_keuangan = $('[name="url_download_keuangan"]').val()
+        location.href = url_download_keuangan + id_url;
+    }
 </script>
 
 <script>

@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <!-- nanti ini di buat file global terpisah -->
     <input type="hidden" name="id_url_vendor" value="<?= $row_vendor['id_url_vendor'] ?>">
-    <input type="hidden" name="secret_token" value="<?= $row_vendor['token_scure_vendor'] ?>">
+    <input type="text" name="secret_token" value="<?= $row_vendor['token_scure_vendor'] ?>">
     <?php $this->load->view('datapenyedia/izin_usaha/url_izin_usaha') ?>
     <!-- Default box -->
     <div class="row">

@@ -129,27 +129,35 @@ function get_row_vendor() {
                     $('#sts_validasi_siup_kbli_1').css('display','none');
                     $('#sts_validasi_siup_kbli_2').css('display','none');
                 }
-                if (response['row_siup']['sts_validasi'] == 0 || response['row_siup']['sts_validasi'] == '') {
+                if (response['row_siup']['sts_pemeriksaan'] == 0) {
                     $('#sts_validasi_siup_0').css('display','block');
                     $('#sts_validasi_siup_1').css('display','none');
                     $('#sts_validasi_siup_2').css('display','none');
                     $('#sts_validasi_siup_3').css('display','none');
-                } else if (response['row_siup']['sts_validasi'] == 1) {
-                    $('#sts_validasi_siup_0').css('display','none');
-                    $('#sts_validasi_siup_1').css('display','block');
-                    $('#sts_validasi_siup_2').css('display','none');
-                    $('#sts_validasi_siup_3').css('display','none');
-                } else if (response['row_siup']['sts_validasi'] == 2) {
-                    $('#sts_validasi_siup_0').css('display','none');
-                    $('#sts_validasi_siup_1').css('display','none');
-                    $('#sts_validasi_siup_2').css('display','block');
-                    $('#sts_validasi_siup_3').css('display','none');
-                } else if (response['row_siup']['sts_validasi'] == 3) {
-                    $('#sts_validasi_siup_0').css('display','none');
-                    $('#sts_validasi_siup_1').css('display','none');
-                    $('#sts_validasi_siup_2').css('display','none');
-                    $('#sts_validasi_siup_3').css('display','block');
+                } else {
+                    if (response['row_siup']['sts_validasi'] == 0 || response['row_siup']['sts_validasi'] == '') {
+                        $('#sts_validasi_siup_0').css('display','block');
+                        $('#sts_validasi_siup_1').css('display','none');
+                        $('#sts_validasi_siup_2').css('display','none');
+                        $('#sts_validasi_siup_3').css('display','none');
+                    } else if (response['row_siup']['sts_validasi'] == 1) {
+                        $('#sts_validasi_siup_0').css('display','none');
+                        $('#sts_validasi_siup_1').css('display','block');
+                        $('#sts_validasi_siup_2').css('display','none');
+                        $('#sts_validasi_siup_3').css('display','none');
+                    } else if (response['row_siup']['sts_validasi'] == 2) {
+                        $('#sts_validasi_siup_0').css('display','none');
+                        $('#sts_validasi_siup_1').css('display','none');
+                        $('#sts_validasi_siup_2').css('display','block');
+                        $('#sts_validasi_siup_3').css('display','none');
+                    } else if (response['row_siup']['sts_validasi'] == 3) {
+                        $('#sts_validasi_siup_0').css('display','none');
+                        $('#sts_validasi_siup_1').css('display','none');
+                        $('#sts_validasi_siup_2').css('display','none');
+                        $('#sts_validasi_siup_3').css('display','block');
+                    }
                 }
+              
                 $('.btn_siup').attr("disabled", true);
                 $('.nomor_surat_siup').attr("readonly", true);
                 $('.sts_seumur_hidup_siup').attr("disabled", true);
