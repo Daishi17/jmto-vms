@@ -290,7 +290,7 @@ class Datapenyedia extends CI_Controller
 		$row_nib = $this->M_datapenyedia->get_row_nib($id_vendor);
 		$id = $this->uuid->v4();
 		$id = str_replace('-', '', $id);
-		$token = $this->token->data_token();
+		$token = random_string('alnum', 16);
 		// post
 		$nomor_surat = $this->input->post('nomor_surat_nib');
 		$sts_seumur_hidup = $this->input->post('sts_seumur_hidup_nib');
@@ -463,13 +463,13 @@ class Datapenyedia extends CI_Controller
 			$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
 			$data = [
 				'sts_token_dokumen' => 2,
-				'file_dokumen' => $encryption_string,
+				'file_dokumen' => $get_row_enkrip['file_dokumen']
 			];
 		} else {
 			$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
 			$data = [
 				'sts_token_dokumen' => 1,
-				'file_dokumen' => $encryption_string,
+				'file_dokumen' => $get_row_enkrip['file_dokumen']
 			];
 		}
 
@@ -508,7 +508,7 @@ class Datapenyedia extends CI_Controller
 		];
 		$data = [
 			'sts_token_dokumen' => 2,
-			'file_dokumen' => $encryption_string,
+			'file_dokumen' => $get_row_enkrip['file_dokumen']
 		];
 		if ($token_dokumen == $secret_token_dokumen) {
 			$response = [
@@ -585,7 +585,7 @@ class Datapenyedia extends CI_Controller
 		$row_vendor = $this->M_datapenyedia->get_row_kbli_nib_by_vendor($id_vendor);
 		$id = $this->uuid->v4();
 		$id = str_replace('-', '', $id);
-		$token = $this->token->data_token();
+		$token = random_string('alnum', 16);
 		// post
 		$id_kbli = $this->input->post('id_kbli_nib');
 		$id_kualifikasi_izin = $this->input->post('id_kualifikasi_izin_kbli_nib');
@@ -718,7 +718,7 @@ class Datapenyedia extends CI_Controller
 
 		$id = $this->uuid->v4();
 		$id = str_replace('-', '', $id);
-		$token = $this->token->data_token();
+		$token = random_string('alnum', 16);
 		// post
 		$nomor_surat = $this->input->post('nomor_surat_siup');
 		$sts_seumur_hidup = $this->input->post('sts_seumur_hidup_siup');
@@ -779,8 +779,9 @@ class Datapenyedia extends CI_Controller
 				$file_dokumen = $fileData['file_name'];
 				$chiper = "AES-128-CBC";
 				$secret = $token;
-				$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret);
-
+				$option = 0;
+				$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+				$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret, $option, $iv);
 				if (!$row_siup) {
 					$upload = [
 						'id_url' => $id,
@@ -789,7 +790,7 @@ class Datapenyedia extends CI_Controller
 						'nomor_surat' => $nomor_surat,
 						'sts_seumur_hidup' => $sts_seumur_hidup,
 						'password_dokumen' => $password_dokumen,
-						'file_dokumen' => $file_dokumen,
+						'file_dokumen' => $enckrips_string,
 						'token_dokumen' => $secret,
 						'tgl_berlaku' => $tgl_berlaku,
 						'sts_token_dokumen' => 2,
@@ -808,7 +809,7 @@ class Datapenyedia extends CI_Controller
 						'nomor_surat' => $nomor_surat,
 						'sts_seumur_hidup' => $sts_seumur_hidup,
 						'password_dokumen' => $password_dokumen,
-						'file_dokumen' => $file_dokumen,
+						'file_dokumen' => $enckrips_string,
 						'token_dokumen' => $secret,
 						'tgl_berlaku' => $tgl_berlaku,
 						'sts_token_dokumen' => 2,
@@ -894,13 +895,15 @@ class Datapenyedia extends CI_Controller
 			$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
 			$data = [
 				'sts_token_dokumen' => 2,
-				'file_dokumen' => $encryption_string,
+				'file_dokumen' => $get_row_enkrip['file_dokumen']
 			];
 		} else {
-			$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+			$option = 0;
+			$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+			$enckrips_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret, $option, $iv);
 			$data = [
 				'sts_token_dokumen' => 1,
-				'file_dokumen' => $encryption_string,
+				'file_dokumen' => $enckrips_string
 			];
 		}
 
@@ -939,7 +942,7 @@ class Datapenyedia extends CI_Controller
 		];
 		$data = [
 			'sts_token_dokumen' => 2,
-			'file_dokumen' => $encryption_string,
+			'file_dokumen' => $get_row_enkrip['file_dokumen']
 		];
 		if ($token_dokumen == $secret_token_dokumen) {
 			$response = [
@@ -1016,7 +1019,7 @@ class Datapenyedia extends CI_Controller
 		$row_vendor = $this->M_datapenyedia->get_row_kbli_siup_by_vendor($id_vendor);
 		$id = $this->uuid->v4();
 		$id = str_replace('-', '', $id);
-		$token = $this->token->data_token();
+		$token = random_string('alnum', 16);
 		// post
 		$id_kbli = $this->input->post('id_kbli_siup');
 		$id_kualifikasi_izin = $this->input->post('id_kualifikasi_izin_kbli_siup');
@@ -1144,7 +1147,7 @@ class Datapenyedia extends CI_Controller
 		$row_siujk = $this->M_datapenyedia->get_row_siujk($id_vendor);
 		$id = $this->uuid->v4();
 		$id = str_replace('-', '', $id);
-		$token = $this->token->data_token();
+		$token = random_string('alnum', 16);
 		// post
 		$nomor_surat = $this->input->post('nomor_surat_siujk');
 		$kualifikasi_izin = $this->input->post('kualifikasi_izin_siujk');
@@ -1316,13 +1319,13 @@ class Datapenyedia extends CI_Controller
 			$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
 			$data = [
 				'sts_token_dokumen' => 2,
-				'file_dokumen' => $encryption_string,
+				'file_dokumen' => $get_row_enkrip['file_dokumen']
 			];
 		} else {
 			$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
 			$data = [
 				'sts_token_dokumen' => 1,
-				'file_dokumen' => $encryption_string,
+				'file_dokumen' => $get_row_enkrip['file_dokumen']
 			];
 		}
 
@@ -1361,7 +1364,7 @@ class Datapenyedia extends CI_Controller
 		];
 		$data = [
 			'sts_token_dokumen' => 2,
-			'file_dokumen' => $encryption_string,
+			'file_dokumen' => $get_row_enkrip['file_dokumen']
 		];
 		if ($token_dokumen == $secret_token_dokumen) {
 			$response = [
@@ -1437,7 +1440,7 @@ class Datapenyedia extends CI_Controller
 		$id_vendor = $this->session->userdata('id_vendor');
 		$id = $this->uuid->v4();
 		$id = str_replace('-', '', $id);
-		$token = $this->token->data_token();
+		$token = random_string('alnum', 16);
 		// post
 		$id_kbli = $this->input->post('id_kbli_siujk');
 		$id_kualifikasi_izin = $this->input->post('id_kualifikasi_izin_kbli_siujk');
@@ -1565,7 +1568,7 @@ class Datapenyedia extends CI_Controller
 
 		$id = $this->uuid->v4();
 		$id = str_replace('-', '', $id);
-		$token = $this->token->data_token();
+		$token = random_string('alnum', 16);
 		// post
 		$nomor_surat = $this->input->post('nomor_surat_sbu');
 		$kualifikasi_izin = $this->input->post('kualifikasi_izin_sbu');
@@ -1737,13 +1740,13 @@ class Datapenyedia extends CI_Controller
 			$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
 			$data = [
 				'sts_token_dokumen' => 2,
-				'file_dokumen' => $encryption_string,
+				'file_dokumen' => $get_row_enkrip['file_dokumen']
 			];
 		} else {
 			$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
 			$data = [
 				'sts_token_dokumen' => 1,
-				'file_dokumen' => $encryption_string,
+				'file_dokumen' => $get_row_enkrip['file_dokumen']
 			];
 		}
 
@@ -1782,7 +1785,7 @@ class Datapenyedia extends CI_Controller
 		];
 		$data = [
 			'sts_token_dokumen' => 2,
-			'file_dokumen' => $encryption_string,
+			'file_dokumen' => $get_row_enkrip['file_dokumen']
 		];
 		if ($token_dokumen == $secret_token_dokumen) {
 			$response = [
@@ -1858,7 +1861,7 @@ class Datapenyedia extends CI_Controller
 		$id_vendor = $this->session->userdata('id_vendor');
 		$id = $this->uuid->v4();
 		$id = str_replace('-', '', $id);
-		$token = $this->token->data_token();
+		$token = random_string('alnum', 16);
 		// post
 		$id_sbu = $this->input->post('id_kbli_sbu');
 		$id_kualifikasi_sbu = $this->input->post('id_kualifikasi_izin_kbli_sbu');
@@ -2006,7 +2009,7 @@ class Datapenyedia extends CI_Controller
 		$row_akta_pendirian = $this->M_datapenyedia->get_row_akta_pendirian($id_vendor);
 		$id = $this->uuid->v4();
 		$id = str_replace('-', '', $id);
-		$token = $this->token->data_token();
+		$token = random_string('alnum', 16);
 
 		// post
 		$nomor_surat = $this->input->post('no_surat_akta');
@@ -2141,7 +2144,7 @@ class Datapenyedia extends CI_Controller
 		$row_akta_perubahan = $this->M_datapenyedia->get_row_akta_perubahan($id_vendor);
 		$id = $this->uuid->v4();
 		$id = str_replace('-', '', $id);
-		$token = $this->token->data_token();
+		$token = random_string('alnum', 16);
 		$chiper = "AES-128-CBC";
 		$secret = $token;
 		$enckrips_string = openssl_encrypt('-', $chiper, $secret);
@@ -2285,7 +2288,7 @@ class Datapenyedia extends CI_Controller
 
 		$id = $this->uuid->v4();
 		$id = str_replace('-', '', $id);
-		$token = $this->token->data_token();
+		$token = random_string('alnum', 16);
 
 		// post
 		$nomor_surat = $this->input->post('no_surat_perubahan');
@@ -4443,7 +4446,7 @@ class Datapenyedia extends CI_Controller
 
 		$id = $this->uuid->v4();
 		$id = str_replace('-', '', $id);
-		$token = $this->token->data_token();
+		$token = random_string('alnum', 16);
 		// post
 		$no_surat = $this->input->post('no_surat_sppkp');
 		$sts_seumur_hidup = $this->input->post('sts_seumur_hidup_sppkp');
@@ -4610,7 +4613,7 @@ class Datapenyedia extends CI_Controller
 			];
 			$data = [
 				'sts_token_dokumen' => 1,
-				'file_dokumen' => $encryption_string,
+				'file_dokumen' => $get_row_enkrip['file_dokumen']
 			];
 			if ($token_dokumen == $secret_token_dokumen) {
 				$response = [
@@ -4629,7 +4632,7 @@ class Datapenyedia extends CI_Controller
 			];
 			$data = [
 				'sts_token_dokumen' => 2,
-				'file_dokumen' => $encryption_string,
+				'file_dokumen' => $get_row_enkrip['file_dokumen']
 			];
 			if ($token_dokumen == $secret_token_dokumen) {
 				$response = [
@@ -4669,7 +4672,7 @@ class Datapenyedia extends CI_Controller
 
 		$id = $this->uuid->v4();
 		$id = str_replace('-', '', $id);
-		$token = $this->token->data_token();
+		$token = random_string('alnum', 16);
 		// post
 		$no_surat = $this->input->post('no_npwp');
 		$sts_seumur_hidup = $this->input->post('sts_seumur_hidup_npwp');
@@ -4854,7 +4857,7 @@ class Datapenyedia extends CI_Controller
 			];
 			$data = [
 				'sts_token_dokumen' => 1,
-				'file_dokumen' => $encryption_string,
+				'file_dokumen' => $get_row_enkrip['file_dokumen']
 			];
 			if ($token_dokumen == $secret_token_dokumen) {
 				$response = [
@@ -4873,7 +4876,7 @@ class Datapenyedia extends CI_Controller
 			];
 			$data = [
 				'sts_token_dokumen' => 2,
-				'file_dokumen' => $encryption_string,
+				'file_dokumen' => $get_row_enkrip['file_dokumen']
 			];
 			if ($token_dokumen == $secret_token_dokumen) {
 				$response = [
@@ -4966,7 +4969,7 @@ class Datapenyedia extends CI_Controller
 
 		$id = $this->uuid->v4();
 		$id = str_replace('-', '', $id);
-		$token = $this->token->data_token();
+		$token = random_string('alnum', 16);
 		// post
 		$no_surat = $this->input->post('nomor_surat');
 		$tahun_lapor = $this->input->post('tahun_lapor');
@@ -5062,7 +5065,7 @@ class Datapenyedia extends CI_Controller
 
 		$id = $this->uuid->v4();
 		$id = str_replace('-', '', $id);
-		$token = $this->token->data_token();
+		$token = random_string('alnum', 16);
 		// post
 		$no_surat = $this->input->post('nomor_surat');
 		$tahun_lapor = $this->input->post('tahun_lapor');
@@ -5192,7 +5195,7 @@ class Datapenyedia extends CI_Controller
 			];
 			$data = [
 				'sts_token_dokumen' => 1,
-				'file_dokumen' => $encryption_string,
+				'file_dokumen' => $get_row_enkrip['file_dokumen']
 			];
 			if ($token_dokumen == $secret_token_dokumen) {
 				$response = [
@@ -5211,7 +5214,7 @@ class Datapenyedia extends CI_Controller
 			];
 			$data = [
 				'sts_token_dokumen' => 2,
-				'file_dokumen' => $encryption_string,
+				'file_dokumen' => $get_row_enkrip['file_dokumen']
 			];
 			if ($token_dokumen == $secret_token_dokumen) {
 				$response = [
@@ -5623,7 +5626,7 @@ class Datapenyedia extends CI_Controller
 
 		$id = $this->uuid->v4();
 		$id = str_replace('-', '', $id);
-		$token = $this->token->data_token();
+		$token = random_string('alnum', 16);
 		// post
 		$nomor_surat = $this->input->post('nomor_surat_skdp');
 		$sts_seumur_hidup = $this->input->post('sts_seumur_hidup_skdp');
@@ -5820,7 +5823,7 @@ class Datapenyedia extends CI_Controller
 		$id_vendor = $this->session->userdata('id_vendor');
 		$id = $this->uuid->v4();
 		$id = str_replace('-', '', $id);
-		$token = $this->token->data_token();
+		$token = random_string('alnum', 16);
 		// post
 		$id_kbli = $this->input->post('id_kbli_skdp');
 		$id_kualifikasi_izin = $this->input->post('id_kualifikasi_izin_kbli_skdp');
@@ -5946,13 +5949,13 @@ class Datapenyedia extends CI_Controller
 			$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
 			$data = [
 				'sts_token_dokumen' => 2,
-				'file_dokumen' => $encryption_string,
+				'file_dokumen' => $get_row_enkrip['file_dokumen']
 			];
 		} else {
 			$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
 			$data = [
 				'sts_token_dokumen' => 1,
-				'file_dokumen' => $encryption_string,
+				'file_dokumen' => $get_row_enkrip['file_dokumen']
 			];
 		}
 
@@ -5991,7 +5994,7 @@ class Datapenyedia extends CI_Controller
 		];
 		$data = [
 			'sts_token_dokumen' => 2,
-			'file_dokumen' => $encryption_string,
+			'file_dokumen' => $get_row_enkrip['file_dokumen']
 		];
 		if ($token_dokumen == $secret_token_dokumen) {
 			$response = [
@@ -6031,7 +6034,7 @@ class Datapenyedia extends CI_Controller
 
 		$id = $this->uuid->v4();
 		$id = str_replace('-', '', $id);
-		$token = $this->token->data_token();
+		$token = random_string('alnum', 16);
 		// post
 		$nomor_surat = $this->input->post('nomor_surat_lainnya');
 		$nama_surat = $this->input->post('nama_surat');
@@ -6196,13 +6199,13 @@ class Datapenyedia extends CI_Controller
 			$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
 			$data = [
 				'sts_token_dokumen' => 2,
-				'file_dokumen' => $encryption_string,
+				'file_dokumen' => $get_row_enkrip['file_dokumen']
 			];
 		} else {
 			$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
 			$data = [
 				'sts_token_dokumen' => 1,
-				'file_dokumen' => $encryption_string,
+				'file_dokumen' => $get_row_enkrip['file_dokumen']
 			];
 		}
 
@@ -6241,7 +6244,7 @@ class Datapenyedia extends CI_Controller
 		];
 		$data = [
 			'sts_token_dokumen' => 2,
-			'file_dokumen' => $encryption_string,
+			'file_dokumen' => $get_row_enkrip['file_dokumen']
 		];
 		if ($token_dokumen == $secret_token_dokumen) {
 			$response = [

@@ -227,17 +227,17 @@ class M_tender extends CI_Model
         //     }
         // }
 
-        if ($sbu_vendor) {
-            if ($sbu_vendor_kode) {
-                $this->db->where_in('tbl_syratat_sbu_tender.id_sbu',  $sbu_vendor_kode);
-                if ($sbu_vendor['sts_seumur_hidup'] == 2) {
-                    $this->db->where('tbl_izin_rup.sts_masa_berlaku_sbu', 2);
-                    $this->db->where('tbl_izin_rup.tgl_berlaku_sbu <=', date('Y-m-d', strtotime('+50 year', strtotime($now))));
-                } else {
-                    $this->db->where('tbl_izin_rup.tgl_berlaku_sbu <=', $sbu_vendor['tgl_berlaku']);
-                }
-            }
-        }
+        // if ($sbu_vendor) {
+        //     if ($sbu_vendor_kode) {
+        //         $this->db->where_in('tbl_syratat_sbu_tender.id_sbu',  $sbu_vendor_kode);
+        //         if ($sbu_vendor['sts_seumur_hidup'] == 2) {
+        //             $this->db->where('tbl_izin_rup.sts_masa_berlaku_sbu', 2);
+        //             $this->db->where('tbl_izin_rup.tgl_berlaku_sbu <=', date('Y-m-d', strtotime('+50 year', strtotime($now))));
+        //         } else {
+        //             $this->db->where('tbl_izin_rup.tgl_berlaku_sbu <=', $sbu_vendor['tgl_berlaku']);
+        //         }
+        //     }
+        // }
 
 
         // if ($spt_vendor) {

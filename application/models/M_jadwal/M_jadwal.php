@@ -224,4 +224,216 @@ class M_jadwal extends CI_Model
         $query = $this->db->get();
         return $query->row_array();
     }
+
+    public function jadwal_pra1file_umum_1($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Pengumuman Tender Terbatas');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_pra1file_umum_2($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Pendaftaran (Pengambilan Dokumen PQ)/Download Dokumen Kualifikasi');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_pra1file_umum_3($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Pemasukan Dokumen PQ/Upload Dokumen Kualifikasi');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_pra1file_umum_4($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Pembukaan Dokumen PQ');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_pra1file_umum_5($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Pembuktian Kualifikasi');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_pra1file_umum_6($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Evaluasi Kualifikasi');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_pra1file_umum_7($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Persetujuan / Pengesahan Hasil Prakualifikasi');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_pra1file_umum_8($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Pengumuman Hasil Prakualifikasi');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_pra1file_umum_9($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Masa Sanggah & Jawaban Sanggah PQ');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_pra1file_umum_10($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Undangan Penawaran');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_pra1file_umum_11($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Pengambilan Dokumen Pengadaan/Download Dokumen Pengadaan');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_pra1file_umum_12($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Rapat Penjelasan/Aanwijzing');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+
+    public function jadwal_pra1file_umum_13($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Pemasukan Penawaran dan Jaminan Penawaran/Upload Dokumen Penawaran');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_pra1file_umum_14($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Evaluasi Penawaran');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+
+    public function jadwal_pra1file_umum_15($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Klarifikasi dan Negosiasi Teknik dan Biaya');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_pra1file_umum_16($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Pengajuan Usulan Calon Pemenang / Hasil Negosiasi');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_pra1file_umum_17($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Persetujuan Calon Pemenang / Hasil Negosiasi');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_pra1file_umum_18($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Pemberitahuan / Pengumuman Pemenang Pengadaan');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_pra1file_umum_19($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Masa Sanggah & Jawaban Sanggah terhadap Pemenang');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_pra1file_umum_20($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Penunjukan Pelaksanaan Pekerjaan (Gunning)');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_pra1file_umum_21($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Penandatanganan Kontrak');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
 }
