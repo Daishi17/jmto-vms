@@ -28,8 +28,10 @@
                             <input type="hidden" name="get_data_tender" value="<?= base_url('tender_diikuti/get_data_tender') ?>">
                             <input type="hidden" name="url_detail_paket" value="<?= base_url('tender_diikuti/detail_paket/') ?>">
                             <input type="hidden" name="url_info_tender" value="<?= base_url('tender_diikuti/informasi_tender/') ?>">
-
+                            <input type="hidden" name="url_info_tender_penunjukan_langsung" value="<?= base_url('informasi_tender_penunjukan_langsung/') ?>">
                             <input type="hidden" name="get_data_tender_terbatas" value="<?= base_url('tender_diikuti/get_data_tender_terbatas') ?>">
+
+                            <input type="hidden" name="get_data_tender_penunjukan_langsung" value="<?= base_url('tender_diikuti/get_data_tender_penunjukan_langsung') ?>">
                             <button class="nav-link active text-dark" id="nav-tenderumum-tab" data-bs-toggle="tab" data-bs-target="#nav-tenderumum" type="button" role="tab" aria-controls="nav-tenderumum" aria-selected="true">
                                 <i class="fa-solid fa-gift"></i>
                                 <small><b>Tender Umum &nbsp;<span class="badge bg-secondary"><?= count($count_tender_umum) ?></span></b></small>
@@ -159,7 +161,7 @@
 
                             <div class="tab-pane fade" id="nav-juksung" role="tabpanel" aria-labelledby="nav-juksung-tab">
                                 <div class="card border-dark">
-                                    <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
+                                    <div class="card-header border-dark bg-danger d-flex justify-content-between align-items-center">
                                         <div class="flex-grow-1 bd-highlight">
                                             <span class="text-white">
                                                 <i class="fa-solid fa-circle-info px-1"></i>
@@ -169,9 +171,10 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <table id="example5" class="table table-bordered border-dark table-sm table-striped">
+                                <table id="tbl_tender_penunjukan_langsung" class="table table-bordered border-dark table-sm table-striped">
                                     <thead class="bg-secondary col-12">
                                         <tr>
+                                            <th><small class="text-white">No</small></th>
                                             <th class="col-1"><small class="text-white">Tahun</small></th>
                                             <th class="col-3"><small class="text-white">Nama Paket Penyedia</small></th>
                                             <th class="col-2"><small class="text-white">Departemen</small></th>
@@ -179,7 +182,7 @@
                                             <th class="col-2"><small class="text-white">Total HPS (Rp)</small></th>
                                             <th class="col-1"><small class="text-white">Status</small></th>
                                             <th class="col-1"><small class="text-white">
-                                                    <div class="text-center">#</div>
+                                                    <div class="text-center">Aksi</div>
                                                 </small></th>
                                         </tr>
                                     </thead>

@@ -428,7 +428,39 @@
         }).buttons().container().appendTo('#data_pengalaman_manajerial .col-md-6:eq(0)');
     });
 
+
+    $(document).ready(function() {
+        var get_data_tender_penunjukan_langsung = $('[name="get_data_tender_penunjukan_langsung"]').val();
+        $('#tbl_tender_penunjukan_langsung').DataTable({
+            "ordering": true,
+            "autoWidth": false,
+            "processing": true,
+            "serverSide": true,
+            "bDestroy": true,
+            "dom": 'Bfrtip',
+            "buttons": ["excel", "pdf", "print", "colvis"],
+            "order": [],
+            "ajax": {
+                "url": get_data_tender_penunjukan_langsung,
+                "type": "POST",
+            },
+            "columnDefs": [{
+                "target": [-1],
+                "orderable": false
+            }],
+            "oLanguage": {
+                "sSearch": "Pencarian : ",
+                "sEmptyTable": "Data Tidak Tersedia",
+                "sLoadingRecords": "Silahkan Tunggu - loading...",
+                "sLengthMenu": "Menampilkan &nbsp;  _MENU_  &nbsp;   Data",
+                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                "sProcessing": "Memuat Data...."
+            }
+        }).buttons().container().appendTo('#data_pengalaman_manajerial .col-md-6:eq(0)');
+    });
+
     function reload_table() {
+        $('#tbl_tender_terbatas').DataTable().ajax.reload();
         $('#tbl_tender_umum').DataTable().ajax.reload();
     }
 </script>

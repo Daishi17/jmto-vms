@@ -34,6 +34,7 @@ class Tender_terundang extends CI_Controller
 
         $data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
         $data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
+        $data['count_tender_penunjukan_langsung'] =  $this->M_count->count_tender_penunjukan_langsung($id_vendor);
         $data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
         $this->M_monitoring->update_notif($where, $update_notif);
 
@@ -124,6 +125,46 @@ class Tender_terundang extends CI_Controller
             "draw" => $_POST['draw'],
             "recordsTotal" => $this->M_tender->count_all_data_terbatas($session),
             "recordsFiltered" => $this->M_tender->count_filtered_data_terbatas($session),
+            "data" => $data
+        );
+        $this->output->set_content_type('application/json')->set_output(json_encode($output));
+    }
+
+
+    public function get_data_tender_penunjukan_langsung()
+    {
+        $session = $this->session->userdata('id_vendor');
+        $resultss = $this->M_tender->gettable_penunjukan_langsung($session);
+        $data = [];
+        $no = $_POST['start'];
+        foreach ($resultss as $rs) {
+
+            $row = array();
+            $row[] = ++$no;
+            $row[] = $rs->tahun_rup;
+            $row[] = $rs->nama_rup;
+            $row[] = $rs->nama_departemen;
+            $row[] = $rs->nama_jenis_pengadaan;
+            $row[] = 'Rp. ' . number_format($rs->total_hps_rup, 2, ",", ".");
+            if ($rs->sts_mengikuti_paket == 1) {
+                $row[] = '<span class="badge bg-success text-white">Tender Telah Diikuti
+                </span>';
+            } else {
+                if ($rs->batas_pendaftaran_tender) {
+                    $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
+                    </span>';
+                } else {
+                    $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
+                    </span>';
+                }
+            }
+            $row[] = '<a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white"  onClick="by_id_rup(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa fa-info-circle" aria-hidden="true"></i> Detail</a>';
+            $data[] = $row;
+        }
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->M_tender->count_all_data_penunjukan_langsung($session),
+            "recordsFiltered" => $this->M_tender->count_filtered_data_penunjukan_langsung($session),
             "data" => $data
         );
         $this->output->set_content_type('application/json')->set_output(json_encode($output));

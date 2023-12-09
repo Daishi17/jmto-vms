@@ -436,4 +436,93 @@ class M_jadwal extends CI_Model
         $query = $this->db->get();
         return $query->row_array();
     }
+
+    // INI UNTUK JADWAL PENUNJUKAN LANGSUNG
+    public function jadwal_juksung_4($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Pembukaan Dokumen PQ');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_juksung_11($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Pemasukan Penawaran dan Jaminan Penawaran');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+
+    
+    public function jadwal_juksung_5($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Pembuktian Dokumen PQ');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_juksung_8($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Pengumuman Hasil Prakualifikasi');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_juksung_1($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Pengumuman / Undangan Penunjukan Langsung');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_juksung_2($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Pendaftaran (Pengambilan Dokumen PQ)/Download Dokumen Kulaifikasi');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+
+
+    public function jadwal_juksung_16($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Penetapan Pemenang Pengadaan');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+
+    
+    public function jadwal_juksung_15($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Penetapan Pemenang Pengadaan');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    
 }

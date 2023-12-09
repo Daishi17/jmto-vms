@@ -350,7 +350,9 @@ class Datapenyedia extends CI_Controller
 				$file_dokumen = $fileData['file_name'];
 				$chiper = "AES-128-CBC";
 				$secret = $token;
-				$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret);
+				$option = 0;
+				$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+				$encryption_string = openssl_encrypt($file_dokumen, $chiper, $secret, $option, $iv);
 
 				if (!$row_nib) {
 					$upload = [
@@ -360,7 +362,7 @@ class Datapenyedia extends CI_Controller
 						'nomor_surat' => $nomor_surat,
 						'sts_seumur_hidup' => $sts_seumur_hidup,
 						'password_dokumen' => $password_dokumen,
-						'file_dokumen' => $enckrips_string,
+						'file_dokumen' => $encryption_string,
 						'token_dokumen' => $secret,
 						'tgl_berlaku' => $tgl_berlaku,
 						'sts_token_dokumen' => 1,
@@ -378,7 +380,7 @@ class Datapenyedia extends CI_Controller
 						'nomor_surat' => $nomor_surat,
 						'sts_seumur_hidup' => $sts_seumur_hidup,
 						'password_dokumen' => $password_dokumen,
-						'file_dokumen' => $enckrips_string,
+						'file_dokumen' => $encryption_string,
 						'token_dokumen' => $secret,
 						'tgl_berlaku' => $tgl_berlaku,
 						'sts_token_dokumen' => 1,
@@ -460,16 +462,20 @@ class Datapenyedia extends CI_Controller
 		$chiper = "AES-128-CBC";
 		$secret = $get_row_enkrip['token_dokumen'];
 		if ($type == 'dekrip') {
-			$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+			$option = 0;
+			$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+			$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret, $option, $iv);
 			$data = [
 				'sts_token_dokumen' => 2,
-				'file_dokumen' => $get_row_enkrip['file_dokumen']
+				'file_dokumen' => $encryption_string
 			];
 		} else {
-			$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+			$option = 0;
+			$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+			$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret, $option, $iv);
 			$data = [
 				'sts_token_dokumen' => 1,
-				'file_dokumen' => $get_row_enkrip['file_dokumen']
+				'file_dokumen' => $encryption_string
 			];
 		}
 
@@ -502,13 +508,15 @@ class Datapenyedia extends CI_Controller
 		$row_vendor = $this->M_datapenyedia->get_row_vendor($id_vendor);
 		$chiper = "AES-128-CBC";
 		$secret_token_dokumen = $get_row_enkrip['token_dokumen'];
-		$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret_token_dokumen);
+		$option = 0;
+		$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+		$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret_token_dokumen, $option, $iv);
 		$where = [
 			'id_url' => $id_url
 		];
 		$data = [
 			'sts_token_dokumen' => 2,
-			'file_dokumen' => $get_row_enkrip['file_dokumen']
+			'file_dokumen' => $encryption_string
 		];
 		if ($token_dokumen == $secret_token_dokumen) {
 			$response = [
@@ -781,7 +789,7 @@ class Datapenyedia extends CI_Controller
 				$secret = $token;
 				$option = 0;
 				$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
-				$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret, $option, $iv);
+				$encryption_string = openssl_encrypt($file_dokumen, $chiper, $secret, $option, $iv);
 				if (!$row_siup) {
 					$upload = [
 						'id_url' => $id,
@@ -790,10 +798,10 @@ class Datapenyedia extends CI_Controller
 						'nomor_surat' => $nomor_surat,
 						'sts_seumur_hidup' => $sts_seumur_hidup,
 						'password_dokumen' => $password_dokumen,
-						'file_dokumen' => $enckrips_string,
+						'file_dokumen' => $encryption_string,
 						'token_dokumen' => $secret,
 						'tgl_berlaku' => $tgl_berlaku,
-						'sts_token_dokumen' => 2,
+						'sts_token_dokumen' => 1,
 						'sts_validasi' => 0,
 						'sts_pemeriksaan' => 0
 					];
@@ -809,10 +817,10 @@ class Datapenyedia extends CI_Controller
 						'nomor_surat' => $nomor_surat,
 						'sts_seumur_hidup' => $sts_seumur_hidup,
 						'password_dokumen' => $password_dokumen,
-						'file_dokumen' => $enckrips_string,
+						'file_dokumen' => $encryption_string,
 						'token_dokumen' => $secret,
 						'tgl_berlaku' => $tgl_berlaku,
-						'sts_token_dokumen' => 2,
+						'sts_token_dokumen' => 1,
 						'sts_validasi' => 3,
 					];
 					$where = [
@@ -892,18 +900,20 @@ class Datapenyedia extends CI_Controller
 		$chiper = "AES-128-CBC";
 		$secret = $get_row_enkrip['token_dokumen'];
 		if ($type == 'dekrip') {
-			$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+			$option = 0;
+			$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+			$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret, $option, $iv);
 			$data = [
 				'sts_token_dokumen' => 2,
-				'file_dokumen' => $get_row_enkrip['file_dokumen']
+				'file_dokumen' => $encryption_string
 			];
 		} else {
 			$option = 0;
 			$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
-			$enckrips_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret, $option, $iv);
+			$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret, $option, $iv);
 			$data = [
 				'sts_token_dokumen' => 1,
-				'file_dokumen' => $enckrips_string
+				'file_dokumen' => $encryption_string
 			];
 		}
 
@@ -936,13 +946,15 @@ class Datapenyedia extends CI_Controller
 		$row_vendor = $this->M_datapenyedia->get_row_vendor($id_vendor);
 		$chiper = "AES-128-CBC";
 		$secret_token_dokumen = $get_row_enkrip['token_dokumen'];
-		$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret_token_dokumen);
+		$option = 0;
+		$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+		$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret_token_dokumen, $option, $iv);
 		$where = [
 			'id_url' => $id_url
 		];
 		$data = [
 			'sts_token_dokumen' => 2,
-			'file_dokumen' => $get_row_enkrip['file_dokumen']
+			'file_dokumen' => $encryption_string
 		];
 		if ($token_dokumen == $secret_token_dokumen) {
 			$response = [
@@ -1199,7 +1211,9 @@ class Datapenyedia extends CI_Controller
 				$file_dokumen = $fileData['file_name'];
 				$chiper = "AES-128-CBC";
 				$secret = $token;
-				$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret);
+				$option = 0;
+				$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+				$encryption_string = openssl_encrypt($file_dokumen, $chiper, $secret, $option, $iv);
 
 				if (!$row_siujk) {
 					$upload = [
@@ -1210,7 +1224,7 @@ class Datapenyedia extends CI_Controller
 						'kualifikasi_izin' => $kualifikasi_izin,
 						'sts_seumur_hidup' => $sts_seumur_hidup,
 						'password_dokumen' => $password_dokumen,
-						'file_dokumen' => $enckrips_string,
+						'file_dokumen' => $encryption_string,
 						'token_dokumen' => $secret,
 						'tgl_berlaku' => $tgl_berlaku,
 						'sts_token_dokumen' => 1,
@@ -1229,7 +1243,7 @@ class Datapenyedia extends CI_Controller
 						'kualifikasi_izin' => $kualifikasi_izin,
 						'sts_seumur_hidup' => $sts_seumur_hidup,
 						'password_dokumen' => $password_dokumen,
-						'file_dokumen' => $enckrips_string,
+						'file_dokumen' => $encryption_string,
 						'token_dokumen' => $secret,
 						'tgl_berlaku' => $tgl_berlaku,
 						'sts_token_dokumen' => 1,
@@ -1316,16 +1330,20 @@ class Datapenyedia extends CI_Controller
 		$chiper = "AES-128-CBC";
 		$secret = $get_row_enkrip['token_dokumen'];
 		if ($type == 'dekrip') {
-			$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+			$option = 0;
+			$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+			$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret, $option, $iv);
 			$data = [
 				'sts_token_dokumen' => 2,
-				'file_dokumen' => $get_row_enkrip['file_dokumen']
+				'file_dokumen' => $encryption_string
 			];
 		} else {
-			$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+			$option = 0;
+			$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+			$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret, $option, $iv);
 			$data = [
 				'sts_token_dokumen' => 1,
-				'file_dokumen' => $get_row_enkrip['file_dokumen']
+				'file_dokumen' => $encryption_string
 			];
 		}
 
@@ -1358,13 +1376,15 @@ class Datapenyedia extends CI_Controller
 		$row_vendor = $this->M_datapenyedia->get_row_vendor($id_vendor);
 		$chiper = "AES-128-CBC";
 		$secret_token_dokumen = $get_row_enkrip['token_dokumen'];
-		$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret_token_dokumen);
+		$option = 0;
+		$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+		$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret_token_dokumen, $option, $iv);
 		$where = [
 			'id_url' => $id_url
 		];
 		$data = [
 			'sts_token_dokumen' => 2,
-			'file_dokumen' => $get_row_enkrip['file_dokumen']
+			'file_dokumen' => $encryption_string
 		];
 		if ($token_dokumen == $secret_token_dokumen) {
 			$response = [
@@ -1620,7 +1640,9 @@ class Datapenyedia extends CI_Controller
 				$file_dokumen = $fileData['file_name'];
 				$chiper = "AES-128-CBC";
 				$secret = $token;
-				$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret);
+				$option = 0;
+				$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+				$encryption_string = openssl_encrypt($file_dokumen, $chiper, $secret, $option, $iv);
 
 				if (!$row_sbu) {
 					$upload = [
@@ -1631,7 +1653,7 @@ class Datapenyedia extends CI_Controller
 						'kualifikasi_izin' => $kualifikasi_izin,
 						'sts_seumur_hidup' => $sts_seumur_hidup,
 						'password_dokumen' => $password_dokumen,
-						'file_dokumen' => $enckrips_string,
+						'file_dokumen' => $encryption_string,
 						'token_dokumen' => $secret,
 						'tgl_berlaku' => $tgl_berlaku,
 						'sts_token_dokumen' => 1,
@@ -1650,7 +1672,7 @@ class Datapenyedia extends CI_Controller
 						'kualifikasi_izin' => $kualifikasi_izin,
 						'sts_seumur_hidup' => $sts_seumur_hidup,
 						'password_dokumen' => $password_dokumen,
-						'file_dokumen' => $enckrips_string,
+						'file_dokumen' => $encryption_string,
 						'token_dokumen' => $secret,
 						'tgl_berlaku' => $tgl_berlaku,
 						'sts_token_dokumen' => 1,
@@ -1737,16 +1759,20 @@ class Datapenyedia extends CI_Controller
 		$chiper = "AES-128-CBC";
 		$secret = $get_row_enkrip['token_dokumen'];
 		if ($type == 'dekrip') {
-			$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+			$option = 0;
+			$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+			$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret, $option, $iv);
 			$data = [
 				'sts_token_dokumen' => 2,
-				'file_dokumen' => $get_row_enkrip['file_dokumen']
+				'file_dokumen' => $encryption_string
 			];
 		} else {
-			$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+			$option = 0;
+			$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+			$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret, $option, $iv);
 			$data = [
 				'sts_token_dokumen' => 1,
-				'file_dokumen' => $get_row_enkrip['file_dokumen']
+				'file_dokumen' => $encryption_string
 			];
 		}
 
@@ -1779,13 +1805,15 @@ class Datapenyedia extends CI_Controller
 		$row_vendor = $this->M_datapenyedia->get_row_vendor($id_vendor);
 		$chiper = "AES-128-CBC";
 		$secret_token_dokumen = $get_row_enkrip['token_dokumen'];
-		$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret_token_dokumen);
+		$option = 0;
+		$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+		$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret_token_dokumen, $option, $iv);
 		$where = [
 			'id_url' => $id_url
 		];
 		$data = [
 			'sts_token_dokumen' => 2,
-			'file_dokumen' => $get_row_enkrip['file_dokumen']
+			'file_dokumen' => $encryption_string
 		];
 		if ($token_dokumen == $secret_token_dokumen) {
 			$response = [
@@ -2147,14 +2175,14 @@ class Datapenyedia extends CI_Controller
 		$token = random_string('alnum', 16);
 		$chiper = "AES-128-CBC";
 		$secret = $token;
-		$enckrips_string = openssl_encrypt('-', $chiper, $secret);
+		$encryption_string = openssl_encrypt('-', $chiper, $secret);
 		$upload = [
 			'id_url' => $id,
 			'id_vendor' => $id_vendor,
 			'no_surat' => '-',
 			'kualifikasi_usaha' => '-',
 			'sts_seumur_hidup' => '-',
-			'file_dokumen' => $enckrips_string,
+			'file_dokumen' => $encryption_string,
 			'token_dokumen' => $secret,
 			'tgl_berlaku_akta' => null,
 			'jumlah_setor_modal' => null,
@@ -4498,7 +4526,9 @@ class Datapenyedia extends CI_Controller
 				$file_dokumen = $fileData['file_name'];
 				$chiper = "AES-128-CBC";
 				$secret = $token;
-				$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret);
+				$option = 0;
+				$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+				$encryption_string = openssl_encrypt($file_dokumen, $chiper, $secret, $option, $iv);
 				$where = [
 					'id_vendor' => $id_vendor
 				];
@@ -4509,7 +4539,7 @@ class Datapenyedia extends CI_Controller
 						'no_surat' => $no_surat,
 						'sts_seumur_hidup' => $sts_seumur_hidup,
 						'password_dokumen' => $password_dokumen,
-						'file_dokumen' => $enckrips_string,
+						'file_dokumen' => $encryption_string,
 						'token_dokumen' => $secret,
 						'tgl_berlaku' => $tgl_berlaku,
 						'sts_token_dokumen' => 1,
@@ -4523,7 +4553,7 @@ class Datapenyedia extends CI_Controller
 						'no_surat' => $no_surat,
 						'sts_seumur_hidup' => $sts_seumur_hidup,
 						'password_dokumen' => $password_dokumen,
-						'file_dokumen' => $enckrips_string,
+						'file_dokumen' => $encryption_string,
 						'token_dokumen' => $secret,
 						'tgl_berlaku' => $tgl_berlaku,
 						'sts_token_dokumen' => 1,
@@ -4613,7 +4643,7 @@ class Datapenyedia extends CI_Controller
 			];
 			$data = [
 				'sts_token_dokumen' => 1,
-				'file_dokumen' => $get_row_enkrip['file_dokumen']
+				'file_dokumen' => $encryption_string
 			];
 			if ($token_dokumen == $secret_token_dokumen) {
 				$response = [
@@ -4632,7 +4662,7 @@ class Datapenyedia extends CI_Controller
 			];
 			$data = [
 				'sts_token_dokumen' => 2,
-				'file_dokumen' => $get_row_enkrip['file_dokumen']
+				'file_dokumen' => $encryption_string
 			];
 			if ($token_dokumen == $secret_token_dokumen) {
 				$response = [
@@ -4725,14 +4755,16 @@ class Datapenyedia extends CI_Controller
 				$file_dokumen = $fileData['file_name'];
 				$chiper = "AES-128-CBC";
 				$secret = $token;
-				$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret);
+				$option = 0;
+				$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+				$encryption_string = openssl_encrypt($file_dokumen, $chiper, $secret, $option, $iv);
 				$upload = [
 					'id_url' => $id,
 					'id_vendor' => $id_vendor,
 					'no_npwp' => $no_surat,
 					'sts_seumur_hidup' => $sts_seumur_hidup,
 					'password_dokumen' => $password_dokumen,
-					'file_dokumen' => $enckrips_string,
+					'file_dokumen' => $encryption_string,
 					'token_dokumen' => $secret,
 					'tgl_berlaku' => $tgl_berlaku,
 					'sts_token_dokumen' => 1,
@@ -4747,7 +4779,7 @@ class Datapenyedia extends CI_Controller
 						'no_npwp' => $no_surat,
 						'sts_seumur_hidup' => $sts_seumur_hidup,
 						'password_dokumen' => $password_dokumen,
-						'file_dokumen' => $enckrips_string,
+						'file_dokumen' => $encryption_string,
 						'token_dokumen' => $secret,
 						'tgl_berlaku' => $tgl_berlaku,
 						'sts_token_dokumen' => 1,
@@ -4761,7 +4793,7 @@ class Datapenyedia extends CI_Controller
 						'no_npwp' => $no_surat,
 						'sts_seumur_hidup' => $sts_seumur_hidup,
 						'password_dokumen' => $password_dokumen,
-						'file_dokumen' => $enckrips_string,
+						'file_dokumen' => $encryption_string,
 						'token_dokumen' => $secret,
 						'tgl_berlaku' => $tgl_berlaku,
 						'sts_token_dokumen' => 1,
@@ -4857,7 +4889,7 @@ class Datapenyedia extends CI_Controller
 			];
 			$data = [
 				'sts_token_dokumen' => 1,
-				'file_dokumen' => $get_row_enkrip['file_dokumen']
+				'file_dokumen' => $encryption_string
 			];
 			if ($token_dokumen == $secret_token_dokumen) {
 				$response = [
@@ -4876,7 +4908,7 @@ class Datapenyedia extends CI_Controller
 			];
 			$data = [
 				'sts_token_dokumen' => 2,
-				'file_dokumen' => $get_row_enkrip['file_dokumen']
+				'file_dokumen' => $encryption_string
 			];
 			if ($token_dokumen == $secret_token_dokumen) {
 				$response = [
@@ -5015,7 +5047,9 @@ class Datapenyedia extends CI_Controller
 				$file_dokumen = $fileData['file_name'];
 				$chiper = "AES-128-CBC";
 				$secret = $token;
-				$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret);
+				$option = 0;
+				$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+				$encryption_string = openssl_encrypt($file_dokumen, $chiper, $secret, $option, $iv);
 				$upload = [
 					'id_url' => $id,
 					'id_vendor' => $id_vendor,
@@ -5024,7 +5058,7 @@ class Datapenyedia extends CI_Controller
 					'jenis_spt' => $jenis_spt,
 					'tgl_penyampaian' => $tgl_penyampaian,
 					'password_dokumen' => $password_dokumen,
-					'file_dokumen' => $enckrips_string,
+					'file_dokumen' => $encryption_string,
 					'token_dokumen' => $secret,
 					'sts_token_dokumen' => 1,
 					'sts_validasi' => 0
@@ -5114,7 +5148,9 @@ class Datapenyedia extends CI_Controller
 				$file_dokumen = $fileData['file_name'];
 				$chiper = "AES-128-CBC";
 				$secret = $token;
-				$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret);
+				$option = 0;
+				$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+				$encryption_string = openssl_encrypt($file_dokumen, $chiper, $secret, $option, $iv);
 
 				$upload = [
 					'id_vendor' => $id_vendor,
@@ -5123,7 +5159,7 @@ class Datapenyedia extends CI_Controller
 					'jenis_spt' => $jenis_spt,
 					'tgl_penyampaian' => $tgl_penyampaian,
 					'password_dokumen' => $password_dokumen,
-					'file_dokumen' => $enckrips_string,
+					'file_dokumen' => $encryption_string,
 					'token_dokumen' => $secret,
 					'sts_token_dokumen' => 1,
 					'sts_validasi' => 2
@@ -5195,7 +5231,7 @@ class Datapenyedia extends CI_Controller
 			];
 			$data = [
 				'sts_token_dokumen' => 1,
-				'file_dokumen' => $get_row_enkrip['file_dokumen']
+				'file_dokumen' => $encryption_string
 			];
 			if ($token_dokumen == $secret_token_dokumen) {
 				$response = [
@@ -5214,7 +5250,7 @@ class Datapenyedia extends CI_Controller
 			];
 			$data = [
 				'sts_token_dokumen' => 2,
-				'file_dokumen' => $get_row_enkrip['file_dokumen']
+				'file_dokumen' => $encryption_string
 			];
 			if ($token_dokumen == $secret_token_dokumen) {
 				$response = [
@@ -5687,7 +5723,9 @@ class Datapenyedia extends CI_Controller
 				$file_dokumen = $fileData['file_name'];
 				$chiper = "AES-128-CBC";
 				$secret = $token;
-				$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret);
+				$option = 0;
+				$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+				$encryption_string = openssl_encrypt($file_dokumen, $chiper, $secret, $option, $iv);
 
 				if (!$row_skdp) {
 					$upload = [
@@ -5696,7 +5734,7 @@ class Datapenyedia extends CI_Controller
 						'nomor_surat' => $nomor_surat,
 						'sts_seumur_hidup' => $sts_seumur_hidup,
 						'password_dokumen' => $password_dokumen,
-						'file_dokumen' => $enckrips_string,
+						'file_dokumen' => $encryption_string,
 						'token_dokumen' => $secret,
 						'tgl_berlaku' => $tgl_berlaku,
 						'sts_token_dokumen' => 1,
@@ -5710,7 +5748,7 @@ class Datapenyedia extends CI_Controller
 						'nomor_surat' => $nomor_surat,
 						'sts_seumur_hidup' => $sts_seumur_hidup,
 						'password_dokumen' => $password_dokumen,
-						'file_dokumen' => $enckrips_string,
+						'file_dokumen' => $encryption_string,
 						'token_dokumen' => $secret,
 						'tgl_berlaku' => $tgl_berlaku,
 						'sts_token_dokumen' => 1,
@@ -5946,16 +5984,20 @@ class Datapenyedia extends CI_Controller
 		$chiper = "AES-128-CBC";
 		$secret = $get_row_enkrip['token_dokumen'];
 		if ($type == 'dekrip') {
-			$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+			$option = 0;
+			$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+			$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret, $option, $iv);
 			$data = [
 				'sts_token_dokumen' => 2,
-				'file_dokumen' => $get_row_enkrip['file_dokumen']
+				'file_dokumen' => $encryption_string
 			];
 		} else {
-			$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+			$option = 0;
+			$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+			$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret, $option, $iv);
 			$data = [
 				'sts_token_dokumen' => 1,
-				'file_dokumen' => $get_row_enkrip['file_dokumen']
+				'file_dokumen' => $encryption_string
 			];
 		}
 
@@ -5988,13 +6030,15 @@ class Datapenyedia extends CI_Controller
 		$row_vendor = $this->M_datapenyedia->get_row_vendor($id_vendor);
 		$chiper = "AES-128-CBC";
 		$secret_token_dokumen = $get_row_enkrip['token_dokumen'];
-		$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret_token_dokumen);
+		$option = 0;
+		$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+		$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret_token_dokumen, $option, $iv);
 		$where = [
 			'id_url' => $id_url
 		];
 		$data = [
 			'sts_token_dokumen' => 2,
-			'file_dokumen' => $get_row_enkrip['file_dokumen']
+			'file_dokumen' => $encryption_string
 		];
 		if ($token_dokumen == $secret_token_dokumen) {
 			$response = [
@@ -6094,7 +6138,9 @@ class Datapenyedia extends CI_Controller
 				$file_dokumen = $fileData['file_name'];
 				$chiper = "AES-128-CBC";
 				$secret = $token;
-				$enckrips_string = openssl_encrypt($file_dokumen, $chiper, $secret);
+				$option = 0;
+				$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+				$encryption_string = openssl_encrypt($file_dokumen, $chiper, $secret, $option, $iv);
 
 				if (!$row_lainnya) {
 					$upload = [
@@ -6104,7 +6150,7 @@ class Datapenyedia extends CI_Controller
 						'nama_surat' => $nama_surat,
 						'sts_seumur_hidup' => $sts_seumur_hidup,
 						'password_dokumen' => $password_dokumen,
-						'file_dokumen' => $enckrips_string,
+						'file_dokumen' => $encryption_string,
 						'token_dokumen' => $secret,
 						'tgl_berlaku' => $tgl_berlaku,
 						'sts_token_dokumen' => 1,
@@ -6122,7 +6168,7 @@ class Datapenyedia extends CI_Controller
 						'nama_surat' => $nama_surat,
 						'sts_seumur_hidup' => $sts_seumur_hidup,
 						'password_dokumen' => $password_dokumen,
-						'file_dokumen' => $enckrips_string,
+						'file_dokumen' => $encryption_string,
 						'token_dokumen' => $secret,
 						'tgl_berlaku' => $tgl_berlaku,
 						'sts_token_dokumen' => 1,
@@ -6196,16 +6242,20 @@ class Datapenyedia extends CI_Controller
 		$chiper = "AES-128-CBC";
 		$secret = $get_row_enkrip['token_dokumen'];
 		if ($type == 'dekrip') {
-			$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+			$option = 0;
+			$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+			$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret, $option, $iv);
 			$data = [
 				'sts_token_dokumen' => 2,
-				'file_dokumen' => $get_row_enkrip['file_dokumen']
+				'file_dokumen' => $encryption_string
 			];
 		} else {
-			$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+			$option = 0;
+			$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+			$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret, $option, $iv);
 			$data = [
 				'sts_token_dokumen' => 1,
-				'file_dokumen' => $get_row_enkrip['file_dokumen']
+				'file_dokumen' => $encryption_string
 			];
 		}
 
@@ -6238,13 +6288,15 @@ class Datapenyedia extends CI_Controller
 		$row_vendor = $this->M_datapenyedia->get_row_vendor($id_vendor);
 		$chiper = "AES-128-CBC";
 		$secret_token_dokumen = $get_row_enkrip['token_dokumen'];
-		$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret_token_dokumen);
+		$option = 0;
+		$iv = str_repeat("0", openssl_cipher_iv_length($chiper));
+		$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret_token_dokumen, $option, $iv);
 		$where = [
 			'id_url' => $id_url
 		];
 		$data = [
 			'sts_token_dokumen' => 2,
-			'file_dokumen' => $get_row_enkrip['file_dokumen']
+			'file_dokumen' => $encryption_string
 		];
 		if ($token_dokumen == $secret_token_dokumen) {
 			$response = [

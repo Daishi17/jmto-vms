@@ -39,4 +39,29 @@ class M_count extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+
+
+    // penunjukan_langsung
+    public function count_tender_penunjukan_langsung($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_mengikuti_paket');
+        $this->db->join('tbl_rup', 'tbl_rup.id_rup = tbl_vendor_mengikuti_paket.id_rup', 'left');
+        $this->db->where('tbl_vendor_mengikuti_paket.id_vendor', $id_vendor);
+        $this->db->where('tbl_rup.id_metode_pengadaan', 3);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function count_tender_penunjukan_langsung_diikuti($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_mengikuti_paket');
+        $this->db->join('tbl_rup', 'tbl_rup.id_rup = tbl_vendor_mengikuti_paket.id_rup', 'left');
+        $this->db->where('tbl_vendor_mengikuti_paket.id_vendor', $id_vendor);
+        $this->db->where('tbl_vendor_mengikuti_paket.sts_mengikuti_paket', 1);
+        $this->db->where('tbl_rup.id_metode_pengadaan', 3);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }
