@@ -67,8 +67,19 @@
                 $('#jangka_waktu_hari_pelaksanaan').text(response['row_rup'].jangka_waktu_hari_pelaksanaan)
                 $('#status_pencatatan').text(response['row_rup'].status_pencatatan)
                 $('#persen_pencatatan').text(response['row_rup'].persen_pencatatan)
+                if (response['row_rup'].jenis_kontrak == 1) {
+                    jenis_kontrak = 'Lump Sum'
+                } else if (response['row_rup'].jenis_kontrak == 2) {
+                    jenis_kontrak = 'Harga Satuan'
+                } else if (response['row_rup'].jenis_kontrak == 3) {
+                    jenis_kontrak = 'Gabungan Lump Sum dan Harga Satuan'
+                } else if (response['row_rup'].jenis_kontrak == 4) {
+                    jenis_kontrak = 'Terima Jadi(Turnkey)'
+                } else if (response['row_rup'].jenis_kontrak == 5) {
+                    jenis_kontrak = 'Persentase( % )'
+                }
+                $('#jenis_kontrak').text(jenis_kontrak)
                 $('#total_hps_rup').text(currency(response['row_rup'].total_hps_rup))
-                $('#jenis_kontrak').text(jenis_kontrak(response['row_rup'].jenis_kontrak))
 
                 if (response['result_kbli']) {
                     var res_kbli = ''
@@ -114,7 +125,18 @@
                     $('#bobot_nilai').text('Bobot Biaya')
                     $('#Bobot').text(response['row_rup'].bobot_teknis + '% ' + '& ' + response['row_rup'].bobot_biaya + '% ')
                 }
-                $('#jenis_kontrak').text(jenis_kontrak(response['row_rup'].jenis_kontrak))
+                if (response['row_rup'].jenis_kontrak == 1) {
+                    jenis_kontrak = 'Lump Sum'
+                } else if (response['row_rup'].jenis_kontrak == 2) {
+                    jenis_kontrak = 'Harga Satuan'
+                } else if (response['row_rup'].jenis_kontrak == 3) {
+                    jenis_kontrak = 'Gabungan Lump Sum dan Harga Satuan'
+                } else if (response['row_rup'].jenis_kontrak == 4) {
+                    jenis_kontrak = 'Terima Jadi(Turnkey)'
+                } else if (response['row_rup'].jenis_kontrak == 5) {
+                    jenis_kontrak = 'Persentase( % )'
+                }
+                $('#jenis_kontrak').text(jenis_kontrak)
 
 
                 $('#detail_jadwal').html('<a href="javascript:;" onclick="lihat_detail_jadwal(\'' + response['row_rup'].id_url_rup + '\')" class="btn btn-sm btn-primary"><i class="fa-solid fa-calendar-days px-1"></i> Detail Jadwal Pengadaan</a>')

@@ -37,9 +37,10 @@ class Tender_diikuti extends CI_Controller
         $update_notif = ['notifikasi' => 0];
         $where = ['id_vendor' => $id_vendor];
         $this->M_monitoring->update_notif($where, $update_notif);
-        $data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
-        $data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
+        $data['count_tender_umum'] =  $this->M_count->count_tender_umum_diikuti($id_vendor);
+        $data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas_diikuti($id_vendor);
         $data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
+        $data['count_tender_penunjukan_langsung'] =  $this->M_count->count_tender_penunjukan_langsung_diikuti($id_vendor);
         // var_dump($data['count_tender_umum']);
         // die;
         $this->load->view('template_menu/header_menu', $data);
@@ -96,12 +97,11 @@ class Tender_diikuti extends CI_Controller
         $now = date('Y-m-d H:i');
         $no = $_POST['start'];
         foreach ($resultss as $rs) {
-
             $rup = $this->M_tender->get_row_rup_byid($rs->id_url_rup);
             if ($rs->id_jadwal_tender == 3 || $rs->id_jadwal_tender == 6) {
-                $jadwal_terakhir = $this->M_jadwal->jadwal_pasca_terbatas($rs->id_rup);
+                $jadwal_terakhir = $this->M_jadwal->jadwal_pasca_terbatas($rup['id_rup']);
             } else {
-                $jadwal_terakhir = $this->M_jadwal->jadwal_pra_umum_22($rs->id_rup);
+                $jadwal_terakhir = $this->M_jadwal->jadwal_pra_umum_223($rup['id_rup']);
             }
             $row = array();
             $row[] = ++$no;
@@ -110,7 +110,7 @@ class Tender_diikuti extends CI_Controller
             $row[] = $rs->nama_departemen;
             $row[] = $rs->nama_jenis_pengadaan;
             $row[] = 'Rp. ' . number_format($rs->total_hps_rup, 2, ",", ".");;
-            if ($jadwal_terakhir['waktu_mulai'] < $now) {
+            if ($jadwal_terakhir['waktu_mulai'] <= $now) {
                 $row[] = '<span class="badge bg-success text-white">Pengadaan Sudah Selesai
                 </span>';
             } else {
@@ -137,12 +137,11 @@ class Tender_diikuti extends CI_Controller
         $now = date('Y-m-d H:i');
         $no = $_POST['start'];
         foreach ($resultss as $rs) {
-
             $rup = $this->M_tender->get_row_rup_byid($rs->id_url_rup);
             if ($rs->id_jadwal_tender == 3 || $rs->id_jadwal_tender == 6) {
-                $jadwal_terakhir = $this->M_jadwal->jadwal_pasca_terbatas($rs->id_rup);
+                $jadwal_terakhir = $this->M_jadwal->jadwal_pasca_terbatas($rup['id_rup']);
             } else {
-                $jadwal_terakhir = $this->M_jadwal->jadwal_pra_umum_22($rs->id_rup);
+                $jadwal_terakhir = $this->M_jadwal->jadwal_pra_umum_223($rup['id_rup']);
             }
             $row = array();
             $row[] = ++$no;
@@ -475,7 +474,6 @@ class Tender_diikuti extends CI_Controller
         $id_vendor = $this->session->userdata('id_vendor');
         $data['notifikasi'] = $this->M_dashboard->count_notifikasi($id_vendor);
         // query tendering
-        $data['count_tender_umum'] =  $this->M_tender->count_all_data();
         $data['rup'] = $this->M_tender->get_row_rup($id_url_rup);
         // id_rup non url
         $id_rup = $data['rup']['id_rup'];
@@ -544,7 +542,7 @@ class Tender_diikuti extends CI_Controller
         } else if ($data['rup']['id_jadwal_tender'] == 1) {
             $data['jadwal_pengumuman_pengadaan'] =  $this->M_jadwal->jadwal_pra1file_umum_1($data['rup']['id_rup']);
             $data['jadwal_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_pra1file_umum_2($data['rup']['id_rup']);
-            $data['jadwal_aanwijzing_pq'] =  $this->M_jadwal->jadwal_pra1file_umum_3($data['rup']['id_rup']);
+            $data['jadwal_aanwijzing_pq'] =  $this->M_jadwal->jadwal_pra1file_pasca_3($data['rup']['id_rup']);
             $data['jadwal_upload_dokumen_prakualifikasi'] =  $this->M_jadwal->jadwal_pra1file_umum_3($data['rup']['id_rup']);
             $data['jadwal_pembuktian_kualifikasi'] =  $this->M_jadwal->jadwal_pra1file_umum_5($data['rup']['id_rup']);
             $data['jadwal_evaluasi_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_pra1file_umum_6($data['rup']['id_rup']);
@@ -709,7 +707,7 @@ class Tender_diikuti extends CI_Controller
 
         $data['notifikasi'] = $this->M_dashboard->count_notifikasi($id_vendor);
         // query tendering
-        $data['count_tender_umum'] =  $this->M_tender->count_all_data();
+
         $data['rup'] = $this->M_tender->get_row_rup($id_url_rup);
         // id_rup non url
         $id_rup = $data['rup']['id_rup'];
@@ -944,7 +942,7 @@ class Tender_diikuti extends CI_Controller
         $data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
         $data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
         $data['notifikasi'] = $this->M_dashboard->count_notifikasi($id_vendor);
-        $data['count_tender_umum'] =  $this->M_tender->count_all_data();
+
         $data['rup'] = $this->M_tender->get_row_rup($id_url_rup);
         // id_rup non url
         $id_rup = $data['rup']['id_rup'];
@@ -1007,7 +1005,7 @@ class Tender_diikuti extends CI_Controller
             $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_pra_umum_20($data['rup']['id_rup']);
             $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra_umum_21($data['rup']['id_rup']);
             // end get tahap
-            $this->load->view('info_tender/informasi_tender_terbatas', $data);
+
         } else if ($data['rup']['id_jadwal_tender'] == 1) {
             $data['jadwal_pengumuman_pengadaan'] =  $this->M_jadwal->jadwal_pra1file_umum_1($data['rup']['id_rup']);
             $data['jadwal_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_pra1file_umum_2($data['rup']['id_rup']);
@@ -1031,7 +1029,6 @@ class Tender_diikuti extends CI_Controller
             $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_pra1file_umum_20($data['rup']['id_rup']);
             $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra1file_umum_21($data['rup']['id_rup']);
             // end get tahap
-            $this->load->view('info_tender/informasi_tender_terbatas_1file', $data);
         } else if ($data['rup']['id_jadwal_tender'] == 9) {
             $data['jadwal_pengumuman_pengadaan'] =  $this->M_jadwal->jadwal_juksung_1($data['rup']['id_rup']);
             $data['jadwal_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_juksung_2($data['rup']['id_rup']);
@@ -1055,7 +1052,6 @@ class Tender_diikuti extends CI_Controller
             $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_pra1file_umum_20($data['rup']['id_rup']);
             $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra1file_umum_21($data['rup']['id_rup']);
             // end get tahap
-            $this->load->view('info_tender/informasi_tender_penunjukan_langsung', $data);
         } else if ($data['rup']['id_jadwal_tender'] == 3) {
             $data['jadwal_pengumuman_pengadaan'] =  $this->M_jadwal->jadwal_tender_terbatas_pasca_1_file_1($data['rup']['id_rup']);
             $data['jadwal_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_tender_terbatas_pasca_1_file_4($data['rup']['id_rup']);
@@ -1079,7 +1075,6 @@ class Tender_diikuti extends CI_Controller
             $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_tender_terbatas_pasca_1_file_12($data['rup']['id_rup']);
             $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra_umum_21($data['rup']['id_rup']);
             // end get tahap
-            $this->load->view('info_tender/informasi_tender_terbatas_pasca_1_file', $data);
         } else if ($data['rup']['id_jadwal_tender'] == 6) {
             $data['jadwal_pengumuman_pengadaan'] =  $this->M_jadwal->jadwal_pra_umum_1($data['rup']['id_rup']);
             $data['jadwal_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_2($data['rup']['id_rup']);
@@ -1103,8 +1098,8 @@ class Tender_diikuti extends CI_Controller
             $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_pra_umum_20($data['rup']['id_rup']);
             $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra_umum_21($data['rup']['id_rup']);
             // end get tahap
-            $this->load->view('info_tender/informasi_tender_terbatas_pasca_2_file', $data);
         }
+        $this->load->view('info_tender/sanggahan_prakualifikasi', $data);
         $this->load->view('template_menu/new_footer');
         $this->load->view('info_tender/ajax');
     }
@@ -1184,12 +1179,21 @@ class Tender_diikuti extends CI_Controller
     public function sanggahan_akhir($id_url_rup)
     {
         $id_vendor = $this->session->userdata('id_vendor');
+        $data['notifikasi'] = $this->M_dashboard->count_notifikasi($id_vendor);
+        $data['notifikasi_izin'] = $this->M_dashboard->count_notifikasi_izin($id_vendor);
+        $data['notifikasi_akta'] = $this->M_dashboard->count_notifikasi_akta($id_vendor);
+        $data['notifikasi_manajerial'] = $this->M_dashboard->count_notifikasi_manajerial($id_vendor);
+        $data['notifikasi_pengalaman'] = $this->M_dashboard->count_notifikasi_pengalaman($id_vendor);
+        $data['notifikasi_pajak'] = $this->M_dashboard->count_notifikasi_pajak($id_vendor);
+
+        $update_notif = ['notifikasi' => 0];
+        $where = ['id_vendor' => $id_vendor];
+        $this->M_monitoring->update_notif($where, $update_notif);
         $data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
         $data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
         $data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
         $data['notifikasi'] = $this->M_dashboard->count_notifikasi($id_vendor);
 
-        $data['count_tender_umum'] =  $this->M_tender->count_all_data();
         $data['rup'] = $this->M_tender->get_row_rup($id_url_rup);
         // id_rup non url
         $id_rup = $data['rup']['id_rup'];
@@ -1226,7 +1230,6 @@ class Tender_diikuti extends CI_Controller
             $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_pra_umum_20($data['rup']['id_rup']);
             $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra_umum_21($data['rup']['id_rup']);
             // end get tahap
-            $this->load->view('info_tender/informasi_tender_umum', $data);
         } else if ($data['rup']['id_jadwal_tender'] == 2) {
             $data['jadwal_pengumuman_pengadaan'] =  $this->M_jadwal->jadwal_pra_umum_1($data['rup']['id_rup']);
             $data['jadwal_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_2($data['rup']['id_rup']);
@@ -1250,7 +1253,6 @@ class Tender_diikuti extends CI_Controller
             $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_pra_umum_20($data['rup']['id_rup']);
             $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra_umum_21($data['rup']['id_rup']);
             // end get tahap
-            $this->load->view('info_tender/informasi_tender_terbatas', $data);
         } else if ($data['rup']['id_jadwal_tender'] == 1) {
             $data['jadwal_pengumuman_pengadaan'] =  $this->M_jadwal->jadwal_pra1file_umum_1($data['rup']['id_rup']);
             $data['jadwal_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_pra1file_umum_2($data['rup']['id_rup']);
@@ -1274,7 +1276,6 @@ class Tender_diikuti extends CI_Controller
             $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_pra1file_umum_20($data['rup']['id_rup']);
             $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra1file_umum_21($data['rup']['id_rup']);
             // end get tahap
-            $this->load->view('info_tender/informasi_tender_terbatas_1file', $data);
         } else if ($data['rup']['id_jadwal_tender'] == 9) {
             $data['jadwal_pengumuman_pengadaan'] =  $this->M_jadwal->jadwal_juksung_1($data['rup']['id_rup']);
             $data['jadwal_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_juksung_2($data['rup']['id_rup']);
@@ -1298,7 +1299,6 @@ class Tender_diikuti extends CI_Controller
             $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_pra1file_umum_20($data['rup']['id_rup']);
             $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra1file_umum_21($data['rup']['id_rup']);
             // end get tahap
-            $this->load->view('info_tender/informasi_tender_penunjukan_langsung', $data);
         } else if ($data['rup']['id_jadwal_tender'] == 3) {
             $data['jadwal_pengumuman_pengadaan'] =  $this->M_jadwal->jadwal_tender_terbatas_pasca_1_file_1($data['rup']['id_rup']);
             $data['jadwal_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_tender_terbatas_pasca_1_file_4($data['rup']['id_rup']);
@@ -1322,7 +1322,6 @@ class Tender_diikuti extends CI_Controller
             $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_tender_terbatas_pasca_1_file_12($data['rup']['id_rup']);
             $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra_umum_21($data['rup']['id_rup']);
             // end get tahap
-            $this->load->view('info_tender/informasi_tender_terbatas_pasca_1_file', $data);
         } else if ($data['rup']['id_jadwal_tender'] == 6) {
             $data['jadwal_pengumuman_pengadaan'] =  $this->M_jadwal->jadwal_pra_umum_1($data['rup']['id_rup']);
             $data['jadwal_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_2($data['rup']['id_rup']);
@@ -1346,8 +1345,8 @@ class Tender_diikuti extends CI_Controller
             $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_pra_umum_20($data['rup']['id_rup']);
             $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra_umum_21($data['rup']['id_rup']);
             // end get tahap
-            $this->load->view('info_tender/informasi_tender_terbatas_pasca_2_file', $data);
         }
+        $this->load->view('info_tender/sanggahan_akhir', $data);
         $this->load->view('template_menu/new_footer');
         $this->load->view('info_tender/ajax');
     }
@@ -1430,7 +1429,7 @@ class Tender_diikuti extends CI_Controller
         $data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
         $data['notifikasi'] = $this->M_dashboard->count_notifikasi($id_vendor);
         // query tendering
-        $data['count_tender_umum'] =  $this->M_tender->count_all_data();
+
         $data['rup'] = $this->M_tender->get_row_rup($id_url_rup);
         // id_rup non url
         $id_rup = $data['rup']['id_rup'];
@@ -1466,7 +1465,6 @@ class Tender_diikuti extends CI_Controller
             $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_pra_umum_20($data['rup']['id_rup']);
             $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra_umum_21($data['rup']['id_rup']);
             // end get tahap
-            $this->load->view('info_tender/informasi_tender_umum', $data);
         } else if ($data['rup']['id_jadwal_tender'] == 2) {
             $data['jadwal_pengumuman_pengadaan'] =  $this->M_jadwal->jadwal_pra_umum_1($data['rup']['id_rup']);
             $data['jadwal_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_2($data['rup']['id_rup']);
@@ -1490,7 +1488,6 @@ class Tender_diikuti extends CI_Controller
             $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_pra_umum_20($data['rup']['id_rup']);
             $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra_umum_21($data['rup']['id_rup']);
             // end get tahap
-            $this->load->view('info_tender/informasi_tender_terbatas', $data);
         } else if ($data['rup']['id_jadwal_tender'] == 1) {
             $data['jadwal_pengumuman_pengadaan'] =  $this->M_jadwal->jadwal_pra1file_umum_1($data['rup']['id_rup']);
             $data['jadwal_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_pra1file_umum_2($data['rup']['id_rup']);
@@ -1514,7 +1511,6 @@ class Tender_diikuti extends CI_Controller
             $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_pra1file_umum_20($data['rup']['id_rup']);
             $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra1file_umum_21($data['rup']['id_rup']);
             // end get tahap
-            $this->load->view('info_tender/informasi_tender_terbatas_1file', $data);
         } else if ($data['rup']['id_jadwal_tender'] == 9) {
             $data['jadwal_pengumuman_pengadaan'] =  $this->M_jadwal->jadwal_juksung_1($data['rup']['id_rup']);
             $data['jadwal_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_juksung_2($data['rup']['id_rup']);
@@ -1538,7 +1534,6 @@ class Tender_diikuti extends CI_Controller
             $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_pra1file_umum_20($data['rup']['id_rup']);
             $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra1file_umum_21($data['rup']['id_rup']);
             // end get tahap
-            $this->load->view('info_tender/informasi_tender_penunjukan_langsung', $data);
         } else if ($data['rup']['id_jadwal_tender'] == 3) {
             $data['jadwal_pengumuman_pengadaan'] =  $this->M_jadwal->jadwal_tender_terbatas_pasca_1_file_1($data['rup']['id_rup']);
             $data['jadwal_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_tender_terbatas_pasca_1_file_4($data['rup']['id_rup']);
@@ -1562,7 +1557,6 @@ class Tender_diikuti extends CI_Controller
             $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_tender_terbatas_pasca_1_file_12($data['rup']['id_rup']);
             $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra_umum_21($data['rup']['id_rup']);
             // end get tahap
-            $this->load->view('info_tender/informasi_tender_terbatas_pasca_1_file', $data);
         } else if ($data['rup']['id_jadwal_tender'] == 6) {
             $data['jadwal_pengumuman_pengadaan'] =  $this->M_jadwal->jadwal_pra_umum_1($data['rup']['id_rup']);
             $data['jadwal_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_2($data['rup']['id_rup']);
@@ -1586,7 +1580,6 @@ class Tender_diikuti extends CI_Controller
             $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_pra_umum_20($data['rup']['id_rup']);
             $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra_umum_21($data['rup']['id_rup']);
             // end get tahap
-            $this->load->view('info_tender/informasi_tender_terbatas_pasca_2_file', $data);
         }
         $data['data2'] = $this->M_tender->getDataById($data['rup']['id_rup']);
         $this->load->view('template_menu/header_menu', $data);
@@ -1608,6 +1601,8 @@ class Tender_diikuti extends CI_Controller
             $data['jadwal_upload_dokumen_penawaran'] =  $this->M_jadwal->jadwal_pra_umum_12($data['rup']['id_rup']);
         } else if ($data['rup']['id_jadwal_tender'] == 1) {
             $data['jadwal_upload_dokumen_penawaran'] =  $this->M_jadwal->jadwal_pra1file_umum_13($data['rup']['id_rup']);
+        } else if ($data['rup']['id_jadwal_tender'] == 9) {
+            $data['jadwal_upload_dokumen_penawaran'] =  $this->M_jadwal->jadwal_juksung_11($data['rup']['id_rup']);
         }
 
 

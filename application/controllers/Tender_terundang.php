@@ -130,7 +130,6 @@ class Tender_terundang extends CI_Controller
         $this->output->set_content_type('application/json')->set_output(json_encode($output));
     }
 
-
     public function get_data_tender_penunjukan_langsung()
     {
         $session = $this->session->userdata('id_vendor');

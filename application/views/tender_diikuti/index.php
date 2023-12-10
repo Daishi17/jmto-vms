@@ -40,23 +40,23 @@
                                 <i class="fa-solid fa-gift"></i>
                                 <small><b>Tender Terbatas &nbsp;<span class="badge bg-secondary"><?= count($count_tender_terbatas) ?></span></b></small>
                             </button>
-                            <button class="nav-link text-dark" id="nav-seleksiumum-tab" data-bs-toggle="tab" data-bs-target="#nav-seleksiumum" type="button" role="tab" aria-controls="nav-seleksiumum" aria-selected="true">
+                            <!-- <button class="nav-link text-dark" id="nav-seleksiumum-tab" data-bs-toggle="tab" data-bs-target="#nav-seleksiumum" type="button" role="tab" aria-controls="nav-seleksiumum" aria-selected="true">
                                 <i class="fa-solid fa-gift"></i>
                                 <small><b>Seleksi Umum &nbsp;<span class="badge bg-secondary">0</span></b></small>
-                            </button>
+                            </button> -->
                             <button class="nav-link text-dark" id="nav-juksung-tab" data-bs-toggle="tab" data-bs-target="#nav-juksung" type="button" role="tab" aria-controls="nav-juksung" aria-selected="true">
                                 <i class="fa-solid fa-gift"></i>
-                                <small><b>Penunjukan Langsung &nbsp;<span class="badge bg-secondary">0</span></b></small>
+                                <small><b>Penunjukan Langsung &nbsp;<span class="badge bg-secondary"><?= count($count_tender_penunjukan_langsung) ?></span></b></small>
                             </button>
 
-                            <button class="nav-link text-dark" id="nav-selekterbatas-tab" data-bs-toggle="tab" data-bs-target="#nav-selekterbatas" type="button" role="tab" aria-controls="nav-selekterbatas" aria-selected="true">
+                            <!-- <button class="nav-link text-dark" id="nav-selekterbatas-tab" data-bs-toggle="tab" data-bs-target="#nav-selekterbatas" type="button" role="tab" aria-controls="nav-selekterbatas" aria-selected="true">
                                 <i class="fa-solid fa-gift"></i>
                                 <small><b>Seleksi Terbatas &nbsp;<span class="badge bg-secondary">0</span></b></small>
-                            </button>
-                            <button class="nav-link text-dark" id="nav-penglangsung-tab" data-bs-toggle="tab" data-bs-target="#nav-penglangsung" type="button" role="tab" aria-controls="nav-penglangsung" aria-selected="true">
+                            </button> -->
+                            <!-- <button class="nav-link text-dark" id="nav-penglangsung-tab" data-bs-toggle="tab" data-bs-target="#nav-penglangsung" type="button" role="tab" aria-controls="nav-penglangsung" aria-selected="true">
                                 <i class="fa-solid fa-gift"></i>
                                 <small><b>Pengadaan Langsung &nbsp;<span class="badge bg-secondary">0</span></b></small>
-                            </button>
+                            </button> -->
                         </div>
                         <div class="tab-content p-3 border bg-light" id="nav-tabContent">
                             <div class="tab-pane fade active show" id="nav-tenderumum" role="tabpanel" aria-labelledby="nav-tenderumum-tab">

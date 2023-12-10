@@ -238,7 +238,8 @@
                         <li>
                             <a class="dropdown-item" href="<?= base_url() ?>tender_terundang">
                                 <i class="fa-solid fa-envelope-open-text px-1"></i>
-                                <small>Tender Terundang <span class="badge bg-success"><?= count($count_tender_terundang) + count($count_tender_terbatas) ?></span></small>
+                                <small>Tender Terundang</small>
+                                <!-- <small>Tender Terundang <span class="badge bg-success"><?= count($count_tender_terundang) + count($count_tender_terbatas) + count($count_tender_penunjukan_langsung) ?></span></small> -->
                             </a>
                         </li>
                         <!-- <li>
@@ -250,7 +251,8 @@
                         <li>
                             <a class="dropdown-item" href="<?= base_url() ?>tender_diikuti">
                                 <i class="fa-solid fa-inbox px-1"></i>
-                                <small>Tender Di Ikuti <span class="badge bg-success"><?= count($count_tender_umum) + count($count_tender_terbatas) ?></span></small>
+                                <small>Tender Di Ikuti</small>
+                                <!-- <small>Tender Di Ikuti <span class="badge bg-success"><?= count($count_tender_umum) + count($count_tender_terbatas) + count($count_tender_penunjukan_langsung) ?></span></small> -->
                             </a>
                         </li>
                         <li>
@@ -259,7 +261,7 @@
                         <li>
                             <a class="dropdown-item" href="<?= base_url() ?>page_kosong/page_konstruksi">
                                 <i class="fa-solid fa-newspaper px-1"></i>
-                                <small>Berita Terkini <span class="badge bg-primary">4</span></small>
+                                <small>Berita Terkini</small>
                             </a>
                         </li>
                     </ul>
@@ -279,12 +281,12 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li>
+                        <!-- <li>
                             <a class="dropdown-item" href="<?= base_url() ?>page_kosong/page_konstruksi">
                                 <i class="fa-solid fa-person-chalkboard px-1"></i>
                                 <small>Progress Kerja <span class="badge bg-success">4</span></small>
                             </a>
-                        </li>
+                        </li> -->
                         <li>
                             <a class="dropdown-item" href="<?= base_url() ?>page_kosong/page_konstruksi">
                                 <i class="fa-solid fa-certificate px-1"></i>

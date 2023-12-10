@@ -28,6 +28,7 @@ class Datapenyedia extends CI_Controller
 	{
 		$id_vendor = $this->session->userdata('id_vendor');
 		$data['notifikasi'] = $this->M_dashboard->count_notifikasi($id_vendor);
+		$data['count_tender_penunjukan_langsung'] =  $this->M_count->count_tender_penunjukan_langsung($id_vendor);
 		$this->load->view('template_menu/header_menu', $data);
 		$this->load->view('datapenyedia/index');
 		$this->load->view('template_menu/new_footer');
@@ -48,6 +49,7 @@ class Datapenyedia extends CI_Controller
 		$data['count_tender_umum'] =  $this->M_count->count_tender_umum($id_vendor);
 		$data['count_tender_terbatas'] =  $this->M_count->count_tender_terbatas($id_vendor);
 		$data['count_tender_terundang'] = $this->M_tender->hitung_terundang();
+		$data['count_tender_penunjukan_langsung'] =  $this->M_count->count_tender_penunjukan_langsung($id_vendor);
 		$this->load->view('template_menu/header_menu', $data);
 		$this->load->view('datapenyedia/identitas/index', $data);
 		$this->load->view('template_menu/new_footer');

@@ -17,6 +17,7 @@ class Tender_umum extends CI_Controller
     {
         $id_vendor = $this->session->userdata('id_vendor');
         $data['notifikasi'] = $this->M_dashboard->count_notifikasi($id_vendor);
+        $data['count_tender_penunjukan_langsung'] =  $this->M_count->count_tender_penunjukan_langsung($id_vendor);
         $this->load->view('template_menu/header_menu', $data);
         $this->load->view('info_tender/index');
         $this->load->view('template_menu/new_footer');

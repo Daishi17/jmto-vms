@@ -225,6 +225,18 @@ class M_jadwal extends CI_Model
         return $query->row_array();
     }
 
+
+    public function jadwal_pra_umum_223($id_rup)
+    {
+        
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->like('nama_jadwal_rup', 'Penandatanganan Kontrak');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
     public function jadwal_pra1file_umum_1($id_rup)
     {
         $this->db->select('*');
@@ -609,6 +621,17 @@ class M_jadwal extends CI_Model
         $this->db->from('tbl_jadwal_rup');
         $this->db->where('id_rup', $id_rup);
         $this->db->like('nama_jadwal_rup', 'Pembukaan Dokumen Tender (Dok Kualifikasi dan Penawaran)');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+
+    public function jadwal_pra1file_pasca_3($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Rapat Penjelasan/Aanwijzing');
         $query = $this->db->get();
         return $query->row_array();
     }
