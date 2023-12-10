@@ -456,16 +456,12 @@
                             <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_pembuktian_kualifikasi['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_pembuktian_kualifikasi['waktu_mulai']))  == date('Y-m-d H:i')) { ?>
                                 <tr>
                                     <th>Undangan Pembuktian</th>
-                                    <th><button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#undangan_pembuktian">
-                                            <i class="fa fa-download" aria-hidden="true"></i> Lihat Undangan Pembuktian
-                                        </button></th>
+                                    <th><a href="<?= base_url('tender_diikuti/lihat_undangan_pembuktian/' . $rup['id_url_rup']) ?>" class="btn btn-sm btn-danger" target="_blank"> <i class="fa fa-download" aria-hidden="true"></i> Lihat Undangan Pembuktian</a></th>
                                 </tr>
                             <?php    } else { ?>
                                 <tr>
                                     <th>Undangan Pembuktian</th>
-                                    <th><button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#undangan_pembuktian">
-                                            <i class="fa fa-download" aria-hidden="true"></i> Lihat Undangan Pembuktian
-                                        </button></th>
+                                    <th><a href="<?= base_url('tender_diikuti/lihat_undangan_pembuktian/' . $rup['id_url_rup']) ?>" class="btn btn-sm btn-danger" target="_blank"> <i class="fa fa-download" aria-hidden="true"></i> Lihat Undangan Pembuktian</a></th>
                                 </tr>
                             <?php    } ?>
                         <?php } else { ?>
@@ -475,16 +471,12 @@
                             <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_pembuktian_kualifikasi['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_pembuktian_kualifikasi['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
                                 <tr>
                                     <th>Undangan Pembuktian</th>
-                                    <th><button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#undangan_pembuktian">
-                                            <i class="fa fa-download" aria-hidden="true"></i> Lihat Undangan Pembuktian
-                                        </button></th>
+                                    <th><a href="<?= base_url('tender_diikuti/lihat_undangan_pembuktian/' . $rup['id_url_rup']) ?>" class="btn btn-sm btn-danger" target="_blank"> <i class="fa fa-download" aria-hidden="true"></i> Lihat Undangan Pembuktian</a></th>
                                 </tr>
                             <?php    } else { ?>
                                 <tr>
                                     <th>Undangan Pembuktian</th>
-                                    <th><button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#undangan_pembuktian">
-                                            <i class="fa fa-download" aria-hidden="true"></i> Lihat Undangan Pembuktian
-                                        </button></th>
+                                    <th><a href="<?= base_url('tender_diikuti/lihat_undangan_pembuktian/' . $rup['id_url_rup']) ?>" class="btn btn-sm btn-danger" target="_blank"> <i class="fa fa-download" aria-hidden="true"></i> Lihat Undangan Pembuktian</a></th>
                                 </tr>
                             <?php    } ?>
                         <?php } ?>

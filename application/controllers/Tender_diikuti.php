@@ -1830,4 +1830,12 @@ class Tender_diikuti extends CI_Controller
         $url  = $file_url;
         return force_download($url, NULL);
     }
+
+    public function lihat_undangan_pembuktian($id_url_rup)
+    {
+        $data['rup'] = $this->M_tender->get_row_rup($id_url_rup);
+        $data['mengikuti'] = $this->M_tender->cek_mengikuti($data['rup']['id_rup']);
+        $data['peserta'] = $this->M_tender->peserta($data['rup']['id_rup']);
+        $this->load->view('info_tender/undangan_pembuktian', $data);
+    }
 }
