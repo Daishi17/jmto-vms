@@ -189,12 +189,25 @@
                                         </tr>
                                         <tr>
                                             <th class="bg-light" colspan="2">
-                                                <a href="<?= base_url('datapenyedia/identitas_perusahaan') ?>">
-                                                    <button type="button" class="btn btn-warning btn-sm">
-                                                        <i class="fa-solid fa-pen-to-square px-1"></i>
-                                                        Edit Changes
-                                                    </button>
-                                                </a>
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <a href="<?= base_url('datapenyedia/identitas_perusahaan') ?>">
+                                                            <button type="button" class="btn btn-warning btn-sm">
+                                                                <i class="fa-solid fa-pen-to-square px-1"></i>
+                                                                Edit Changes
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <a href="javascript:;" onclick="pengajuan_dokumen()">
+                                                            <button type="button" class="btn btn-info btn-sm">
+                                                                <i class="fa-solid fa-file px-1"></i>
+                                                                Pengajuan Dokumen Baru
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
                                             </th>
                                         </tr>
                                     </table>
@@ -213,7 +226,7 @@
                                     <div class="col-lg-3 col-6">
                                         <div class="card shadow-lg" style="width: 18rem;">
 
-                                            <?php if ($count_validate >= 15) { ?>
+                                            <?php if ($count_validate >= 16) { ?>
                                                 <?php if ($count_tdk_validate > 0) { ?>
                                                     <div class="card-body bg-danger">
                                                         <div class="text-start">
@@ -235,7 +248,7 @@
                                                         <div class="text-end">
                                                             <h5>
                                                                 <input type="hidden" name="count_validate" value="<?= base_url('dashboard/count_validate') ?>">
-                                                                <small class="text-white"><b id="count_validate"><?= $count_validate ?>/15</b></small>
+                                                                <small class="text-white"><b id="count_validate"><?= $count_validate ?>/16</b></small>
                                                             </h5>
                                                             <small class="text-white"><b>Dokumen Yang Tervalidasi</b></small>
                                                         </div>
@@ -250,7 +263,7 @@
                                                     <div class="text-end">
                                                         <h5>
                                                             <input type="hidden" name="count_validate" value="<?= base_url('dashboard/count_validate') ?>">
-                                                            <small class="text-white"><b id="count_validate"><?= $count_validate ?>/15</b></small>
+                                                            <small class="text-white"><b id="count_validate"><?= $count_validate ?>/16</b></small>
                                                         </h5>
                                                         <small class="text-white"><b>Dokumen Yang Tervalidasi</b></small>
                                                     </div>
@@ -272,7 +285,7 @@
                                                 </div>
                                                 <div class="text-end">
                                                     <h5>
-                                                        <small class="text-dark"><b>0</b></small>
+                                                        <small class="text-dark"><b><?= count($count_tender_umum) + count($count_tender_terbatas) ?></b></small>
                                                     </h5>
                                                     <small class="text-dark"><b>Tender Terundang</b></small>
                                                 </div>
@@ -726,6 +739,83 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal_pengajuan_dokumen" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Buat List Pengajuan Dokumen</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-2">
+
+                    </div>
+
+                    <div class="col-md-8">
+                        <select name="jenis_dokumen_perubahan" onchange="pilih_jenis_dokumen_perubahan()" class="form-control select2">
+                            <option value="">-- Pilih Jenis Dokumen Ingin Diubah --</option>
+                            <option value="nib">NIB</option>
+                            <option value="siup">SIUP</option>
+                            <option value="sbu">SBU</option>
+                            <option value="siujk">SIUJK</option>
+                            <option value="skdp">SKDP</option>
+                            <option value="izin_lainya">Izin Lainya</option>
+                            <option value="akta_pendirian">Akta Pendirian</option>
+                            <option value="akta_perubahan">Akta Perubahan</option>
+                            <option value="pemilik_perusahaan">Pemilik Perusahaan</option>
+                            <option value="pengurus_perusahaan">Pengurus Perusahaan</option>
+                            <option value="pengalaman_perusahaan">Pengalaman Perusahaan</option>
+                            <option value="sppkp">SPPKP</option>
+                            <option value="npwp">NPWP</option>
+                            <option value="spt">SPT</option>
+                            <option value="laporan_keuangan">Laporan Keuangan</option>
+                            <option value="neraca_keuangan">Neraca Keuangan</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2">
+
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="card">
+                        <div class="card-header bg-warning text-white">
+                            List Dokumen Pengajun Perubahan Dokumen
+                        </div>
+                        <div class="card-body">
+                            <table class="table" id="datatable_pengajuan_dokumen">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Jenis Dokumen</th>
+                                        <th>Waktu Pengajuan</th>
+                                        <th>Status</th>
+                                        <th>Status Upload</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

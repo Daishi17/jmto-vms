@@ -301,7 +301,7 @@
                                 }
                             } else {
                                 if (d.dokumen_chat == null) {
-                                    html += `<label class="badge badge-danger ml-5" >${d.nama_usaha}</label><div class="d-flex justify-content-start mb-4">
+                                    html += `<label class="badge badge-danger ml-5" >Penyedia</label><div class="d-flex justify-content-start mb-4">
                         <div class="img_cont_msg">
                         <img src="<?= base_url('assets/vendor.png') ?>" alt="" class="rounded-circle user_img_msg">
                         </div>
@@ -310,7 +310,7 @@
                            <span class="msg_time">${kapan}, ${time}  	</span>
                         </div> </div>`;
                                 } else if (d.dokumen_chat) {
-                                    html += `<label class="badge badge-danger ml-5" >${d.nama_usaha}</label><div class="d-flex justify-content-start mb-4">
+                                    html += `<label class="badge badge-danger ml-5" >Penyedia</label><div class="d-flex justify-content-start mb-4">
                         <div class="img_cont_msg">
                         <img src="<?= base_url('assets/vendor.png') ?>" alt="" class="rounded-circle user_img_msg">
                         </div>
@@ -321,7 +321,7 @@
                         </div>
                      </div>`;
                                 } else if (d.img_chat) {
-                                    html += `<label class="badge badge-danger ml-5" >${d.nama_usaha}</label><div class="d-flex justify-content-start mb-4">
+                                    html += `<label class="badge badge-danger ml-5" >Penyedia</label><div class="d-flex justify-content-start mb-4">
                         <div class="img_cont_msg">
                         <img src="<?= base_url('assets/vendor.png') ?>" alt="" class="rounded-circle user_img_msg">
                         </div>
