@@ -59,7 +59,6 @@ class Tender_terundang extends CI_Controller
         $data = [];
         $no = $_POST['start'];
         foreach ($resultss as $rs) {
-
             $row = array();
             $row[] = ++$no;
             $row[] = $rs->tahun_rup;
@@ -71,13 +70,8 @@ class Tender_terundang extends CI_Controller
                 $row[] = '<span class="badge bg-success text-white">Tender Telah Diikuti
                 </span>';
             } else {
-                if ($rs->batas_pendaftaran_tender) {
-                    $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
+                $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
                     </span>';
-                } else {
-                    $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
-                    </span>';
-                }
             }
             $row[] = '<a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white"  onClick="by_id_rup(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa fa-info-circle" aria-hidden="true"></i> Detail</a>';
             $data[] = $row;
@@ -110,13 +104,8 @@ class Tender_terundang extends CI_Controller
                 $row[] = '<span class="badge bg-success text-white">Tender Telah Diikuti
                 </span>';
             } else {
-                if ($rs->batas_pendaftaran_tender) {
-                    $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
+                $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
                     </span>';
-                } else {
-                    $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
-                    </span>';
-                }
             }
             $row[] = '<a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white"  onClick="by_id_rup(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa fa-info-circle" aria-hidden="true"></i> Detail</a>';
             $data[] = $row;
@@ -149,13 +138,8 @@ class Tender_terundang extends CI_Controller
                 $row[] = '<span class="badge bg-success text-white">Tender Telah Diikuti
                 </span>';
             } else {
-                if ($rs->batas_pendaftaran_tender) {
-                    $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
+                $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
                     </span>';
-                } else {
-                    $row[] = '<span class="badge bg-primary text-white">Pengumuman Tender
-                    </span>';
-                }
             }
             $row[] = '<a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white"  onClick="by_id_rup(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa fa-info-circle" aria-hidden="true"></i> Detail</a>';
             $data[] = $row;

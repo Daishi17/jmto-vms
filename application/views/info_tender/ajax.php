@@ -96,7 +96,7 @@
                         var status_dicek = '<span class="badge bg-secondary">Belum Di Cek</span>'
                     } else {
                         if (response['syarat_tambahan'][i].status == 1) {
-                            var status_dicek = '<span class="badge bg-success">Sudah Valid</span>'
+                            var status_dicek = '<span class="badge bg-success">Sudah Dievaluasi</span>'
                         } else {
                             var status_dicek = '<span class="badge bg-danger">Tidak Valid</span>'
                         }
